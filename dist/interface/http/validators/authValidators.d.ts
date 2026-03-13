@@ -1,0 +1,25 @@
+export declare const authValidators: {
+    registerCustomer: import("zod").ZodObject<{
+        name: import("zod").ZodString;
+        email: import("zod").ZodOptional<import("zod").ZodString>;
+        phone: import("zod").ZodString;
+        password: import("zod").ZodString;
+    }, import("zod/v4/core").$strip>;
+    registerFarmer: import("zod").ZodObject<{
+        name: import("zod").ZodString;
+        email: import("zod").ZodOptional<import("zod").ZodString>;
+        phone: import("zod").ZodString;
+        password: import("zod").ZodString;
+        farmName: import("zod").ZodString;
+        farmLocation: import("zod").ZodString;
+        farmDescription: import("zod").ZodOptional<import("zod").ZodString>;
+    }, import("zod/v4/core").$strip>;
+    login: import("zod").ZodObject<{
+        phone: import("zod").ZodString;
+        password: import("zod").ZodString;
+    }, import("zod/v4/core").$strip>;
+    refreshToken: import("zod").ZodObject<{
+        refreshToken: import("zod").ZodString;
+    }, import("zod/v4/core").$strip>;
+};
+//# sourceMappingURL=authValidators.d.ts.map

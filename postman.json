@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Farm-to-Table Backend",
+    "_postman_id": "farming-ecommerce-backend",
+    "description": "Postman collection for Farm-to-Table backend auth and health endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/admin/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "admin", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Customer Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"email\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/customer/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "customer", "register"]
+            }
+          }
+        },
+        {
+          "name": "Customer Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/customer/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "customer", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Farmer",
+      "item": [
+        {
+          "name": "Farmer Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\",\n  \"email\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/farmer/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "farmer", "register"]
+            }
+          }
+        },
+        {
+          "name": "Farmer Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/farmer/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "farmer", "login"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
