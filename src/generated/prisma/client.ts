@@ -80,15 +80,25 @@ export type ProductImage = Prisma.ProductImageModel
  */
 export type Harvest = Prisma.HarvestModel
 /**
+ * Model Box
+ * 
+ */
+export type Box = Prisma.BoxModel
+/**
+ * Model BoxVersion
+ * 
+ */
+export type BoxVersion = Prisma.BoxVersionModel
+/**
+ * Model BoxItem
+ * 
+ */
+export type BoxItem = Prisma.BoxItemModel
+/**
  * Model SubscriptionPlan
  * 
  */
 export type SubscriptionPlan = Prisma.SubscriptionPlanModel
-/**
- * Model SubscriptionPlanItem
- * 
- */
-export type SubscriptionPlanItem = Prisma.SubscriptionPlanItemModel
 /**
  * Model Subscription
  * 

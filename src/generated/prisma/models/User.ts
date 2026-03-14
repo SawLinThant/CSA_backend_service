@@ -33,6 +33,7 @@ export type UserMinAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -44,6 +45,7 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.UserRole | null
   status: $Enums.UserStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type UserCountAggregateOutputType = {
   role: number
   status: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -68,6 +71,7 @@ export type UserMinAggregateInputType = {
   role?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -79,6 +83,7 @@ export type UserMaxAggregateInputType = {
   role?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -90,6 +95,7 @@ export type UserCountAggregateInputType = {
   role?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -174,6 +180,7 @@ export type UserGroupByOutputType = {
   role: $Enums.UserRole
   status: $Enums.UserStatus
   createdAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -206,11 +213,13 @@ export type UserWhereInput = {
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
   farmer?: Prisma.XOR<Prisma.FarmerNullableScalarRelationFilter, Prisma.FarmerWhereInput> | null
   addresses?: Prisma.AddressListRelationFilter
   referralsGiven?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
+  approvedHarvests?: Prisma.HarvestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -222,11 +231,13 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   customer?: Prisma.CustomerOrderByWithRelationInput
   farmer?: Prisma.FarmerOrderByWithRelationInput
   addresses?: Prisma.AddressOrderByRelationAggregateInput
   referralsGiven?: Prisma.ReferralOrderByRelationAggregateInput
   referralsReceived?: Prisma.ReferralOrderByRelationAggregateInput
+  approvedHarvests?: Prisma.HarvestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -241,11 +252,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
   farmer?: Prisma.XOR<Prisma.FarmerNullableScalarRelationFilter, Prisma.FarmerWhereInput> | null
   addresses?: Prisma.AddressListRelationFilter
   referralsGiven?: Prisma.ReferralListRelationFilter
   referralsReceived?: Prisma.ReferralListRelationFilter
+  approvedHarvests?: Prisma.HarvestListRelationFilter
 }, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
@@ -257,6 +270,7 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -274,6 +288,7 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
@@ -285,11 +300,13 @@ export type UserCreateInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -301,11 +318,13 @@ export type UserUncheckedCreateInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserUpdateInput = {
@@ -317,11 +336,13 @@ export type UserUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -333,11 +354,13 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -349,6 +372,7 @@ export type UserCreateManyInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -360,6 +384,7 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -371,6 +396,7 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -382,6 +408,7 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -393,6 +420,7 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -404,11 +432,17 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -473,6 +507,22 @@ export type UserUpdateOneRequiredWithoutAddressesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddressesInput, Prisma.UserUpdateWithoutAddressesInput>, Prisma.UserUncheckedUpdateWithoutAddressesInput>
 }
 
+export type UserCreateNestedOneWithoutApprovedHarvestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedHarvestsInput, Prisma.UserUncheckedCreateWithoutApprovedHarvestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedHarvestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutApprovedHarvestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedHarvestsInput, Prisma.UserUncheckedCreateWithoutApprovedHarvestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedHarvestsInput
+  upsert?: Prisma.UserUpsertWithoutApprovedHarvestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApprovedHarvestsInput, Prisma.UserUpdateWithoutApprovedHarvestsInput>, Prisma.UserUncheckedUpdateWithoutApprovedHarvestsInput>
+}
+
 export type UserCreateNestedOneWithoutReferralsGivenInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReferralsGivenInput, Prisma.UserUncheckedCreateWithoutReferralsGivenInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReferralsGivenInput
@@ -510,10 +560,12 @@ export type UserCreateWithoutCustomerInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateWithoutCustomerInput = {
@@ -525,10 +577,12 @@ export type UserUncheckedCreateWithoutCustomerInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserCreateOrConnectWithoutCustomerInput = {
@@ -556,10 +610,12 @@ export type UserUpdateWithoutCustomerInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCustomerInput = {
@@ -571,10 +627,12 @@ export type UserUncheckedUpdateWithoutCustomerInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
 }
 
 export type UserCreateWithoutFarmerInput = {
@@ -586,10 +644,12 @@ export type UserCreateWithoutFarmerInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateWithoutFarmerInput = {
@@ -601,10 +661,12 @@ export type UserUncheckedCreateWithoutFarmerInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserCreateOrConnectWithoutFarmerInput = {
@@ -632,10 +694,12 @@ export type UserUpdateWithoutFarmerInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFarmerInput = {
@@ -647,10 +711,12 @@ export type UserUncheckedUpdateWithoutFarmerInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
 }
 
 export type UserCreateWithoutAddressesInput = {
@@ -662,10 +728,12 @@ export type UserCreateWithoutAddressesInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateWithoutAddressesInput = {
@@ -677,10 +745,12 @@ export type UserUncheckedCreateWithoutAddressesInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
   referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserCreateOrConnectWithoutAddressesInput = {
@@ -708,10 +778,12 @@ export type UserUpdateWithoutAddressesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAddressesInput = {
@@ -723,8 +795,94 @@ export type UserUncheckedUpdateWithoutAddressesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
+  referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
+}
+
+export type UserCreateWithoutApprovedHarvestsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone: string
+  password: string
+  role: $Enums.UserRole
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
+  farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
+  referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+}
+
+export type UserUncheckedCreateWithoutApprovedHarvestsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone: string
+  password: string
+  role: $Enums.UserRole
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
+  farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
+  referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+}
+
+export type UserCreateOrConnectWithoutApprovedHarvestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedHarvestsInput, Prisma.UserUncheckedCreateWithoutApprovedHarvestsInput>
+}
+
+export type UserUpsertWithoutApprovedHarvestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutApprovedHarvestsInput, Prisma.UserUncheckedUpdateWithoutApprovedHarvestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedHarvestsInput, Prisma.UserUncheckedCreateWithoutApprovedHarvestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApprovedHarvestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutApprovedHarvestsInput, Prisma.UserUncheckedUpdateWithoutApprovedHarvestsInput>
+}
+
+export type UserUpdateWithoutApprovedHarvestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
+  farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
+  referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApprovedHarvestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
+  farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
 }
@@ -738,10 +896,12 @@ export type UserCreateWithoutReferralsGivenInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
   referralsReceived?: Prisma.ReferralCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateWithoutReferralsGivenInput = {
@@ -753,10 +913,12 @@ export type UserUncheckedCreateWithoutReferralsGivenInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
   referralsReceived?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferredInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserCreateOrConnectWithoutReferralsGivenInput = {
@@ -773,10 +935,12 @@ export type UserCreateWithoutReferralsReceivedInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralCreateNestedManyWithoutReferrerInput
+  approvedHarvests?: Prisma.HarvestCreateNestedManyWithoutApproverInput
 }
 
 export type UserUncheckedCreateWithoutReferralsReceivedInput = {
@@ -788,10 +952,12 @@ export type UserUncheckedCreateWithoutReferralsReceivedInput = {
   role: $Enums.UserRole
   status?: $Enums.UserStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
   farmer?: Prisma.FarmerUncheckedCreateNestedOneWithoutUserInput
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
   referralsGiven?: Prisma.ReferralUncheckedCreateNestedManyWithoutReferrerInput
+  approvedHarvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutApproverInput
 }
 
 export type UserCreateOrConnectWithoutReferralsReceivedInput = {
@@ -819,10 +985,12 @@ export type UserUpdateWithoutReferralsGivenInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
   referralsReceived?: Prisma.ReferralUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferralsGivenInput = {
@@ -834,10 +1002,12 @@ export type UserUncheckedUpdateWithoutReferralsGivenInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsReceived?: Prisma.ReferralUncheckedUpdateManyWithoutReferredNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUpsertWithoutReferralsReceivedInput = {
@@ -860,10 +1030,12 @@ export type UserUpdateWithoutReferralsReceivedInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUpdateManyWithoutReferrerNestedInput
+  approvedHarvests?: Prisma.HarvestUpdateManyWithoutApproverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReferralsReceivedInput = {
@@ -875,10 +1047,12 @@ export type UserUncheckedUpdateWithoutReferralsReceivedInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
   farmer?: Prisma.FarmerUncheckedUpdateOneWithoutUserNestedInput
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
   referralsGiven?: Prisma.ReferralUncheckedUpdateManyWithoutReferrerNestedInput
+  approvedHarvests?: Prisma.HarvestUncheckedUpdateManyWithoutApproverNestedInput
 }
 
 
@@ -890,12 +1064,14 @@ export type UserCountOutputType = {
   addresses: number
   referralsGiven: number
   referralsReceived: number
+  approvedHarvests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addresses?: boolean | UserCountOutputTypeCountAddressesArgs
   referralsGiven?: boolean | UserCountOutputTypeCountReferralsGivenArgs
   referralsReceived?: boolean | UserCountOutputTypeCountReferralsReceivedArgs
+  approvedHarvests?: boolean | UserCountOutputTypeCountApprovedHarvestsArgs
 }
 
 /**
@@ -929,6 +1105,13 @@ export type UserCountOutputTypeCountReferralsReceivedArgs<ExtArgs extends runtim
   where?: Prisma.ReferralWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApprovedHarvestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HarvestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -939,11 +1122,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   customer?: boolean | Prisma.User$customerArgs<ExtArgs>
   farmer?: boolean | Prisma.User$farmerArgs<ExtArgs>
   addresses?: boolean | Prisma.User$addressesArgs<ExtArgs>
   referralsGiven?: boolean | Prisma.User$referralsGivenArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.User$referralsReceivedArgs<ExtArgs>
+  approvedHarvests?: boolean | Prisma.User$approvedHarvestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -956,6 +1141,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -967,6 +1153,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -978,15 +1165,17 @@ export type UserSelectScalar = {
   role?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password" | "role" | "status" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password" | "role" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.User$customerArgs<ExtArgs>
   farmer?: boolean | Prisma.User$farmerArgs<ExtArgs>
   addresses?: boolean | Prisma.User$addressesArgs<ExtArgs>
   referralsGiven?: boolean | Prisma.User$referralsGivenArgs<ExtArgs>
   referralsReceived?: boolean | Prisma.User$referralsReceivedArgs<ExtArgs>
+  approvedHarvests?: boolean | Prisma.User$approvedHarvestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1000,6 +1189,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     addresses: Prisma.$AddressPayload<ExtArgs>[]
     referralsGiven: Prisma.$ReferralPayload<ExtArgs>[]
     referralsReceived: Prisma.$ReferralPayload<ExtArgs>[]
+    approvedHarvests: Prisma.$HarvestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1010,6 +1200,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.UserRole
     status: $Enums.UserStatus
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1409,6 +1600,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   addresses<T extends Prisma.User$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsGiven<T extends Prisma.User$referralsGivenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referralsGivenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   referralsReceived<T extends Prisma.User$referralsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$referralsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReferralPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  approvedHarvests<T extends Prisma.User$approvedHarvestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvedHarvestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HarvestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1446,6 +1638,7 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1946,6 +2139,30 @@ export type User$referralsReceivedArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ReferralScalarFieldEnum | Prisma.ReferralScalarFieldEnum[]
+}
+
+/**
+ * User.approvedHarvests
+ */
+export type User$approvedHarvestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Harvest
+   */
+  select?: Prisma.HarvestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Harvest
+   */
+  omit?: Prisma.HarvestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HarvestInclude<ExtArgs> | null
+  where?: Prisma.HarvestWhereInput
+  orderBy?: Prisma.HarvestOrderByWithRelationInput | Prisma.HarvestOrderByWithRelationInput[]
+  cursor?: Prisma.HarvestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HarvestScalarFieldEnum | Prisma.HarvestScalarFieldEnum[]
 }
 
 /**

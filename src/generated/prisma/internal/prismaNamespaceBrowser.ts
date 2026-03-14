@@ -59,8 +59,10 @@ export const ModelName = {
   Product: 'Product',
   ProductImage: 'ProductImage',
   Harvest: 'Harvest',
+  Box: 'Box',
+  BoxVersion: 'BoxVersion',
+  BoxItem: 'BoxItem',
   SubscriptionPlan: 'SubscriptionPlan',
-  SubscriptionPlanItem: 'SubscriptionPlanItem',
   Subscription: 'Subscription',
   Order: 'Order',
   OrderItem: 'OrderItem',
@@ -93,7 +95,8 @@ export const UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -102,7 +105,6 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const CustomerScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  defaultAddressId: 'defaultAddressId',
   createdAt: 'createdAt'
 } as const
 
@@ -115,6 +117,7 @@ export const FarmerScalarFieldEnum = {
   farmName: 'farmName',
   farmLocation: 'farmLocation',
   farmDescription: 'farmDescription',
+  farmImage: 'farmImage',
   approved: 'approved',
   createdAt: 'createdAt'
 } as const
@@ -129,6 +132,7 @@ export const AddressScalarFieldEnum = {
   city: 'city',
   state: 'state',
   postalCode: 'postalCode',
+  country: 'country',
   isDefault: 'isDefault'
 } as const
 
@@ -137,7 +141,8 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  description: 'description'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -145,11 +150,12 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 
 export const ProductScalarFieldEnum = {
   id: 'id',
+  farmerId: 'farmerId',
+  categoryId: 'categoryId',
   name: 'name',
   description: 'description',
-  price: 'price',
-  categoryId: 'categoryId',
-  farmerId: 'farmerId',
+  unit: 'unit',
+  basePrice: 'basePrice',
   isActive: 'isActive',
   createdAt: 'createdAt'
 } as const
@@ -162,8 +168,7 @@ export const ProductImageScalarFieldEnum = {
   productId: 'productId',
   imageUrl: 'imageUrl',
   isPrimary: 'isPrimary',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt'
+  sortOrder: 'sortOrder'
 } as const
 
 export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
@@ -173,34 +178,67 @@ export const HarvestScalarFieldEnum = {
   id: 'id',
   farmerId: 'farmerId',
   productId: 'productId',
-  quantity: 'quantity',
+  quantityAvailable: 'quantityAvailable',
+  unitPrice: 'unitPrice',
   harvestDate: 'harvestDate',
-  availableUntil: 'availableUntil'
+  availableUntil: 'availableUntil',
+  status: 'status',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt'
 } as const
 
 export type HarvestScalarFieldEnum = (typeof HarvestScalarFieldEnum)[keyof typeof HarvestScalarFieldEnum]
 
 
-export const SubscriptionPlanScalarFieldEnum = {
+export const BoxScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  imageUrl: 'imageUrl',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type BoxScalarFieldEnum = (typeof BoxScalarFieldEnum)[keyof typeof BoxScalarFieldEnum]
+
+
+export const BoxVersionScalarFieldEnum = {
+  id: 'id',
+  boxId: 'boxId',
+  versionName: 'versionName',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt'
+} as const
+
+export type BoxVersionScalarFieldEnum = (typeof BoxVersionScalarFieldEnum)[keyof typeof BoxVersionScalarFieldEnum]
+
+
+export const BoxItemScalarFieldEnum = {
+  id: 'id',
+  boxVersionId: 'boxVersionId',
+  productId: 'productId',
+  farmerId: 'farmerId',
+  quantity: 'quantity',
+  optional: 'optional'
+} as const
+
+export type BoxItemScalarFieldEnum = (typeof BoxItemScalarFieldEnum)[keyof typeof BoxItemScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  boxId: 'boxId',
+  name: 'name',
   price: 'price',
   deliveryFrequency: 'deliveryFrequency',
-  active: 'active'
+  deliveriesPerCycle: 'deliveriesPerCycle',
+  active: 'active',
+  createdAt: 'createdAt'
 } as const
 
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
-
-
-export const SubscriptionPlanItemScalarFieldEnum = {
-  id: 'id',
-  planId: 'planId',
-  productId: 'productId',
-  quantity: 'quantity'
-} as const
-
-export type SubscriptionPlanItemScalarFieldEnum = (typeof SubscriptionPlanItemScalarFieldEnum)[keyof typeof SubscriptionPlanItemScalarFieldEnum]
 
 
 export const SubscriptionScalarFieldEnum = {
@@ -221,6 +259,7 @@ export const OrderScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   subscriptionId: 'subscriptionId',
+  boxVersionId: 'boxVersionId',
   status: 'status',
   totalPrice: 'totalPrice',
   deliveryDate: 'deliveryDate',
@@ -234,6 +273,7 @@ export const OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
   productId: 'productId',
+  farmerId: 'farmerId',
   quantity: 'quantity',
   price: 'price'
 } as const
@@ -247,7 +287,7 @@ export const PaymentScalarFieldEnum = {
   amount: 'amount',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
-  transactionId: 'transactionId',
+  transactionReference: 'transactionReference',
   paidAt: 'paidAt'
 } as const
 
@@ -257,8 +297,9 @@ export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeo
 export const DeliveryScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
-  driverName: 'driverName',
+  deliveryDriver: 'deliveryDriver',
   deliveryStatus: 'deliveryStatus',
+  trackingCode: 'trackingCode',
   deliveredAt: 'deliveredAt'
 } as const
 

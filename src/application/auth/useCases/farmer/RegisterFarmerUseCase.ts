@@ -1,8 +1,8 @@
-import type { UserRepository } from '../../../domain/users/UserRepository';
-import type { RegisterFarmerInput } from '../dtos/authDtos';
-import { passwordHasher } from '../../../core/security/passwordHasher';
-import { signAccessToken, signRefreshToken } from '../../../core/security/jwt';
-import prisma from '../../../infrastructure/db/prismaClient';
+import type { UserRepository } from '../../../../domain/users/UserRepository';
+import type { RegisterFarmerInput } from '../../dtos/authDtos';
+import { passwordHasher } from '../../../../core/security/passwordHasher';
+import { signAccessToken, signRefreshToken } from '../../../../core/security/jwt';
+import prisma from '../../../../infrastructure/db/prismaClient';
 
 export class RegisterFarmerUseCase {
   constructor(private readonly userRepository: UserRepository) {}
@@ -62,4 +62,3 @@ export class RegisterFarmerUseCase {
     };
   }
 }
-

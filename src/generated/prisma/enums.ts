@@ -26,6 +26,15 @@ export const UserStatus = {
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
+export const HarvestStatus = {
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected'
+} as const
+
+export type HarvestStatus = (typeof HarvestStatus)[keyof typeof HarvestStatus]
+
+
 export const DeliveryFrequency = {
   weekly: 'weekly',
   monthly: 'monthly'
@@ -46,7 +55,7 @@ export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof Subscr
 export const OrderStatus = {
   pending: 'pending',
   packed: 'packed',
-  out_for_delivery: 'out_for_delivery',
+  shipped: 'shipped',
   delivered: 'delivered',
   cancelled: 'cancelled'
 } as const

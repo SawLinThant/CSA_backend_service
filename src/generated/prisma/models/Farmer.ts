@@ -30,6 +30,7 @@ export type FarmerMinAggregateOutputType = {
   farmName: string | null
   farmLocation: string | null
   farmDescription: string | null
+  farmImage: string | null
   approved: boolean | null
   createdAt: Date | null
 }
@@ -40,6 +41,7 @@ export type FarmerMaxAggregateOutputType = {
   farmName: string | null
   farmLocation: string | null
   farmDescription: string | null
+  farmImage: string | null
   approved: boolean | null
   createdAt: Date | null
 }
@@ -50,6 +52,7 @@ export type FarmerCountAggregateOutputType = {
   farmName: number
   farmLocation: number
   farmDescription: number
+  farmImage: number
   approved: number
   createdAt: number
   _all: number
@@ -62,6 +65,7 @@ export type FarmerMinAggregateInputType = {
   farmName?: true
   farmLocation?: true
   farmDescription?: true
+  farmImage?: true
   approved?: true
   createdAt?: true
 }
@@ -72,6 +76,7 @@ export type FarmerMaxAggregateInputType = {
   farmName?: true
   farmLocation?: true
   farmDescription?: true
+  farmImage?: true
   approved?: true
   createdAt?: true
 }
@@ -82,6 +87,7 @@ export type FarmerCountAggregateInputType = {
   farmName?: true
   farmLocation?: true
   farmDescription?: true
+  farmImage?: true
   approved?: true
   createdAt?: true
   _all?: true
@@ -165,6 +171,7 @@ export type FarmerGroupByOutputType = {
   farmName: string
   farmLocation: string
   farmDescription: string | null
+  farmImage: string | null
   approved: boolean
   createdAt: Date
   _count: FarmerCountAggregateOutputType | null
@@ -196,11 +203,14 @@ export type FarmerWhereInput = {
   farmName?: Prisma.StringFilter<"Farmer"> | string
   farmLocation?: Prisma.StringFilter<"Farmer"> | string
   farmDescription?: Prisma.StringNullableFilter<"Farmer"> | string | null
+  farmImage?: Prisma.StringNullableFilter<"Farmer"> | string | null
   approved?: Prisma.BoolFilter<"Farmer"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Farmer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
   harvests?: Prisma.HarvestListRelationFilter
+  boxItems?: Prisma.BoxItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
 }
 
 export type FarmerOrderByWithRelationInput = {
@@ -209,11 +219,14 @@ export type FarmerOrderByWithRelationInput = {
   farmName?: Prisma.SortOrder
   farmLocation?: Prisma.SortOrder
   farmDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  farmImage?: Prisma.SortOrderInput | Prisma.SortOrder
   approved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   products?: Prisma.ProductOrderByRelationAggregateInput
   harvests?: Prisma.HarvestOrderByRelationAggregateInput
+  boxItems?: Prisma.BoxItemOrderByRelationAggregateInput
+  orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
 }
 
 export type FarmerWhereUniqueInput = Prisma.AtLeast<{
@@ -225,11 +238,14 @@ export type FarmerWhereUniqueInput = Prisma.AtLeast<{
   farmName?: Prisma.StringFilter<"Farmer"> | string
   farmLocation?: Prisma.StringFilter<"Farmer"> | string
   farmDescription?: Prisma.StringNullableFilter<"Farmer"> | string | null
+  farmImage?: Prisma.StringNullableFilter<"Farmer"> | string | null
   approved?: Prisma.BoolFilter<"Farmer"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Farmer"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   products?: Prisma.ProductListRelationFilter
   harvests?: Prisma.HarvestListRelationFilter
+  boxItems?: Prisma.BoxItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
 }, "id" | "userId">
 
 export type FarmerOrderByWithAggregationInput = {
@@ -238,6 +254,7 @@ export type FarmerOrderByWithAggregationInput = {
   farmName?: Prisma.SortOrder
   farmLocation?: Prisma.SortOrder
   farmDescription?: Prisma.SortOrderInput | Prisma.SortOrder
+  farmImage?: Prisma.SortOrderInput | Prisma.SortOrder
   approved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.FarmerCountOrderByAggregateInput
@@ -254,6 +271,7 @@ export type FarmerScalarWhereWithAggregatesInput = {
   farmName?: Prisma.StringWithAggregatesFilter<"Farmer"> | string
   farmLocation?: Prisma.StringWithAggregatesFilter<"Farmer"> | string
   farmDescription?: Prisma.StringNullableWithAggregatesFilter<"Farmer"> | string | null
+  farmImage?: Prisma.StringNullableWithAggregatesFilter<"Farmer"> | string | null
   approved?: Prisma.BoolWithAggregatesFilter<"Farmer"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Farmer"> | Date | string
 }
@@ -263,11 +281,14 @@ export type FarmerCreateInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFarmerInput
   products?: Prisma.ProductCreateNestedManyWithoutFarmerInput
   harvests?: Prisma.HarvestCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerUncheckedCreateInput = {
@@ -276,10 +297,13 @@ export type FarmerUncheckedCreateInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutFarmerInput
   harvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemUncheckedCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerUpdateInput = {
@@ -287,11 +311,14 @@ export type FarmerUpdateInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFarmerNestedInput
   products?: Prisma.ProductUpdateManyWithoutFarmerNestedInput
   harvests?: Prisma.HarvestUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerUncheckedUpdateInput = {
@@ -300,10 +327,13 @@ export type FarmerUncheckedUpdateInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUncheckedUpdateManyWithoutFarmerNestedInput
   harvests?: Prisma.HarvestUncheckedUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUncheckedUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerCreateManyInput = {
@@ -312,6 +342,7 @@ export type FarmerCreateManyInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
 }
@@ -321,6 +352,7 @@ export type FarmerUpdateManyMutationInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -331,6 +363,7 @@ export type FarmerUncheckedUpdateManyInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -346,6 +379,7 @@ export type FarmerCountOrderByAggregateInput = {
   farmName?: Prisma.SortOrder
   farmLocation?: Prisma.SortOrder
   farmDescription?: Prisma.SortOrder
+  farmImage?: Prisma.SortOrder
   approved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -356,6 +390,7 @@ export type FarmerMaxOrderByAggregateInput = {
   farmName?: Prisma.SortOrder
   farmLocation?: Prisma.SortOrder
   farmDescription?: Prisma.SortOrder
+  farmImage?: Prisma.SortOrder
   approved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -366,6 +401,7 @@ export type FarmerMinOrderByAggregateInput = {
   farmName?: Prisma.SortOrder
   farmLocation?: Prisma.SortOrder
   farmDescription?: Prisma.SortOrder
+  farmImage?: Prisma.SortOrder
   approved?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -439,15 +475,46 @@ export type FarmerUpdateOneRequiredWithoutHarvestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FarmerUpdateToOneWithWhereWithoutHarvestsInput, Prisma.FarmerUpdateWithoutHarvestsInput>, Prisma.FarmerUncheckedUpdateWithoutHarvestsInput>
 }
 
+export type FarmerCreateNestedOneWithoutBoxItemsInput = {
+  create?: Prisma.XOR<Prisma.FarmerCreateWithoutBoxItemsInput, Prisma.FarmerUncheckedCreateWithoutBoxItemsInput>
+  connectOrCreate?: Prisma.FarmerCreateOrConnectWithoutBoxItemsInput
+  connect?: Prisma.FarmerWhereUniqueInput
+}
+
+export type FarmerUpdateOneRequiredWithoutBoxItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.FarmerCreateWithoutBoxItemsInput, Prisma.FarmerUncheckedCreateWithoutBoxItemsInput>
+  connectOrCreate?: Prisma.FarmerCreateOrConnectWithoutBoxItemsInput
+  upsert?: Prisma.FarmerUpsertWithoutBoxItemsInput
+  connect?: Prisma.FarmerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FarmerUpdateToOneWithWhereWithoutBoxItemsInput, Prisma.FarmerUpdateWithoutBoxItemsInput>, Prisma.FarmerUncheckedUpdateWithoutBoxItemsInput>
+}
+
+export type FarmerCreateNestedOneWithoutOrderItemsInput = {
+  create?: Prisma.XOR<Prisma.FarmerCreateWithoutOrderItemsInput, Prisma.FarmerUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.FarmerCreateOrConnectWithoutOrderItemsInput
+  connect?: Prisma.FarmerWhereUniqueInput
+}
+
+export type FarmerUpdateOneRequiredWithoutOrderItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.FarmerCreateWithoutOrderItemsInput, Prisma.FarmerUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.FarmerCreateOrConnectWithoutOrderItemsInput
+  upsert?: Prisma.FarmerUpsertWithoutOrderItemsInput
+  connect?: Prisma.FarmerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FarmerUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.FarmerUpdateWithoutOrderItemsInput>, Prisma.FarmerUncheckedUpdateWithoutOrderItemsInput>
+}
+
 export type FarmerCreateWithoutUserInput = {
   id?: string
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   products?: Prisma.ProductCreateNestedManyWithoutFarmerInput
   harvests?: Prisma.HarvestCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerUncheckedCreateWithoutUserInput = {
@@ -455,10 +522,13 @@ export type FarmerUncheckedCreateWithoutUserInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutFarmerInput
   harvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemUncheckedCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerCreateOrConnectWithoutUserInput = {
@@ -482,10 +552,13 @@ export type FarmerUpdateWithoutUserInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUpdateManyWithoutFarmerNestedInput
   harvests?: Prisma.HarvestUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerUncheckedUpdateWithoutUserInput = {
@@ -493,10 +566,13 @@ export type FarmerUncheckedUpdateWithoutUserInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUncheckedUpdateManyWithoutFarmerNestedInput
   harvests?: Prisma.HarvestUncheckedUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUncheckedUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerCreateWithoutProductsInput = {
@@ -504,10 +580,13 @@ export type FarmerCreateWithoutProductsInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFarmerInput
   harvests?: Prisma.HarvestCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerUncheckedCreateWithoutProductsInput = {
@@ -516,9 +595,12 @@ export type FarmerUncheckedCreateWithoutProductsInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   harvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemUncheckedCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerCreateOrConnectWithoutProductsInput = {
@@ -542,10 +624,13 @@ export type FarmerUpdateWithoutProductsInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFarmerNestedInput
   harvests?: Prisma.HarvestUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerUncheckedUpdateWithoutProductsInput = {
@@ -554,9 +639,12 @@ export type FarmerUncheckedUpdateWithoutProductsInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   harvests?: Prisma.HarvestUncheckedUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUncheckedUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerCreateWithoutHarvestsInput = {
@@ -564,10 +652,13 @@ export type FarmerCreateWithoutHarvestsInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFarmerInput
   products?: Prisma.ProductCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerUncheckedCreateWithoutHarvestsInput = {
@@ -576,9 +667,12 @@ export type FarmerUncheckedCreateWithoutHarvestsInput = {
   farmName: string
   farmLocation: string
   farmDescription?: string | null
+  farmImage?: string | null
   approved?: boolean
   createdAt?: Date | string
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemUncheckedCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutFarmerInput
 }
 
 export type FarmerCreateOrConnectWithoutHarvestsInput = {
@@ -602,10 +696,13 @@ export type FarmerUpdateWithoutHarvestsInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFarmerNestedInput
   products?: Prisma.ProductUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutFarmerNestedInput
 }
 
 export type FarmerUncheckedUpdateWithoutHarvestsInput = {
@@ -614,9 +711,156 @@ export type FarmerUncheckedUpdateWithoutHarvestsInput = {
   farmName?: Prisma.StringFieldUpdateOperationsInput | string
   farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   products?: Prisma.ProductUncheckedUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUncheckedUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutFarmerNestedInput
+}
+
+export type FarmerCreateWithoutBoxItemsInput = {
+  id?: string
+  farmName: string
+  farmLocation: string
+  farmDescription?: string | null
+  farmImage?: string | null
+  approved?: boolean
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutFarmerInput
+  products?: Prisma.ProductCreateNestedManyWithoutFarmerInput
+  harvests?: Prisma.HarvestCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutFarmerInput
+}
+
+export type FarmerUncheckedCreateWithoutBoxItemsInput = {
+  id?: string
+  userId: string
+  farmName: string
+  farmLocation: string
+  farmDescription?: string | null
+  farmImage?: string | null
+  approved?: boolean
+  createdAt?: Date | string
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutFarmerInput
+  harvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutFarmerInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutFarmerInput
+}
+
+export type FarmerCreateOrConnectWithoutBoxItemsInput = {
+  where: Prisma.FarmerWhereUniqueInput
+  create: Prisma.XOR<Prisma.FarmerCreateWithoutBoxItemsInput, Prisma.FarmerUncheckedCreateWithoutBoxItemsInput>
+}
+
+export type FarmerUpsertWithoutBoxItemsInput = {
+  update: Prisma.XOR<Prisma.FarmerUpdateWithoutBoxItemsInput, Prisma.FarmerUncheckedUpdateWithoutBoxItemsInput>
+  create: Prisma.XOR<Prisma.FarmerCreateWithoutBoxItemsInput, Prisma.FarmerUncheckedCreateWithoutBoxItemsInput>
+  where?: Prisma.FarmerWhereInput
+}
+
+export type FarmerUpdateToOneWithWhereWithoutBoxItemsInput = {
+  where?: Prisma.FarmerWhereInput
+  data: Prisma.XOR<Prisma.FarmerUpdateWithoutBoxItemsInput, Prisma.FarmerUncheckedUpdateWithoutBoxItemsInput>
+}
+
+export type FarmerUpdateWithoutBoxItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farmName?: Prisma.StringFieldUpdateOperationsInput | string
+  farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutFarmerNestedInput
+  products?: Prisma.ProductUpdateManyWithoutFarmerNestedInput
+  harvests?: Prisma.HarvestUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutFarmerNestedInput
+}
+
+export type FarmerUncheckedUpdateWithoutBoxItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  farmName?: Prisma.StringFieldUpdateOperationsInput | string
+  farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUncheckedUpdateManyWithoutFarmerNestedInput
+  harvests?: Prisma.HarvestUncheckedUpdateManyWithoutFarmerNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutFarmerNestedInput
+}
+
+export type FarmerCreateWithoutOrderItemsInput = {
+  id?: string
+  farmName: string
+  farmLocation: string
+  farmDescription?: string | null
+  farmImage?: string | null
+  approved?: boolean
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutFarmerInput
+  products?: Prisma.ProductCreateNestedManyWithoutFarmerInput
+  harvests?: Prisma.HarvestCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemCreateNestedManyWithoutFarmerInput
+}
+
+export type FarmerUncheckedCreateWithoutOrderItemsInput = {
+  id?: string
+  userId: string
+  farmName: string
+  farmLocation: string
+  farmDescription?: string | null
+  farmImage?: string | null
+  approved?: boolean
+  createdAt?: Date | string
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutFarmerInput
+  harvests?: Prisma.HarvestUncheckedCreateNestedManyWithoutFarmerInput
+  boxItems?: Prisma.BoxItemUncheckedCreateNestedManyWithoutFarmerInput
+}
+
+export type FarmerCreateOrConnectWithoutOrderItemsInput = {
+  where: Prisma.FarmerWhereUniqueInput
+  create: Prisma.XOR<Prisma.FarmerCreateWithoutOrderItemsInput, Prisma.FarmerUncheckedCreateWithoutOrderItemsInput>
+}
+
+export type FarmerUpsertWithoutOrderItemsInput = {
+  update: Prisma.XOR<Prisma.FarmerUpdateWithoutOrderItemsInput, Prisma.FarmerUncheckedUpdateWithoutOrderItemsInput>
+  create: Prisma.XOR<Prisma.FarmerCreateWithoutOrderItemsInput, Prisma.FarmerUncheckedCreateWithoutOrderItemsInput>
+  where?: Prisma.FarmerWhereInput
+}
+
+export type FarmerUpdateToOneWithWhereWithoutOrderItemsInput = {
+  where?: Prisma.FarmerWhereInput
+  data: Prisma.XOR<Prisma.FarmerUpdateWithoutOrderItemsInput, Prisma.FarmerUncheckedUpdateWithoutOrderItemsInput>
+}
+
+export type FarmerUpdateWithoutOrderItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farmName?: Prisma.StringFieldUpdateOperationsInput | string
+  farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutFarmerNestedInput
+  products?: Prisma.ProductUpdateManyWithoutFarmerNestedInput
+  harvests?: Prisma.HarvestUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUpdateManyWithoutFarmerNestedInput
+}
+
+export type FarmerUncheckedUpdateWithoutOrderItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  farmName?: Prisma.StringFieldUpdateOperationsInput | string
+  farmLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  farmDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  farmImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  products?: Prisma.ProductUncheckedUpdateManyWithoutFarmerNestedInput
+  harvests?: Prisma.HarvestUncheckedUpdateManyWithoutFarmerNestedInput
+  boxItems?: Prisma.BoxItemUncheckedUpdateManyWithoutFarmerNestedInput
 }
 
 
@@ -627,11 +871,15 @@ export type FarmerUncheckedUpdateWithoutHarvestsInput = {
 export type FarmerCountOutputType = {
   products: number
   harvests: number
+  boxItems: number
+  orderItems: number
 }
 
 export type FarmerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | FarmerCountOutputTypeCountProductsArgs
   harvests?: boolean | FarmerCountOutputTypeCountHarvestsArgs
+  boxItems?: boolean | FarmerCountOutputTypeCountBoxItemsArgs
+  orderItems?: boolean | FarmerCountOutputTypeCountOrderItemsArgs
 }
 
 /**
@@ -658,6 +906,20 @@ export type FarmerCountOutputTypeCountHarvestsArgs<ExtArgs extends runtime.Types
   where?: Prisma.HarvestWhereInput
 }
 
+/**
+ * FarmerCountOutputType without action
+ */
+export type FarmerCountOutputTypeCountBoxItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxItemWhereInput
+}
+
+/**
+ * FarmerCountOutputType without action
+ */
+export type FarmerCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderItemWhereInput
+}
+
 
 export type FarmerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -665,11 +927,14 @@ export type FarmerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   farmName?: boolean
   farmLocation?: boolean
   farmDescription?: boolean
+  farmImage?: boolean
   approved?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Farmer$productsArgs<ExtArgs>
   harvests?: boolean | Prisma.Farmer$harvestsArgs<ExtArgs>
+  boxItems?: boolean | Prisma.Farmer$boxItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Farmer$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.FarmerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["farmer"]>
 
@@ -679,6 +944,7 @@ export type FarmerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   farmName?: boolean
   farmLocation?: boolean
   farmDescription?: boolean
+  farmImage?: boolean
   approved?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -690,6 +956,7 @@ export type FarmerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   farmName?: boolean
   farmLocation?: boolean
   farmDescription?: boolean
+  farmImage?: boolean
   approved?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -701,15 +968,18 @@ export type FarmerSelectScalar = {
   farmName?: boolean
   farmLocation?: boolean
   farmDescription?: boolean
+  farmImage?: boolean
   approved?: boolean
   createdAt?: boolean
 }
 
-export type FarmerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "farmName" | "farmLocation" | "farmDescription" | "approved" | "createdAt", ExtArgs["result"]["farmer"]>
+export type FarmerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "farmName" | "farmLocation" | "farmDescription" | "farmImage" | "approved" | "createdAt", ExtArgs["result"]["farmer"]>
 export type FarmerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   products?: boolean | Prisma.Farmer$productsArgs<ExtArgs>
   harvests?: boolean | Prisma.Farmer$harvestsArgs<ExtArgs>
+  boxItems?: boolean | Prisma.Farmer$boxItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Farmer$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.FarmerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FarmerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -725,6 +995,8 @@ export type $FarmerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: Prisma.$UserPayload<ExtArgs>
     products: Prisma.$ProductPayload<ExtArgs>[]
     harvests: Prisma.$HarvestPayload<ExtArgs>[]
+    boxItems: Prisma.$BoxItemPayload<ExtArgs>[]
+    orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -732,6 +1004,7 @@ export type $FarmerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     farmName: string
     farmLocation: string
     farmDescription: string | null
+    farmImage: string | null
     approved: boolean
     createdAt: Date
   }, ExtArgs["result"]["farmer"]>
@@ -1131,6 +1404,8 @@ export interface Prisma__FarmerClient<T, Null = never, ExtArgs extends runtime.T
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   products<T extends Prisma.Farmer$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farmer$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   harvests<T extends Prisma.Farmer$harvestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farmer$harvestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HarvestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boxItems<T extends Prisma.Farmer$boxItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farmer$boxItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderItems<T extends Prisma.Farmer$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farmer$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1165,6 +1440,7 @@ export interface FarmerFieldRefs {
   readonly farmName: Prisma.FieldRef<"Farmer", 'String'>
   readonly farmLocation: Prisma.FieldRef<"Farmer", 'String'>
   readonly farmDescription: Prisma.FieldRef<"Farmer", 'String'>
+  readonly farmImage: Prisma.FieldRef<"Farmer", 'String'>
   readonly approved: Prisma.FieldRef<"Farmer", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Farmer", 'DateTime'>
 }
@@ -1613,6 +1889,54 @@ export type Farmer$harvestsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.HarvestScalarFieldEnum | Prisma.HarvestScalarFieldEnum[]
+}
+
+/**
+ * Farmer.boxItems
+ */
+export type Farmer$boxItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxItem
+   */
+  select?: Prisma.BoxItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxItem
+   */
+  omit?: Prisma.BoxItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxItemInclude<ExtArgs> | null
+  where?: Prisma.BoxItemWhereInput
+  orderBy?: Prisma.BoxItemOrderByWithRelationInput | Prisma.BoxItemOrderByWithRelationInput[]
+  cursor?: Prisma.BoxItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxItemScalarFieldEnum | Prisma.BoxItemScalarFieldEnum[]
+}
+
+/**
+ * Farmer.orderItems
+ */
+export type Farmer$orderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderItem
+   */
+  select?: Prisma.OrderItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderItem
+   */
+  omit?: Prisma.OrderItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderItemInclude<ExtArgs> | null
+  where?: Prisma.OrderItemWhereInput
+  orderBy?: Prisma.OrderItemOrderByWithRelationInput | Prisma.OrderItemOrderByWithRelationInput[]
+  cursor?: Prisma.OrderItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
 }
 
 /**

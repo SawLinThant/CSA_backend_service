@@ -1,5 +1,5 @@
 import type { User, UserRole } from '../../../domain/users/User';
-import type { UserRepository } from '../../../domain/users/UserRepository';
+import type { UserRepository, UserUpdateData } from '../../../domain/users/UserRepository';
 import prisma from '../prismaClient';
 
 function mapDbUserToDomain(user: {
@@ -56,6 +56,23 @@ export class PrismaUserRepository implements UserRepository {
     });
 
     return mapDbUserToDomain(created);
+  }
+
+  async update(id: string, data: UserUpdateData): Promise<User> {
+    const updated = await prisma.user.update({
+      where: { id },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.email !== undefined && { email: data.email }),
+        ...(data.phone !== undefined && { phone: data.phone }),
+        ...(data.status !== undefined && { status: data.status }),
+      },
+    });
+    return mapDbUserToDomain(updated);
+  }
+
+  async delete(id: string): Promise<void> {
+    await prisma.user.delete({ where: { id } });
   }
 }
 

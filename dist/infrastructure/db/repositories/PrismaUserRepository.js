@@ -49,6 +49,21 @@ class PrismaUserRepository {
         });
         return mapDbUserToDomain(created);
     }
+    async update(id, data) {
+        const updated = await prismaClient_1.default.user.update({
+            where: { id },
+            data: {
+                ...(data.name !== undefined && { name: data.name }),
+                ...(data.email !== undefined && { email: data.email }),
+                ...(data.phone !== undefined && { phone: data.phone }),
+                ...(data.status !== undefined && { status: data.status }),
+            },
+        });
+        return mapDbUserToDomain(updated);
+    }
+    async delete(id) {
+        await prismaClient_1.default.user.delete({ where: { id } });
+    }
 }
 exports.PrismaUserRepository = PrismaUserRepository;
 //# sourceMappingURL=PrismaUserRepository.js.map

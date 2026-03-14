@@ -392,8 +392,10 @@ export const ModelName = {
   Product: 'Product',
   ProductImage: 'ProductImage',
   Harvest: 'Harvest',
+  Box: 'Box',
+  BoxVersion: 'BoxVersion',
+  BoxItem: 'BoxItem',
   SubscriptionPlan: 'SubscriptionPlan',
-  SubscriptionPlanItem: 'SubscriptionPlanItem',
   Subscription: 'Subscription',
   Order: 'Order',
   OrderItem: 'OrderItem',
@@ -415,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "subscriptionPlan" | "subscriptionPlanItem" | "subscription" | "order" | "orderItem" | "payment" | "delivery" | "referral"
+    modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "box" | "boxVersion" | "boxItem" | "subscriptionPlan" | "subscription" | "order" | "orderItem" | "payment" | "delivery" | "referral"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1011,6 +1013,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Box: {
+      payload: Prisma.$BoxPayload<ExtArgs>
+      fields: Prisma.BoxFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoxFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoxFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        findFirst: {
+          args: Prisma.BoxFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoxFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        findMany: {
+          args: Prisma.BoxFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[]
+        }
+        create: {
+          args: Prisma.BoxCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        createMany: {
+          args: Prisma.BoxCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoxCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[]
+        }
+        delete: {
+          args: Prisma.BoxDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        update: {
+          args: Prisma.BoxUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoxDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoxUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoxUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoxUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>
+        }
+        aggregate: {
+          args: Prisma.BoxAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBox>
+        }
+        groupBy: {
+          args: Prisma.BoxGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoxCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoxVersion: {
+      payload: Prisma.$BoxVersionPayload<ExtArgs>
+      fields: Prisma.BoxVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoxVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoxVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.BoxVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoxVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        findMany: {
+          args: Prisma.BoxVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[]
+        }
+        create: {
+          args: Prisma.BoxVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        createMany: {
+          args: Prisma.BoxVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoxVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.BoxVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        update: {
+          args: Prisma.BoxVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoxVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoxVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoxVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoxVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.BoxVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoxVersion>
+        }
+        groupBy: {
+          args: Prisma.BoxVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoxVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    BoxItem: {
+      payload: Prisma.$BoxItemPayload<ExtArgs>
+      fields: Prisma.BoxItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BoxItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BoxItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        findFirst: {
+          args: Prisma.BoxItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BoxItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        findMany: {
+          args: Prisma.BoxItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
+        }
+        create: {
+          args: Prisma.BoxItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        createMany: {
+          args: Prisma.BoxItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BoxItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
+        }
+        delete: {
+          args: Prisma.BoxItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        update: {
+          args: Prisma.BoxItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.BoxItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BoxItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BoxItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.BoxItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>
+        }
+        aggregate: {
+          args: Prisma.BoxItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBoxItem>
+        }
+        groupBy: {
+          args: Prisma.BoxItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BoxItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BoxItemCountAggregateOutputType> | number
+        }
+      }
+    }
     SubscriptionPlan: {
       payload: Prisma.$SubscriptionPlanPayload<ExtArgs>
       fields: Prisma.SubscriptionPlanFieldRefs
@@ -1082,80 +1306,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SubscriptionPlanCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanCountAggregateOutputType> | number
-        }
-      }
-    }
-    SubscriptionPlanItem: {
-      payload: Prisma.$SubscriptionPlanItemPayload<ExtArgs>
-      fields: Prisma.SubscriptionPlanItemFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SubscriptionPlanItemFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SubscriptionPlanItemFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        findFirst: {
-          args: Prisma.SubscriptionPlanItemFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SubscriptionPlanItemFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        findMany: {
-          args: Prisma.SubscriptionPlanItemFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[]
-        }
-        create: {
-          args: Prisma.SubscriptionPlanItemCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        createMany: {
-          args: Prisma.SubscriptionPlanItemCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.SubscriptionPlanItemCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[]
-        }
-        delete: {
-          args: Prisma.SubscriptionPlanItemDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        update: {
-          args: Prisma.SubscriptionPlanItemUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        deleteMany: {
-          args: Prisma.SubscriptionPlanItemDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SubscriptionPlanItemUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.SubscriptionPlanItemUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[]
-        }
-        upsert: {
-          args: Prisma.SubscriptionPlanItemUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>
-        }
-        aggregate: {
-          args: Prisma.SubscriptionPlanItemAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscriptionPlanItem>
-        }
-        groupBy: {
-          args: Prisma.SubscriptionPlanItemGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanItemGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SubscriptionPlanItemCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanItemCountAggregateOutputType> | number
         }
       }
     }
@@ -1650,7 +1800,8 @@ export const UserScalarFieldEnum = {
   password: 'password',
   role: 'role',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1659,7 +1810,6 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const CustomerScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  defaultAddressId: 'defaultAddressId',
   createdAt: 'createdAt'
 } as const
 
@@ -1672,6 +1822,7 @@ export const FarmerScalarFieldEnum = {
   farmName: 'farmName',
   farmLocation: 'farmLocation',
   farmDescription: 'farmDescription',
+  farmImage: 'farmImage',
   approved: 'approved',
   createdAt: 'createdAt'
 } as const
@@ -1686,6 +1837,7 @@ export const AddressScalarFieldEnum = {
   city: 'city',
   state: 'state',
   postalCode: 'postalCode',
+  country: 'country',
   isDefault: 'isDefault'
 } as const
 
@@ -1694,7 +1846,8 @@ export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeo
 
 export const CategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  description: 'description'
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -1702,11 +1855,12 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 
 export const ProductScalarFieldEnum = {
   id: 'id',
+  farmerId: 'farmerId',
+  categoryId: 'categoryId',
   name: 'name',
   description: 'description',
-  price: 'price',
-  categoryId: 'categoryId',
-  farmerId: 'farmerId',
+  unit: 'unit',
+  basePrice: 'basePrice',
   isActive: 'isActive',
   createdAt: 'createdAt'
 } as const
@@ -1719,8 +1873,7 @@ export const ProductImageScalarFieldEnum = {
   productId: 'productId',
   imageUrl: 'imageUrl',
   isPrimary: 'isPrimary',
-  sortOrder: 'sortOrder',
-  createdAt: 'createdAt'
+  sortOrder: 'sortOrder'
 } as const
 
 export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
@@ -1730,34 +1883,67 @@ export const HarvestScalarFieldEnum = {
   id: 'id',
   farmerId: 'farmerId',
   productId: 'productId',
-  quantity: 'quantity',
+  quantityAvailable: 'quantityAvailable',
+  unitPrice: 'unitPrice',
   harvestDate: 'harvestDate',
-  availableUntil: 'availableUntil'
+  availableUntil: 'availableUntil',
+  status: 'status',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt'
 } as const
 
 export type HarvestScalarFieldEnum = (typeof HarvestScalarFieldEnum)[keyof typeof HarvestScalarFieldEnum]
 
 
-export const SubscriptionPlanScalarFieldEnum = {
+export const BoxScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
+  imageUrl: 'imageUrl',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type BoxScalarFieldEnum = (typeof BoxScalarFieldEnum)[keyof typeof BoxScalarFieldEnum]
+
+
+export const BoxVersionScalarFieldEnum = {
+  id: 'id',
+  boxId: 'boxId',
+  versionName: 'versionName',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt'
+} as const
+
+export type BoxVersionScalarFieldEnum = (typeof BoxVersionScalarFieldEnum)[keyof typeof BoxVersionScalarFieldEnum]
+
+
+export const BoxItemScalarFieldEnum = {
+  id: 'id',
+  boxVersionId: 'boxVersionId',
+  productId: 'productId',
+  farmerId: 'farmerId',
+  quantity: 'quantity',
+  optional: 'optional'
+} as const
+
+export type BoxItemScalarFieldEnum = (typeof BoxItemScalarFieldEnum)[keyof typeof BoxItemScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  boxId: 'boxId',
+  name: 'name',
   price: 'price',
   deliveryFrequency: 'deliveryFrequency',
-  active: 'active'
+  deliveriesPerCycle: 'deliveriesPerCycle',
+  active: 'active',
+  createdAt: 'createdAt'
 } as const
 
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
-
-
-export const SubscriptionPlanItemScalarFieldEnum = {
-  id: 'id',
-  planId: 'planId',
-  productId: 'productId',
-  quantity: 'quantity'
-} as const
-
-export type SubscriptionPlanItemScalarFieldEnum = (typeof SubscriptionPlanItemScalarFieldEnum)[keyof typeof SubscriptionPlanItemScalarFieldEnum]
 
 
 export const SubscriptionScalarFieldEnum = {
@@ -1778,6 +1964,7 @@ export const OrderScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   subscriptionId: 'subscriptionId',
+  boxVersionId: 'boxVersionId',
   status: 'status',
   totalPrice: 'totalPrice',
   deliveryDate: 'deliveryDate',
@@ -1791,6 +1978,7 @@ export const OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
   productId: 'productId',
+  farmerId: 'farmerId',
   quantity: 'quantity',
   price: 'price'
 } as const
@@ -1804,7 +1992,7 @@ export const PaymentScalarFieldEnum = {
   amount: 'amount',
   paymentMethod: 'paymentMethod',
   paymentStatus: 'paymentStatus',
-  transactionId: 'transactionId',
+  transactionReference: 'transactionReference',
   paidAt: 'paidAt'
 } as const
 
@@ -1814,8 +2002,9 @@ export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeo
 export const DeliveryScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
-  driverName: 'driverName',
+  deliveryDriver: 'deliveryDriver',
   deliveryStatus: 'deliveryStatus',
+  trackingCode: 'trackingCode',
   deliveredAt: 'deliveredAt'
 } as const
 
@@ -1950,6 +2139,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'HarvestStatus'
+ */
+export type EnumHarvestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HarvestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'HarvestStatus[]'
+ */
+export type ListEnumHarvestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HarvestStatus[]'>
     
 
 
@@ -2139,8 +2342,10 @@ export type GlobalOmitConfig = {
   product?: Prisma.ProductOmit
   productImage?: Prisma.ProductImageOmit
   harvest?: Prisma.HarvestOmit
+  box?: Prisma.BoxOmit
+  boxVersion?: Prisma.BoxVersionOmit
+  boxItem?: Prisma.BoxItemOmit
   subscriptionPlan?: Prisma.SubscriptionPlanOmit
-  subscriptionPlanItem?: Prisma.SubscriptionPlanItemOmit
   subscription?: Prisma.SubscriptionOmit
   order?: Prisma.OrderOmit
   orderItem?: Prisma.OrderItemOmit

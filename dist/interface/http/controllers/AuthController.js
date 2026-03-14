@@ -2,16 +2,35 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const PrismaUserRepository_1 = require("../../../infrastructure/db/repositories/PrismaUserRepository");
-const RegisterCustomerUseCase_1 = require("../../../application/auth/useCases/RegisterCustomerUseCase");
-const RegisterFarmerUseCase_1 = require("../../../application/auth/useCases/RegisterFarmerUseCase");
-const LoginUseCase_1 = require("../../../application/auth/useCases/LoginUseCase");
-const RefreshTokenUseCase_1 = require("../../../application/auth/useCases/RefreshTokenUseCase");
+const PrismaCustomerRepository_1 = require("../../../infrastructure/db/repositories/PrismaCustomerRepository");
+const PrismaFarmerRepository_1 = require("../../../infrastructure/db/repositories/PrismaFarmerRepository");
+const RegisterCustomerUseCase_1 = require("../../../application/auth/useCases/customer/RegisterCustomerUseCase");
+const RegisterFarmerUseCase_1 = require("../../../application/auth/useCases/farmer/RegisterFarmerUseCase");
+const LoginUseCase_1 = require("../../../application/auth/useCases/login/LoginUseCase");
+const RefreshTokenUseCase_1 = require("../../../application/auth/useCases/refresh/RefreshTokenUseCase");
+const UpdateCustomerProfileUseCase_1 = require("../../../application/users/useCases/customer/profile/UpdateCustomerProfileUseCase");
+const UpdateFarmerProfileUseCase_1 = require("../../../application/users/useCases/farmer/profile/UpdateFarmerProfileUseCase");
+const AdminListCustomersUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminListCustomersUseCase");
+const AdminGetCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminGetCustomerUseCase");
+const AdminCreateCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminCreateCustomerUseCase");
+const AdminUpdateCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminUpdateCustomerUseCase");
+const AdminDeleteCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminDeleteCustomerUseCase");
 const authValidators_1 = require("../validators/authValidators");
+const userValidators_1 = require("../validators/userValidators");
 const userRepository = new PrismaUserRepository_1.PrismaUserRepository();
+const customerRepository = new PrismaCustomerRepository_1.PrismaCustomerRepository();
+const farmerRepository = new PrismaFarmerRepository_1.PrismaFarmerRepository();
 const registerCustomerUseCase = new RegisterCustomerUseCase_1.RegisterCustomerUseCase(userRepository);
 const registerFarmerUseCase = new RegisterFarmerUseCase_1.RegisterFarmerUseCase(userRepository);
 const loginUseCase = new LoginUseCase_1.LoginUseCase(userRepository);
 const refreshTokenUseCase = new RefreshTokenUseCase_1.RefreshTokenUseCase();
+const updateCustomerProfileUseCase = new UpdateCustomerProfileUseCase_1.UpdateCustomerProfileUseCase(userRepository);
+const updateFarmerProfileUseCase = new UpdateFarmerProfileUseCase_1.UpdateFarmerProfileUseCase(userRepository, farmerRepository);
+const adminListCustomersUseCase = new AdminListCustomersUseCase_1.AdminListCustomersUseCase(customerRepository);
+const adminGetCustomerUseCase = new AdminGetCustomerUseCase_1.AdminGetCustomerUseCase(customerRepository);
+const adminCreateCustomerUseCase = new AdminCreateCustomerUseCase_1.AdminCreateCustomerUseCase(userRepository, customerRepository);
+const adminUpdateCustomerUseCase = new AdminUpdateCustomerUseCase_1.AdminUpdateCustomerUseCase(userRepository, customerRepository);
+const adminDeleteCustomerUseCase = new AdminDeleteCustomerUseCase_1.AdminDeleteCustomerUseCase(customerRepository, userRepository);
 class AuthController {
     async customerRegister(req, res) {
         const parseResult = authValidators_1.authValidators.registerCustomer.safeParse(req.body);
@@ -89,6 +108,102 @@ class AuthController {
         }
         catch (error) {
             return res.status(401).json({ error: error instanceof Error ? error.message : 'Refresh failed' });
+        }
+    }
+    async updateCustomerProfile(req, res) {
+        if (!req.user)
+            return res.status(401).json({ error: 'Unauthorized' });
+        const parseResult = userValidators_1.userValidators.updateCustomerProfile.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await updateCustomerProfileUseCase.execute(req.user.id, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(400).json({ error: error instanceof Error ? error.message : 'Update failed' });
+        }
+    }
+    async updateFarmerProfile(req, res) {
+        if (!req.user)
+            return res.status(401).json({ error: 'Unauthorized' });
+        const parseResult = userValidators_1.userValidators.updateFarmerProfile.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await updateFarmerProfileUseCase.execute(req.user.id, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(400).json({ error: error instanceof Error ? error.message : 'Update failed' });
+        }
+    }
+    async adminListCustomers(req, res) {
+        const parseResult = userValidators_1.userValidators.listCustomersQuery.safeParse(req.query);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminListCustomersUseCase.execute(parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(500).json({ error: error instanceof Error ? error.message : 'Failed' });
+        }
+    }
+    async adminGetCustomer(req, res) {
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'Customer id required' });
+        try {
+            const result = await adminGetCustomerUseCase.execute(id);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(404).json({ error: error instanceof Error ? error.message : 'Not found' });
+        }
+    }
+    async adminCreateCustomer(req, res) {
+        const parseResult = userValidators_1.userValidators.adminCreateCustomer.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminCreateCustomerUseCase.execute(parseResult.data);
+            return res.status(201).json(result);
+        }
+        catch (error) {
+            return res.status(400).json({ error: error instanceof Error ? error.message : 'Create failed' });
+        }
+    }
+    async adminUpdateCustomer(req, res) {
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'Customer id required' });
+        const parseResult = userValidators_1.userValidators.adminUpdateCustomer.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminUpdateCustomerUseCase.execute(id, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(400).json({ error: error instanceof Error ? error.message : 'Update failed' });
+        }
+    }
+    async adminDeleteCustomer(req, res) {
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'Customer id required' });
+        try {
+            await adminDeleteCustomerUseCase.execute(id);
+            return res.status(204).send();
+        }
+        catch (error) {
+            return res.status(404).json({ error: error instanceof Error ? error.message : 'Not found' });
         }
     }
 }

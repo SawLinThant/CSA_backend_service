@@ -1,5 +1,5 @@
 // Farm-to-Table Platform – Prisma schema
-// Based on docs/farm_to_table_system_entities.txt
+// Updated from docs/updateschema.text
 
 generator client {
   provider = "prisma-client"
@@ -25,6 +25,12 @@ enum UserStatus {
   suspended
 }
 
+enum HarvestStatus {
+  pending
+  approved
+  rejected
+}
+
 enum DeliveryFrequency {
   weekly
   monthly
@@ -39,7 +45,7 @@ enum SubscriptionStatus {
 enum OrderStatus {
   pending
   packed
-  out_for_delivery
+  shipped
   delivered
   cancelled
 }
@@ -63,31 +69,37 @@ enum DeliveryStatus {
 // ---------------------------------------------------------------------------
 
 model User {
-  id           String      @id @default(cuid())
-  name         String
-  email        String?     @unique
-  phone        String      @unique
-  password     String
-  role         UserRole
-  status       UserStatus  @default(active)
-  createdAt    DateTime    @default(now()) @map("created_at")
+  id        String     @id @default(cuid())
+  name      String
+  email     String?    @unique
+  phone     String     @unique
+  password  String
+  role      UserRole
+  status    UserStatus @default(active)
 
-  customer         Customer?
-  farmer           Farmer?
-  addresses        Address[]
-  referralsGiven   Referral[] @relation("Referrer")
-  referralsReceived Referral[] @relation("Referred")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  customer  Customer?
+  farmer    Farmer?
+
+  addresses Address[]
+
+  referralsGiven    Referral[]  @relation("Referrer")
+  referralsReceived Referral[]  @relation("Referred")
+
+  approvedHarvests Harvest[] @relation("HarvestApprover")
 
   @@map("users")
 }
 
 model Customer {
-  id                 String    @id @default(cuid())
-  userId             String    @unique @map("user_id")
-  defaultAddressId   String?   @map("default_address_id")
-  createdAt          DateTime  @default(now()) @map("created_at")
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   subscriptions Subscription[]
   orders        Order[]
 
@@ -95,29 +107,35 @@ model Customer {
 }
 
 model Farmer {
-  id               String    @id @default(cuid())
-  userId           String    @unique @map("user_id")
-  farmName         String    @map("farm_name")
-  farmLocation     String    @map("farm_location")
-  farmDescription  String?   @map("farm_description")
-  approved         Boolean   @default(false)
-  createdAt        DateTime  @default(now()) @map("created_at")
+  id              String   @id @default(cuid())
+  userId          String   @unique @map("user_id")
+  farmName        String   @map("farm_name")
+  farmLocation    String   @map("farm_location")
+  farmDescription String?  @map("farm_description")
+  farmImage       String?  @map("farm_image")
+  approved        Boolean  @default(false)
 
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  products  Product[]
-  harvests  Harvest[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  products Product[]
+  harvests Harvest[]
+  boxItems BoxItem[]
+  orderItems OrderItem[]
 
   @@map("farmers")
 }
 
 model Address {
-  id          String   @id @default(cuid())
-  userId      String   @map("user_id")
-  addressLine String   @map("address_line")
+  id          String  @id @default(cuid())
+  userId      String  @map("user_id")
+  addressLine String  @map("address_line")
   city        String
   state       String
-  postalCode  String   @map("postal_code")
-  isDefault   Boolean  @default(false) @map("is_default")
+  postalCode  String  @map("postal_code")
+  country     String
+  isDefault   Boolean @default(false) @map("is_default")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -125,12 +143,13 @@ model Address {
 }
 
 // ---------------------------------------------------------------------------
-// 2. Product & Farm Entities
+// 2. Product Catalog
 // ---------------------------------------------------------------------------
 
 model Category {
-  id   String @id @default(cuid())
-  name String
+  id          String  @id @default(cuid())
+  name        String
+  description String?
 
   products Product[]
 
@@ -139,179 +158,269 @@ model Category {
 
 model Product {
   id          String   @id @default(cuid())
+  farmerId    String
+  categoryId  String
   name        String
-  description String
-  price       Decimal  @db.Decimal(10, 2)
-  categoryId  String   @map("category_id")
-  farmerId    String   @map("farmer_id")
-  isActive    Boolean  @default(true) @map("is_active")
-  createdAt   DateTime @default(now()) @map("created_at")
+  description String?
+  unit        String
+  basePrice   Decimal  @db.Decimal(10, 2)
+  isActive    Boolean  @default(true)
 
-  category       Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
-  farmer         Farmer           @relation(fields: [farmerId], references: [id], onDelete: Restrict)
-  images         ProductImage[]
-  harvests       Harvest[]
-  planItems      SubscriptionPlanItem[]
-  orderItems     OrderItem[]
+  createdAt DateTime @default(now())
+
+  farmer   Farmer   @relation(fields: [farmerId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  images   ProductImage[]
+  harvests Harvest[]
+  boxItems BoxItem[]
+  orderItems OrderItem[]
 
   @@map("products")
 }
 
 model ProductImage {
-  id        String   @id @default(cuid())
-  productId String   @map("product_id")
-  imageUrl  String   @map("image_url")
-  isPrimary Boolean  @default(false) @map("is_primary")
-  sortOrder Int      @default(0) @map("sort_order")
-  createdAt DateTime @default(now()) @map("created_at")
+  id        String  @id @default(cuid())
+  productId String
+  imageUrl  String
+  isPrimary Boolean @default(false)
+  sortOrder Int     @default(0)
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("product_images")
 }
 
-model Harvest {
-  id             String   @id @default(cuid())
-  farmerId       String   @map("farmer_id")
-  productId      String   @map("product_id")
-  quantity       Int
-  harvestDate    DateTime @map("harvest_date")
-  availableUntil DateTime @map("available_until")
+// ---------------------------------------------------------------------------
+// 3. Farmer Inventory (Harvest)
+// ---------------------------------------------------------------------------
 
-  farmer  Farmer  @relation(fields: [farmerId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+model Harvest {
+  id        String        @id @default(cuid())
+  farmerId  String
+  productId String
+
+  quantityAvailable Int
+  unitPrice         Decimal @db.Decimal(10, 2)
+
+  harvestDate    DateTime
+  availableUntil DateTime
+
+  status HarvestStatus @default(pending)
+
+  approvedBy String?
+  approvedAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  farmer   Farmer  @relation(fields: [farmerId], references: [id])
+  product  Product @relation(fields: [productId], references: [id])
+  approver User?   @relation("HarvestApprover", fields: [approvedBy], references: [id])
 
   @@map("harvests")
 }
 
 // ---------------------------------------------------------------------------
-// 3. Subscription System
+// 4. Box System
+// ---------------------------------------------------------------------------
+
+model Box {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  imageUrl    String?
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  versions BoxVersion[]
+  plans    SubscriptionPlan[]
+
+  @@map("boxes")
+}
+
+model BoxVersion {
+  id          String   @id @default(cuid())
+  boxId       String
+  versionName String
+
+  startDate DateTime
+  endDate   DateTime?
+
+  createdAt DateTime @default(now())
+
+  box Box @relation(fields: [boxId], references: [id])
+
+  items  BoxItem[]
+  orders Order[]
+
+  @@map("box_versions")
+}
+
+model BoxItem {
+  id           String @id @default(cuid())
+  boxVersionId String
+  productId    String
+  farmerId     String
+
+  quantity Int
+  optional Boolean @default(false)
+
+  boxVersion BoxVersion @relation(fields: [boxVersionId], references: [id])
+  product    Product    @relation(fields: [productId], references: [id])
+  farmer     Farmer     @relation(fields: [farmerId], references: [id])
+
+  @@map("box_items")
+}
+
+// ---------------------------------------------------------------------------
+// 5. Subscriptions
 // ---------------------------------------------------------------------------
 
 model SubscriptionPlan {
-  id                 String            @id @default(cuid())
-  name               String
-  description        String?
-  price              Decimal           @db.Decimal(10, 2)
-  deliveryFrequency  DeliveryFrequency @map("delivery_frequency")
-  active             Boolean           @default(true)
+  id                String   @id @default(cuid())
+  boxId             String
+  name              String
+  price             Decimal  @db.Decimal(10, 2)
 
-  planItems    SubscriptionPlanItem[]
+  deliveryFrequency DeliveryFrequency
+  deliveriesPerCycle Int
+
+  active Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  box Box @relation(fields: [boxId], references: [id])
+
   subscriptions Subscription[]
 
   @@map("subscription_plans")
 }
 
-model SubscriptionPlanItem {
-  id        String @id @default(cuid())
-  planId    String @map("plan_id")
-  productId String @map("product_id")
-  quantity  Int
-
-  plan    SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
-  product Product          @relation(fields: [productId], references: [id], onDelete: Restrict)
-
-  @@map("subscription_plan_items")
-}
-
 model Subscription {
-  id                String             @id @default(cuid())
-  customerId        String             @map("customer_id")
-  planId            String             @map("plan_id")
-  status            SubscriptionStatus @default(active)
-  startDate         DateTime          @map("start_date")
-  nextDeliveryDate  DateTime          @map("next_delivery_date")
-  pauseUntil        DateTime?         @map("pause_until")
-  createdAt         DateTime          @default(now()) @map("created_at")
+  id         String   @id @default(cuid())
+  customerId String
+  planId     String
 
-  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  plan     SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
-  orders   Order[]
+  status SubscriptionStatus @default(active)
+
+  startDate        DateTime
+  nextDeliveryDate DateTime
+  pauseUntil       DateTime?
+
+  createdAt DateTime @default(now())
+
+  customer Customer @relation(fields: [customerId], references: [id])
+  plan     SubscriptionPlan @relation(fields: [planId], references: [id])
+
+  orders Order[]
 
   @@map("subscriptions")
 }
 
 // ---------------------------------------------------------------------------
-// 4. Order System
+// 6. Orders
 // ---------------------------------------------------------------------------
 
 model Order {
-  id             String      @id @default(cuid())
-  customerId     String      @map("customer_id")
-  subscriptionId String?     @map("subscription_id")
-  status         OrderStatus @default(pending)
-  totalPrice     Decimal     @map("total_price") @db.Decimal(10, 2)
-  deliveryDate   DateTime?   @map("delivery_date")
-  createdAt      DateTime    @default(now()) @map("created_at")
+  id             String   @id @default(cuid())
+  customerId     String
+  subscriptionId String?
+  boxVersionId   String
 
-  customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
-  items        OrderItem[]
-  payments     Payment[]
-  delivery     Delivery?
+  status OrderStatus @default(pending)
+
+  totalPrice Decimal @db.Decimal(10, 2)
+
+  deliveryDate DateTime?
+
+  createdAt DateTime @default(now())
+
+  customer     Customer      @relation(fields: [customerId], references: [id])
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id])
+
+  boxVersion BoxVersion @relation(fields: [boxVersionId], references: [id])
+
+  items     OrderItem[]
+  payments  Payment[]
+  delivery  Delivery?
 
   @@map("orders")
 }
 
 model OrderItem {
   id        String  @id @default(cuid())
-  orderId   String  @map("order_id")
-  productId String  @map("product_id")
-  quantity  Int
-  price     Decimal @db.Decimal(10, 2)
+  orderId   String
+  productId String
+  farmerId  String
+
+  quantity Int
+  price    Decimal @db.Decimal(10, 2)
 
   order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  product Product @relation(fields: [productId], references: [id])
+  farmer  Farmer  @relation(fields: [farmerId], references: [id])
 
   @@map("order_items")
 }
 
 // ---------------------------------------------------------------------------
-// 5. Payment System
+// 7. Payment
 // ---------------------------------------------------------------------------
 
 model Payment {
-  id             String        @id @default(cuid())
-  orderId        String        @map("order_id")
-  amount         Decimal       @db.Decimal(10, 2)
-  paymentMethod  String        @map("payment_method")
-  paymentStatus  PaymentStatus @map("payment_status")
-  transactionId String?       @map("transaction_id")
-  paidAt         DateTime?     @map("paid_at")
+  id      String @id @default(cuid())
+  orderId String
 
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  amount Decimal @db.Decimal(10, 2)
+
+  paymentMethod String
+  paymentStatus PaymentStatus
+
+  transactionReference String?
+
+  paidAt DateTime?
+
+  order Order @relation(fields: [orderId], references: [id])
 
   @@map("payments")
 }
 
 // ---------------------------------------------------------------------------
-// 6. Delivery System
+// 8. Delivery
 // ---------------------------------------------------------------------------
 
 model Delivery {
-  id             String         @id @default(cuid())
-  orderId        String         @unique @map("order_id")
-  driverName     String         @map("driver_name")
-  deliveryStatus DeliveryStatus @map("delivery_status")
-  deliveredAt    DateTime?     @map("delivered_at")
+  id      String @id @default(cuid())
+  orderId String @unique
 
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  deliveryDriver String?
+
+  deliveryStatus DeliveryStatus
+
+  trackingCode String?
+
+  deliveredAt DateTime?
+
+  order Order @relation(fields: [orderId], references: [id])
 
   @@map("deliveries")
 }
 
 // ---------------------------------------------------------------------------
-// 7. Referral System (Optional)
+// 9. Referral
 // ---------------------------------------------------------------------------
 
 model Referral {
-  id             String  @id @default(cuid())
-  referrerId     String  @map("referrer_id")
-  referredUserId String  @map("referred_user_id")
-  rewardGiven    Boolean @default(false) @map("reward_given")
+  id String @id @default(cuid())
 
-  referrer   User @relation("Referrer", fields: [referrerId], references: [id], onDelete: Cascade)
-  referred   User @relation("Referred", fields: [referredUserId], references: [id], onDelete: Cascade)
+  referrerId     String
+  referredUserId String
+
+  rewardGiven Boolean @default(false)
+
+  referrer User @relation("Referrer", fields: [referrerId], references: [id])
+  referred User @relation("Referred", fields: [referredUserId], references: [id])
 
   @@map("referrals")
 }

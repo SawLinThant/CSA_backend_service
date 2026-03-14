@@ -2,14 +2,14 @@ import { z } from 'zod';
 
 export const registerCustomerSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email().optional(),
+  email: z.string().email().optional().nullable(),
   phone: z.string().min(6),
   password: z.string().min(8),
 });
 
 export const registerFarmerSchema = z.object({
   name: z.string().min(1),
-  email: z.string().email().optional(),
+  email: z.string().email().optional().nullable(),
   phone: z.string().min(6),
   password: z.string().min(8),
   farmName: z.string().min(1),

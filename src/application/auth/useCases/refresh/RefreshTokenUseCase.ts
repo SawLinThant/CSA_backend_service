@@ -1,5 +1,5 @@
-import type { RefreshTokenInput } from '../dtos/authDtos';
-import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../../../core/security/jwt';
+import type { RefreshTokenInput } from '../../dtos/authDtos';
+import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../../../../core/security/jwt';
 
 export class RefreshTokenUseCase {
   async execute(input: RefreshTokenInput) {
@@ -18,4 +18,3 @@ export class RefreshTokenUseCase {
     };
   }
 }
-

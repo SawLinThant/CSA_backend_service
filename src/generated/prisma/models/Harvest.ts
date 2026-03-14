@@ -27,75 +27,109 @@ export type AggregateHarvest = {
 }
 
 export type HarvestAvgAggregateOutputType = {
-  quantity: number | null
+  quantityAvailable: number | null
+  unitPrice: runtime.Decimal | null
 }
 
 export type HarvestSumAggregateOutputType = {
-  quantity: number | null
+  quantityAvailable: number | null
+  unitPrice: runtime.Decimal | null
 }
 
 export type HarvestMinAggregateOutputType = {
   id: string | null
   farmerId: string | null
   productId: string | null
-  quantity: number | null
+  quantityAvailable: number | null
+  unitPrice: runtime.Decimal | null
   harvestDate: Date | null
   availableUntil: Date | null
+  status: $Enums.HarvestStatus | null
+  approvedBy: string | null
+  approvedAt: Date | null
+  createdAt: Date | null
 }
 
 export type HarvestMaxAggregateOutputType = {
   id: string | null
   farmerId: string | null
   productId: string | null
-  quantity: number | null
+  quantityAvailable: number | null
+  unitPrice: runtime.Decimal | null
   harvestDate: Date | null
   availableUntil: Date | null
+  status: $Enums.HarvestStatus | null
+  approvedBy: string | null
+  approvedAt: Date | null
+  createdAt: Date | null
 }
 
 export type HarvestCountAggregateOutputType = {
   id: number
   farmerId: number
   productId: number
-  quantity: number
+  quantityAvailable: number
+  unitPrice: number
   harvestDate: number
   availableUntil: number
+  status: number
+  approvedBy: number
+  approvedAt: number
+  createdAt: number
   _all: number
 }
 
 
 export type HarvestAvgAggregateInputType = {
-  quantity?: true
+  quantityAvailable?: true
+  unitPrice?: true
 }
 
 export type HarvestSumAggregateInputType = {
-  quantity?: true
+  quantityAvailable?: true
+  unitPrice?: true
 }
 
 export type HarvestMinAggregateInputType = {
   id?: true
   farmerId?: true
   productId?: true
-  quantity?: true
+  quantityAvailable?: true
+  unitPrice?: true
   harvestDate?: true
   availableUntil?: true
+  status?: true
+  approvedBy?: true
+  approvedAt?: true
+  createdAt?: true
 }
 
 export type HarvestMaxAggregateInputType = {
   id?: true
   farmerId?: true
   productId?: true
-  quantity?: true
+  quantityAvailable?: true
+  unitPrice?: true
   harvestDate?: true
   availableUntil?: true
+  status?: true
+  approvedBy?: true
+  approvedAt?: true
+  createdAt?: true
 }
 
 export type HarvestCountAggregateInputType = {
   id?: true
   farmerId?: true
   productId?: true
-  quantity?: true
+  quantityAvailable?: true
+  unitPrice?: true
   harvestDate?: true
   availableUntil?: true
+  status?: true
+  approvedBy?: true
+  approvedAt?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -189,9 +223,14 @@ export type HarvestGroupByOutputType = {
   id: string
   farmerId: string
   productId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal
   harvestDate: Date
   availableUntil: Date
+  status: $Enums.HarvestStatus
+  approvedBy: string | null
+  approvedAt: Date | null
+  createdAt: Date
   _count: HarvestCountAggregateOutputType | null
   _avg: HarvestAvgAggregateOutputType | null
   _sum: HarvestSumAggregateOutputType | null
@@ -221,22 +260,34 @@ export type HarvestWhereInput = {
   id?: Prisma.StringFilter<"Harvest"> | string
   farmerId?: Prisma.StringFilter<"Harvest"> | string
   productId?: Prisma.StringFilter<"Harvest"> | string
-  quantity?: Prisma.IntFilter<"Harvest"> | number
+  quantityAvailable?: Prisma.IntFilter<"Harvest"> | number
+  unitPrice?: Prisma.DecimalFilter<"Harvest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFilter<"Harvest"> | Date | string
   availableUntil?: Prisma.DateTimeFilter<"Harvest"> | Date | string
+  status?: Prisma.EnumHarvestStatusFilter<"Harvest"> | $Enums.HarvestStatus
+  approvedBy?: Prisma.StringNullableFilter<"Harvest"> | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Harvest"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Harvest"> | Date | string
   farmer?: Prisma.XOR<Prisma.FarmerScalarRelationFilter, Prisma.FarmerWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  approver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type HarvestOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   farmerId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
   harvestDate?: Prisma.SortOrder
   availableUntil?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  approvedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   farmer?: Prisma.FarmerOrderByWithRelationInput
   product?: Prisma.ProductOrderByWithRelationInput
+  approver?: Prisma.UserOrderByWithRelationInput
 }
 
 export type HarvestWhereUniqueInput = Prisma.AtLeast<{
@@ -246,20 +297,31 @@ export type HarvestWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.HarvestWhereInput | Prisma.HarvestWhereInput[]
   farmerId?: Prisma.StringFilter<"Harvest"> | string
   productId?: Prisma.StringFilter<"Harvest"> | string
-  quantity?: Prisma.IntFilter<"Harvest"> | number
+  quantityAvailable?: Prisma.IntFilter<"Harvest"> | number
+  unitPrice?: Prisma.DecimalFilter<"Harvest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFilter<"Harvest"> | Date | string
   availableUntil?: Prisma.DateTimeFilter<"Harvest"> | Date | string
+  status?: Prisma.EnumHarvestStatusFilter<"Harvest"> | $Enums.HarvestStatus
+  approvedBy?: Prisma.StringNullableFilter<"Harvest"> | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Harvest"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Harvest"> | Date | string
   farmer?: Prisma.XOR<Prisma.FarmerScalarRelationFilter, Prisma.FarmerWhereInput>
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  approver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type HarvestOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   farmerId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
   harvestDate?: Prisma.SortOrder
   availableUntil?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  approvedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.HarvestCountOrderByAggregateInput
   _avg?: Prisma.HarvestAvgOrderByAggregateInput
   _max?: Prisma.HarvestMaxOrderByAggregateInput
@@ -274,70 +336,109 @@ export type HarvestScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Harvest"> | string
   farmerId?: Prisma.StringWithAggregatesFilter<"Harvest"> | string
   productId?: Prisma.StringWithAggregatesFilter<"Harvest"> | string
-  quantity?: Prisma.IntWithAggregatesFilter<"Harvest"> | number
+  quantityAvailable?: Prisma.IntWithAggregatesFilter<"Harvest"> | number
+  unitPrice?: Prisma.DecimalWithAggregatesFilter<"Harvest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeWithAggregatesFilter<"Harvest"> | Date | string
   availableUntil?: Prisma.DateTimeWithAggregatesFilter<"Harvest"> | Date | string
+  status?: Prisma.EnumHarvestStatusWithAggregatesFilter<"Harvest"> | $Enums.HarvestStatus
+  approvedBy?: Prisma.StringNullableWithAggregatesFilter<"Harvest"> | string | null
+  approvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Harvest"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Harvest"> | Date | string
 }
 
 export type HarvestCreateInput = {
   id?: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
   farmer: Prisma.FarmerCreateNestedOneWithoutHarvestsInput
   product: Prisma.ProductCreateNestedOneWithoutHarvestsInput
+  approver?: Prisma.UserCreateNestedOneWithoutApprovedHarvestsInput
 }
 
 export type HarvestUncheckedCreateInput = {
   id?: string
   farmerId: string
   productId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   farmer?: Prisma.FarmerUpdateOneRequiredWithoutHarvestsNestedInput
   product?: Prisma.ProductUpdateOneRequiredWithoutHarvestsNestedInput
+  approver?: Prisma.UserUpdateOneWithoutApprovedHarvestsNestedInput
 }
 
 export type HarvestUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   farmerId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestCreateManyInput = {
   id?: string
   farmerId: string
   productId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   farmerId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestListRelationFilter = {
@@ -354,35 +455,94 @@ export type HarvestCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   farmerId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
   harvestDate?: Prisma.SortOrder
   availableUntil?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  approvedBy?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type HarvestAvgOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
 }
 
 export type HarvestMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   farmerId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
   harvestDate?: Prisma.SortOrder
   availableUntil?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  approvedBy?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type HarvestMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   farmerId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
   harvestDate?: Prisma.SortOrder
   availableUntil?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  approvedBy?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type HarvestSumOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
+  quantityAvailable?: Prisma.SortOrder
+  unitPrice?: Prisma.SortOrder
+}
+
+export type HarvestCreateNestedManyWithoutApproverInput = {
+  create?: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput> | Prisma.HarvestCreateWithoutApproverInput[] | Prisma.HarvestUncheckedCreateWithoutApproverInput[]
+  connectOrCreate?: Prisma.HarvestCreateOrConnectWithoutApproverInput | Prisma.HarvestCreateOrConnectWithoutApproverInput[]
+  createMany?: Prisma.HarvestCreateManyApproverInputEnvelope
+  connect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+}
+
+export type HarvestUncheckedCreateNestedManyWithoutApproverInput = {
+  create?: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput> | Prisma.HarvestCreateWithoutApproverInput[] | Prisma.HarvestUncheckedCreateWithoutApproverInput[]
+  connectOrCreate?: Prisma.HarvestCreateOrConnectWithoutApproverInput | Prisma.HarvestCreateOrConnectWithoutApproverInput[]
+  createMany?: Prisma.HarvestCreateManyApproverInputEnvelope
+  connect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+}
+
+export type HarvestUpdateManyWithoutApproverNestedInput = {
+  create?: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput> | Prisma.HarvestCreateWithoutApproverInput[] | Prisma.HarvestUncheckedCreateWithoutApproverInput[]
+  connectOrCreate?: Prisma.HarvestCreateOrConnectWithoutApproverInput | Prisma.HarvestCreateOrConnectWithoutApproverInput[]
+  upsert?: Prisma.HarvestUpsertWithWhereUniqueWithoutApproverInput | Prisma.HarvestUpsertWithWhereUniqueWithoutApproverInput[]
+  createMany?: Prisma.HarvestCreateManyApproverInputEnvelope
+  set?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  disconnect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  delete?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  connect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  update?: Prisma.HarvestUpdateWithWhereUniqueWithoutApproverInput | Prisma.HarvestUpdateWithWhereUniqueWithoutApproverInput[]
+  updateMany?: Prisma.HarvestUpdateManyWithWhereWithoutApproverInput | Prisma.HarvestUpdateManyWithWhereWithoutApproverInput[]
+  deleteMany?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
+}
+
+export type HarvestUncheckedUpdateManyWithoutApproverNestedInput = {
+  create?: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput> | Prisma.HarvestCreateWithoutApproverInput[] | Prisma.HarvestUncheckedCreateWithoutApproverInput[]
+  connectOrCreate?: Prisma.HarvestCreateOrConnectWithoutApproverInput | Prisma.HarvestCreateOrConnectWithoutApproverInput[]
+  upsert?: Prisma.HarvestUpsertWithWhereUniqueWithoutApproverInput | Prisma.HarvestUpsertWithWhereUniqueWithoutApproverInput[]
+  createMany?: Prisma.HarvestCreateManyApproverInputEnvelope
+  set?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  disconnect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  delete?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  connect?: Prisma.HarvestWhereUniqueInput | Prisma.HarvestWhereUniqueInput[]
+  update?: Prisma.HarvestUpdateWithWhereUniqueWithoutApproverInput | Prisma.HarvestUpdateWithWhereUniqueWithoutApproverInput[]
+  updateMany?: Prisma.HarvestUpdateManyWithWhereWithoutApproverInput | Prisma.HarvestUpdateManyWithWhereWithoutApproverInput[]
+  deleteMany?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
 }
 
 export type HarvestCreateNestedManyWithoutFarmerInput = {
@@ -469,20 +629,107 @@ export type HarvestUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
 }
 
-export type HarvestCreateWithoutFarmerInput = {
+export type EnumHarvestStatusFieldUpdateOperationsInput = {
+  set?: $Enums.HarvestStatus
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type HarvestCreateWithoutApproverInput = {
   id?: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  farmer: Prisma.FarmerCreateNestedOneWithoutHarvestsInput
   product: Prisma.ProductCreateNestedOneWithoutHarvestsInput
+}
+
+export type HarvestUncheckedCreateWithoutApproverInput = {
+  id?: string
+  farmerId: string
+  productId: string
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate: Date | string
+  availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type HarvestCreateOrConnectWithoutApproverInput = {
+  where: Prisma.HarvestWhereUniqueInput
+  create: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput>
+}
+
+export type HarvestCreateManyApproverInputEnvelope = {
+  data: Prisma.HarvestCreateManyApproverInput | Prisma.HarvestCreateManyApproverInput[]
+  skipDuplicates?: boolean
+}
+
+export type HarvestUpsertWithWhereUniqueWithoutApproverInput = {
+  where: Prisma.HarvestWhereUniqueInput
+  update: Prisma.XOR<Prisma.HarvestUpdateWithoutApproverInput, Prisma.HarvestUncheckedUpdateWithoutApproverInput>
+  create: Prisma.XOR<Prisma.HarvestCreateWithoutApproverInput, Prisma.HarvestUncheckedCreateWithoutApproverInput>
+}
+
+export type HarvestUpdateWithWhereUniqueWithoutApproverInput = {
+  where: Prisma.HarvestWhereUniqueInput
+  data: Prisma.XOR<Prisma.HarvestUpdateWithoutApproverInput, Prisma.HarvestUncheckedUpdateWithoutApproverInput>
+}
+
+export type HarvestUpdateManyWithWhereWithoutApproverInput = {
+  where: Prisma.HarvestScalarWhereInput
+  data: Prisma.XOR<Prisma.HarvestUpdateManyMutationInput, Prisma.HarvestUncheckedUpdateManyWithoutApproverInput>
+}
+
+export type HarvestScalarWhereInput = {
+  AND?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
+  OR?: Prisma.HarvestScalarWhereInput[]
+  NOT?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
+  id?: Prisma.StringFilter<"Harvest"> | string
+  farmerId?: Prisma.StringFilter<"Harvest"> | string
+  productId?: Prisma.StringFilter<"Harvest"> | string
+  quantityAvailable?: Prisma.IntFilter<"Harvest"> | number
+  unitPrice?: Prisma.DecimalFilter<"Harvest"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate?: Prisma.DateTimeFilter<"Harvest"> | Date | string
+  availableUntil?: Prisma.DateTimeFilter<"Harvest"> | Date | string
+  status?: Prisma.EnumHarvestStatusFilter<"Harvest"> | $Enums.HarvestStatus
+  approvedBy?: Prisma.StringNullableFilter<"Harvest"> | string | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Harvest"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Harvest"> | Date | string
+}
+
+export type HarvestCreateWithoutFarmerInput = {
+  id?: string
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate: Date | string
+  availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+  product: Prisma.ProductCreateNestedOneWithoutHarvestsInput
+  approver?: Prisma.UserCreateNestedOneWithoutApprovedHarvestsInput
 }
 
 export type HarvestUncheckedCreateWithoutFarmerInput = {
   id?: string
   productId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestCreateOrConnectWithoutFarmerInput = {
@@ -511,32 +758,30 @@ export type HarvestUpdateManyWithWhereWithoutFarmerInput = {
   data: Prisma.XOR<Prisma.HarvestUpdateManyMutationInput, Prisma.HarvestUncheckedUpdateManyWithoutFarmerInput>
 }
 
-export type HarvestScalarWhereInput = {
-  AND?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
-  OR?: Prisma.HarvestScalarWhereInput[]
-  NOT?: Prisma.HarvestScalarWhereInput | Prisma.HarvestScalarWhereInput[]
-  id?: Prisma.StringFilter<"Harvest"> | string
-  farmerId?: Prisma.StringFilter<"Harvest"> | string
-  productId?: Prisma.StringFilter<"Harvest"> | string
-  quantity?: Prisma.IntFilter<"Harvest"> | number
-  harvestDate?: Prisma.DateTimeFilter<"Harvest"> | Date | string
-  availableUntil?: Prisma.DateTimeFilter<"Harvest"> | Date | string
-}
-
 export type HarvestCreateWithoutProductInput = {
   id?: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
   farmer: Prisma.FarmerCreateNestedOneWithoutHarvestsInput
+  approver?: Prisma.UserCreateNestedOneWithoutApprovedHarvestsInput
 }
 
 export type HarvestUncheckedCreateWithoutProductInput = {
   id?: string
   farmerId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestCreateOrConnectWithoutProductInput = {
@@ -565,68 +810,160 @@ export type HarvestUpdateManyWithWhereWithoutProductInput = {
   data: Prisma.XOR<Prisma.HarvestUpdateManyMutationInput, Prisma.HarvestUncheckedUpdateManyWithoutProductInput>
 }
 
+export type HarvestCreateManyApproverInput = {
+  id?: string
+  farmerId: string
+  productId: string
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate: Date | string
+  availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type HarvestUpdateWithoutApproverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  farmer?: Prisma.FarmerUpdateOneRequiredWithoutHarvestsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutHarvestsNestedInput
+}
+
+export type HarvestUncheckedUpdateWithoutApproverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farmerId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type HarvestUncheckedUpdateManyWithoutApproverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farmerId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type HarvestCreateManyFarmerInput = {
   id?: string
   productId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestUpdateWithoutFarmerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutHarvestsNestedInput
+  approver?: Prisma.UserUpdateOneWithoutApprovedHarvestsNestedInput
 }
 
 export type HarvestUncheckedUpdateWithoutFarmerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestUncheckedUpdateManyWithoutFarmerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestCreateManyProductInput = {
   id?: string
   farmerId: string
-  quantity: number
+  quantityAvailable: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate: Date | string
   availableUntil: Date | string
+  status?: $Enums.HarvestStatus
+  approvedBy?: string | null
+  approvedAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type HarvestUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   farmer?: Prisma.FarmerUpdateOneRequiredWithoutHarvestsNestedInput
+  approver?: Prisma.UserUpdateOneWithoutApprovedHarvestsNestedInput
 }
 
 export type HarvestUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   farmerId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HarvestUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   farmerId?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  quantityAvailable?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   harvestDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   availableUntil?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumHarvestStatusFieldUpdateOperationsInput | $Enums.HarvestStatus
+  approvedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -635,56 +972,82 @@ export type HarvestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   farmerId?: boolean
   productId?: boolean
-  quantity?: boolean
+  quantityAvailable?: boolean
+  unitPrice?: boolean
   harvestDate?: boolean
   availableUntil?: boolean
+  status?: boolean
+  approvedBy?: boolean
+  approvedAt?: boolean
+  createdAt?: boolean
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }, ExtArgs["result"]["harvest"]>
 
 export type HarvestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   farmerId?: boolean
   productId?: boolean
-  quantity?: boolean
+  quantityAvailable?: boolean
+  unitPrice?: boolean
   harvestDate?: boolean
   availableUntil?: boolean
+  status?: boolean
+  approvedBy?: boolean
+  approvedAt?: boolean
+  createdAt?: boolean
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }, ExtArgs["result"]["harvest"]>
 
 export type HarvestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   farmerId?: boolean
   productId?: boolean
-  quantity?: boolean
+  quantityAvailable?: boolean
+  unitPrice?: boolean
   harvestDate?: boolean
   availableUntil?: boolean
+  status?: boolean
+  approvedBy?: boolean
+  approvedAt?: boolean
+  createdAt?: boolean
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }, ExtArgs["result"]["harvest"]>
 
 export type HarvestSelectScalar = {
   id?: boolean
   farmerId?: boolean
   productId?: boolean
-  quantity?: boolean
+  quantityAvailable?: boolean
+  unitPrice?: boolean
   harvestDate?: boolean
   availableUntil?: boolean
+  status?: boolean
+  approvedBy?: boolean
+  approvedAt?: boolean
+  createdAt?: boolean
 }
 
-export type HarvestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farmerId" | "productId" | "quantity" | "harvestDate" | "availableUntil", ExtArgs["result"]["harvest"]>
+export type HarvestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farmerId" | "productId" | "quantityAvailable" | "unitPrice" | "harvestDate" | "availableUntil" | "status" | "approvedBy" | "approvedAt" | "createdAt", ExtArgs["result"]["harvest"]>
 export type HarvestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }
 export type HarvestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }
 export type HarvestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farmer?: boolean | Prisma.FarmerDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  approver?: boolean | Prisma.Harvest$approverArgs<ExtArgs>
 }
 
 export type $HarvestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -692,14 +1055,20 @@ export type $HarvestPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     farmer: Prisma.$FarmerPayload<ExtArgs>
     product: Prisma.$ProductPayload<ExtArgs>
+    approver: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     farmerId: string
     productId: string
-    quantity: number
+    quantityAvailable: number
+    unitPrice: runtime.Decimal
     harvestDate: Date
     availableUntil: Date
+    status: $Enums.HarvestStatus
+    approvedBy: string | null
+    approvedAt: Date | null
+    createdAt: Date
   }, ExtArgs["result"]["harvest"]>
   composites: {}
 }
@@ -1096,6 +1465,7 @@ export interface Prisma__HarvestClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   farmer<T extends Prisma.FarmerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FarmerDefaultArgs<ExtArgs>>): Prisma.Prisma__FarmerClient<runtime.Types.Result.GetResult<Prisma.$FarmerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  approver<T extends Prisma.Harvest$approverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Harvest$approverArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1128,9 +1498,14 @@ export interface HarvestFieldRefs {
   readonly id: Prisma.FieldRef<"Harvest", 'String'>
   readonly farmerId: Prisma.FieldRef<"Harvest", 'String'>
   readonly productId: Prisma.FieldRef<"Harvest", 'String'>
-  readonly quantity: Prisma.FieldRef<"Harvest", 'Int'>
+  readonly quantityAvailable: Prisma.FieldRef<"Harvest", 'Int'>
+  readonly unitPrice: Prisma.FieldRef<"Harvest", 'Decimal'>
   readonly harvestDate: Prisma.FieldRef<"Harvest", 'DateTime'>
   readonly availableUntil: Prisma.FieldRef<"Harvest", 'DateTime'>
+  readonly status: Prisma.FieldRef<"Harvest", 'HarvestStatus'>
+  readonly approvedBy: Prisma.FieldRef<"Harvest", 'String'>
+  readonly approvedAt: Prisma.FieldRef<"Harvest", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"Harvest", 'DateTime'>
 }
     
 
@@ -1529,6 +1904,25 @@ export type HarvestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Harvests to delete.
    */
   limit?: number
+}
+
+/**
+ * Harvest.approver
+ */
+export type Harvest$approverArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

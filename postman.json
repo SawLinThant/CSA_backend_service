@@ -2,7 +2,7 @@
   "info": {
     "name": "Farm-to-Table Backend",
     "_postman_id": "farming-ecommerce-backend",
-    "description": "Postman collection for Farm-to-Table backend auth and health endpoints.",
+    "description": "Postman collection for Farm-to-Table backend: health, auth, and admin customer endpoints.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -10,14 +10,129 @@
       "key": "baseUrl",
       "value": "http://localhost:4000",
       "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
     }
   ],
   "item": [
     {
-      "name": "Admin",
+      "name": "Health",
       "item": [
         {
-          "name": "Admin Login",
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "API (Public)",
+      "item": [
+        {
+          "name": "Categories",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/categories?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "categories"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/categories/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "categories", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "products"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "categoryId", "value": "", "disabled": true },
+                    { "key": "isActive", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "products", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Refresh Token",
           "request": {
             "method": "POST",
             "header": [
@@ -28,14 +143,332 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+              "raw": "{\n  \"refreshToken\": \"\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/admin/login",
+              "raw": "{{baseUrl}}/auth/refresh",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "admin", "login"]
+              "path": ["auth", "refresh"]
             }
           }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "login"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Customer",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/customers?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "customers"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "phone", "value": "", "disabled": true },
+                    { "key": "usertype", "value": "customer", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/customers/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "customers", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/customers",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "customers"]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"email\": \"\",\n  \"status\": \"active\",\n  \"defaultAddressId\": null\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/customers/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "customers", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/customers/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "customers", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Farmer",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/farmers?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "farmers"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "phone", "value": "", "disabled": true }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/categories?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "categories"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/categories/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "categories", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"description\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/categories",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "categories"]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"description\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/categories/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "categories", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/categories/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "categories", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -43,46 +476,81 @@
       "name": "Customer",
       "item": [
         {
-          "name": "Customer Register",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+          "name": "auth",
+          "item": [
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"email\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "register"]
+                }
               }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"email\": \"\"\n}"
             },
-            "url": {
-              "raw": "{{baseUrl}}/auth/customer/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "customer", "register"]
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "login"]
+                }
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Customer Login",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+          "name": "Profile",
+          "item": [
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"email\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/profile",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "profile"]
+                }
               }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/customer/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "customer", "login"]
             }
-          }
+          ]
         }
       ]
     },
@@ -90,49 +558,267 @@
       "name": "Farmer",
       "item": [
         {
-          "name": "Farmer Register",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+          "name": "auth",
+          "item": [
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\",\n  \"email\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/register",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "register"]
+                }
               }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\",\n  \"email\": \"\"\n}"
             },
-            "url": {
-              "raw": "{{baseUrl}}/auth/farmer/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "farmer", "register"]
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/login",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "login"]
+                }
+              }
             }
-          }
+          ]
         },
         {
-          "name": "Farmer Login",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
+          "name": "Profile",
+          "item": [
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"email\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/profile",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "profile"]
+                }
               }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"phone\": \"\",\n  \"password\": \"\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/auth/farmer/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "farmer", "login"]
             }
-          }
+          ]
+        },
+        {
+          "name": "Product",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "categoryId", "value": "", "disabled": true },
+                    { "key": "isActive", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"description\": \"\",\n  \"categoryId\": \"\",\n  \"unit\": \"kg\",\n  \"basePrice\": 0,\n  \"images\": [\n    { \"imageUrl\": \"https://example.com/image.jpg\", \"isPrimary\": true, \"sortOrder\": 0 }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products"]
+                }
+              }
+            },
+            {
+              "name": "Create (with file upload)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "", "type": "text" },
+                    { "key": "description", "value": "", "type": "text" },
+                    { "key": "categoryId", "value": "", "type": "text" },
+                    { "key": "unit", "value": "kg", "type": "text" },
+                    { "key": "basePrice", "value": "0", "type": "text" },
+                    { "key": "imageMeta", "value": "[{\"isPrimary\":true,\"sortOrder\":0},{\"isPrimary\":false,\"sortOrder\":1}]", "type": "text", "description": "Optional. JSON array: one object per image (same order as files). Each: isPrimary (boolean), sortOrder (number)." },
+                    { "key": "images", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products", "upload"]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"description\": \"\",\n  \"categoryId\": \"\",\n  \"unit\": \"kg\",\n  \"basePrice\": 0,\n  \"isActive\": true,\n  \"images\": [\n    { \"imageUrl\": \"https://example.com/1.jpg\", \"isPrimary\": true, \"sortOrder\": 0 },\n    { \"imageUrl\": \"https://example.com/2.jpg\", \"isPrimary\": false, \"sortOrder\": 1 }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Update (with file upload)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "", "type": "text" },
+                    { "key": "description", "value": "", "type": "text" },
+                    { "key": "categoryId", "value": "", "type": "text" },
+                    { "key": "unit", "value": "kg", "type": "text" },
+                    { "key": "basePrice", "value": "", "type": "text" },
+                    { "key": "isActive", "value": "true", "type": "text" },
+                    { "key": "imageMeta", "value": "[{\"isPrimary\":true,\"sortOrder\":0},{\"isPrimary\":false,\"sortOrder\":1}]", "type": "text", "description": "Optional. JSON array: one object per image (same order as files)." },
+                    { "key": "images", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products/:id/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products", ":id", "upload"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/products/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "products", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     }
   ]
 }
-
