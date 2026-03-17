@@ -1,8 +1,15 @@
 import type { FarmerRepository } from '../../../../../domain/farmers/FarmerRepository';
 import type { ListFarmersQuery } from '../../../dtos/userDtos';
 
-function toPublicUser(user: { id: string; name: string; email: string | null; phone: string; role: string }) {
-  return { id: user.id, name: user.name, email: user.email, phone: user.phone, role: user.role };
+function toPublicUser(user: {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string;
+  role: string;
+  status: 'active' | 'suspended';
+}) {
+  return { id: user.id, name: user.name, email: user.email, phone: user.phone, role: user.role, status: user.status };
 }
 
 export class AdminListFarmersUseCase {

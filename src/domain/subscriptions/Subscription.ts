@@ -10,4 +10,3 @@ export interface Subscription {
   pauseUntil: Date | null;
   createdAt: Date;
 }
-

@@ -125,6 +125,126 @@
               }
             }
           ]
+        },
+        {
+          "name": "Boxes",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/boxes?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "boxes"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "isActive", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/boxes/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "boxes", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Box Versions",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/box-versions?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "box-versions"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "boxId", "value": "", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/box-versions/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "box-versions", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "List Items",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/box-versions/:id/items",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "box-versions", ":id", "items"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Subscription Plans",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/subscription-plans?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "subscription-plans"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "boxId", "value": "", "disabled": true },
+                    { "key": "active", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/subscription-plans/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "subscription-plans", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -149,6 +269,18 @@
               "raw": "{{baseUrl}}/auth/refresh",
               "host": ["{{baseUrl}}"],
               "path": ["auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
             }
           }
         },
@@ -195,6 +327,31 @@
                   "raw": "{{baseUrl}}/auth/admin/login",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "admin", "login"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "User",
+          "item": [
+            {
+              "name": "Toggle Status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/users/:id/toggle-status",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "users", ":id", "toggle-status"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
                 }
               }
             }
@@ -469,6 +626,427 @@
               }
             }
           ]
+        },
+        {
+          "name": "Harvest",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/harvests?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "harvests"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "farmerId", "value": "", "disabled": true },
+                    { "key": "productId", "value": "", "disabled": true },
+                    { "key": "status", "value": "pending", "disabled": true },
+                    { "key": "harvestDateFrom", "value": "2025-03-01", "disabled": true },
+                    { "key": "harvestDateTo", "value": "2025-03-31", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/harvests/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "harvests", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Approve",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/harvests/:id/approve",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "harvests", ":id", "approve"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Reject",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/harvests/:id/reject",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "harvests", ":id", "reject"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Box",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "name", "value": "", "disabled": true },
+                    { "key": "isActive", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Weekly Veggie Box\",\n  \"description\": \"Fresh vegetables every week\",\n  \"imageUrl\": null,\n  \"isActive\": true\n}"
+                },
+                "url": { "raw": "{{baseUrl}}/auth/admin/boxes", "host": ["{{baseUrl}}"], "path": ["auth", "admin", "boxes"] }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"description\": \"\",\n  \"imageUrl\": null,\n  \"isActive\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Box Version",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-versions?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-versions"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "boxId", "value": "", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-versions/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-versions", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "List Items",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-versions/:id/items",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-versions", ":id", "items"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"boxId\": \"\",\n  \"versionName\": \"Week 1\",\n  \"startDate\": \"2025-03-01\",\n  \"endDate\": \"2025-03-07\"\n}"
+                },
+                "url": { "raw": "{{baseUrl}}/auth/admin/box-versions", "host": ["{{baseUrl}}"], "path": ["auth", "admin", "box-versions"] }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"versionName\": \"\",\n  \"startDate\": \"2025-03-01\",\n  \"endDate\": \"2025-03-07\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-versions/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-versions", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-versions/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-versions", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Box Item",
+          "item": [
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"boxVersionId\": \"\",\n  \"productId\": \"\",\n  \"farmerId\": \"\",\n  \"quantity\": 2,\n  \"optional\": false\n}"
+                },
+                "url": { "raw": "{{baseUrl}}/auth/admin/box-items", "host": ["{{baseUrl}}"], "path": ["auth", "admin", "box-items"] }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-items/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-items", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 3,\n  \"optional\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-items/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-items", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/box-items/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "box-items", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Subscription Plan",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/subscription-plans?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "subscription-plans"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "boxId", "value": "", "disabled": true },
+                    { "key": "active", "value": "true", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/subscription-plans/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "subscription-plans", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"boxId\": \"\",\n  \"name\": \"Weekly Veggie Plan\",\n  \"price\": 29.99,\n  \"deliveryFrequency\": \"weekly\",\n  \"deliveriesPerCycle\": 4,\n  \"active\": true\n}"
+                },
+                "url": { "raw": "{{baseUrl}}/auth/admin/subscription-plans", "host": ["{{baseUrl}}"], "path": ["auth", "admin", "subscription-plans"] }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"\",\n  \"price\": 0,\n  \"deliveryFrequency\": \"weekly\",\n  \"deliveriesPerCycle\": 4,\n  \"active\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/subscription-plans/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "subscription-plans", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/subscription-plans/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "subscription-plans", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -547,6 +1125,89 @@
                   "raw": "{{baseUrl}}/auth/customer/profile",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "customer", "profile"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Subscription",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/subscriptions?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "subscriptions"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "status", "value": "active", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/subscriptions/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "subscriptions", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planId\": \"\"\n}"
+                },
+                "url": { "raw": "{{baseUrl}}/auth/customer/subscriptions", "host": ["{{baseUrl}}"], "path": ["auth", "customer", "subscriptions"] }
+              }
+            },
+            {
+              "name": "Pause",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pauseUntil\": \"2025-04-01\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/subscriptions/:id/pause",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "subscriptions", ":id", "pause"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Cancel",
+              "request": {
+                "method": "PATCH",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/subscriptions/:id/cancel",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "subscriptions", ":id", "cancel"],
+                  "variable": [{ "key": "id", "value": "" }]
                 }
               }
             }
@@ -810,6 +1471,109 @@
                   "raw": "{{baseUrl}}/auth/farmer/products/:id",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "farmer", "products", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Harvest",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/harvests?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "harvests"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "productId", "value": "", "disabled": true },
+                    { "key": "status", "value": "pending", "disabled": true },
+                    { "key": "harvestDateFrom", "value": "2025-03-01", "disabled": true },
+                    { "key": "harvestDateTo", "value": "2025-03-31", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/harvests/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "harvests", ":id"],
+                  "variable": [
+                    { "key": "id", "value": "" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productId\": \"\",\n  \"quantityAvailable\": 10,\n  \"unitPrice\": 5.99,\n  \"harvestDate\": \"2025-03-01\",\n  \"availableUntil\": \"2025-03-15\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/harvests",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "harvests"]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantityAvailable\": 20,\n  \"unitPrice\": 6.50,\n  \"harvestDate\": \"2025-03-01\",\n  \"availableUntil\": \"2025-03-20\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/harvests/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "harvests", ":id"],
                   "variable": [
                     { "key": "id", "value": "" }
                   ]

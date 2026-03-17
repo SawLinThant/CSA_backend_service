@@ -14,6 +14,7 @@ import { AdminCreateCustomerUseCase } from '../../../application/users/useCases/
 import { AdminUpdateCustomerUseCase } from '../../../application/users/useCases/admin/customer/AdminUpdateCustomerUseCase';
 import { AdminDeleteCustomerUseCase } from '../../../application/users/useCases/admin/customer/AdminDeleteCustomerUseCase';
 import { AdminListFarmersUseCase } from '../../../application/users/useCases/admin/farmer/AdminListFarmersUseCase';
+import { AdminToggleUserStatusUseCase } from '../../../application/users/useCases/admin/user/AdminToggleUserStatusUseCase';
 import { authValidators } from '../validators/authValidators';
 import { userValidators } from '../validators/userValidators';
 
@@ -33,6 +34,7 @@ const adminCreateCustomerUseCase = new AdminCreateCustomerUseCase(userRepository
 const adminUpdateCustomerUseCase = new AdminUpdateCustomerUseCase(userRepository, customerRepository);
 const adminDeleteCustomerUseCase = new AdminDeleteCustomerUseCase(customerRepository, userRepository);
 const adminListFarmersUseCase = new AdminListFarmersUseCase(farmerRepository);
+const adminToggleUserStatusUseCase = new AdminToggleUserStatusUseCase(userRepository);
 
 export class AuthController {
   async customerRegister(req: Request, res: Response) {
@@ -117,6 +119,12 @@ export class AuthController {
     } catch (error) {
       return res.status(401).json({ error: error instanceof Error ? error.message : 'Refresh failed' });
     }
+  }
+
+  async logout(_req: Request, res: Response) {
+    // Tokens are stateless JWTs; logout is handled client-side by discarding tokens.
+    // This endpoint exists so clients have a consistent API to call.
+    return res.status(200).json({ message: 'Logged out' });
   }
 
   async updateCustomerProfile(req: Request, res: Response) {
@@ -220,6 +228,27 @@ export class AuthController {
       return res.status(204).send();
     } catch (error) {
       return res.status(404).json({ error: error instanceof Error ? error.message : 'Not found' });
+    }
+  }
+
+  async adminToggleUserStatus(req: Request, res: Response) {
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+    if (!id) return res.status(400).json({ error: 'User id required' });
+    try {
+      const user = await adminToggleUserStatusUseCase.execute(id, req.user.id);
+      return res.status(200).json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        status: user.status,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed';
+      if (message.includes('not found')) return res.status(404).json({ error: message });
+      return res.status(400).json({ error: message });
     }
   }
 }
