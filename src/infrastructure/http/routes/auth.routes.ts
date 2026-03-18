@@ -8,7 +8,7 @@ import { SubscriptionPlanController } from '../../../interface/http/controllers/
 import { SubscriptionController } from '../../../interface/http/controllers/SubscriptionController';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { requireRole } from '../middleware/requireRole';
-import { productImagesUpload } from '../middleware/uploadMiddleware';
+import { productImagesUpload, singleImageUpload } from '../middleware/uploadMiddleware';
 
 const router = Router();
 const controller = new AuthController();
@@ -154,6 +154,12 @@ router.get('/admin/boxes/:id', authMiddleware, requireRole('admin'), (req, res) 
 );
 router.post('/admin/boxes', authMiddleware, requireRole('admin'), (req, res) =>
   boxController.adminCreateBox(req, res),
+);
+router.post('/admin/boxes/upload', authMiddleware, requireRole('admin'), singleImageUpload, (req, res) =>
+  boxController.adminCreateBoxWithUpload(req, res),
+);
+router.patch('/admin/boxes/:id/upload', authMiddleware, requireRole('admin'), singleImageUpload, (req, res) =>
+  boxController.adminUpdateBoxWithUpload(req, res),
 );
 router.patch('/admin/boxes/:id', authMiddleware, requireRole('admin'), (req, res) =>
   boxController.adminUpdateBox(req, res),

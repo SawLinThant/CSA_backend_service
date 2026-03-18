@@ -768,6 +768,29 @@
               }
             },
             {
+              "name": "Create (with image upload)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "Weekly Veggie Box", "type": "text" },
+                    { "key": "description", "value": "Fresh vegetables every week", "type": "text" },
+                    { "key": "isActive", "value": "true", "type": "text" },
+                    { "key": "image", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes", "upload"]
+                }
+              }
+            },
+            {
               "name": "Update",
               "request": {
                 "method": "PATCH",
@@ -783,6 +806,30 @@
                   "raw": "{{baseUrl}}/auth/admin/boxes/:id",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "admin", "boxes", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Update (with image upload)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "", "type": "text" },
+                    { "key": "description", "value": "", "type": "text" },
+                    { "key": "isActive", "value": "true", "type": "text" },
+                    { "key": "image", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/admin/boxes/:id/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "admin", "boxes", ":id", "upload"],
                   "variable": [{ "key": "id", "value": "" }]
                 }
               }

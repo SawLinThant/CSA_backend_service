@@ -82,7 +82,7 @@ export class PrismaProductRepository implements ProductRepository {
       prisma.product.findMany({
         skip,
         take,
-        where: Object.keys(where).length > 0 ? where : undefined,
+        ...(Object.keys(where).length > 0 && { where }),
         orderBy: { createdAt: 'desc' },
         include: { images: { orderBy: { sortOrder: 'asc' } } },
       }),

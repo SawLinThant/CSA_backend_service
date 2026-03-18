@@ -11,8 +11,8 @@ import { FarmerDeleteProductUseCase } from '../../../application/products/useCas
 import { PublicListProductsUseCase } from '../../../application/products/useCases/public/PublicListProductsUseCase';
 import { PublicGetProductUseCase } from '../../../application/products/useCases/public/PublicGetProductUseCase';
 import { productValidators } from '../validators/productValidators';
-import { isS3Configured } from '../../../config/env';
-import { uploadToS3, getImageExtension } from '../../../infrastructure/storage/S3UploadService';
+import { getImageExtension } from '../../../infrastructure/storage/S3StorageService';
+import { getStorageService } from '../../../infrastructure/storage/storageFactory';
 
 const farmerRepository = new PrismaFarmerRepository();
 const categoryRepository = new PrismaCategoryRepository();
@@ -33,6 +33,7 @@ const farmerUpdateProductUseCase = new FarmerUpdateProductUseCase(
   productRepository,
 );
 const farmerDeleteProductUseCase = new FarmerDeleteProductUseCase(farmerRepository, productRepository);
+const storage = getStorageService();
 
 export class ProductController {
   async publicListProducts(req: Request, res: Response) {
@@ -107,9 +108,6 @@ export class ProductController {
 
   async farmerCreateProductWithUpload(req: Request, res: Response) {
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
-    if (!isS3Configured()) {
-      return res.status(503).json({ error: 'File upload is not configured. Set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, and AWS_S3_BUCKET.' });
-    }
     const files = (req as Request & { files?: Express.Multer.File[] }).files;
     if (!Array.isArray(files) || files.length === 0) {
       return res.status(400).json({ error: 'At least one image file is required (field: images)' });
@@ -119,7 +117,7 @@ export class ProductController {
       return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
     }
     const userId = req.user.id;
-    let metaList: { isPrimary?: boolean; sortOrder?: number }[] = [];
+    let metaList: Array<{ isPrimary?: boolean; sortOrder?: number }> = [];
     if (parseResult.data.imageMeta) {
       try {
         const parsed = JSON.parse(parseResult.data.imageMeta) as unknown;
@@ -132,7 +130,10 @@ export class ProductController {
             error: `imageMeta length (${metaResult.data.length}) must match number of uploaded images (${files.length})`,
           });
         }
-        metaList = metaResult.data;
+        metaList = metaResult.data.map((m) => ({
+          ...(m.isPrimary !== undefined && { isPrimary: m.isPrimary }),
+          ...(m.sortOrder !== undefined && { sortOrder: m.sortOrder }),
+        }));
       } catch {
         return res.status(400).json({ error: 'imageMeta must be a valid JSON array' });
       }
@@ -141,9 +142,10 @@ export class ProductController {
       const imageUrls: string[] = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+        if (!file) continue;
         const ext = getImageExtension(file.mimetype);
         const key = `products/${userId}/${Date.now()}-${randomUUID()}${ext}`;
-        const url = await uploadToS3({
+        const url = await storage.uploadImage({
           buffer: file.buffer,
           key,
           contentType: file.mimetype,
@@ -165,7 +167,7 @@ export class ProductController {
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Create failed';
       if (message.includes('not found')) return res.status(404).json({ error: message });
-      if (message.includes('S3')) return res.status(503).json({ error: message });
+      if (message.includes('configured') || message.includes('upload failed')) return res.status(503).json({ error: message });
       return res.status(400).json({ error: message });
     }
   }
@@ -209,12 +211,7 @@ export class ProductController {
     if (parseResult.data.isActive !== undefined) data.isActive = parseResult.data.isActive;
 
     if (fileList.length > 0) {
-      if (!isS3Configured()) {
-        return res.status(503).json({
-          error: 'File upload is not configured. Set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, and AWS_S3_BUCKET.',
-        });
-      }
-      let metaList: { isPrimary?: boolean; sortOrder?: number }[] = [];
+      let metaList: Array<{ isPrimary?: boolean; sortOrder?: number }> = [];
       if (parseResult.data.imageMeta) {
         try {
           const parsed = JSON.parse(parseResult.data.imageMeta) as unknown;
@@ -227,7 +224,10 @@ export class ProductController {
               error: `imageMeta length (${metaResult.data.length}) must match number of uploaded images (${fileList.length})`,
             });
           }
-          metaList = metaResult.data;
+          metaList = metaResult.data.map((m) => ({
+            ...(m.isPrimary !== undefined && { isPrimary: m.isPrimary }),
+            ...(m.sortOrder !== undefined && { sortOrder: m.sortOrder }),
+          }));
         } catch {
           return res.status(400).json({ error: 'imageMeta must be a valid JSON array' });
         }
@@ -237,9 +237,10 @@ export class ProductController {
         const imageUrls: string[] = [];
         for (let i = 0; i < fileList.length; i++) {
           const file = fileList[i];
+          if (!file) continue;
           const ext = getImageExtension(file.mimetype);
           const key = `products/${userId}/${Date.now()}-${randomUUID()}${ext}`;
-          const url = await uploadToS3({
+          const url = await storage.uploadImage({
             buffer: file.buffer,
             key,
             contentType: file.mimetype,
@@ -255,7 +256,7 @@ export class ProductController {
         });
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Upload failed';
-        if (message.includes('S3')) return res.status(503).json({ error: message });
+        if (message.includes('configured') || message.includes('upload failed')) return res.status(503).json({ error: message });
         return res.status(400).json({ error: message });
       }
     }

@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import { randomUUID } from 'crypto';
 import { PrismaBoxRepository } from '../../../infrastructure/db/repositories/PrismaBoxRepository';
 import { PrismaBoxVersionRepository } from '../../../infrastructure/db/repositories/PrismaBoxVersionRepository';
 import { PrismaBoxItemRepository } from '../../../infrastructure/db/repositories/PrismaBoxItemRepository';
@@ -20,6 +21,8 @@ import { AdminCreateBoxItemUseCase } from '../../../application/boxes/useCases/a
 import { AdminUpdateBoxItemUseCase } from '../../../application/boxes/useCases/admin/AdminUpdateBoxItemUseCase';
 import { AdminDeleteBoxItemUseCase } from '../../../application/boxes/useCases/admin/AdminDeleteBoxItemUseCase';
 import { boxValidators } from '../validators/boxValidators';
+import { getImageExtension } from '../../../infrastructure/storage/S3StorageService';
+import { getStorageService } from '../../../infrastructure/storage/storageFactory';
 
 const boxRepository = new PrismaBoxRepository();
 const boxVersionRepository = new PrismaBoxVersionRepository();
@@ -49,6 +52,7 @@ const adminCreateBoxItemUseCase = new AdminCreateBoxItemUseCase(
 );
 const adminUpdateBoxItemUseCase = new AdminUpdateBoxItemUseCase(boxItemRepository);
 const adminDeleteBoxItemUseCase = new AdminDeleteBoxItemUseCase(boxItemRepository);
+const storage = getStorageService();
 
 export class BoxController {
   async adminListBoxes(req: Request, res: Response) {
@@ -88,6 +92,39 @@ export class BoxController {
     }
   }
 
+  async adminCreateBoxWithUpload(req: Request, res: Response) {
+    const file = (req as Request & { file?: Express.Multer.File }).file;
+    if (!file) {
+      return res.status(400).json({ error: 'Image file is required (field: image)' });
+    }
+
+    // Parse form-data fields. Multer puts them in req.body as strings.
+    const parseResult = boxValidators.createBox.safeParse({
+      name: req.body?.name,
+      description: req.body?.description ?? null,
+      isActive:
+        typeof req.body?.isActive === 'string'
+          ? req.body.isActive === 'true'
+          : req.body?.isActive,
+      imageUrl: null,
+    });
+    if (!parseResult.success) {
+      return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+    }
+
+    try {
+      const ext = getImageExtension(file.mimetype);
+      const key = `boxes/${Date.now()}-${randomUUID()}${ext}`;
+      const imageUrl = await storage.uploadImage({ buffer: file.buffer, key, contentType: file.mimetype });
+      const result = await adminCreateBoxUseCase.execute({ ...parseResult.data, imageUrl });
+      return res.status(201).json(result);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Create failed';
+      if (message.includes('configured') || message.includes('upload failed')) return res.status(503).json({ error: message });
+      return res.status(400).json({ error: message });
+    }
+  }
+
   async adminUpdateBox(req: Request, res: Response) {
     const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
     if (!id) return res.status(400).json({ error: 'Box id required' });
@@ -101,6 +138,47 @@ export class BoxController {
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Update failed';
       if (message.includes('not found')) return res.status(404).json({ error: message });
+      return res.status(400).json({ error: message });
+    }
+  }
+
+  async adminUpdateBoxWithUpload(req: Request, res: Response) {
+    const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+    if (!id) return res.status(400).json({ error: 'Box id required' });
+
+    const file = (req as Request & { file?: Express.Multer.File }).file;
+
+    // Parse form-data fields. Multer puts them in req.body as strings.
+    const parseResult = boxValidators.updateBox.safeParse({
+      name: req.body?.name,
+      description: req.body?.description,
+      isActive:
+        typeof req.body?.isActive === 'string'
+          ? req.body.isActive === 'true'
+          : req.body?.isActive,
+      // imageUrl comes from uploaded file (if present), so don't accept it from the form body here.
+    });
+    if (!parseResult.success) {
+      return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+    }
+
+    try {
+      let imageUrl: string | undefined;
+      if (file) {
+        const ext = getImageExtension(file.mimetype);
+        const key = `boxes/${id}/${Date.now()}-${randomUUID()}${ext}`;
+        imageUrl = await storage.uploadImage({ buffer: file.buffer, key, contentType: file.mimetype });
+      }
+
+      const result = await adminUpdateBoxUseCase.execute(id, {
+        ...parseResult.data,
+        ...(imageUrl !== undefined && { imageUrl }),
+      });
+      return res.status(200).json(result);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Update failed';
+      if (message.includes('not found')) return res.status(404).json({ error: message });
+      if (message.includes('configured') || message.includes('upload failed')) return res.status(503).json({ error: message });
       return res.status(400).json({ error: message });
     }
   }
