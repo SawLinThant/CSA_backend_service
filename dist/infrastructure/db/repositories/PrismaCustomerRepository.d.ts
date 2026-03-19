@@ -9,6 +9,6 @@ export declare class PrismaCustomerRepository implements CustomerRepository {
         total: number;
     }>;
     getByIdWithUser(id: string): Promise<CustomerWithUser | null>;
-    update(id: string, data: CustomerUpdateData): Promise<Customer>;
+    update(id: string, _data: CustomerUpdateData): Promise<Customer>;
 }
 //# sourceMappingURL=PrismaCustomerRepository.d.ts.map

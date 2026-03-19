@@ -1,13 +1,13 @@
 export declare const authValidators: {
     registerCustomer: import("zod").ZodObject<{
         name: import("zod").ZodString;
-        email: import("zod").ZodOptional<import("zod").ZodString>;
+        email: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
         phone: import("zod").ZodString;
         password: import("zod").ZodString;
     }, import("zod/v4/core").$strip>;
     registerFarmer: import("zod").ZodObject<{
         name: import("zod").ZodString;
-        email: import("zod").ZodOptional<import("zod").ZodString>;
+        email: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
         phone: import("zod").ZodString;
         password: import("zod").ZodString;
         farmName: import("zod").ZodString;

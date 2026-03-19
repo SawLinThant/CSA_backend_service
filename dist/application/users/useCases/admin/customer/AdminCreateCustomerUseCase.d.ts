@@ -8,7 +8,6 @@ export declare class AdminCreateCustomerUseCase {
     execute(input: AdminCreateCustomerInput): Promise<{
         id: string;
         userId: string;
-        defaultAddressId: null;
         createdAt: Date;
         user: {
             id: string;

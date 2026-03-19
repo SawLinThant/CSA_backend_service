@@ -239,8 +239,10 @@ export declare const ModelName: {
     readonly Product: "Product";
     readonly ProductImage: "ProductImage";
     readonly Harvest: "Harvest";
+    readonly Box: "Box";
+    readonly BoxVersion: "BoxVersion";
+    readonly BoxItem: "BoxItem";
     readonly SubscriptionPlan: "SubscriptionPlan";
-    readonly SubscriptionPlanItem: "SubscriptionPlanItem";
     readonly Subscription: "Subscription";
     readonly Order: "Order";
     readonly OrderItem: "OrderItem";
@@ -259,7 +261,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "subscriptionPlan" | "subscriptionPlanItem" | "subscription" | "order" | "orderItem" | "payment" | "delivery" | "referral";
+        modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "box" | "boxVersion" | "boxItem" | "subscriptionPlan" | "subscription" | "order" | "orderItem" | "payment" | "delivery" | "referral";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -855,6 +857,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 };
             };
         };
+        Box: {
+            payload: Prisma.$BoxPayload<ExtArgs>;
+            fields: Prisma.BoxFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.BoxFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.BoxFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                findFirst: {
+                    args: Prisma.BoxFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.BoxFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                findMany: {
+                    args: Prisma.BoxFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[];
+                };
+                create: {
+                    args: Prisma.BoxCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                createMany: {
+                    args: Prisma.BoxCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.BoxCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[];
+                };
+                delete: {
+                    args: Prisma.BoxDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                update: {
+                    args: Prisma.BoxUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.BoxDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.BoxUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.BoxUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>[];
+                };
+                upsert: {
+                    args: Prisma.BoxUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxPayload>;
+                };
+                aggregate: {
+                    args: Prisma.BoxAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateBox>;
+                };
+                groupBy: {
+                    args: Prisma.BoxGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.BoxCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxCountAggregateOutputType> | number;
+                };
+            };
+        };
+        BoxVersion: {
+            payload: Prisma.$BoxVersionPayload<ExtArgs>;
+            fields: Prisma.BoxVersionFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.BoxVersionFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.BoxVersionFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                findFirst: {
+                    args: Prisma.BoxVersionFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.BoxVersionFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                findMany: {
+                    args: Prisma.BoxVersionFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[];
+                };
+                create: {
+                    args: Prisma.BoxVersionCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                createMany: {
+                    args: Prisma.BoxVersionCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.BoxVersionCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[];
+                };
+                delete: {
+                    args: Prisma.BoxVersionDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                update: {
+                    args: Prisma.BoxVersionUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.BoxVersionDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.BoxVersionUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.BoxVersionUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>[];
+                };
+                upsert: {
+                    args: Prisma.BoxVersionUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxVersionPayload>;
+                };
+                aggregate: {
+                    args: Prisma.BoxVersionAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateBoxVersion>;
+                };
+                groupBy: {
+                    args: Prisma.BoxVersionGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxVersionGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.BoxVersionCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxVersionCountAggregateOutputType> | number;
+                };
+            };
+        };
+        BoxItem: {
+            payload: Prisma.$BoxItemPayload<ExtArgs>;
+            fields: Prisma.BoxItemFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.BoxItemFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.BoxItemFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                findFirst: {
+                    args: Prisma.BoxItemFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.BoxItemFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                findMany: {
+                    args: Prisma.BoxItemFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[];
+                };
+                create: {
+                    args: Prisma.BoxItemCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                createMany: {
+                    args: Prisma.BoxItemCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.BoxItemCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[];
+                };
+                delete: {
+                    args: Prisma.BoxItemDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                update: {
+                    args: Prisma.BoxItemUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.BoxItemDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.BoxItemUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.BoxItemUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>[];
+                };
+                upsert: {
+                    args: Prisma.BoxItemUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BoxItemPayload>;
+                };
+                aggregate: {
+                    args: Prisma.BoxItemAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateBoxItem>;
+                };
+                groupBy: {
+                    args: Prisma.BoxItemGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxItemGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.BoxItemCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BoxItemCountAggregateOutputType> | number;
+                };
+            };
+        };
         SubscriptionPlan: {
             payload: Prisma.$SubscriptionPlanPayload<ExtArgs>;
             fields: Prisma.SubscriptionPlanFieldRefs;
@@ -926,80 +1150,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 count: {
                     args: Prisma.SubscriptionPlanCountArgs<ExtArgs>;
                     result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanCountAggregateOutputType> | number;
-                };
-            };
-        };
-        SubscriptionPlanItem: {
-            payload: Prisma.$SubscriptionPlanItemPayload<ExtArgs>;
-            fields: Prisma.SubscriptionPlanItemFieldRefs;
-            operations: {
-                findUnique: {
-                    args: Prisma.SubscriptionPlanItemFindUniqueArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload> | null;
-                };
-                findUniqueOrThrow: {
-                    args: Prisma.SubscriptionPlanItemFindUniqueOrThrowArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                findFirst: {
-                    args: Prisma.SubscriptionPlanItemFindFirstArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload> | null;
-                };
-                findFirstOrThrow: {
-                    args: Prisma.SubscriptionPlanItemFindFirstOrThrowArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                findMany: {
-                    args: Prisma.SubscriptionPlanItemFindManyArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[];
-                };
-                create: {
-                    args: Prisma.SubscriptionPlanItemCreateArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                createMany: {
-                    args: Prisma.SubscriptionPlanItemCreateManyArgs<ExtArgs>;
-                    result: BatchPayload;
-                };
-                createManyAndReturn: {
-                    args: Prisma.SubscriptionPlanItemCreateManyAndReturnArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[];
-                };
-                delete: {
-                    args: Prisma.SubscriptionPlanItemDeleteArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                update: {
-                    args: Prisma.SubscriptionPlanItemUpdateArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                deleteMany: {
-                    args: Prisma.SubscriptionPlanItemDeleteManyArgs<ExtArgs>;
-                    result: BatchPayload;
-                };
-                updateMany: {
-                    args: Prisma.SubscriptionPlanItemUpdateManyArgs<ExtArgs>;
-                    result: BatchPayload;
-                };
-                updateManyAndReturn: {
-                    args: Prisma.SubscriptionPlanItemUpdateManyAndReturnArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>[];
-                };
-                upsert: {
-                    args: Prisma.SubscriptionPlanItemUpsertArgs<ExtArgs>;
-                    result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPlanItemPayload>;
-                };
-                aggregate: {
-                    args: Prisma.SubscriptionPlanItemAggregateArgs<ExtArgs>;
-                    result: runtime.Types.Utils.Optional<Prisma.AggregateSubscriptionPlanItem>;
-                };
-                groupBy: {
-                    args: Prisma.SubscriptionPlanItemGroupByArgs<ExtArgs>;
-                    result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanItemGroupByOutputType>[];
-                };
-                count: {
-                    args: Prisma.SubscriptionPlanItemCountArgs<ExtArgs>;
-                    result: runtime.Types.Utils.Optional<Prisma.SubscriptionPlanItemCountAggregateOutputType> | number;
                 };
             };
         };
@@ -1490,12 +1640,12 @@ export declare const UserScalarFieldEnum: {
     readonly role: "role";
     readonly status: "status";
     readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
 };
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 export declare const CustomerScalarFieldEnum: {
     readonly id: "id";
     readonly userId: "userId";
-    readonly defaultAddressId: "defaultAddressId";
     readonly createdAt: "createdAt";
 };
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum];
@@ -1505,6 +1655,7 @@ export declare const FarmerScalarFieldEnum: {
     readonly farmName: "farmName";
     readonly farmLocation: "farmLocation";
     readonly farmDescription: "farmDescription";
+    readonly farmImage: "farmImage";
     readonly approved: "approved";
     readonly createdAt: "createdAt";
 };
@@ -1516,21 +1667,24 @@ export declare const AddressScalarFieldEnum: {
     readonly city: "city";
     readonly state: "state";
     readonly postalCode: "postalCode";
+    readonly country: "country";
     readonly isDefault: "isDefault";
 };
 export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum];
 export declare const CategoryScalarFieldEnum: {
     readonly id: "id";
     readonly name: "name";
+    readonly description: "description";
 };
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum];
 export declare const ProductScalarFieldEnum: {
     readonly id: "id";
+    readonly farmerId: "farmerId";
+    readonly categoryId: "categoryId";
     readonly name: "name";
     readonly description: "description";
-    readonly price: "price";
-    readonly categoryId: "categoryId";
-    readonly farmerId: "farmerId";
+    readonly unit: "unit";
+    readonly basePrice: "basePrice";
     readonly isActive: "isActive";
     readonly createdAt: "createdAt";
 };
@@ -1541,34 +1695,60 @@ export declare const ProductImageScalarFieldEnum: {
     readonly imageUrl: "imageUrl";
     readonly isPrimary: "isPrimary";
     readonly sortOrder: "sortOrder";
-    readonly createdAt: "createdAt";
 };
 export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum];
 export declare const HarvestScalarFieldEnum: {
     readonly id: "id";
     readonly farmerId: "farmerId";
     readonly productId: "productId";
-    readonly quantity: "quantity";
+    readonly quantityAvailable: "quantityAvailable";
+    readonly unitPrice: "unitPrice";
     readonly harvestDate: "harvestDate";
     readonly availableUntil: "availableUntil";
+    readonly status: "status";
+    readonly approvedBy: "approvedBy";
+    readonly approvedAt: "approvedAt";
+    readonly createdAt: "createdAt";
 };
 export type HarvestScalarFieldEnum = (typeof HarvestScalarFieldEnum)[keyof typeof HarvestScalarFieldEnum];
-export declare const SubscriptionPlanScalarFieldEnum: {
+export declare const BoxScalarFieldEnum: {
     readonly id: "id";
     readonly name: "name";
     readonly description: "description";
+    readonly imageUrl: "imageUrl";
+    readonly isActive: "isActive";
+    readonly createdAt: "createdAt";
+};
+export type BoxScalarFieldEnum = (typeof BoxScalarFieldEnum)[keyof typeof BoxScalarFieldEnum];
+export declare const BoxVersionScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxId: "boxId";
+    readonly versionName: "versionName";
+    readonly startDate: "startDate";
+    readonly endDate: "endDate";
+    readonly createdAt: "createdAt";
+};
+export type BoxVersionScalarFieldEnum = (typeof BoxVersionScalarFieldEnum)[keyof typeof BoxVersionScalarFieldEnum];
+export declare const BoxItemScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxVersionId: "boxVersionId";
+    readonly productId: "productId";
+    readonly farmerId: "farmerId";
+    readonly quantity: "quantity";
+    readonly optional: "optional";
+};
+export type BoxItemScalarFieldEnum = (typeof BoxItemScalarFieldEnum)[keyof typeof BoxItemScalarFieldEnum];
+export declare const SubscriptionPlanScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxId: "boxId";
+    readonly name: "name";
     readonly price: "price";
     readonly deliveryFrequency: "deliveryFrequency";
+    readonly deliveriesPerCycle: "deliveriesPerCycle";
     readonly active: "active";
+    readonly createdAt: "createdAt";
 };
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum];
-export declare const SubscriptionPlanItemScalarFieldEnum: {
-    readonly id: "id";
-    readonly planId: "planId";
-    readonly productId: "productId";
-    readonly quantity: "quantity";
-};
-export type SubscriptionPlanItemScalarFieldEnum = (typeof SubscriptionPlanItemScalarFieldEnum)[keyof typeof SubscriptionPlanItemScalarFieldEnum];
 export declare const SubscriptionScalarFieldEnum: {
     readonly id: "id";
     readonly customerId: "customerId";
@@ -1584,6 +1764,7 @@ export declare const OrderScalarFieldEnum: {
     readonly id: "id";
     readonly customerId: "customerId";
     readonly subscriptionId: "subscriptionId";
+    readonly boxVersionId: "boxVersionId";
     readonly status: "status";
     readonly totalPrice: "totalPrice";
     readonly deliveryDate: "deliveryDate";
@@ -1594,6 +1775,7 @@ export declare const OrderItemScalarFieldEnum: {
     readonly id: "id";
     readonly orderId: "orderId";
     readonly productId: "productId";
+    readonly farmerId: "farmerId";
     readonly quantity: "quantity";
     readonly price: "price";
 };
@@ -1604,15 +1786,16 @@ export declare const PaymentScalarFieldEnum: {
     readonly amount: "amount";
     readonly paymentMethod: "paymentMethod";
     readonly paymentStatus: "paymentStatus";
-    readonly transactionId: "transactionId";
+    readonly transactionReference: "transactionReference";
     readonly paidAt: "paidAt";
 };
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum];
 export declare const DeliveryScalarFieldEnum: {
     readonly id: "id";
     readonly orderId: "orderId";
-    readonly driverName: "driverName";
+    readonly deliveryDriver: "deliveryDriver";
     readonly deliveryStatus: "deliveryStatus";
+    readonly trackingCode: "trackingCode";
     readonly deliveredAt: "deliveredAt";
 };
 export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum];
@@ -1693,6 +1876,14 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>;
+/**
+ * Reference to a field of type 'HarvestStatus'
+ */
+export type EnumHarvestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HarvestStatus'>;
+/**
+ * Reference to a field of type 'HarvestStatus[]'
+ */
+export type ListEnumHarvestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HarvestStatus[]'>;
 /**
  * Reference to a field of type 'DeliveryFrequency'
  */
@@ -1843,8 +2034,10 @@ export type GlobalOmitConfig = {
     product?: Prisma.ProductOmit;
     productImage?: Prisma.ProductImageOmit;
     harvest?: Prisma.HarvestOmit;
+    box?: Prisma.BoxOmit;
+    boxVersion?: Prisma.BoxVersionOmit;
+    boxItem?: Prisma.BoxItemOmit;
     subscriptionPlan?: Prisma.SubscriptionPlanOmit;
-    subscriptionPlanItem?: Prisma.SubscriptionPlanItemOmit;
     subscription?: Prisma.SubscriptionOmit;
     order?: Prisma.OrderOmit;
     orderItem?: Prisma.OrderItemOmit;

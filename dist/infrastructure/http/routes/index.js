@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerRoutes = registerRoutes;
 const health_routes_1 = __importDefault(require("./health.routes"));
 const auth_routes_1 = __importDefault(require("./auth.routes"));
+const public_routes_1 = __importDefault(require("./public.routes"));
 function registerRoutes(app) {
     app.use('/', health_routes_1.default);
     app.use('/auth', auth_routes_1.default);
+    app.use('/api', public_routes_1.default);
 }
 //# sourceMappingURL=index.js.map

@@ -204,6 +204,39 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     /**
+     * `prisma.box`: Exposes CRUD operations for the **Box** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Boxes
+      * const boxes = await prisma.box.findMany()
+      * ```
+      */
+    get box(): Prisma.BoxDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.boxVersion`: Exposes CRUD operations for the **BoxVersion** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more BoxVersions
+      * const boxVersions = await prisma.boxVersion.findMany()
+      * ```
+      */
+    get boxVersion(): Prisma.BoxVersionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.boxItem`: Exposes CRUD operations for the **BoxItem** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more BoxItems
+      * const boxItems = await prisma.boxItem.findMany()
+      * ```
+      */
+    get boxItem(): Prisma.BoxItemDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
      * `prisma.subscriptionPlan`: Exposes CRUD operations for the **SubscriptionPlan** model.
       * Example usage:
       * ```ts
@@ -212,17 +245,6 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
       * ```
       */
     get subscriptionPlan(): Prisma.SubscriptionPlanDelegate<ExtArgs, {
-        omit: OmitOpts;
-    }>;
-    /**
-     * `prisma.subscriptionPlanItem`: Exposes CRUD operations for the **SubscriptionPlanItem** model.
-      * Example usage:
-      * ```ts
-      * // Fetch zero or more SubscriptionPlanItems
-      * const subscriptionPlanItems = await prisma.subscriptionPlanItem.findMany()
-      * ```
-      */
-    get subscriptionPlanItem(): Prisma.SubscriptionPlanItemDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
     /**

@@ -12,7 +12,6 @@ class AdminGetCustomerUseCase {
         return {
             id: customerWithUser.id,
             userId: customerWithUser.userId,
-            defaultAddressId: customerWithUser.defaultAddressId,
             createdAt: customerWithUser.createdAt,
             user: {
                 id: customerWithUser.user.id,

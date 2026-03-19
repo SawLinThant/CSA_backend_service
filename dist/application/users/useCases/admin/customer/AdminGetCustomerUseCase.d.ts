@@ -5,7 +5,6 @@ export declare class AdminGetCustomerUseCase {
     execute(customerId: string): Promise<{
         id: string;
         userId: string;
-        defaultAddressId: string | null;
         createdAt: Date;
         user: {
             id: string;

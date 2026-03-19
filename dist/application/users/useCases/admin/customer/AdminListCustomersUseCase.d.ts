@@ -7,7 +7,6 @@ export declare class AdminListCustomersUseCase {
         items: {
             id: string;
             userId: string;
-            defaultAddressId: string | null;
             createdAt: Date;
             user: {
                 id: string;
@@ -15,6 +14,7 @@ export declare class AdminListCustomersUseCase {
                 email: string | null;
                 phone: string;
                 role: string;
+                status: "active" | "suspended";
             };
         }[];
         total: number;

@@ -13,38 +13,32 @@ export type AggregateCustomer = {
 export type CustomerMinAggregateOutputType = {
     id: string | null;
     userId: string | null;
-    defaultAddressId: string | null;
     createdAt: Date | null;
 };
 export type CustomerMaxAggregateOutputType = {
     id: string | null;
     userId: string | null;
-    defaultAddressId: string | null;
     createdAt: Date | null;
 };
 export type CustomerCountAggregateOutputType = {
     id: number;
     userId: number;
-    defaultAddressId: number;
     createdAt: number;
     _all: number;
 };
 export type CustomerMinAggregateInputType = {
     id?: true;
     userId?: true;
-    defaultAddressId?: true;
     createdAt?: true;
 };
 export type CustomerMaxAggregateInputType = {
     id?: true;
     userId?: true;
-    defaultAddressId?: true;
     createdAt?: true;
 };
 export type CustomerCountAggregateInputType = {
     id?: true;
     userId?: true;
-    defaultAddressId?: true;
     createdAt?: true;
     _all?: true;
 };
@@ -113,7 +107,6 @@ export type CustomerGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type CustomerGroupByOutputType = {
     id: string;
     userId: string;
-    defaultAddressId: string | null;
     createdAt: Date;
     _count: CustomerCountAggregateOutputType | null;
     _min: CustomerMinAggregateOutputType | null;
@@ -128,7 +121,6 @@ export type CustomerWhereInput = {
     NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[];
     id?: Prisma.StringFilter<"Customer"> | string;
     userId?: Prisma.StringFilter<"Customer"> | string;
-    defaultAddressId?: Prisma.StringNullableFilter<"Customer"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
     subscriptions?: Prisma.SubscriptionListRelationFilter;
@@ -137,7 +129,6 @@ export type CustomerWhereInput = {
 export type CustomerOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
-    defaultAddressId?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     user?: Prisma.UserOrderByWithRelationInput;
     subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput;
@@ -149,7 +140,6 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
     AND?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[];
     OR?: Prisma.CustomerWhereInput[];
     NOT?: Prisma.CustomerWhereInput | Prisma.CustomerWhereInput[];
-    defaultAddressId?: Prisma.StringNullableFilter<"Customer"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"Customer"> | Date | string;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
     subscriptions?: Prisma.SubscriptionListRelationFilter;
@@ -158,7 +148,6 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
 export type CustomerOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
-    defaultAddressId?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     _count?: Prisma.CustomerCountOrderByAggregateInput;
     _max?: Prisma.CustomerMaxOrderByAggregateInput;
@@ -170,12 +159,10 @@ export type CustomerScalarWhereWithAggregatesInput = {
     NOT?: Prisma.CustomerScalarWhereWithAggregatesInput | Prisma.CustomerScalarWhereWithAggregatesInput[];
     id?: Prisma.StringWithAggregatesFilter<"Customer"> | string;
     userId?: Prisma.StringWithAggregatesFilter<"Customer"> | string;
-    defaultAddressId?: Prisma.StringNullableWithAggregatesFilter<"Customer"> | string | null;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Customer"> | Date | string;
 };
 export type CustomerCreateInput = {
     id?: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutCustomerInput;
     subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCustomerInput;
@@ -184,14 +171,12 @@ export type CustomerCreateInput = {
 export type CustomerUncheckedCreateInput = {
     id?: string;
     userId: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCustomerInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput;
 };
 export type CustomerUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutCustomerNestedInput;
     subscriptions?: Prisma.SubscriptionUpdateManyWithoutCustomerNestedInput;
@@ -200,7 +185,6 @@ export type CustomerUpdateInput = {
 export type CustomerUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCustomerNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput;
@@ -208,18 +192,15 @@ export type CustomerUncheckedUpdateInput = {
 export type CustomerCreateManyInput = {
     id?: string;
     userId: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
 };
 export type CustomerUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type CustomerUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type CustomerNullableScalarRelationFilter = {
@@ -229,19 +210,16 @@ export type CustomerNullableScalarRelationFilter = {
 export type CustomerCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
-    defaultAddressId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
 export type CustomerMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
-    defaultAddressId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
 export type CustomerMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
-    defaultAddressId?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
 export type CustomerScalarRelationFilter = {
@@ -302,14 +280,12 @@ export type CustomerUpdateOneRequiredWithoutOrdersNestedInput = {
 };
 export type CustomerCreateWithoutUserInput = {
     id?: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCustomerInput;
     orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput;
 };
 export type CustomerUncheckedCreateWithoutUserInput = {
     id?: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCustomerInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput;
@@ -329,21 +305,18 @@ export type CustomerUpdateToOneWithWhereWithoutUserInput = {
 };
 export type CustomerUpdateWithoutUserInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     subscriptions?: Prisma.SubscriptionUpdateManyWithoutCustomerNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput;
 };
 export type CustomerUncheckedUpdateWithoutUserInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCustomerNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput;
 };
 export type CustomerCreateWithoutSubscriptionsInput = {
     id?: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutCustomerInput;
     orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput;
@@ -351,7 +324,6 @@ export type CustomerCreateWithoutSubscriptionsInput = {
 export type CustomerUncheckedCreateWithoutSubscriptionsInput = {
     id?: string;
     userId: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput;
 };
@@ -370,7 +342,6 @@ export type CustomerUpdateToOneWithWhereWithoutSubscriptionsInput = {
 };
 export type CustomerUpdateWithoutSubscriptionsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutCustomerNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput;
@@ -378,13 +349,11 @@ export type CustomerUpdateWithoutSubscriptionsInput = {
 export type CustomerUncheckedUpdateWithoutSubscriptionsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput;
 };
 export type CustomerCreateWithoutOrdersInput = {
     id?: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutCustomerInput;
     subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCustomerInput;
@@ -392,7 +361,6 @@ export type CustomerCreateWithoutOrdersInput = {
 export type CustomerUncheckedCreateWithoutOrdersInput = {
     id?: string;
     userId: string;
-    defaultAddressId?: string | null;
     createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCustomerInput;
 };
@@ -411,7 +379,6 @@ export type CustomerUpdateToOneWithWhereWithoutOrdersInput = {
 };
 export type CustomerUpdateWithoutOrdersInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutCustomerNestedInput;
     subscriptions?: Prisma.SubscriptionUpdateManyWithoutCustomerNestedInput;
@@ -419,7 +386,6 @@ export type CustomerUpdateWithoutOrdersInput = {
 export type CustomerUncheckedUpdateWithoutOrdersInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     userId?: Prisma.StringFieldUpdateOperationsInput | string;
-    defaultAddressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCustomerNestedInput;
 };
@@ -458,7 +424,6 @@ export type CustomerCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types
 export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     userId?: boolean;
-    defaultAddressId?: boolean;
     createdAt?: boolean;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     subscriptions?: boolean | Prisma.Customer$subscriptionsArgs<ExtArgs>;
@@ -468,24 +433,21 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type CustomerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     userId?: boolean;
-    defaultAddressId?: boolean;
     createdAt?: boolean;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["customer"]>;
 export type CustomerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     userId?: boolean;
-    defaultAddressId?: boolean;
     createdAt?: boolean;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["customer"]>;
 export type CustomerSelectScalar = {
     id?: boolean;
     userId?: boolean;
-    defaultAddressId?: boolean;
     createdAt?: boolean;
 };
-export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "defaultAddressId" | "createdAt", ExtArgs["result"]["customer"]>;
+export type CustomerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "createdAt", ExtArgs["result"]["customer"]>;
 export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
     subscriptions?: boolean | Prisma.Customer$subscriptionsArgs<ExtArgs>;
@@ -508,7 +470,6 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
         userId: string;
-        defaultAddressId: string | null;
         createdAt: Date;
     }, ExtArgs["result"]["customer"]>;
     composites: {};
@@ -869,7 +830,6 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
 export interface CustomerFieldRefs {
     readonly id: Prisma.FieldRef<"Customer", 'String'>;
     readonly userId: Prisma.FieldRef<"Customer", 'String'>;
-    readonly defaultAddressId: Prisma.FieldRef<"Customer", 'String'>;
     readonly createdAt: Prisma.FieldRef<"Customer", 'DateTime'>;
 }
 /**

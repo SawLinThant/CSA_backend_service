@@ -1,13 +1,13 @@
 import { z } from 'zod';
 export declare const registerCustomerSchema: z.ZodObject<{
     name: z.ZodString;
-    email: z.ZodOptional<z.ZodString>;
+    email: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     phone: z.ZodString;
     password: z.ZodString;
 }, z.core.$strip>;
 export declare const registerFarmerSchema: z.ZodObject<{
     name: z.ZodString;
-    email: z.ZodOptional<z.ZodString>;
+    email: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     phone: z.ZodString;
     password: z.ZodString;
     farmName: z.ZodString;

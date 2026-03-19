@@ -15,64 +15,80 @@ export type AggregateSubscriptionPlan = {
 };
 export type SubscriptionPlanAvgAggregateOutputType = {
     price: runtime.Decimal | null;
+    deliveriesPerCycle: number | null;
 };
 export type SubscriptionPlanSumAggregateOutputType = {
     price: runtime.Decimal | null;
+    deliveriesPerCycle: number | null;
 };
 export type SubscriptionPlanMinAggregateOutputType = {
     id: string | null;
+    boxId: string | null;
     name: string | null;
-    description: string | null;
     price: runtime.Decimal | null;
     deliveryFrequency: $Enums.DeliveryFrequency | null;
+    deliveriesPerCycle: number | null;
     active: boolean | null;
+    createdAt: Date | null;
 };
 export type SubscriptionPlanMaxAggregateOutputType = {
     id: string | null;
+    boxId: string | null;
     name: string | null;
-    description: string | null;
     price: runtime.Decimal | null;
     deliveryFrequency: $Enums.DeliveryFrequency | null;
+    deliveriesPerCycle: number | null;
     active: boolean | null;
+    createdAt: Date | null;
 };
 export type SubscriptionPlanCountAggregateOutputType = {
     id: number;
+    boxId: number;
     name: number;
-    description: number;
     price: number;
     deliveryFrequency: number;
+    deliveriesPerCycle: number;
     active: number;
+    createdAt: number;
     _all: number;
 };
 export type SubscriptionPlanAvgAggregateInputType = {
     price?: true;
+    deliveriesPerCycle?: true;
 };
 export type SubscriptionPlanSumAggregateInputType = {
     price?: true;
+    deliveriesPerCycle?: true;
 };
 export type SubscriptionPlanMinAggregateInputType = {
     id?: true;
+    boxId?: true;
     name?: true;
-    description?: true;
     price?: true;
     deliveryFrequency?: true;
+    deliveriesPerCycle?: true;
     active?: true;
+    createdAt?: true;
 };
 export type SubscriptionPlanMaxAggregateInputType = {
     id?: true;
+    boxId?: true;
     name?: true;
-    description?: true;
     price?: true;
     deliveryFrequency?: true;
+    deliveriesPerCycle?: true;
     active?: true;
+    createdAt?: true;
 };
 export type SubscriptionPlanCountAggregateInputType = {
     id?: true;
+    boxId?: true;
     name?: true;
-    description?: true;
     price?: true;
     deliveryFrequency?: true;
+    deliveriesPerCycle?: true;
     active?: true;
+    createdAt?: true;
     _all?: true;
 };
 export type SubscriptionPlanAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -153,11 +169,13 @@ export type SubscriptionPlanGroupByArgs<ExtArgs extends runtime.Types.Extensions
 };
 export type SubscriptionPlanGroupByOutputType = {
     id: string;
+    boxId: string;
     name: string;
-    description: string | null;
     price: runtime.Decimal;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active: boolean;
+    createdAt: Date;
     _count: SubscriptionPlanCountAggregateOutputType | null;
     _avg: SubscriptionPlanAvgAggregateOutputType | null;
     _sum: SubscriptionPlanSumAggregateOutputType | null;
@@ -172,22 +190,26 @@ export type SubscriptionPlanWhereInput = {
     OR?: Prisma.SubscriptionPlanWhereInput[];
     NOT?: Prisma.SubscriptionPlanWhereInput | Prisma.SubscriptionPlanWhereInput[];
     id?: Prisma.StringFilter<"SubscriptionPlan"> | string;
+    boxId?: Prisma.StringFilter<"SubscriptionPlan"> | string;
     name?: Prisma.StringFilter<"SubscriptionPlan"> | string;
-    description?: Prisma.StringNullableFilter<"SubscriptionPlan"> | string | null;
     price?: Prisma.DecimalFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFilter<"SubscriptionPlan"> | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFilter<"SubscriptionPlan"> | number;
     active?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean;
-    planItems?: Prisma.SubscriptionPlanItemListRelationFilter;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionPlan"> | Date | string;
+    box?: Prisma.XOR<Prisma.BoxScalarRelationFilter, Prisma.BoxWhereInput>;
     subscriptions?: Prisma.SubscriptionListRelationFilter;
 };
 export type SubscriptionPlanOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
-    description?: Prisma.SortOrderInput | Prisma.SortOrder;
     price?: Prisma.SortOrder;
     deliveryFrequency?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
     active?: Prisma.SortOrder;
-    planItems?: Prisma.SubscriptionPlanItemOrderByRelationAggregateInput;
+    createdAt?: Prisma.SortOrder;
+    box?: Prisma.BoxOrderByWithRelationInput;
     subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput;
 };
 export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -195,21 +217,25 @@ export type SubscriptionPlanWhereUniqueInput = Prisma.AtLeast<{
     AND?: Prisma.SubscriptionPlanWhereInput | Prisma.SubscriptionPlanWhereInput[];
     OR?: Prisma.SubscriptionPlanWhereInput[];
     NOT?: Prisma.SubscriptionPlanWhereInput | Prisma.SubscriptionPlanWhereInput[];
+    boxId?: Prisma.StringFilter<"SubscriptionPlan"> | string;
     name?: Prisma.StringFilter<"SubscriptionPlan"> | string;
-    description?: Prisma.StringNullableFilter<"SubscriptionPlan"> | string | null;
     price?: Prisma.DecimalFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFilter<"SubscriptionPlan"> | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFilter<"SubscriptionPlan"> | number;
     active?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean;
-    planItems?: Prisma.SubscriptionPlanItemListRelationFilter;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionPlan"> | Date | string;
+    box?: Prisma.XOR<Prisma.BoxScalarRelationFilter, Prisma.BoxWhereInput>;
     subscriptions?: Prisma.SubscriptionListRelationFilter;
 }, "id">;
 export type SubscriptionPlanOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
-    description?: Prisma.SortOrderInput | Prisma.SortOrder;
     price?: Prisma.SortOrder;
     deliveryFrequency?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
     active?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
     _count?: Prisma.SubscriptionPlanCountOrderByAggregateInput;
     _avg?: Prisma.SubscriptionPlanAvgOrderByAggregateInput;
     _max?: Prisma.SubscriptionPlanMaxOrderByAggregateInput;
@@ -221,124 +247,177 @@ export type SubscriptionPlanScalarWhereWithAggregatesInput = {
     OR?: Prisma.SubscriptionPlanScalarWhereWithAggregatesInput[];
     NOT?: Prisma.SubscriptionPlanScalarWhereWithAggregatesInput | Prisma.SubscriptionPlanScalarWhereWithAggregatesInput[];
     id?: Prisma.StringWithAggregatesFilter<"SubscriptionPlan"> | string;
+    boxId?: Prisma.StringWithAggregatesFilter<"SubscriptionPlan"> | string;
     name?: Prisma.StringWithAggregatesFilter<"SubscriptionPlan"> | string;
-    description?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPlan"> | string | null;
     price?: Prisma.DecimalWithAggregatesFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyWithAggregatesFilter<"SubscriptionPlan"> | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntWithAggregatesFilter<"SubscriptionPlan"> | number;
     active?: Prisma.BoolWithAggregatesFilter<"SubscriptionPlan"> | boolean;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"SubscriptionPlan"> | Date | string;
 };
 export type SubscriptionPlanCreateInput = {
     id?: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
-    planItems?: Prisma.SubscriptionPlanItemCreateNestedManyWithoutPlanInput;
+    createdAt?: Date | string;
+    box: Prisma.BoxCreateNestedOneWithoutPlansInput;
     subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput;
 };
 export type SubscriptionPlanUncheckedCreateInput = {
     id?: string;
+    boxId: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
-    planItems?: Prisma.SubscriptionPlanItemUncheckedCreateNestedManyWithoutPlanInput;
+    createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutPlanInput;
 };
 export type SubscriptionPlanUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    planItems?: Prisma.SubscriptionPlanItemUpdateManyWithoutPlanNestedInput;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    box?: Prisma.BoxUpdateOneRequiredWithoutPlansNestedInput;
     subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput;
 };
 export type SubscriptionPlanUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    planItems?: Prisma.SubscriptionPlanItemUncheckedUpdateManyWithoutPlanNestedInput;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput;
 };
 export type SubscriptionPlanCreateManyInput = {
     id?: string;
+    boxId: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
+    createdAt?: Date | string;
 };
 export type SubscriptionPlanUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type SubscriptionPlanUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionPlanListRelationFilter = {
+    every?: Prisma.SubscriptionPlanWhereInput;
+    some?: Prisma.SubscriptionPlanWhereInput;
+    none?: Prisma.SubscriptionPlanWhereInput;
+};
+export type SubscriptionPlanOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
 };
 export type SubscriptionPlanCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
-    description?: Prisma.SortOrder;
     price?: Prisma.SortOrder;
     deliveryFrequency?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
     active?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
 };
 export type SubscriptionPlanAvgOrderByAggregateInput = {
     price?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
 };
 export type SubscriptionPlanMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
-    description?: Prisma.SortOrder;
     price?: Prisma.SortOrder;
     deliveryFrequency?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
     active?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
 };
 export type SubscriptionPlanMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
-    description?: Prisma.SortOrder;
     price?: Prisma.SortOrder;
     deliveryFrequency?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
     active?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
 };
 export type SubscriptionPlanSumOrderByAggregateInput = {
     price?: Prisma.SortOrder;
+    deliveriesPerCycle?: Prisma.SortOrder;
 };
 export type SubscriptionPlanScalarRelationFilter = {
     is?: Prisma.SubscriptionPlanWhereInput;
     isNot?: Prisma.SubscriptionPlanWhereInput;
 };
+export type SubscriptionPlanCreateNestedManyWithoutBoxInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionPlanCreateWithoutBoxInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput | Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionPlanCreateManyBoxInputEnvelope;
+    connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+};
+export type SubscriptionPlanUncheckedCreateNestedManyWithoutBoxInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionPlanCreateWithoutBoxInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput | Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionPlanCreateManyBoxInputEnvelope;
+    connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+};
+export type SubscriptionPlanUpdateManyWithoutBoxNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionPlanCreateWithoutBoxInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput | Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput[];
+    upsert?: Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionPlanCreateManyBoxInputEnvelope;
+    set?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    delete?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    update?: Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutBoxInput[];
+    updateMany?: Prisma.SubscriptionPlanUpdateManyWithWhereWithoutBoxInput | Prisma.SubscriptionPlanUpdateManyWithWhereWithoutBoxInput[];
+    deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[];
+};
+export type SubscriptionPlanUncheckedUpdateManyWithoutBoxNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionPlanCreateWithoutBoxInput[] | Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput | Prisma.SubscriptionPlanCreateOrConnectWithoutBoxInput[];
+    upsert?: Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionPlanUpsertWithWhereUniqueWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionPlanCreateManyBoxInputEnvelope;
+    set?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    delete?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    connect?: Prisma.SubscriptionPlanWhereUniqueInput | Prisma.SubscriptionPlanWhereUniqueInput[];
+    update?: Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionPlanUpdateWithWhereUniqueWithoutBoxInput[];
+    updateMany?: Prisma.SubscriptionPlanUpdateManyWithWhereWithoutBoxInput | Prisma.SubscriptionPlanUpdateManyWithWhereWithoutBoxInput[];
+    deleteMany?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[];
+};
 export type EnumDeliveryFrequencyFieldUpdateOperationsInput = {
     set?: $Enums.DeliveryFrequency;
-};
-export type SubscriptionPlanCreateNestedOneWithoutPlanItemsInput = {
-    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutPlanItemsInput>;
-    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutPlanItemsInput;
-    connect?: Prisma.SubscriptionPlanWhereUniqueInput;
-};
-export type SubscriptionPlanUpdateOneRequiredWithoutPlanItemsNestedInput = {
-    create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutPlanItemsInput>;
-    connectOrCreate?: Prisma.SubscriptionPlanCreateOrConnectWithoutPlanItemsInput;
-    upsert?: Prisma.SubscriptionPlanUpsertWithoutPlanItemsInput;
-    connect?: Prisma.SubscriptionPlanWhereUniqueInput;
-    update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionPlanUpdateToOneWithWhereWithoutPlanItemsInput, Prisma.SubscriptionPlanUpdateWithoutPlanItemsInput>, Prisma.SubscriptionPlanUncheckedUpdateWithoutPlanItemsInput>;
 };
 export type SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput = {
     create?: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutSubscriptionsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput>;
@@ -352,72 +431,79 @@ export type SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput = {
     connect?: Prisma.SubscriptionPlanWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionPlanUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.SubscriptionPlanUpdateWithoutSubscriptionsInput>, Prisma.SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput>;
 };
-export type SubscriptionPlanCreateWithoutPlanItemsInput = {
+export type SubscriptionPlanCreateWithoutBoxInput = {
     id?: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
+    createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput;
 };
-export type SubscriptionPlanUncheckedCreateWithoutPlanItemsInput = {
+export type SubscriptionPlanUncheckedCreateWithoutBoxInput = {
     id?: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
+    createdAt?: Date | string;
     subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutPlanInput;
 };
-export type SubscriptionPlanCreateOrConnectWithoutPlanItemsInput = {
+export type SubscriptionPlanCreateOrConnectWithoutBoxInput = {
     where: Prisma.SubscriptionPlanWhereUniqueInput;
-    create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutPlanItemsInput>;
+    create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput>;
 };
-export type SubscriptionPlanUpsertWithoutPlanItemsInput = {
-    update: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutPlanItemsInput>;
-    create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedCreateWithoutPlanItemsInput>;
-    where?: Prisma.SubscriptionPlanWhereInput;
+export type SubscriptionPlanCreateManyBoxInputEnvelope = {
+    data: Prisma.SubscriptionPlanCreateManyBoxInput | Prisma.SubscriptionPlanCreateManyBoxInput[];
+    skipDuplicates?: boolean;
 };
-export type SubscriptionPlanUpdateToOneWithWhereWithoutPlanItemsInput = {
-    where?: Prisma.SubscriptionPlanWhereInput;
-    data: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutPlanItemsInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutPlanItemsInput>;
+export type SubscriptionPlanUpsertWithWhereUniqueWithoutBoxInput = {
+    where: Prisma.SubscriptionPlanWhereUniqueInput;
+    update: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutBoxInput>;
+    create: Prisma.XOR<Prisma.SubscriptionPlanCreateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedCreateWithoutBoxInput>;
 };
-export type SubscriptionPlanUpdateWithoutPlanItemsInput = {
-    id?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-    price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
-    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
-    active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput;
+export type SubscriptionPlanUpdateWithWhereUniqueWithoutBoxInput = {
+    where: Prisma.SubscriptionPlanWhereUniqueInput;
+    data: Prisma.XOR<Prisma.SubscriptionPlanUpdateWithoutBoxInput, Prisma.SubscriptionPlanUncheckedUpdateWithoutBoxInput>;
 };
-export type SubscriptionPlanUncheckedUpdateWithoutPlanItemsInput = {
-    id?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-    price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
-    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
-    active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput;
+export type SubscriptionPlanUpdateManyWithWhereWithoutBoxInput = {
+    where: Prisma.SubscriptionPlanScalarWhereInput;
+    data: Prisma.XOR<Prisma.SubscriptionPlanUpdateManyMutationInput, Prisma.SubscriptionPlanUncheckedUpdateManyWithoutBoxInput>;
+};
+export type SubscriptionPlanScalarWhereInput = {
+    AND?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[];
+    OR?: Prisma.SubscriptionPlanScalarWhereInput[];
+    NOT?: Prisma.SubscriptionPlanScalarWhereInput | Prisma.SubscriptionPlanScalarWhereInput[];
+    id?: Prisma.StringFilter<"SubscriptionPlan"> | string;
+    boxId?: Prisma.StringFilter<"SubscriptionPlan"> | string;
+    name?: Prisma.StringFilter<"SubscriptionPlan"> | string;
+    price?: Prisma.DecimalFilter<"SubscriptionPlan"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFilter<"SubscriptionPlan"> | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFilter<"SubscriptionPlan"> | number;
+    active?: Prisma.BoolFilter<"SubscriptionPlan"> | boolean;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionPlan"> | Date | string;
 };
 export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
     id?: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
-    planItems?: Prisma.SubscriptionPlanItemCreateNestedManyWithoutPlanInput;
+    createdAt?: Date | string;
+    box: Prisma.BoxCreateNestedOneWithoutPlansInput;
 };
 export type SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput = {
     id?: string;
+    boxId: string;
     name: string;
-    description?: string | null;
     price: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
     active?: boolean;
-    planItems?: Prisma.SubscriptionPlanItemUncheckedCreateNestedManyWithoutPlanInput;
+    createdAt?: Date | string;
 };
 export type SubscriptionPlanCreateOrConnectWithoutSubscriptionsInput = {
     where: Prisma.SubscriptionPlanWhereUniqueInput;
@@ -435,30 +521,68 @@ export type SubscriptionPlanUpdateToOneWithWhereWithoutSubscriptionsInput = {
 export type SubscriptionPlanUpdateWithoutSubscriptionsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    planItems?: Prisma.SubscriptionPlanItemUpdateManyWithoutPlanNestedInput;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    box?: Prisma.BoxUpdateOneRequiredWithoutPlansNestedInput;
 };
 export type SubscriptionPlanUncheckedUpdateWithoutSubscriptionsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.StringFieldUpdateOperationsInput | string;
     name?: Prisma.StringFieldUpdateOperationsInput | string;
-    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
     active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
-    planItems?: Prisma.SubscriptionPlanItemUncheckedUpdateManyWithoutPlanNestedInput;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionPlanCreateManyBoxInput = {
+    id?: string;
+    name: string;
+    price: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    deliveryFrequency: $Enums.DeliveryFrequency;
+    deliveriesPerCycle: number;
+    active?: boolean;
+    createdAt?: Date | string;
+};
+export type SubscriptionPlanUpdateWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
+    active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput;
+};
+export type SubscriptionPlanUncheckedUpdateWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
+    active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput;
+};
+export type SubscriptionPlanUncheckedUpdateManyWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    deliveryFrequency?: Prisma.EnumDeliveryFrequencyFieldUpdateOperationsInput | $Enums.DeliveryFrequency;
+    deliveriesPerCycle?: Prisma.IntFieldUpdateOperationsInput | number;
+    active?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 /**
  * Count Type SubscriptionPlanCountOutputType
  */
 export type SubscriptionPlanCountOutputType = {
-    planItems: number;
     subscriptions: number;
 };
 export type SubscriptionPlanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-    planItems?: boolean | SubscriptionPlanCountOutputTypeCountPlanItemsArgs;
     subscriptions?: boolean | SubscriptionPlanCountOutputTypeCountSubscriptionsArgs;
 };
 /**
@@ -473,71 +597,81 @@ export type SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs extends runtime.T
 /**
  * SubscriptionPlanCountOutputType without action
  */
-export type SubscriptionPlanCountOutputTypeCountPlanItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-    where?: Prisma.SubscriptionPlanItemWhereInput;
-};
-/**
- * SubscriptionPlanCountOutputType without action
- */
 export type SubscriptionPlanCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.SubscriptionWhereInput;
 };
 export type SubscriptionPlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    boxId?: boolean;
     name?: boolean;
-    description?: boolean;
     price?: boolean;
     deliveryFrequency?: boolean;
+    deliveriesPerCycle?: boolean;
     active?: boolean;
-    planItems?: boolean | Prisma.SubscriptionPlan$planItemsArgs<ExtArgs>;
+    createdAt?: boolean;
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
     subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>;
     _count?: boolean | Prisma.SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["subscriptionPlan"]>;
 export type SubscriptionPlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    boxId?: boolean;
     name?: boolean;
-    description?: boolean;
     price?: boolean;
     deliveryFrequency?: boolean;
+    deliveriesPerCycle?: boolean;
     active?: boolean;
+    createdAt?: boolean;
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["subscriptionPlan"]>;
 export type SubscriptionPlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    boxId?: boolean;
     name?: boolean;
-    description?: boolean;
     price?: boolean;
     deliveryFrequency?: boolean;
+    deliveriesPerCycle?: boolean;
     active?: boolean;
+    createdAt?: boolean;
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["subscriptionPlan"]>;
 export type SubscriptionPlanSelectScalar = {
     id?: boolean;
+    boxId?: boolean;
     name?: boolean;
-    description?: boolean;
     price?: boolean;
     deliveryFrequency?: boolean;
+    deliveriesPerCycle?: boolean;
     active?: boolean;
+    createdAt?: boolean;
 };
-export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "deliveryFrequency" | "active", ExtArgs["result"]["subscriptionPlan"]>;
+export type SubscriptionPlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "boxId" | "name" | "price" | "deliveryFrequency" | "deliveriesPerCycle" | "active" | "createdAt", ExtArgs["result"]["subscriptionPlan"]>;
 export type SubscriptionPlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-    planItems?: boolean | Prisma.SubscriptionPlan$planItemsArgs<ExtArgs>;
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
     subscriptions?: boolean | Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>;
     _count?: boolean | Prisma.SubscriptionPlanCountOutputTypeDefaultArgs<ExtArgs>;
 };
-export type SubscriptionPlanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
-export type SubscriptionPlanIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type SubscriptionPlanIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
+};
+export type SubscriptionPlanIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
+};
 export type $SubscriptionPlanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "SubscriptionPlan";
     objects: {
-        planItems: Prisma.$SubscriptionPlanItemPayload<ExtArgs>[];
+        box: Prisma.$BoxPayload<ExtArgs>;
         subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
+        boxId: string;
         name: string;
-        description: string | null;
         price: runtime.Decimal;
         deliveryFrequency: $Enums.DeliveryFrequency;
+        deliveriesPerCycle: number;
         active: boolean;
+        createdAt: Date;
     }, ExtArgs["result"]["subscriptionPlan"]>;
     composites: {};
 };
@@ -867,7 +1001,7 @@ export interface SubscriptionPlanDelegate<ExtArgs extends runtime.Types.Extensio
  */
 export interface Prisma__SubscriptionPlanClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    planItems<T extends Prisma.SubscriptionPlan$planItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$planItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    box<T extends Prisma.BoxDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxDefaultArgs<ExtArgs>>): Prisma.Prisma__BoxClient<runtime.Types.Result.GetResult<Prisma.$BoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     subscriptions<T extends Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlan$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -895,11 +1029,13 @@ export interface Prisma__SubscriptionPlanClient<T, Null = never, ExtArgs extends
  */
 export interface SubscriptionPlanFieldRefs {
     readonly id: Prisma.FieldRef<"SubscriptionPlan", 'String'>;
+    readonly boxId: Prisma.FieldRef<"SubscriptionPlan", 'String'>;
     readonly name: Prisma.FieldRef<"SubscriptionPlan", 'String'>;
-    readonly description: Prisma.FieldRef<"SubscriptionPlan", 'String'>;
     readonly price: Prisma.FieldRef<"SubscriptionPlan", 'Decimal'>;
     readonly deliveryFrequency: Prisma.FieldRef<"SubscriptionPlan", 'DeliveryFrequency'>;
+    readonly deliveriesPerCycle: Prisma.FieldRef<"SubscriptionPlan", 'Int'>;
     readonly active: Prisma.FieldRef<"SubscriptionPlan", 'Boolean'>;
+    readonly createdAt: Prisma.FieldRef<"SubscriptionPlan", 'DateTime'>;
 }
 /**
  * SubscriptionPlan findUnique
@@ -1144,6 +1280,10 @@ export type SubscriptionPlanCreateManyAndReturnArgs<ExtArgs extends runtime.Type
      */
     data: Prisma.SubscriptionPlanCreateManyInput | Prisma.SubscriptionPlanCreateManyInput[];
     skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionPlanIncludeCreateManyAndReturn<ExtArgs> | null;
 };
 /**
  * SubscriptionPlan update
@@ -1211,6 +1351,10 @@ export type SubscriptionPlanUpdateManyAndReturnArgs<ExtArgs extends runtime.Type
      * Limit how many SubscriptionPlans to update.
      */
     limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionPlanIncludeUpdateManyAndReturn<ExtArgs> | null;
 };
 /**
  * SubscriptionPlan upsert
@@ -1274,29 +1418,6 @@ export type SubscriptionPlanDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
      * Limit how many SubscriptionPlans to delete.
      */
     limit?: number;
-};
-/**
- * SubscriptionPlan.planItems
- */
-export type SubscriptionPlan$planItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubscriptionPlanItem
-     */
-    select?: Prisma.SubscriptionPlanItemSelect<ExtArgs> | null;
-    /**
-     * Omit specific fields from the SubscriptionPlanItem
-     */
-    omit?: Prisma.SubscriptionPlanItemOmit<ExtArgs> | null;
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: Prisma.SubscriptionPlanItemInclude<ExtArgs> | null;
-    where?: Prisma.SubscriptionPlanItemWhereInput;
-    orderBy?: Prisma.SubscriptionPlanItemOrderByWithRelationInput | Prisma.SubscriptionPlanItemOrderByWithRelationInput[];
-    cursor?: Prisma.SubscriptionPlanItemWhereUniqueInput;
-    take?: number;
-    skip?: number;
-    distinct?: Prisma.SubscriptionPlanItemScalarFieldEnum | Prisma.SubscriptionPlanItemScalarFieldEnum[];
 };
 /**
  * SubscriptionPlan.subscriptions

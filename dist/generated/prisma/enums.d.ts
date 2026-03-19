@@ -9,6 +9,12 @@ export declare const UserStatus: {
     readonly suspended: "suspended";
 };
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus];
+export declare const HarvestStatus: {
+    readonly pending: "pending";
+    readonly approved: "approved";
+    readonly rejected: "rejected";
+};
+export type HarvestStatus = (typeof HarvestStatus)[keyof typeof HarvestStatus];
 export declare const DeliveryFrequency: {
     readonly weekly: "weekly";
     readonly monthly: "monthly";
@@ -23,7 +29,7 @@ export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof Subscr
 export declare const OrderStatus: {
     readonly pending: "pending";
     readonly packed: "packed";
-    readonly out_for_delivery: "out_for_delivery";
+    readonly shipped: "shipped";
     readonly delivered: "delivered";
     readonly cancelled: "cancelled";
 };

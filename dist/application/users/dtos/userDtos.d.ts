@@ -26,7 +26,6 @@ export declare const adminUpdateCustomerSchema: z.ZodObject<{
         active: "active";
         suspended: "suspended";
     }>>;
-    defaultAddressId: z.ZodNullable<z.ZodOptional<z.ZodString>>;
 }, z.core.$strip>;
 export declare const listCustomersQuerySchema: z.ZodObject<{
     page: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
@@ -39,9 +38,16 @@ export declare const listCustomersQuerySchema: z.ZodObject<{
         farmer: "farmer";
     }>>;
 }, z.core.$strip>;
+export declare const listFarmersQuerySchema: z.ZodObject<{
+    page: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
+    limit: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
+    name: z.ZodOptional<z.ZodString>;
+    phone: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
 export type UpdateCustomerProfileInput = z.infer<typeof updateCustomerProfileSchema>;
 export type UpdateFarmerProfileInput = z.infer<typeof updateFarmerProfileSchema>;
 export type AdminCreateCustomerInput = z.infer<typeof adminCreateCustomerSchema>;
 export type AdminUpdateCustomerInput = z.infer<typeof adminUpdateCustomerSchema>;
 export type ListCustomersQuery = z.infer<typeof listCustomersQuerySchema>;
+export type ListFarmersQuery = z.infer<typeof listFarmersQuerySchema>;
 //# sourceMappingURL=userDtos.d.ts.map

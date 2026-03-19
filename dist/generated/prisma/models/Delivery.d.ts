@@ -14,44 +14,50 @@ export type AggregateDelivery = {
 export type DeliveryMinAggregateOutputType = {
     id: string | null;
     orderId: string | null;
-    driverName: string | null;
+    deliveryDriver: string | null;
     deliveryStatus: $Enums.DeliveryStatus | null;
+    trackingCode: string | null;
     deliveredAt: Date | null;
 };
 export type DeliveryMaxAggregateOutputType = {
     id: string | null;
     orderId: string | null;
-    driverName: string | null;
+    deliveryDriver: string | null;
     deliveryStatus: $Enums.DeliveryStatus | null;
+    trackingCode: string | null;
     deliveredAt: Date | null;
 };
 export type DeliveryCountAggregateOutputType = {
     id: number;
     orderId: number;
-    driverName: number;
+    deliveryDriver: number;
     deliveryStatus: number;
+    trackingCode: number;
     deliveredAt: number;
     _all: number;
 };
 export type DeliveryMinAggregateInputType = {
     id?: true;
     orderId?: true;
-    driverName?: true;
+    deliveryDriver?: true;
     deliveryStatus?: true;
+    trackingCode?: true;
     deliveredAt?: true;
 };
 export type DeliveryMaxAggregateInputType = {
     id?: true;
     orderId?: true;
-    driverName?: true;
+    deliveryDriver?: true;
     deliveryStatus?: true;
+    trackingCode?: true;
     deliveredAt?: true;
 };
 export type DeliveryCountAggregateInputType = {
     id?: true;
     orderId?: true;
-    driverName?: true;
+    deliveryDriver?: true;
     deliveryStatus?: true;
+    trackingCode?: true;
     deliveredAt?: true;
     _all?: true;
 };
@@ -120,8 +126,9 @@ export type DeliveryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type DeliveryGroupByOutputType = {
     id: string;
     orderId: string;
-    driverName: string;
+    deliveryDriver: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode: string | null;
     deliveredAt: Date | null;
     _count: DeliveryCountAggregateOutputType | null;
     _min: DeliveryMinAggregateOutputType | null;
@@ -136,16 +143,18 @@ export type DeliveryWhereInput = {
     NOT?: Prisma.DeliveryWhereInput | Prisma.DeliveryWhereInput[];
     id?: Prisma.StringFilter<"Delivery"> | string;
     orderId?: Prisma.StringFilter<"Delivery"> | string;
-    driverName?: Prisma.StringFilter<"Delivery"> | string;
+    deliveryDriver?: Prisma.StringNullableFilter<"Delivery"> | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.StringNullableFilter<"Delivery"> | string | null;
     deliveredAt?: Prisma.DateTimeNullableFilter<"Delivery"> | Date | string | null;
     order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>;
 };
 export type DeliveryOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     orderId?: Prisma.SortOrder;
-    driverName?: Prisma.SortOrder;
+    deliveryDriver?: Prisma.SortOrderInput | Prisma.SortOrder;
     deliveryStatus?: Prisma.SortOrder;
+    trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder;
     deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder;
     order?: Prisma.OrderOrderByWithRelationInput;
 };
@@ -155,16 +164,18 @@ export type DeliveryWhereUniqueInput = Prisma.AtLeast<{
     AND?: Prisma.DeliveryWhereInput | Prisma.DeliveryWhereInput[];
     OR?: Prisma.DeliveryWhereInput[];
     NOT?: Prisma.DeliveryWhereInput | Prisma.DeliveryWhereInput[];
-    driverName?: Prisma.StringFilter<"Delivery"> | string;
+    deliveryDriver?: Prisma.StringNullableFilter<"Delivery"> | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.StringNullableFilter<"Delivery"> | string | null;
     deliveredAt?: Prisma.DateTimeNullableFilter<"Delivery"> | Date | string | null;
     order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>;
 }, "id" | "orderId">;
 export type DeliveryOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     orderId?: Prisma.SortOrder;
-    driverName?: Prisma.SortOrder;
+    deliveryDriver?: Prisma.SortOrderInput | Prisma.SortOrder;
     deliveryStatus?: Prisma.SortOrder;
+    trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder;
     deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder;
     _count?: Prisma.DeliveryCountOrderByAggregateInput;
     _max?: Prisma.DeliveryMaxOrderByAggregateInput;
@@ -176,56 +187,64 @@ export type DeliveryScalarWhereWithAggregatesInput = {
     NOT?: Prisma.DeliveryScalarWhereWithAggregatesInput | Prisma.DeliveryScalarWhereWithAggregatesInput[];
     id?: Prisma.StringWithAggregatesFilter<"Delivery"> | string;
     orderId?: Prisma.StringWithAggregatesFilter<"Delivery"> | string;
-    driverName?: Prisma.StringWithAggregatesFilter<"Delivery"> | string;
+    deliveryDriver?: Prisma.StringNullableWithAggregatesFilter<"Delivery"> | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusWithAggregatesFilter<"Delivery"> | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.StringNullableWithAggregatesFilter<"Delivery"> | string | null;
     deliveredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Delivery"> | Date | string | null;
 };
 export type DeliveryCreateInput = {
     id?: string;
-    driverName: string;
+    deliveryDriver?: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode?: string | null;
     deliveredAt?: Date | string | null;
     order: Prisma.OrderCreateNestedOneWithoutDeliveryInput;
 };
 export type DeliveryUncheckedCreateInput = {
     id?: string;
     orderId: string;
-    driverName: string;
+    deliveryDriver?: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode?: string | null;
     deliveredAt?: Date | string | null;
 };
 export type DeliveryUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     order?: Prisma.OrderUpdateOneRequiredWithoutDeliveryNestedInput;
 };
 export type DeliveryUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     orderId?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 export type DeliveryCreateManyInput = {
     id?: string;
     orderId: string;
-    driverName: string;
+    deliveryDriver?: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode?: string | null;
     deliveredAt?: Date | string | null;
 };
 export type DeliveryUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 export type DeliveryUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     orderId?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 export type DeliveryNullableScalarRelationFilter = {
@@ -235,22 +254,25 @@ export type DeliveryNullableScalarRelationFilter = {
 export type DeliveryCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     orderId?: Prisma.SortOrder;
-    driverName?: Prisma.SortOrder;
+    deliveryDriver?: Prisma.SortOrder;
     deliveryStatus?: Prisma.SortOrder;
+    trackingCode?: Prisma.SortOrder;
     deliveredAt?: Prisma.SortOrder;
 };
 export type DeliveryMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     orderId?: Prisma.SortOrder;
-    driverName?: Prisma.SortOrder;
+    deliveryDriver?: Prisma.SortOrder;
     deliveryStatus?: Prisma.SortOrder;
+    trackingCode?: Prisma.SortOrder;
     deliveredAt?: Prisma.SortOrder;
 };
 export type DeliveryMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     orderId?: Prisma.SortOrder;
-    driverName?: Prisma.SortOrder;
+    deliveryDriver?: Prisma.SortOrder;
     deliveryStatus?: Prisma.SortOrder;
+    trackingCode?: Prisma.SortOrder;
     deliveredAt?: Prisma.SortOrder;
 };
 export type DeliveryCreateNestedOneWithoutOrderInput = {
@@ -286,14 +308,16 @@ export type EnumDeliveryStatusFieldUpdateOperationsInput = {
 };
 export type DeliveryCreateWithoutOrderInput = {
     id?: string;
-    driverName: string;
+    deliveryDriver?: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode?: string | null;
     deliveredAt?: Date | string | null;
 };
 export type DeliveryUncheckedCreateWithoutOrderInput = {
     id?: string;
-    driverName: string;
+    deliveryDriver?: string | null;
     deliveryStatus: $Enums.DeliveryStatus;
+    trackingCode?: string | null;
     deliveredAt?: Date | string | null;
 };
 export type DeliveryCreateOrConnectWithoutOrderInput = {
@@ -311,48 +335,54 @@ export type DeliveryUpdateToOneWithWhereWithoutOrderInput = {
 };
 export type DeliveryUpdateWithoutOrderInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 export type DeliveryUncheckedUpdateWithoutOrderInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
-    driverName?: Prisma.StringFieldUpdateOperationsInput | string;
+    deliveryDriver?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveryStatus?: Prisma.EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus;
+    trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
 };
 export type DeliverySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     orderId?: boolean;
-    driverName?: boolean;
+    deliveryDriver?: boolean;
     deliveryStatus?: boolean;
+    trackingCode?: boolean;
     deliveredAt?: boolean;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["delivery"]>;
 export type DeliverySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     orderId?: boolean;
-    driverName?: boolean;
+    deliveryDriver?: boolean;
     deliveryStatus?: boolean;
+    trackingCode?: boolean;
     deliveredAt?: boolean;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["delivery"]>;
 export type DeliverySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     orderId?: boolean;
-    driverName?: boolean;
+    deliveryDriver?: boolean;
     deliveryStatus?: boolean;
+    trackingCode?: boolean;
     deliveredAt?: boolean;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["delivery"]>;
 export type DeliverySelectScalar = {
     id?: boolean;
     orderId?: boolean;
-    driverName?: boolean;
+    deliveryDriver?: boolean;
     deliveryStatus?: boolean;
+    trackingCode?: boolean;
     deliveredAt?: boolean;
 };
-export type DeliveryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "driverName" | "deliveryStatus" | "deliveredAt", ExtArgs["result"]["delivery"]>;
+export type DeliveryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "deliveryDriver" | "deliveryStatus" | "trackingCode" | "deliveredAt", ExtArgs["result"]["delivery"]>;
 export type DeliveryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
 };
@@ -370,8 +400,9 @@ export type $DeliveryPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
         orderId: string;
-        driverName: string;
+        deliveryDriver: string | null;
         deliveryStatus: $Enums.DeliveryStatus;
+        trackingCode: string | null;
         deliveredAt: Date | null;
     }, ExtArgs["result"]["delivery"]>;
     composites: {};
@@ -730,8 +761,9 @@ export interface Prisma__DeliveryClient<T, Null = never, ExtArgs extends runtime
 export interface DeliveryFieldRefs {
     readonly id: Prisma.FieldRef<"Delivery", 'String'>;
     readonly orderId: Prisma.FieldRef<"Delivery", 'String'>;
-    readonly driverName: Prisma.FieldRef<"Delivery", 'String'>;
+    readonly deliveryDriver: Prisma.FieldRef<"Delivery", 'String'>;
     readonly deliveryStatus: Prisma.FieldRef<"Delivery", 'DeliveryStatus'>;
+    readonly trackingCode: Prisma.FieldRef<"Delivery", 'String'>;
     readonly deliveredAt: Prisma.FieldRef<"Delivery", 'DateTime'>;
 }
 /**

@@ -9,7 +9,7 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeliveryStatus = exports.PaymentStatus = exports.OrderStatus = exports.SubscriptionStatus = exports.DeliveryFrequency = exports.UserStatus = exports.UserRole = void 0;
+exports.DeliveryStatus = exports.PaymentStatus = exports.OrderStatus = exports.SubscriptionStatus = exports.DeliveryFrequency = exports.HarvestStatus = exports.UserStatus = exports.UserRole = void 0;
 exports.UserRole = {
     admin: 'admin',
     customer: 'customer',
@@ -18,6 +18,11 @@ exports.UserRole = {
 exports.UserStatus = {
     active: 'active',
     suspended: 'suspended'
+};
+exports.HarvestStatus = {
+    pending: 'pending',
+    approved: 'approved',
+    rejected: 'rejected'
 };
 exports.DeliveryFrequency = {
     weekly: 'weekly',
@@ -31,7 +36,7 @@ exports.SubscriptionStatus = {
 exports.OrderStatus = {
     pending: 'pending',
     packed: 'packed',
-    out_for_delivery: 'out_for_delivery',
+    shipped: 'shipped',
     delivered: 'delivered',
     cancelled: 'cancelled'
 };

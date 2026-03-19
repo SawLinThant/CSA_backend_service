@@ -15,6 +15,8 @@ const AdminGetCustomerUseCase_1 = require("../../../application/users/useCases/a
 const AdminCreateCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminCreateCustomerUseCase");
 const AdminUpdateCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminUpdateCustomerUseCase");
 const AdminDeleteCustomerUseCase_1 = require("../../../application/users/useCases/admin/customer/AdminDeleteCustomerUseCase");
+const AdminListFarmersUseCase_1 = require("../../../application/users/useCases/admin/farmer/AdminListFarmersUseCase");
+const AdminToggleUserStatusUseCase_1 = require("../../../application/users/useCases/admin/user/AdminToggleUserStatusUseCase");
 const authValidators_1 = require("../validators/authValidators");
 const userValidators_1 = require("../validators/userValidators");
 const userRepository = new PrismaUserRepository_1.PrismaUserRepository();
@@ -31,6 +33,8 @@ const adminGetCustomerUseCase = new AdminGetCustomerUseCase_1.AdminGetCustomerUs
 const adminCreateCustomerUseCase = new AdminCreateCustomerUseCase_1.AdminCreateCustomerUseCase(userRepository, customerRepository);
 const adminUpdateCustomerUseCase = new AdminUpdateCustomerUseCase_1.AdminUpdateCustomerUseCase(userRepository, customerRepository);
 const adminDeleteCustomerUseCase = new AdminDeleteCustomerUseCase_1.AdminDeleteCustomerUseCase(customerRepository, userRepository);
+const adminListFarmersUseCase = new AdminListFarmersUseCase_1.AdminListFarmersUseCase(farmerRepository);
+const adminToggleUserStatusUseCase = new AdminToggleUserStatusUseCase_1.AdminToggleUserStatusUseCase(userRepository);
 class AuthController {
     async customerRegister(req, res) {
         const parseResult = authValidators_1.authValidators.registerCustomer.safeParse(req.body);
@@ -110,6 +114,11 @@ class AuthController {
             return res.status(401).json({ error: error instanceof Error ? error.message : 'Refresh failed' });
         }
     }
+    async logout(_req, res) {
+        // Tokens are stateless JWTs; logout is handled client-side by discarding tokens.
+        // This endpoint exists so clients have a consistent API to call.
+        return res.status(200).json({ message: 'Logged out' });
+    }
     async updateCustomerProfile(req, res) {
         if (!req.user)
             return res.status(401).json({ error: 'Unauthorized' });
@@ -147,6 +156,19 @@ class AuthController {
         }
         try {
             const result = await adminListCustomersUseCase.execute(parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(500).json({ error: error instanceof Error ? error.message : 'Failed' });
+        }
+    }
+    async adminListFarmers(req, res) {
+        const parseResult = userValidators_1.userValidators.listFarmersQuery.safeParse(req.query);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminListFarmersUseCase.execute(parseResult.data);
             return res.status(200).json(result);
         }
         catch (error) {
@@ -204,6 +226,30 @@ class AuthController {
         }
         catch (error) {
             return res.status(404).json({ error: error instanceof Error ? error.message : 'Not found' });
+        }
+    }
+    async adminToggleUserStatus(req, res) {
+        if (!req.user)
+            return res.status(401).json({ error: 'Unauthorized' });
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'User id required' });
+        try {
+            const user = await adminToggleUserStatusUseCase.execute(id, req.user.id);
+            return res.status(200).json({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                role: user.role,
+                status: user.status,
+            });
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : 'Failed';
+            if (message.includes('not found'))
+                return res.status(404).json({ error: message });
+            return res.status(400).json({ error: message });
         }
     }
 }

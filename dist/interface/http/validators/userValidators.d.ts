@@ -26,7 +26,6 @@ export declare const userValidators: {
             active: "active";
             suspended: "suspended";
         }>>;
-        defaultAddressId: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
     }, import("zod/v4/core").$strip>;
     listCustomersQuery: import("zod").ZodObject<{
         page: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
@@ -38,6 +37,12 @@ export declare const userValidators: {
             customer: "customer";
             farmer: "farmer";
         }>>;
+    }, import("zod/v4/core").$strip>;
+    listFarmersQuery: import("zod").ZodObject<{
+        page: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        name: import("zod").ZodOptional<import("zod").ZodString>;
+        phone: import("zod").ZodOptional<import("zod").ZodString>;
     }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=userValidators.d.ts.map

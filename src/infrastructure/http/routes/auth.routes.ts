@@ -6,6 +6,7 @@ import { HarvestController } from '../../../interface/http/controllers/HarvestCo
 import { BoxController } from '../../../interface/http/controllers/BoxController';
 import { SubscriptionPlanController } from '../../../interface/http/controllers/SubscriptionPlanController';
 import { SubscriptionController } from '../../../interface/http/controllers/SubscriptionController';
+import { AnalyticsController } from '../../../interface/http/controllers/AnalyticsController';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { requireRole } from '../middleware/requireRole';
 import { productImagesUpload, singleImageUpload } from '../middleware/uploadMiddleware';
@@ -18,6 +19,7 @@ const harvestController = new HarvestController();
 const boxController = new BoxController();
 const subscriptionPlanController = new SubscriptionPlanController();
 const subscriptionController = new SubscriptionController();
+const analyticsController = new AnalyticsController();
 
 router.post('/admin/login', (req, res) => controller.loginAdmin(req, res));
 router.post('/customer/register', (req, res) => controller.customerRegister(req, res));
@@ -218,6 +220,13 @@ router.delete('/admin/subscription-plans/:id', authMiddleware, requireRole('admi
 
 router.patch('/admin/users/:id/toggle-status', authMiddleware, requireRole('admin'), (req, res) =>
   controller.adminToggleUserStatus(req, res),
+);
+
+router.get('/admin/analytics/summary', authMiddleware, requireRole('admin'), (req, res) =>
+  analyticsController.adminGetAnalyticsSummary(req, res),
+);
+router.get('/admin/analytics/visitors', authMiddleware, requireRole('admin'), (req, res) =>
+  analyticsController.adminListVisitorsSeries(req, res),
 );
 
 export default router;

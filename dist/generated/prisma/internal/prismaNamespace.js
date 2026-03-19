@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.ReferralScalarFieldEnum = exports.DeliveryScalarFieldEnum = exports.PaymentScalarFieldEnum = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.SubscriptionScalarFieldEnum = exports.SubscriptionPlanItemScalarFieldEnum = exports.SubscriptionPlanScalarFieldEnum = exports.HarvestScalarFieldEnum = exports.ProductImageScalarFieldEnum = exports.ProductScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.AddressScalarFieldEnum = exports.FarmerScalarFieldEnum = exports.CustomerScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.ReferralScalarFieldEnum = exports.DeliveryScalarFieldEnum = exports.PaymentScalarFieldEnum = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.SubscriptionScalarFieldEnum = exports.SubscriptionPlanScalarFieldEnum = exports.BoxItemScalarFieldEnum = exports.BoxVersionScalarFieldEnum = exports.BoxScalarFieldEnum = exports.HarvestScalarFieldEnum = exports.ProductImageScalarFieldEnum = exports.ProductScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.AddressScalarFieldEnum = exports.FarmerScalarFieldEnum = exports.CustomerScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -111,8 +111,10 @@ exports.ModelName = {
     Product: 'Product',
     ProductImage: 'ProductImage',
     Harvest: 'Harvest',
+    Box: 'Box',
+    BoxVersion: 'BoxVersion',
+    BoxItem: 'BoxItem',
     SubscriptionPlan: 'SubscriptionPlan',
-    SubscriptionPlanItem: 'SubscriptionPlanItem',
     Subscription: 'Subscription',
     Order: 'Order',
     OrderItem: 'OrderItem',
@@ -137,12 +139,12 @@ exports.UserScalarFieldEnum = {
     password: 'password',
     role: 'role',
     status: 'status',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 exports.CustomerScalarFieldEnum = {
     id: 'id',
     userId: 'userId',
-    defaultAddressId: 'defaultAddressId',
     createdAt: 'createdAt'
 };
 exports.FarmerScalarFieldEnum = {
@@ -151,6 +153,7 @@ exports.FarmerScalarFieldEnum = {
     farmName: 'farmName',
     farmLocation: 'farmLocation',
     farmDescription: 'farmDescription',
+    farmImage: 'farmImage',
     approved: 'approved',
     createdAt: 'createdAt'
 };
@@ -161,19 +164,22 @@ exports.AddressScalarFieldEnum = {
     city: 'city',
     state: 'state',
     postalCode: 'postalCode',
+    country: 'country',
     isDefault: 'isDefault'
 };
 exports.CategoryScalarFieldEnum = {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    description: 'description'
 };
 exports.ProductScalarFieldEnum = {
     id: 'id',
+    farmerId: 'farmerId',
+    categoryId: 'categoryId',
     name: 'name',
     description: 'description',
-    price: 'price',
-    categoryId: 'categoryId',
-    farmerId: 'farmerId',
+    unit: 'unit',
+    basePrice: 'basePrice',
     isActive: 'isActive',
     createdAt: 'createdAt'
 };
@@ -182,30 +188,54 @@ exports.ProductImageScalarFieldEnum = {
     productId: 'productId',
     imageUrl: 'imageUrl',
     isPrimary: 'isPrimary',
-    sortOrder: 'sortOrder',
-    createdAt: 'createdAt'
+    sortOrder: 'sortOrder'
 };
 exports.HarvestScalarFieldEnum = {
     id: 'id',
     farmerId: 'farmerId',
     productId: 'productId',
-    quantity: 'quantity',
+    quantityAvailable: 'quantityAvailable',
+    unitPrice: 'unitPrice',
     harvestDate: 'harvestDate',
-    availableUntil: 'availableUntil'
+    availableUntil: 'availableUntil',
+    status: 'status',
+    approvedBy: 'approvedBy',
+    approvedAt: 'approvedAt',
+    createdAt: 'createdAt'
 };
-exports.SubscriptionPlanScalarFieldEnum = {
+exports.BoxScalarFieldEnum = {
     id: 'id',
     name: 'name',
     description: 'description',
+    imageUrl: 'imageUrl',
+    isActive: 'isActive',
+    createdAt: 'createdAt'
+};
+exports.BoxVersionScalarFieldEnum = {
+    id: 'id',
+    boxId: 'boxId',
+    versionName: 'versionName',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    createdAt: 'createdAt'
+};
+exports.BoxItemScalarFieldEnum = {
+    id: 'id',
+    boxVersionId: 'boxVersionId',
+    productId: 'productId',
+    farmerId: 'farmerId',
+    quantity: 'quantity',
+    optional: 'optional'
+};
+exports.SubscriptionPlanScalarFieldEnum = {
+    id: 'id',
+    boxId: 'boxId',
+    name: 'name',
     price: 'price',
     deliveryFrequency: 'deliveryFrequency',
-    active: 'active'
-};
-exports.SubscriptionPlanItemScalarFieldEnum = {
-    id: 'id',
-    planId: 'planId',
-    productId: 'productId',
-    quantity: 'quantity'
+    deliveriesPerCycle: 'deliveriesPerCycle',
+    active: 'active',
+    createdAt: 'createdAt'
 };
 exports.SubscriptionScalarFieldEnum = {
     id: 'id',
@@ -221,6 +251,7 @@ exports.OrderScalarFieldEnum = {
     id: 'id',
     customerId: 'customerId',
     subscriptionId: 'subscriptionId',
+    boxVersionId: 'boxVersionId',
     status: 'status',
     totalPrice: 'totalPrice',
     deliveryDate: 'deliveryDate',
@@ -230,6 +261,7 @@ exports.OrderItemScalarFieldEnum = {
     id: 'id',
     orderId: 'orderId',
     productId: 'productId',
+    farmerId: 'farmerId',
     quantity: 'quantity',
     price: 'price'
 };
@@ -239,14 +271,15 @@ exports.PaymentScalarFieldEnum = {
     amount: 'amount',
     paymentMethod: 'paymentMethod',
     paymentStatus: 'paymentStatus',
-    transactionId: 'transactionId',
+    transactionReference: 'transactionReference',
     paidAt: 'paidAt'
 };
 exports.DeliveryScalarFieldEnum = {
     id: 'id',
     orderId: 'orderId',
-    driverName: 'driverName',
+    deliveryDriver: 'deliveryDriver',
     deliveryStatus: 'deliveryStatus',
+    trackingCode: 'trackingCode',
     deliveredAt: 'deliveredAt'
 };
 exports.ReferralScalarFieldEnum = {

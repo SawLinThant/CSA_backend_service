@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminListCustomersUseCase = void 0;
 function toPublicUser(user) {
-    return { id: user.id, name: user.name, email: user.email, phone: user.phone, role: user.role };
+    return { id: user.id, name: user.name, email: user.email, phone: user.phone, role: user.role, status: user.status };
 }
 class AdminListCustomersUseCase {
     constructor(customerRepository) {
@@ -22,7 +22,6 @@ class AdminListCustomersUseCase {
             items: items.map((c) => ({
                 id: c.id,
                 userId: c.userId,
-                defaultAddressId: c.defaultAddressId,
                 createdAt: c.createdAt,
                 user: toPublicUser(c.user),
             })),

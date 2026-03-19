@@ -34,8 +34,10 @@ export declare const ModelName: {
     readonly Product: "Product";
     readonly ProductImage: "ProductImage";
     readonly Harvest: "Harvest";
+    readonly Box: "Box";
+    readonly BoxVersion: "BoxVersion";
+    readonly BoxItem: "BoxItem";
     readonly SubscriptionPlan: "SubscriptionPlan";
-    readonly SubscriptionPlanItem: "SubscriptionPlanItem";
     readonly Subscription: "Subscription";
     readonly Order: "Order";
     readonly OrderItem: "OrderItem";
@@ -60,12 +62,12 @@ export declare const UserScalarFieldEnum: {
     readonly role: "role";
     readonly status: "status";
     readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
 };
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 export declare const CustomerScalarFieldEnum: {
     readonly id: "id";
     readonly userId: "userId";
-    readonly defaultAddressId: "defaultAddressId";
     readonly createdAt: "createdAt";
 };
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum];
@@ -75,6 +77,7 @@ export declare const FarmerScalarFieldEnum: {
     readonly farmName: "farmName";
     readonly farmLocation: "farmLocation";
     readonly farmDescription: "farmDescription";
+    readonly farmImage: "farmImage";
     readonly approved: "approved";
     readonly createdAt: "createdAt";
 };
@@ -86,21 +89,24 @@ export declare const AddressScalarFieldEnum: {
     readonly city: "city";
     readonly state: "state";
     readonly postalCode: "postalCode";
+    readonly country: "country";
     readonly isDefault: "isDefault";
 };
 export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum];
 export declare const CategoryScalarFieldEnum: {
     readonly id: "id";
     readonly name: "name";
+    readonly description: "description";
 };
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum];
 export declare const ProductScalarFieldEnum: {
     readonly id: "id";
+    readonly farmerId: "farmerId";
+    readonly categoryId: "categoryId";
     readonly name: "name";
     readonly description: "description";
-    readonly price: "price";
-    readonly categoryId: "categoryId";
-    readonly farmerId: "farmerId";
+    readonly unit: "unit";
+    readonly basePrice: "basePrice";
     readonly isActive: "isActive";
     readonly createdAt: "createdAt";
 };
@@ -111,34 +117,60 @@ export declare const ProductImageScalarFieldEnum: {
     readonly imageUrl: "imageUrl";
     readonly isPrimary: "isPrimary";
     readonly sortOrder: "sortOrder";
-    readonly createdAt: "createdAt";
 };
 export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum];
 export declare const HarvestScalarFieldEnum: {
     readonly id: "id";
     readonly farmerId: "farmerId";
     readonly productId: "productId";
-    readonly quantity: "quantity";
+    readonly quantityAvailable: "quantityAvailable";
+    readonly unitPrice: "unitPrice";
     readonly harvestDate: "harvestDate";
     readonly availableUntil: "availableUntil";
+    readonly status: "status";
+    readonly approvedBy: "approvedBy";
+    readonly approvedAt: "approvedAt";
+    readonly createdAt: "createdAt";
 };
 export type HarvestScalarFieldEnum = (typeof HarvestScalarFieldEnum)[keyof typeof HarvestScalarFieldEnum];
-export declare const SubscriptionPlanScalarFieldEnum: {
+export declare const BoxScalarFieldEnum: {
     readonly id: "id";
     readonly name: "name";
     readonly description: "description";
+    readonly imageUrl: "imageUrl";
+    readonly isActive: "isActive";
+    readonly createdAt: "createdAt";
+};
+export type BoxScalarFieldEnum = (typeof BoxScalarFieldEnum)[keyof typeof BoxScalarFieldEnum];
+export declare const BoxVersionScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxId: "boxId";
+    readonly versionName: "versionName";
+    readonly startDate: "startDate";
+    readonly endDate: "endDate";
+    readonly createdAt: "createdAt";
+};
+export type BoxVersionScalarFieldEnum = (typeof BoxVersionScalarFieldEnum)[keyof typeof BoxVersionScalarFieldEnum];
+export declare const BoxItemScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxVersionId: "boxVersionId";
+    readonly productId: "productId";
+    readonly farmerId: "farmerId";
+    readonly quantity: "quantity";
+    readonly optional: "optional";
+};
+export type BoxItemScalarFieldEnum = (typeof BoxItemScalarFieldEnum)[keyof typeof BoxItemScalarFieldEnum];
+export declare const SubscriptionPlanScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxId: "boxId";
+    readonly name: "name";
     readonly price: "price";
     readonly deliveryFrequency: "deliveryFrequency";
+    readonly deliveriesPerCycle: "deliveriesPerCycle";
     readonly active: "active";
+    readonly createdAt: "createdAt";
 };
 export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum];
-export declare const SubscriptionPlanItemScalarFieldEnum: {
-    readonly id: "id";
-    readonly planId: "planId";
-    readonly productId: "productId";
-    readonly quantity: "quantity";
-};
-export type SubscriptionPlanItemScalarFieldEnum = (typeof SubscriptionPlanItemScalarFieldEnum)[keyof typeof SubscriptionPlanItemScalarFieldEnum];
 export declare const SubscriptionScalarFieldEnum: {
     readonly id: "id";
     readonly customerId: "customerId";
@@ -154,6 +186,7 @@ export declare const OrderScalarFieldEnum: {
     readonly id: "id";
     readonly customerId: "customerId";
     readonly subscriptionId: "subscriptionId";
+    readonly boxVersionId: "boxVersionId";
     readonly status: "status";
     readonly totalPrice: "totalPrice";
     readonly deliveryDate: "deliveryDate";
@@ -164,6 +197,7 @@ export declare const OrderItemScalarFieldEnum: {
     readonly id: "id";
     readonly orderId: "orderId";
     readonly productId: "productId";
+    readonly farmerId: "farmerId";
     readonly quantity: "quantity";
     readonly price: "price";
 };
@@ -174,15 +208,16 @@ export declare const PaymentScalarFieldEnum: {
     readonly amount: "amount";
     readonly paymentMethod: "paymentMethod";
     readonly paymentStatus: "paymentStatus";
-    readonly transactionId: "transactionId";
+    readonly transactionReference: "transactionReference";
     readonly paidAt: "paidAt";
 };
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum];
 export declare const DeliveryScalarFieldEnum: {
     readonly id: "id";
     readonly orderId: "orderId";
-    readonly driverName: "driverName";
+    readonly deliveryDriver: "deliveryDriver";
     readonly deliveryStatus: "deliveryStatus";
+    readonly trackingCode: "trackingCode";
     readonly deliveredAt: "deliveredAt";
 };
 export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum];

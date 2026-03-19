@@ -4,7 +4,7 @@ import type { Customer } from './Customer';
 export type CustomerWithUser = Customer & {
     user: User;
 };
-export type CustomerUpdateData = Partial<Pick<Customer, 'defaultAddressId'>>;
+export type CustomerUpdateData = Partial<Pick<Customer, never>>;
 export interface CustomerListFilters {
     name?: string;
     phone?: string;

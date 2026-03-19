@@ -4,13 +4,13 @@ exports.refreshTokenSchema = exports.loginSchema = exports.registerFarmerSchema 
 const zod_1 = require("zod");
 exports.registerCustomerSchema = zod_1.z.object({
     name: zod_1.z.string().min(1),
-    email: zod_1.z.string().email().optional(),
+    email: zod_1.z.string().email().optional().nullable(),
     phone: zod_1.z.string().min(6),
     password: zod_1.z.string().min(8),
 });
 exports.registerFarmerSchema = zod_1.z.object({
     name: zod_1.z.string().min(1),
-    email: zod_1.z.string().email().optional(),
+    email: zod_1.z.string().email().optional().nullable(),
     phone: zod_1.z.string().min(6),
     password: zod_1.z.string().min(8),
     farmName: zod_1.z.string().min(1),

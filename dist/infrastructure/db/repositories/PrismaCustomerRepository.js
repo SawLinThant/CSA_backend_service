@@ -21,7 +21,6 @@ function mapToCustomerWithUser(row) {
     return {
         id: row.id,
         userId: row.userId,
-        defaultAddressId: row.defaultAddressId,
         createdAt: row.createdAt,
         user: mapDbUserToUser(row.user),
     };
@@ -34,7 +33,6 @@ class PrismaCustomerRepository {
         return {
             id: customer.id,
             userId: customer.userId,
-            defaultAddressId: customer.defaultAddressId,
             createdAt: customer.createdAt,
         };
     }
@@ -45,7 +43,6 @@ class PrismaCustomerRepository {
         return {
             id: customer.id,
             userId: customer.userId,
-            defaultAddressId: customer.defaultAddressId,
             createdAt: customer.createdAt,
         };
     }
@@ -53,13 +50,11 @@ class PrismaCustomerRepository {
         const created = await prismaClient_1.default.customer.create({
             data: {
                 userId: customer.userId,
-                defaultAddressId: customer.defaultAddressId,
             },
         });
         return {
             id: created.id,
             userId: created.userId,
-            defaultAddressId: created.defaultAddressId,
             createdAt: created.createdAt,
         };
     }
@@ -97,18 +92,14 @@ class PrismaCustomerRepository {
             return null;
         return mapToCustomerWithUser(row);
     }
-    async update(id, data) {
-        const updated = await prismaClient_1.default.customer.update({
-            where: { id },
-            data: {
-                ...(data.defaultAddressId !== undefined && { defaultAddressId: data.defaultAddressId }),
-            },
-        });
+    async update(id, _data) {
+        const customer = await prismaClient_1.default.customer.findUnique({ where: { id } });
+        if (!customer)
+            throw new Error('Customer not found');
         return {
-            id: updated.id,
-            userId: updated.userId,
-            defaultAddressId: updated.defaultAddressId,
-            createdAt: updated.createdAt,
+            id: customer.id,
+            userId: customer.userId,
+            createdAt: customer.createdAt,
         };
     }
 }

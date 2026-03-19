@@ -11,7 +11,8 @@ const index_1 = require("./routes/index");
 const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)({
-    origin: '*',
+    origin: 'http://localhost:5173',
+    credentials: true,
 }));
 app.use(express_1.default.json());
 (0, index_1.registerRoutes)(app);

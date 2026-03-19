@@ -27,16 +27,12 @@ class AdminUpdateCustomerUseCase {
             ...(input.email !== undefined && { email: input.email }),
             ...(input.status !== undefined && { status: input.status }),
         });
-        await this.customerRepository.update(customerId, {
-            ...(input.defaultAddressId !== undefined && { defaultAddressId: input.defaultAddressId }),
-        });
         const updated = await this.customerRepository.getByIdWithUser(customerId);
         if (!updated)
             throw new Error('Customer not found');
         return {
             id: updated.id,
             userId: updated.userId,
-            defaultAddressId: updated.defaultAddressId,
             createdAt: updated.createdAt,
             user: {
                 id: updated.user.id,

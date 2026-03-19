@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listCustomersQuerySchema = exports.adminUpdateCustomerSchema = exports.adminCreateCustomerSchema = exports.updateFarmerProfileSchema = exports.updateCustomerProfileSchema = void 0;
+exports.listFarmersQuerySchema = exports.listCustomersQuerySchema = exports.adminUpdateCustomerSchema = exports.adminCreateCustomerSchema = exports.updateFarmerProfileSchema = exports.updateCustomerProfileSchema = void 0;
 const zod_1 = require("zod");
 exports.updateCustomerProfileSchema = zod_1.z.object({
     name: zod_1.z.string().min(1).optional(),
@@ -26,7 +26,6 @@ exports.adminUpdateCustomerSchema = zod_1.z.object({
     phone: zod_1.z.string().min(6).optional(),
     email: zod_1.z.string().email().optional().nullable(),
     status: zod_1.z.enum(['active', 'suspended']).optional(),
-    defaultAddressId: zod_1.z.string().optional().nullable(),
 });
 exports.listCustomersQuerySchema = zod_1.z.object({
     page: zod_1.z.coerce.number().int().min(1).default(1),
@@ -34,5 +33,11 @@ exports.listCustomersQuerySchema = zod_1.z.object({
     name: zod_1.z.string().min(1).optional(),
     phone: zod_1.z.string().min(1).optional(),
     usertype: zod_1.z.enum(['admin', 'customer', 'farmer']).optional(),
+});
+exports.listFarmersQuerySchema = zod_1.z.object({
+    page: zod_1.z.coerce.number().int().min(1).default(1),
+    limit: zod_1.z.coerce.number().int().min(1).max(100).default(20),
+    name: zod_1.z.string().min(1).optional(),
+    phone: zod_1.z.string().min(1).optional(),
 });
 //# sourceMappingURL=userDtos.js.map

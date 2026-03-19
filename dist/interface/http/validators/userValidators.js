@@ -8,5 +8,6 @@ exports.userValidators = {
     adminCreateCustomer: userDtos_1.adminCreateCustomerSchema,
     adminUpdateCustomer: userDtos_1.adminUpdateCustomerSchema,
     listCustomersQuery: userDtos_1.listCustomersQuerySchema,
+    listFarmersQuery: userDtos_1.listFarmersQuerySchema,
 };
 //# sourceMappingURL=userValidators.js.map

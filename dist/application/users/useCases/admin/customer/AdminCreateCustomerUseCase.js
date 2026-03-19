@@ -40,7 +40,6 @@ class AdminCreateCustomerUseCase {
         return {
             id: result.customer.id,
             userId: result.user.id,
-            defaultAddressId: null,
             createdAt: result.customer.createdAt,
             user: {
                 id: result.user.id,

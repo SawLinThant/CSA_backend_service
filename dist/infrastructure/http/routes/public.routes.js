@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const CategoryController_1 = require("../../../interface/http/controllers/CategoryController");
+const ProductController_1 = require("../../../interface/http/controllers/ProductController");
+const BoxController_1 = require("../../../interface/http/controllers/BoxController");
+const SubscriptionPlanController_1 = require("../../../interface/http/controllers/SubscriptionPlanController");
+const router = (0, express_1.Router)();
+const categoryController = new CategoryController_1.CategoryController();
+const productController = new ProductController_1.ProductController();
+const boxController = new BoxController_1.BoxController();
+const subscriptionPlanController = new SubscriptionPlanController_1.SubscriptionPlanController();
+router.get('/categories', (req, res) => categoryController.adminListCategories(req, res));
+router.get('/categories/:id', (req, res) => categoryController.adminGetCategory(req, res));
+router.get('/products', (req, res) => productController.publicListProducts(req, res));
+router.get('/products/:id', (req, res) => productController.publicGetProduct(req, res));
+router.get('/boxes', (req, res) => boxController.publicListBoxes(req, res));
+router.get('/boxes/:id', (req, res) => boxController.publicGetBox(req, res));
+router.get('/box-versions', (req, res) => boxController.publicListBoxVersions(req, res));
+router.get('/box-versions/:id/items', (req, res) => boxController.publicListBoxVersionItems(req, res));
+router.get('/box-versions/:id', (req, res) => boxController.publicGetBoxVersion(req, res));
+router.get('/subscription-plans', (req, res) => subscriptionPlanController.publicListSubscriptionPlans(req, res));
+router.get('/subscription-plans/:id', (req, res) => subscriptionPlanController.publicGetSubscriptionPlan(req, res));
+exports.default = router;
+//# sourceMappingURL=public.routes.js.map
