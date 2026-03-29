@@ -29,6 +29,7 @@ export class UpdateFarmerProfileUseCase {
       ...(input.name !== undefined && { name: input.name }),
       ...(input.phone !== undefined && { phone: input.phone }),
       ...(input.email !== undefined && { email: input.email }),
+      ...(input.imageUrl !== undefined && { imageUrl: input.imageUrl }),
     });
 
     const updatedFarmer = await this.farmerRepository.update(farmer.id, {
@@ -46,6 +47,7 @@ export class UpdateFarmerProfileUseCase {
         name: updatedUser.name,
         email: updatedUser.email,
         phone: updatedUser.phone,
+        imageUrl: updatedUser.imageUrl,
         role: updatedUser.role,
       },
       farmer: {

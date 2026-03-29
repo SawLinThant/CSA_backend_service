@@ -4,6 +4,7 @@ export declare const authValidators: {
         email: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
         phone: import("zod").ZodString;
         password: import("zod").ZodString;
+        otp: import("zod").ZodOptional<import("zod").ZodString>;
     }, import("zod/v4/core").$strip>;
     registerFarmer: import("zod").ZodObject<{
         name: import("zod").ZodString;
@@ -13,6 +14,7 @@ export declare const authValidators: {
         farmName: import("zod").ZodString;
         farmLocation: import("zod").ZodString;
         farmDescription: import("zod").ZodOptional<import("zod").ZodString>;
+        otp: import("zod").ZodOptional<import("zod").ZodString>;
     }, import("zod/v4/core").$strip>;
     login: import("zod").ZodObject<{
         phone: import("zod").ZodString;
@@ -20,6 +22,9 @@ export declare const authValidators: {
     }, import("zod/v4/core").$strip>;
     refreshToken: import("zod").ZodObject<{
         refreshToken: import("zod").ZodString;
+    }, import("zod/v4/core").$strip>;
+    sendOtp: import("zod").ZodObject<{
+        phone: import("zod").ZodString;
     }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=authValidators.d.ts.map

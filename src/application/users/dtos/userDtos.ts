@@ -4,12 +4,14 @@ export const updateCustomerProfileSchema = z.object({
   name: z.string().min(1).optional(),
   phone: z.string().min(6).optional(),
   email: z.string().email().optional().nullable(),
+  imageUrl: z.string().url().optional().nullable(),
 });
 
 export const updateFarmerProfileSchema = z.object({
   name: z.string().min(1).optional(),
   phone: z.string().min(6).optional(),
   email: z.string().email().optional().nullable(),
+  imageUrl: z.string().url().optional().nullable(),
   farmName: z.string().min(1).optional(),
   farmLocation: z.string().min(1).optional(),
   farmDescription: z.string().optional().nullable(),

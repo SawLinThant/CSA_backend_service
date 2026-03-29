@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.ReferralScalarFieldEnum = exports.DeliveryScalarFieldEnum = exports.PaymentScalarFieldEnum = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.SubscriptionScalarFieldEnum = exports.SubscriptionPlanScalarFieldEnum = exports.BoxItemScalarFieldEnum = exports.BoxVersionScalarFieldEnum = exports.BoxScalarFieldEnum = exports.HarvestScalarFieldEnum = exports.ProductImageScalarFieldEnum = exports.ProductScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.AddressScalarFieldEnum = exports.FarmerScalarFieldEnum = exports.CustomerScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.ReferralScalarFieldEnum = exports.DeliveryScalarFieldEnum = exports.PaymentScalarFieldEnum = exports.OrderItemScalarFieldEnum = exports.InventoryReservationScalarFieldEnum = exports.CapacitySnapshotScalarFieldEnum = exports.SubscriptionOrderCycleEventScalarFieldEnum = exports.OrderScalarFieldEnum = exports.SubscriptionScalarFieldEnum = exports.SubscriptionPlanScalarFieldEnum = exports.BoxItemScalarFieldEnum = exports.BoxVersionScalarFieldEnum = exports.BoxScalarFieldEnum = exports.HarvestScalarFieldEnum = exports.ProductImageScalarFieldEnum = exports.ProductScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.AddressScalarFieldEnum = exports.FarmerScalarFieldEnum = exports.CustomerScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -117,6 +117,9 @@ exports.ModelName = {
     SubscriptionPlan: 'SubscriptionPlan',
     Subscription: 'Subscription',
     Order: 'Order',
+    SubscriptionOrderCycleEvent: 'SubscriptionOrderCycleEvent',
+    CapacitySnapshot: 'CapacitySnapshot',
+    InventoryReservation: 'InventoryReservation',
     OrderItem: 'OrderItem',
     Payment: 'Payment',
     Delivery: 'Delivery',
@@ -136,6 +139,7 @@ exports.UserScalarFieldEnum = {
     name: 'name',
     email: 'email',
     phone: 'phone',
+    imageUrl: 'imageUrl',
     password: 'password',
     role: 'role',
     status: 'status',
@@ -241,9 +245,13 @@ exports.SubscriptionScalarFieldEnum = {
     id: 'id',
     customerId: 'customerId',
     planId: 'planId',
+    boxId: 'boxId',
     status: 'status',
     startDate: 'startDate',
     nextDeliveryDate: 'nextDeliveryDate',
+    nextOrderDate: 'nextOrderDate',
+    lastOrderDate: 'lastOrderDate',
+    pauseReason: 'pauseReason',
     pauseUntil: 'pauseUntil',
     createdAt: 'createdAt'
 };
@@ -252,10 +260,45 @@ exports.OrderScalarFieldEnum = {
     customerId: 'customerId',
     subscriptionId: 'subscriptionId',
     boxVersionId: 'boxVersionId',
+    cycleDate: 'cycleDate',
     status: 'status',
     totalPrice: 'totalPrice',
     deliveryDate: 'deliveryDate',
     createdAt: 'createdAt'
+};
+exports.SubscriptionOrderCycleEventScalarFieldEnum = {
+    id: 'id',
+    subscriptionId: 'subscriptionId',
+    cycleDate: 'cycleDate',
+    referenceDate: 'referenceDate',
+    outcome: 'outcome',
+    reason: 'reason',
+    attempt: 'attempt',
+    createdAt: 'createdAt'
+};
+exports.CapacitySnapshotScalarFieldEnum = {
+    id: 'id',
+    boxVersionId: 'boxVersionId',
+    cycleDate: 'cycleDate',
+    maxBoxes: 'maxBoxes',
+    reservedBoxes: 'reservedBoxes',
+    consumedBoxes: 'consumedBoxes',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.InventoryReservationScalarFieldEnum = {
+    id: 'id',
+    subscriptionId: 'subscriptionId',
+    boxVersionId: 'boxVersionId',
+    capacitySnapshotId: 'capacitySnapshotId',
+    cycleDate: 'cycleDate',
+    quantity: 'quantity',
+    status: 'status',
+    reason: 'reason',
+    idempotencyKey: 'idempotencyKey',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 exports.OrderItemScalarFieldEnum = {
     id: 'id',

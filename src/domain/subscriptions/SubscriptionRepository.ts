@@ -2,7 +2,7 @@ import type { Subscription } from './Subscription';
 
 export type SubscriptionCreateData = Omit<Subscription, 'id' | 'createdAt'>;
 export type SubscriptionUpdateData = Partial<
-  Pick<Subscription, 'status' | 'nextDeliveryDate' | 'pauseUntil'>
+  Pick<Subscription, 'status' | 'nextDeliveryDate' | 'nextOrderDate' | 'lastOrderDate' | 'pauseReason' | 'pauseUntil'>
 >;
 
 export interface SubscriptionListByCustomerFilters {

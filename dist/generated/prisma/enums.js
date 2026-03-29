@@ -9,7 +9,7 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeliveryStatus = exports.PaymentStatus = exports.OrderStatus = exports.SubscriptionStatus = exports.DeliveryFrequency = exports.HarvestStatus = exports.UserStatus = exports.UserRole = void 0;
+exports.SubscriptionOrderCycleOutcome = exports.ReservationStatus = exports.CapacityStatus = exports.DeliveryStatus = exports.PaymentStatus = exports.OrderStatus = exports.SubscriptionStatus = exports.DeliveryFrequency = exports.HarvestStatus = exports.UserStatus = exports.UserRole = void 0;
 exports.UserRole = {
     admin: 'admin',
     customer: 'customer',
@@ -50,6 +50,22 @@ exports.DeliveryStatus = {
     scheduled: 'scheduled',
     out_for_delivery: 'out_for_delivery',
     delivered: 'delivered',
+    failed: 'failed'
+};
+exports.CapacityStatus = {
+    open: 'open',
+    locked: 'locked',
+    closed: 'closed'
+};
+exports.ReservationStatus = {
+    reserved: 'reserved',
+    consumed: 'consumed',
+    released: 'released',
+    expired: 'expired'
+};
+exports.SubscriptionOrderCycleOutcome = {
+    created: 'created',
+    skipped: 'skipped',
     failed: 'failed'
 };
 //# sourceMappingURL=enums.js.map

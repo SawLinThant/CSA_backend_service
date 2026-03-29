@@ -12,6 +12,10 @@ export declare class BoxController {
     adminCreateBoxVersion(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminUpdateBoxVersion(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminDeleteBoxVersion(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    adminRecomputeBoxVersionCapacity(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    adminListCapacitySnapshots(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    adminUpdateCapacitySnapshotStatus(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    adminListInventoryReservations(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminListBoxVersionItems(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminGetBoxItem(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     adminCreateBoxItem(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
@@ -19,6 +23,7 @@ export declare class BoxController {
     adminDeleteBoxItem(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     publicListBoxes(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     publicGetBox(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    publicGetBoxDetail(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     publicListBoxVersions(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     publicGetBoxVersion(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     publicListBoxVersionItems(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;

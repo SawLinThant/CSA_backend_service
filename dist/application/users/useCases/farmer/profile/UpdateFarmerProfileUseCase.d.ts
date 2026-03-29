@@ -11,6 +11,7 @@ export declare class UpdateFarmerProfileUseCase {
             name: string;
             email: string | null;
             phone: string;
+            imageUrl: string | null;
             role: import("../../../../../domain/users/User").UserRole;
         };
         farmer: {

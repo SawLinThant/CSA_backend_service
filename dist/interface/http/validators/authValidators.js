@@ -7,5 +7,6 @@ exports.authValidators = {
     registerFarmer: authDtos_1.registerFarmerSchema,
     login: authDtos_1.loginSchema,
     refreshToken: authDtos_1.refreshTokenSchema,
+    sendOtp: authDtos_1.sendOtpSchema,
 };
 //# sourceMappingURL=authValidators.js.map

@@ -22,6 +22,7 @@ export class UpdateCustomerProfileUseCase {
       ...(input.name !== undefined && { name: input.name }),
       ...(input.phone !== undefined && { phone: input.phone }),
       ...(input.email !== undefined && { email: input.email }),
+      ...(input.imageUrl !== undefined && { imageUrl: input.imageUrl }),
     });
 
     return {
@@ -29,6 +30,7 @@ export class UpdateCustomerProfileUseCase {
       name: updated.name,
       email: updated.email,
       phone: updated.phone,
+      imageUrl: updated.imageUrl,
       role: updated.role,
     };
   }

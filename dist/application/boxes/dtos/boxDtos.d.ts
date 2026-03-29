@@ -17,7 +17,11 @@ export declare const listBoxesQuerySchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     isActive: z.ZodOptional<z.ZodCoercedBoolean<unknown>>;
 }, z.core.$strip>;
+export declare const publicBoxDetailQuerySchema: z.ZodObject<{
+    date: z.ZodOptional<z.ZodCoercedDate<unknown>>;
+}, z.core.$strip>;
 export type CreateBoxInput = z.infer<typeof createBoxSchema>;
 export type UpdateBoxInput = z.infer<typeof updateBoxSchema>;
 export type ListBoxesQuery = z.infer<typeof listBoxesQuerySchema>;
+export type PublicBoxDetailQuery = z.infer<typeof publicBoxDetailQuerySchema>;
 //# sourceMappingURL=boxDtos.d.ts.map

@@ -5,6 +5,7 @@ export interface User {
   name: string;
   email: string | null;
   phone: string;
+  imageUrl: string | null;
   passwordHash: string;
   role: UserRole;
   status: 'active' | 'suspended';

@@ -52,7 +52,7 @@ exports.updateProductFormBodySchema = zod_1.z.object({
 });
 exports.listMyProductsQuerySchema = zod_1.z.object({
     page: zod_1.z.coerce.number().int().min(1).default(1),
-    limit: zod_1.z.coerce.number().int().min(1).max(100).default(20),
+    limit: zod_1.z.coerce.number().int().min(1).max(200).default(20),
     name: zod_1.z.string().min(1).optional(),
     categoryId: zod_1.z.string().min(1).optional(),
     isActive: zod_1.z.coerce.boolean().optional(),

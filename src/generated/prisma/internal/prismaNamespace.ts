@@ -398,6 +398,9 @@ export const ModelName = {
   SubscriptionPlan: 'SubscriptionPlan',
   Subscription: 'Subscription',
   Order: 'Order',
+  SubscriptionOrderCycleEvent: 'SubscriptionOrderCycleEvent',
+  CapacitySnapshot: 'CapacitySnapshot',
+  InventoryReservation: 'InventoryReservation',
   OrderItem: 'OrderItem',
   Payment: 'Payment',
   Delivery: 'Delivery',
@@ -417,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "box" | "boxVersion" | "boxItem" | "subscriptionPlan" | "subscription" | "order" | "orderItem" | "payment" | "delivery" | "referral"
+    modelProps: "user" | "customer" | "farmer" | "address" | "category" | "product" | "productImage" | "harvest" | "box" | "boxVersion" | "boxItem" | "subscriptionPlan" | "subscription" | "order" | "subscriptionOrderCycleEvent" | "capacitySnapshot" | "inventoryReservation" | "orderItem" | "payment" | "delivery" | "referral"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1457,6 +1460,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SubscriptionOrderCycleEvent: {
+      payload: Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>
+      fields: Prisma.SubscriptionOrderCycleEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubscriptionOrderCycleEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubscriptionOrderCycleEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        findFirst: {
+          args: Prisma.SubscriptionOrderCycleEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubscriptionOrderCycleEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        findMany: {
+          args: Prisma.SubscriptionOrderCycleEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>[]
+        }
+        create: {
+          args: Prisma.SubscriptionOrderCycleEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        createMany: {
+          args: Prisma.SubscriptionOrderCycleEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubscriptionOrderCycleEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>[]
+        }
+        delete: {
+          args: Prisma.SubscriptionOrderCycleEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        update: {
+          args: Prisma.SubscriptionOrderCycleEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubscriptionOrderCycleEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubscriptionOrderCycleEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubscriptionOrderCycleEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubscriptionOrderCycleEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionOrderCycleEventPayload>
+        }
+        aggregate: {
+          args: Prisma.SubscriptionOrderCycleEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscriptionOrderCycleEvent>
+        }
+        groupBy: {
+          args: Prisma.SubscriptionOrderCycleEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionOrderCycleEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubscriptionOrderCycleEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionOrderCycleEventCountAggregateOutputType> | number
+        }
+      }
+    }
+    CapacitySnapshot: {
+      payload: Prisma.$CapacitySnapshotPayload<ExtArgs>
+      fields: Prisma.CapacitySnapshotFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CapacitySnapshotFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CapacitySnapshotFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        findFirst: {
+          args: Prisma.CapacitySnapshotFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CapacitySnapshotFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        findMany: {
+          args: Prisma.CapacitySnapshotFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>[]
+        }
+        create: {
+          args: Prisma.CapacitySnapshotCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        createMany: {
+          args: Prisma.CapacitySnapshotCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CapacitySnapshotCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>[]
+        }
+        delete: {
+          args: Prisma.CapacitySnapshotDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        update: {
+          args: Prisma.CapacitySnapshotUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        deleteMany: {
+          args: Prisma.CapacitySnapshotDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CapacitySnapshotUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CapacitySnapshotUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>[]
+        }
+        upsert: {
+          args: Prisma.CapacitySnapshotUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CapacitySnapshotPayload>
+        }
+        aggregate: {
+          args: Prisma.CapacitySnapshotAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCapacitySnapshot>
+        }
+        groupBy: {
+          args: Prisma.CapacitySnapshotGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CapacitySnapshotGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CapacitySnapshotCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CapacitySnapshotCountAggregateOutputType> | number
+        }
+      }
+    }
+    InventoryReservation: {
+      payload: Prisma.$InventoryReservationPayload<ExtArgs>
+      fields: Prisma.InventoryReservationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InventoryReservationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InventoryReservationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        findFirst: {
+          args: Prisma.InventoryReservationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InventoryReservationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        findMany: {
+          args: Prisma.InventoryReservationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>[]
+        }
+        create: {
+          args: Prisma.InventoryReservationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        createMany: {
+          args: Prisma.InventoryReservationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InventoryReservationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>[]
+        }
+        delete: {
+          args: Prisma.InventoryReservationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        update: {
+          args: Prisma.InventoryReservationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        deleteMany: {
+          args: Prisma.InventoryReservationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InventoryReservationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InventoryReservationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>[]
+        }
+        upsert: {
+          args: Prisma.InventoryReservationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InventoryReservationPayload>
+        }
+        aggregate: {
+          args: Prisma.InventoryReservationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInventoryReservation>
+        }
+        groupBy: {
+          args: Prisma.InventoryReservationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InventoryReservationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InventoryReservationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InventoryReservationCountAggregateOutputType> | number
+        }
+      }
+    }
     OrderItem: {
       payload: Prisma.$OrderItemPayload<ExtArgs>
       fields: Prisma.OrderItemFieldRefs
@@ -1797,6 +2022,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
+  imageUrl: 'imageUrl',
   password: 'password',
   role: 'role',
   status: 'status',
@@ -1950,9 +2176,13 @@ export const SubscriptionScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   planId: 'planId',
+  boxId: 'boxId',
   status: 'status',
   startDate: 'startDate',
   nextDeliveryDate: 'nextDeliveryDate',
+  nextOrderDate: 'nextOrderDate',
+  lastOrderDate: 'lastOrderDate',
+  pauseReason: 'pauseReason',
   pauseUntil: 'pauseUntil',
   createdAt: 'createdAt'
 } as const
@@ -1965,6 +2195,7 @@ export const OrderScalarFieldEnum = {
   customerId: 'customerId',
   subscriptionId: 'subscriptionId',
   boxVersionId: 'boxVersionId',
+  cycleDate: 'cycleDate',
   status: 'status',
   totalPrice: 'totalPrice',
   deliveryDate: 'deliveryDate',
@@ -1972,6 +2203,52 @@ export const OrderScalarFieldEnum = {
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const SubscriptionOrderCycleEventScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  cycleDate: 'cycleDate',
+  referenceDate: 'referenceDate',
+  outcome: 'outcome',
+  reason: 'reason',
+  attempt: 'attempt',
+  createdAt: 'createdAt'
+} as const
+
+export type SubscriptionOrderCycleEventScalarFieldEnum = (typeof SubscriptionOrderCycleEventScalarFieldEnum)[keyof typeof SubscriptionOrderCycleEventScalarFieldEnum]
+
+
+export const CapacitySnapshotScalarFieldEnum = {
+  id: 'id',
+  boxVersionId: 'boxVersionId',
+  cycleDate: 'cycleDate',
+  maxBoxes: 'maxBoxes',
+  reservedBoxes: 'reservedBoxes',
+  consumedBoxes: 'consumedBoxes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CapacitySnapshotScalarFieldEnum = (typeof CapacitySnapshotScalarFieldEnum)[keyof typeof CapacitySnapshotScalarFieldEnum]
+
+
+export const InventoryReservationScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  boxVersionId: 'boxVersionId',
+  capacitySnapshotId: 'capacitySnapshotId',
+  cycleDate: 'cycleDate',
+  quantity: 'quantity',
+  status: 'status',
+  reason: 'reason',
+  idempotencyKey: 'idempotencyKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InventoryReservationScalarFieldEnum = (typeof InventoryReservationScalarFieldEnum)[keyof typeof InventoryReservationScalarFieldEnum]
 
 
 export const OrderItemScalarFieldEnum = {
@@ -2199,6 +2476,48 @@ export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'SubscriptionOrderCycleOutcome'
+ */
+export type EnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionOrderCycleOutcome'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionOrderCycleOutcome[]'
+ */
+export type ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionOrderCycleOutcome[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CapacityStatus'
+ */
+export type EnumCapacityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CapacityStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CapacityStatus[]'
+ */
+export type ListEnumCapacityStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CapacityStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ReservationStatus'
+ */
+export type EnumReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ReservationStatus[]'
+ */
+export type ListEnumReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PaymentStatus'
  */
 export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
@@ -2348,6 +2667,9 @@ export type GlobalOmitConfig = {
   subscriptionPlan?: Prisma.SubscriptionPlanOmit
   subscription?: Prisma.SubscriptionOmit
   order?: Prisma.OrderOmit
+  subscriptionOrderCycleEvent?: Prisma.SubscriptionOrderCycleEventOmit
+  capacitySnapshot?: Prisma.CapacitySnapshotOmit
+  inventoryReservation?: Prisma.InventoryReservationOmit
   orderItem?: Prisma.OrderItemOmit
   payment?: Prisma.PaymentOmit
   delivery?: Prisma.DeliveryOmit

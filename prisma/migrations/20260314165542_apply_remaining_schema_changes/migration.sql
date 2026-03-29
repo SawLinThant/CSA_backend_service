@@ -277,8 +277,19 @@ ADD COLUMN     "pauseUntil" TIMESTAMP(3),
 ADD COLUMN     "planId" TEXT NOT NULL,
 ADD COLUMN     "startDate" TIMESTAMP(3) NOT NULL;
 
--- AlterTable
-ALTER TABLE "users" ALTER COLUMN "updated_at" DROP DEFAULT;
+-- AlterTable (guarded for fresh databases where updated_at does not exist yet)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'users'
+      AND column_name = 'updated_at'
+  ) THEN
+    ALTER TABLE "users" ALTER COLUMN "updated_at" DROP DEFAULT;
+  END IF;
+END $$;
 
 -- DropTable
 DROP TABLE "subscription_plan_items";

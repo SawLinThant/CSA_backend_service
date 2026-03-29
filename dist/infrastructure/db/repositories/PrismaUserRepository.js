@@ -11,6 +11,7 @@ function mapDbUserToDomain(user) {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        imageUrl: user.imageUrl,
         passwordHash: user.password,
         role: user.role,
         status: user.status,
@@ -42,6 +43,7 @@ class PrismaUserRepository {
                 name: user.name,
                 email: user.email,
                 phone: user.phone,
+                imageUrl: user.imageUrl ?? null,
                 password: user.passwordHash,
                 role: user.role,
                 status: user.status,
@@ -56,6 +58,7 @@ class PrismaUserRepository {
                 ...(data.name !== undefined && { name: data.name }),
                 ...(data.email !== undefined && { email: data.email }),
                 ...(data.phone !== undefined && { phone: data.phone }),
+                ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
                 ...(data.status !== undefined && { status: data.status }),
             },
         });

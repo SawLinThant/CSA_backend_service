@@ -13,6 +13,7 @@ function mapDbUserToUser(user: {
   name: string;
   email: string | null;
   phone: string;
+  imageUrl: string | null;
   password: string;
   role: UserRole;
   status: 'active' | 'suspended';
@@ -24,6 +25,7 @@ function mapDbUserToUser(user: {
     name: user.name,
     email: user.email,
     phone: user.phone,
+    imageUrl: user.imageUrl,
     passwordHash: user.password,
     role: user.role,
     status: user.status,
@@ -40,6 +42,7 @@ function mapToCustomerWithUser(row: {
     name: string;
     email: string | null;
     phone: string;
+    imageUrl: string | null;
     password: string;
     role: UserRole;
     status: 'active' | 'suspended';

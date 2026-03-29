@@ -6,6 +6,7 @@ import {
   listCustomersQuerySchema,
   listFarmersQuerySchema,
 } from '../../../application/users/dtos/userDtos';
+import { createAddressSchema, updateAddressSchema } from '../../../application/users/dtos/addressDtos';
 
 export const userValidators = {
   updateCustomerProfile: updateCustomerProfileSchema,
@@ -14,4 +15,6 @@ export const userValidators = {
   adminUpdateCustomer: adminUpdateCustomerSchema,
   listCustomersQuery: listCustomersQuerySchema,
   listFarmersQuery: listFarmersQuerySchema,
+  createAddress: createAddressSchema,
+  updateAddress: updateAddressSchema,
 };

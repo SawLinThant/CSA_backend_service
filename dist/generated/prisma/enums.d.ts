@@ -48,4 +48,23 @@ export declare const DeliveryStatus: {
     readonly failed: "failed";
 };
 export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
+export declare const CapacityStatus: {
+    readonly open: "open";
+    readonly locked: "locked";
+    readonly closed: "closed";
+};
+export type CapacityStatus = (typeof CapacityStatus)[keyof typeof CapacityStatus];
+export declare const ReservationStatus: {
+    readonly reserved: "reserved";
+    readonly consumed: "consumed";
+    readonly released: "released";
+    readonly expired: "expired";
+};
+export type ReservationStatus = (typeof ReservationStatus)[keyof typeof ReservationStatus];
+export declare const SubscriptionOrderCycleOutcome: {
+    readonly created: "created";
+    readonly skipped: "skipped";
+    readonly failed: "failed";
+};
+export type SubscriptionOrderCycleOutcome = (typeof SubscriptionOrderCycleOutcome)[keyof typeof SubscriptionOrderCycleOutcome];
 //# sourceMappingURL=enums.d.ts.map

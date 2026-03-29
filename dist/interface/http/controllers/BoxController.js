@@ -22,6 +22,13 @@ const AdminGetBoxItemUseCase_1 = require("../../../application/boxes/useCases/ad
 const AdminCreateBoxItemUseCase_1 = require("../../../application/boxes/useCases/admin/AdminCreateBoxItemUseCase");
 const AdminUpdateBoxItemUseCase_1 = require("../../../application/boxes/useCases/admin/AdminUpdateBoxItemUseCase");
 const AdminDeleteBoxItemUseCase_1 = require("../../../application/boxes/useCases/admin/AdminDeleteBoxItemUseCase");
+const RecomputeBoxVersionCapacityUseCase_1 = require("../../../application/boxes/useCases/admin/RecomputeBoxVersionCapacityUseCase");
+const AdminListCapacitySnapshotsUseCase_1 = require("../../../application/boxes/useCases/admin/AdminListCapacitySnapshotsUseCase");
+const AdminUpdateCapacitySnapshotStatusUseCase_1 = require("../../../application/boxes/useCases/admin/AdminUpdateCapacitySnapshotStatusUseCase");
+const AdminListInventoryReservationsUseCase_1 = require("../../../application/boxes/useCases/admin/AdminListInventoryReservationsUseCase");
+const PublicGetBoxDetailUseCase_1 = require("../../../application/boxes/useCases/admin/PublicGetBoxDetailUseCase");
+const PrismaCapacitySnapshotRepository_1 = require("../../../infrastructure/db/repositories/PrismaCapacitySnapshotRepository");
+const PrismaInventoryReservationRepository_1 = require("../../../infrastructure/db/repositories/PrismaInventoryReservationRepository");
 const boxValidators_1 = require("../validators/boxValidators");
 const S3StorageService_1 = require("../../../infrastructure/storage/S3StorageService");
 const storageFactory_1 = require("../../../infrastructure/storage/storageFactory");
@@ -30,6 +37,8 @@ const boxVersionRepository = new PrismaBoxVersionRepository_1.PrismaBoxVersionRe
 const boxItemRepository = new PrismaBoxItemRepository_1.PrismaBoxItemRepository();
 const productRepository = new PrismaProductRepository_1.PrismaProductRepository();
 const farmerRepository = new PrismaFarmerRepository_1.PrismaFarmerRepository();
+const capacitySnapshotRepository = new PrismaCapacitySnapshotRepository_1.PrismaCapacitySnapshotRepository();
+const inventoryReservationRepository = new PrismaInventoryReservationRepository_1.PrismaInventoryReservationRepository();
 const adminListBoxesUseCase = new AdminListBoxesUseCase_1.AdminListBoxesUseCase(boxRepository);
 const adminGetBoxUseCase = new AdminGetBoxUseCase_1.AdminGetBoxUseCase(boxRepository);
 const adminCreateBoxUseCase = new AdminCreateBoxUseCase_1.AdminCreateBoxUseCase(boxRepository);
@@ -45,6 +54,11 @@ const adminGetBoxItemUseCase = new AdminGetBoxItemUseCase_1.AdminGetBoxItemUseCa
 const adminCreateBoxItemUseCase = new AdminCreateBoxItemUseCase_1.AdminCreateBoxItemUseCase(boxItemRepository, boxVersionRepository, productRepository, farmerRepository);
 const adminUpdateBoxItemUseCase = new AdminUpdateBoxItemUseCase_1.AdminUpdateBoxItemUseCase(boxItemRepository);
 const adminDeleteBoxItemUseCase = new AdminDeleteBoxItemUseCase_1.AdminDeleteBoxItemUseCase(boxItemRepository);
+const recomputeBoxVersionCapacityUseCase = new RecomputeBoxVersionCapacityUseCase_1.RecomputeBoxVersionCapacityUseCase(boxVersionRepository, boxItemRepository, capacitySnapshotRepository);
+const adminListCapacitySnapshotsUseCase = new AdminListCapacitySnapshotsUseCase_1.AdminListCapacitySnapshotsUseCase(capacitySnapshotRepository);
+const adminUpdateCapacitySnapshotStatusUseCase = new AdminUpdateCapacitySnapshotStatusUseCase_1.AdminUpdateCapacitySnapshotStatusUseCase(capacitySnapshotRepository);
+const adminListInventoryReservationsUseCase = new AdminListInventoryReservationsUseCase_1.AdminListInventoryReservationsUseCase(inventoryReservationRepository);
+const publicGetBoxDetailUseCase = new PublicGetBoxDetailUseCase_1.PublicGetBoxDetailUseCase(boxRepository);
 const storage = (0, storageFactory_1.getStorageService)();
 class BoxController {
     async adminListBoxes(req, res) {
@@ -267,6 +281,70 @@ class BoxController {
             return res.status(400).json({ error: message });
         }
     }
+    async adminRecomputeBoxVersionCapacity(req, res) {
+        const boxVersionId = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!boxVersionId)
+            return res.status(400).json({ error: 'Box version id required' });
+        const parseResult = boxValidators_1.boxValidators.recomputeBoxVersionCapacity.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await recomputeBoxVersionCapacityUseCase.execute(boxVersionId, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : 'Recompute failed';
+            if (message.includes('not found'))
+                return res.status(404).json({ error: message });
+            return res.status(400).json({ error: message });
+        }
+    }
+    async adminListCapacitySnapshots(req, res) {
+        const parseResult = boxValidators_1.boxValidators.listCapacitySnapshotsQuery.safeParse(req.query);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminListCapacitySnapshotsUseCase.execute(parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(500).json({ error: error instanceof Error ? error.message : 'Failed' });
+        }
+    }
+    async adminUpdateCapacitySnapshotStatus(req, res) {
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'Capacity snapshot id required' });
+        const parseResult = boxValidators_1.boxValidators.updateCapacitySnapshotStatus.safeParse(req.body);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid input', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminUpdateCapacitySnapshotStatusUseCase.execute(id, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : 'Update failed';
+            if (message.includes('not found'))
+                return res.status(404).json({ error: message });
+            return res.status(400).json({ error: message });
+        }
+    }
+    async adminListInventoryReservations(req, res) {
+        const parseResult = boxValidators_1.boxValidators.listInventoryReservationsQuery.safeParse(req.query);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
+        }
+        try {
+            const result = await adminListInventoryReservationsUseCase.execute(parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res.status(500).json({ error: error instanceof Error ? error.message : 'Failed' });
+        }
+    }
     async adminListBoxVersionItems(req, res) {
         const versionId = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
         if (!versionId)
@@ -350,7 +428,11 @@ class BoxController {
             return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
         }
         try {
-            const result = await adminListBoxesUseCase.execute(parseResult.data);
+            // Public catalogue must only expose active boxes.
+            const result = await adminListBoxesUseCase.execute({
+                ...parseResult.data,
+                isActive: true,
+            });
             return res.status(200).json(result);
         }
         catch (error) {
@@ -363,10 +445,31 @@ class BoxController {
             return res.status(400).json({ error: 'Box id required' });
         try {
             const result = await adminGetBoxUseCase.execute(id);
+            if (!result.isActive)
+                return res.status(404).json({ error: 'Not found' });
             return res.status(200).json(result);
         }
         catch (error) {
             return res.status(404).json({ error: error instanceof Error ? error.message : 'Not found' });
+        }
+    }
+    async publicGetBoxDetail(req, res) {
+        const id = typeof req.params.id === 'string' ? req.params.id : req.params.id?.[0];
+        if (!id)
+            return res.status(400).json({ error: 'Box id required' });
+        const parseResult = boxValidators_1.boxValidators.publicBoxDetailQuery.safeParse(req.query);
+        if (!parseResult.success) {
+            return res.status(400).json({ error: 'Invalid query', details: parseResult.error.format() });
+        }
+        try {
+            const result = await publicGetBoxDetailUseCase.execute(id, parseResult.data);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : 'Not found';
+            if (message.includes('not found'))
+                return res.status(404).json({ error: message });
+            return res.status(400).json({ error: message });
         }
     }
     async publicListBoxVersions(req, res) {

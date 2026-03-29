@@ -8,6 +8,7 @@ export declare class UpdateCustomerProfileUseCase {
         name: string;
         email: string | null;
         phone: string;
+        imageUrl: string | null;
         role: import("../../../../../domain/users/User").UserRole;
     }>;
 }

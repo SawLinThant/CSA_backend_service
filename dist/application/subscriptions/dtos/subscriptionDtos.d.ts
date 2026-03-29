@@ -8,8 +8,8 @@ export declare const listMySubscriptionsQuerySchema: z.ZodObject<{
     limit: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
     status: z.ZodOptional<z.ZodEnum<{
         active: "active";
-        paused: "paused";
         cancelled: "cancelled";
+        paused: "paused";
     }>>;
 }, z.core.$strip>;
 export declare const pauseSubscriptionSchema: z.ZodObject<{

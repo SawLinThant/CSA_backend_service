@@ -6,11 +6,13 @@ exports.updateCustomerProfileSchema = zod_1.z.object({
     name: zod_1.z.string().min(1).optional(),
     phone: zod_1.z.string().min(6).optional(),
     email: zod_1.z.string().email().optional().nullable(),
+    imageUrl: zod_1.z.string().url().optional().nullable(),
 });
 exports.updateFarmerProfileSchema = zod_1.z.object({
     name: zod_1.z.string().min(1).optional(),
     phone: zod_1.z.string().min(6).optional(),
     email: zod_1.z.string().email().optional().nullable(),
+    imageUrl: zod_1.z.string().url().optional().nullable(),
     farmName: zod_1.z.string().min(1).optional(),
     farmLocation: zod_1.z.string().min(1).optional(),
     farmDescription: zod_1.z.string().optional().nullable(),

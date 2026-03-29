@@ -3,6 +3,7 @@ import {
   registerFarmerSchema,
   loginSchema,
   refreshTokenSchema,
+  sendOtpSchema,
 } from '../../../application/auth/dtos/authDtos';
 
 export const authValidators = {
@@ -10,5 +11,6 @@ export const authValidators = {
   registerFarmer: registerFarmerSchema,
   login: loginSchema,
   refreshToken: refreshTokenSchema,
+  sendOtp: sendOtpSchema,
 };
 

@@ -64,6 +64,25 @@ enum DeliveryStatus {
   failed
 }
 
+enum CapacityStatus {
+  open
+  locked
+  closed
+}
+
+enum ReservationStatus {
+  reserved
+  consumed
+  released
+  expired
+}
+
+enum SubscriptionOrderCycleOutcome {
+  created
+  skipped
+  failed
+}
+
 // ---------------------------------------------------------------------------
 // 1. Core System Entities
 // ---------------------------------------------------------------------------
@@ -73,6 +92,7 @@ model User {
   name      String
   email     String?    @unique
   phone     String     @unique
+  imageUrl  String?    @map("image_url")
   password  String
   role      UserRole
   status    UserStatus @default(active)
@@ -235,6 +255,7 @@ model Box {
 
   versions BoxVersion[]
   plans    SubscriptionPlan[]
+  subscriptions Subscription[]
 
   @@map("boxes")
 }
@@ -251,8 +272,10 @@ model BoxVersion {
 
   box Box @relation(fields: [boxId], references: [id])
 
-  items  BoxItem[]
-  orders Order[]
+  items      BoxItem[]
+  orders     Order[]
+  capacities CapacitySnapshot[]
+  reservations InventoryReservation[]
 
   @@map("box_versions")
 }
@@ -301,20 +324,28 @@ model Subscription {
   id         String   @id @default(cuid())
   customerId String
   planId     String
+  boxId      String?
 
   status SubscriptionStatus @default(active)
 
   startDate        DateTime
   nextDeliveryDate DateTime
+  nextOrderDate    DateTime?
+  lastOrderDate    DateTime?
+  pauseReason      String?
   pauseUntil       DateTime?
 
   createdAt DateTime @default(now())
 
   customer Customer @relation(fields: [customerId], references: [id])
   plan     SubscriptionPlan @relation(fields: [planId], references: [id])
+  box      Box? @relation(fields: [boxId], references: [id])
 
-  orders Order[]
+  orders       Order[]
+  reservations InventoryReservation[]
+  cycleEvents  SubscriptionOrderCycleEvent[]
 
+  @@index([status, nextOrderDate], map: "subscriptions_status_next_order_idx")
   @@map("subscriptions")
 }
 
@@ -327,6 +358,7 @@ model Order {
   customerId     String
   subscriptionId String?
   boxVersionId   String
+  cycleDate      DateTime?
 
   status OrderStatus @default(pending)
 
@@ -345,7 +377,70 @@ model Order {
   payments  Payment[]
   delivery  Delivery?
 
+  @@index([cycleDate], map: "orders_cycle_date_idx")
+  @@unique([subscriptionId, cycleDate], map: "orders_subscription_cycle_key")
   @@map("orders")
+}
+
+model SubscriptionOrderCycleEvent {
+  id             String                        @id @default(cuid())
+  subscriptionId String?                       @map("subscription_id")
+  cycleDate      DateTime?                     @map("cycle_date")
+  referenceDate  DateTime                      @map("reference_date")
+  outcome        SubscriptionOrderCycleOutcome
+  reason         String?
+  attempt        Int                           @default(1)
+  createdAt      DateTime                      @default(now()) @map("created_at")
+
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt], map: "subscription_cycle_events_created_idx")
+  @@index([subscriptionId, cycleDate], map: "subscription_cycle_events_subscription_cycle_idx")
+  @@index([outcome, createdAt], map: "subscription_cycle_events_outcome_created_idx")
+  @@map("subscription_order_cycle_events")
+}
+
+model CapacitySnapshot {
+  id            String         @id @default(cuid())
+  boxVersionId  String         @map("box_version_id")
+  cycleDate     DateTime       @map("cycle_date")
+  maxBoxes      Int            @map("max_boxes")
+  reservedBoxes Int            @default(0) @map("reserved_boxes")
+  consumedBoxes Int            @default(0) @map("consumed_boxes")
+  status        CapacityStatus @default(open)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  boxVersion   BoxVersion             @relation(fields: [boxVersionId], references: [id], onDelete: Cascade)
+  reservations InventoryReservation[]
+
+  @@unique([boxVersionId, cycleDate], map: "capacity_snapshot_version_cycle_key")
+  @@index([cycleDate], map: "capacity_snapshot_cycle_idx")
+  @@map("capacity_snapshots")
+}
+
+model InventoryReservation {
+  id               String            @id @default(cuid())
+  subscriptionId   String            @map("subscription_id")
+  boxVersionId     String            @map("box_version_id")
+  capacitySnapshotId String          @map("capacity_snapshot_id")
+  cycleDate        DateTime          @map("cycle_date")
+  quantity         Int               @default(1)
+  status           ReservationStatus @default(reserved)
+  reason           String?
+  idempotencyKey   String            @unique @map("idempotency_key")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  subscription   Subscription   @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  boxVersion     BoxVersion     @relation(fields: [boxVersionId], references: [id], onDelete: Cascade)
+  capacitySnapshot CapacitySnapshot @relation(fields: [capacitySnapshotId], references: [id], onDelete: Cascade)
+
+  @@unique([subscriptionId, cycleDate], map: "reservation_subscription_cycle_key")
+  @@index([status, cycleDate], map: "reservation_status_cycle_idx")
+  @@map("inventory_reservations")
 }
 
 model OrderItem {

@@ -4,6 +4,10 @@ export type SubscriptionPlanUpdateData = Partial<Pick<SubscriptionPlan, 'name' |
 export interface SubscriptionPlanListFilters {
     boxId?: string;
     active?: boolean;
+    deliveryFrequency?: SubscriptionPlan['deliveryFrequency'];
+    minPrice?: number;
+    maxPrice?: number;
+    sortBy?: 'newest' | 'priceAsc' | 'priceDesc' | 'nameAsc';
 }
 export interface SubscriptionPlanRepository {
     findById(id: string): Promise<SubscriptionPlan | null>;

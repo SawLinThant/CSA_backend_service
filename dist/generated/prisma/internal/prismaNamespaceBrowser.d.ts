@@ -40,6 +40,9 @@ export declare const ModelName: {
     readonly SubscriptionPlan: "SubscriptionPlan";
     readonly Subscription: "Subscription";
     readonly Order: "Order";
+    readonly SubscriptionOrderCycleEvent: "SubscriptionOrderCycleEvent";
+    readonly CapacitySnapshot: "CapacitySnapshot";
+    readonly InventoryReservation: "InventoryReservation";
     readonly OrderItem: "OrderItem";
     readonly Payment: "Payment";
     readonly Delivery: "Delivery";
@@ -58,6 +61,7 @@ export declare const UserScalarFieldEnum: {
     readonly name: "name";
     readonly email: "email";
     readonly phone: "phone";
+    readonly imageUrl: "imageUrl";
     readonly password: "password";
     readonly role: "role";
     readonly status: "status";
@@ -175,9 +179,13 @@ export declare const SubscriptionScalarFieldEnum: {
     readonly id: "id";
     readonly customerId: "customerId";
     readonly planId: "planId";
+    readonly boxId: "boxId";
     readonly status: "status";
     readonly startDate: "startDate";
     readonly nextDeliveryDate: "nextDeliveryDate";
+    readonly nextOrderDate: "nextOrderDate";
+    readonly lastOrderDate: "lastOrderDate";
+    readonly pauseReason: "pauseReason";
     readonly pauseUntil: "pauseUntil";
     readonly createdAt: "createdAt";
 };
@@ -187,12 +195,50 @@ export declare const OrderScalarFieldEnum: {
     readonly customerId: "customerId";
     readonly subscriptionId: "subscriptionId";
     readonly boxVersionId: "boxVersionId";
+    readonly cycleDate: "cycleDate";
     readonly status: "status";
     readonly totalPrice: "totalPrice";
     readonly deliveryDate: "deliveryDate";
     readonly createdAt: "createdAt";
 };
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum];
+export declare const SubscriptionOrderCycleEventScalarFieldEnum: {
+    readonly id: "id";
+    readonly subscriptionId: "subscriptionId";
+    readonly cycleDate: "cycleDate";
+    readonly referenceDate: "referenceDate";
+    readonly outcome: "outcome";
+    readonly reason: "reason";
+    readonly attempt: "attempt";
+    readonly createdAt: "createdAt";
+};
+export type SubscriptionOrderCycleEventScalarFieldEnum = (typeof SubscriptionOrderCycleEventScalarFieldEnum)[keyof typeof SubscriptionOrderCycleEventScalarFieldEnum];
+export declare const CapacitySnapshotScalarFieldEnum: {
+    readonly id: "id";
+    readonly boxVersionId: "boxVersionId";
+    readonly cycleDate: "cycleDate";
+    readonly maxBoxes: "maxBoxes";
+    readonly reservedBoxes: "reservedBoxes";
+    readonly consumedBoxes: "consumedBoxes";
+    readonly status: "status";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type CapacitySnapshotScalarFieldEnum = (typeof CapacitySnapshotScalarFieldEnum)[keyof typeof CapacitySnapshotScalarFieldEnum];
+export declare const InventoryReservationScalarFieldEnum: {
+    readonly id: "id";
+    readonly subscriptionId: "subscriptionId";
+    readonly boxVersionId: "boxVersionId";
+    readonly capacitySnapshotId: "capacitySnapshotId";
+    readonly cycleDate: "cycleDate";
+    readonly quantity: "quantity";
+    readonly status: "status";
+    readonly reason: "reason";
+    readonly idempotencyKey: "idempotencyKey";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type InventoryReservationScalarFieldEnum = (typeof InventoryReservationScalarFieldEnum)[keyof typeof InventoryReservationScalarFieldEnum];
 export declare const OrderItemScalarFieldEnum: {
     readonly id: "id";
     readonly orderId: "orderId";

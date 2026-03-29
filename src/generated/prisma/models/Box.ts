@@ -192,6 +192,7 @@ export type BoxWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Box"> | Date | string
   versions?: Prisma.BoxVersionListRelationFilter
   plans?: Prisma.SubscriptionPlanListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
 }
 
 export type BoxOrderByWithRelationInput = {
@@ -203,6 +204,7 @@ export type BoxOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   versions?: Prisma.BoxVersionOrderByRelationAggregateInput
   plans?: Prisma.SubscriptionPlanOrderByRelationAggregateInput
+  subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
 }
 
 export type BoxWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +219,7 @@ export type BoxWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Box"> | Date | string
   versions?: Prisma.BoxVersionListRelationFilter
   plans?: Prisma.SubscriptionPlanListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
 }, "id">
 
 export type BoxOrderByWithAggregationInput = {
@@ -252,6 +255,7 @@ export type BoxCreateInput = {
   createdAt?: Date | string
   versions?: Prisma.BoxVersionCreateNestedManyWithoutBoxInput
   plans?: Prisma.SubscriptionPlanCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutBoxInput
 }
 
 export type BoxUncheckedCreateInput = {
@@ -263,6 +267,7 @@ export type BoxUncheckedCreateInput = {
   createdAt?: Date | string
   versions?: Prisma.BoxVersionUncheckedCreateNestedManyWithoutBoxInput
   plans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxUpdateInput = {
@@ -274,6 +279,7 @@ export type BoxUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.BoxVersionUpdateManyWithoutBoxNestedInput
   plans?: Prisma.SubscriptionPlanUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxUncheckedUpdateInput = {
@@ -285,6 +291,7 @@ export type BoxUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.BoxVersionUncheckedUpdateManyWithoutBoxNestedInput
   plans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxCreateManyInput = {
@@ -346,6 +353,11 @@ export type BoxScalarRelationFilter = {
   isNot?: Prisma.BoxWhereInput
 }
 
+export type BoxNullableScalarRelationFilter = {
+  is?: Prisma.BoxWhereInput | null
+  isNot?: Prisma.BoxWhereInput | null
+}
+
 export type BoxCreateNestedOneWithoutVersionsInput = {
   create?: Prisma.XOR<Prisma.BoxCreateWithoutVersionsInput, Prisma.BoxUncheckedCreateWithoutVersionsInput>
   connectOrCreate?: Prisma.BoxCreateOrConnectWithoutVersionsInput
@@ -374,6 +386,22 @@ export type BoxUpdateOneRequiredWithoutPlansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoxUpdateToOneWithWhereWithoutPlansInput, Prisma.BoxUpdateWithoutPlansInput>, Prisma.BoxUncheckedUpdateWithoutPlansInput>
 }
 
+export type BoxCreateNestedOneWithoutSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.BoxCreateWithoutSubscriptionsInput, Prisma.BoxUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.BoxCreateOrConnectWithoutSubscriptionsInput
+  connect?: Prisma.BoxWhereUniqueInput
+}
+
+export type BoxUpdateOneWithoutSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxCreateWithoutSubscriptionsInput, Prisma.BoxUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.BoxCreateOrConnectWithoutSubscriptionsInput
+  upsert?: Prisma.BoxUpsertWithoutSubscriptionsInput
+  disconnect?: Prisma.BoxWhereInput | boolean
+  delete?: Prisma.BoxWhereInput | boolean
+  connect?: Prisma.BoxWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoxUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.BoxUpdateWithoutSubscriptionsInput>, Prisma.BoxUncheckedUpdateWithoutSubscriptionsInput>
+}
+
 export type BoxCreateWithoutVersionsInput = {
   id?: string
   name: string
@@ -382,6 +410,7 @@ export type BoxCreateWithoutVersionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   plans?: Prisma.SubscriptionPlanCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutBoxInput
 }
 
 export type BoxUncheckedCreateWithoutVersionsInput = {
@@ -392,6 +421,7 @@ export type BoxUncheckedCreateWithoutVersionsInput = {
   isActive?: boolean
   createdAt?: Date | string
   plans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxCreateOrConnectWithoutVersionsInput = {
@@ -418,6 +448,7 @@ export type BoxUpdateWithoutVersionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plans?: Prisma.SubscriptionPlanUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxUncheckedUpdateWithoutVersionsInput = {
@@ -428,6 +459,7 @@ export type BoxUncheckedUpdateWithoutVersionsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxCreateWithoutPlansInput = {
@@ -438,6 +470,7 @@ export type BoxCreateWithoutPlansInput = {
   isActive?: boolean
   createdAt?: Date | string
   versions?: Prisma.BoxVersionCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutBoxInput
 }
 
 export type BoxUncheckedCreateWithoutPlansInput = {
@@ -448,6 +481,7 @@ export type BoxUncheckedCreateWithoutPlansInput = {
   isActive?: boolean
   createdAt?: Date | string
   versions?: Prisma.BoxVersionUncheckedCreateNestedManyWithoutBoxInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutBoxInput
 }
 
 export type BoxCreateOrConnectWithoutPlansInput = {
@@ -474,6 +508,7 @@ export type BoxUpdateWithoutPlansInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.BoxVersionUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutBoxNestedInput
 }
 
 export type BoxUncheckedUpdateWithoutPlansInput = {
@@ -484,6 +519,67 @@ export type BoxUncheckedUpdateWithoutPlansInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.BoxVersionUncheckedUpdateManyWithoutBoxNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutBoxNestedInput
+}
+
+export type BoxCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  imageUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  versions?: Prisma.BoxVersionCreateNestedManyWithoutBoxInput
+  plans?: Prisma.SubscriptionPlanCreateNestedManyWithoutBoxInput
+}
+
+export type BoxUncheckedCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  imageUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  versions?: Prisma.BoxVersionUncheckedCreateNestedManyWithoutBoxInput
+  plans?: Prisma.SubscriptionPlanUncheckedCreateNestedManyWithoutBoxInput
+}
+
+export type BoxCreateOrConnectWithoutSubscriptionsInput = {
+  where: Prisma.BoxWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoxCreateWithoutSubscriptionsInput, Prisma.BoxUncheckedCreateWithoutSubscriptionsInput>
+}
+
+export type BoxUpsertWithoutSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.BoxUpdateWithoutSubscriptionsInput, Prisma.BoxUncheckedUpdateWithoutSubscriptionsInput>
+  create: Prisma.XOR<Prisma.BoxCreateWithoutSubscriptionsInput, Prisma.BoxUncheckedCreateWithoutSubscriptionsInput>
+  where?: Prisma.BoxWhereInput
+}
+
+export type BoxUpdateToOneWithWhereWithoutSubscriptionsInput = {
+  where?: Prisma.BoxWhereInput
+  data: Prisma.XOR<Prisma.BoxUpdateWithoutSubscriptionsInput, Prisma.BoxUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type BoxUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.BoxVersionUpdateManyWithoutBoxNestedInput
+  plans?: Prisma.SubscriptionPlanUpdateManyWithoutBoxNestedInput
+}
+
+export type BoxUncheckedUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.BoxVersionUncheckedUpdateManyWithoutBoxNestedInput
+  plans?: Prisma.SubscriptionPlanUncheckedUpdateManyWithoutBoxNestedInput
 }
 
 
@@ -494,11 +590,13 @@ export type BoxUncheckedUpdateWithoutPlansInput = {
 export type BoxCountOutputType = {
   versions: number
   plans: number
+  subscriptions: number
 }
 
 export type BoxCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   versions?: boolean | BoxCountOutputTypeCountVersionsArgs
   plans?: boolean | BoxCountOutputTypeCountPlansArgs
+  subscriptions?: boolean | BoxCountOutputTypeCountSubscriptionsArgs
 }
 
 /**
@@ -525,6 +623,13 @@ export type BoxCountOutputTypeCountPlansArgs<ExtArgs extends runtime.Types.Exten
   where?: Prisma.SubscriptionPlanWhereInput
 }
 
+/**
+ * BoxCountOutputType without action
+ */
+export type BoxCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionWhereInput
+}
+
 
 export type BoxSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -535,6 +640,7 @@ export type BoxSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   createdAt?: boolean
   versions?: boolean | Prisma.Box$versionsArgs<ExtArgs>
   plans?: boolean | Prisma.Box$plansArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.Box$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.BoxCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["box"]>
 
@@ -569,6 +675,7 @@ export type BoxOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
 export type BoxInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   versions?: boolean | Prisma.Box$versionsArgs<ExtArgs>
   plans?: boolean | Prisma.Box$plansArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.Box$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.BoxCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoxIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -579,6 +686,7 @@ export type $BoxPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   objects: {
     versions: Prisma.$BoxVersionPayload<ExtArgs>[]
     plans: Prisma.$SubscriptionPlanPayload<ExtArgs>[]
+    subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -983,6 +1091,7 @@ export interface Prisma__BoxClient<T, Null = never, ExtArgs extends runtime.Type
   readonly [Symbol.toStringTag]: "PrismaPromise"
   versions<T extends Prisma.Box$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Box$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   plans<T extends Prisma.Box$plansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Box$plansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscriptions<T extends Prisma.Box$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Box$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1456,6 +1565,30 @@ export type Box$plansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionPlanScalarFieldEnum | Prisma.SubscriptionPlanScalarFieldEnum[]
+}
+
+/**
+ * Box.subscriptions
+ */
+export type Box$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
 }
 
 /**

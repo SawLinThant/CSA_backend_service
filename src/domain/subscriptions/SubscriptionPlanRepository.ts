@@ -8,6 +8,10 @@ export type SubscriptionPlanUpdateData = Partial<
 export interface SubscriptionPlanListFilters {
   boxId?: string;
   active?: boolean;
+  deliveryFrequency?: SubscriptionPlan['deliveryFrequency'];
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy?: 'newest' | 'priceAsc' | 'priceDesc' | 'nameAsc';
 }
 
 export interface SubscriptionPlanRepository {

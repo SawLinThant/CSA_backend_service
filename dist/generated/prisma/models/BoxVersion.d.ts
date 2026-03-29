@@ -149,6 +149,8 @@ export type BoxVersionWhereInput = {
     box?: Prisma.XOR<Prisma.BoxScalarRelationFilter, Prisma.BoxWhereInput>;
     items?: Prisma.BoxItemListRelationFilter;
     orders?: Prisma.OrderListRelationFilter;
+    capacities?: Prisma.CapacitySnapshotListRelationFilter;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
 };
 export type BoxVersionOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -160,6 +162,8 @@ export type BoxVersionOrderByWithRelationInput = {
     box?: Prisma.BoxOrderByWithRelationInput;
     items?: Prisma.BoxItemOrderByRelationAggregateInput;
     orders?: Prisma.OrderOrderByRelationAggregateInput;
+    capacities?: Prisma.CapacitySnapshotOrderByRelationAggregateInput;
+    reservations?: Prisma.InventoryReservationOrderByRelationAggregateInput;
 };
 export type BoxVersionWhereUniqueInput = Prisma.AtLeast<{
     id?: string;
@@ -174,6 +178,8 @@ export type BoxVersionWhereUniqueInput = Prisma.AtLeast<{
     box?: Prisma.XOR<Prisma.BoxScalarRelationFilter, Prisma.BoxWhereInput>;
     items?: Prisma.BoxItemListRelationFilter;
     orders?: Prisma.OrderListRelationFilter;
+    capacities?: Prisma.CapacitySnapshotListRelationFilter;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
 }, "id">;
 export type BoxVersionOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -206,6 +212,8 @@ export type BoxVersionCreateInput = {
     box: Prisma.BoxCreateNestedOneWithoutVersionsInput;
     items?: Prisma.BoxItemCreateNestedManyWithoutBoxVersionInput;
     orders?: Prisma.OrderCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionUncheckedCreateInput = {
     id?: string;
@@ -216,6 +224,8 @@ export type BoxVersionUncheckedCreateInput = {
     createdAt?: Date | string;
     items?: Prisma.BoxItemUncheckedCreateNestedManyWithoutBoxVersionInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -226,6 +236,8 @@ export type BoxVersionUpdateInput = {
     box?: Prisma.BoxUpdateOneRequiredWithoutVersionsNestedInput;
     items?: Prisma.BoxItemUpdateManyWithoutBoxVersionNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -236,6 +248,8 @@ export type BoxVersionUncheckedUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     items?: Prisma.BoxItemUncheckedUpdateManyWithoutBoxVersionNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionCreateManyInput = {
     id?: string;
@@ -358,6 +372,30 @@ export type BoxVersionUpdateOneRequiredWithoutOrdersNestedInput = {
     connect?: Prisma.BoxVersionWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.BoxVersionUpdateToOneWithWhereWithoutOrdersInput, Prisma.BoxVersionUpdateWithoutOrdersInput>, Prisma.BoxVersionUncheckedUpdateWithoutOrdersInput>;
 };
+export type BoxVersionCreateNestedOneWithoutCapacitiesInput = {
+    create?: Prisma.XOR<Prisma.BoxVersionCreateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedCreateWithoutCapacitiesInput>;
+    connectOrCreate?: Prisma.BoxVersionCreateOrConnectWithoutCapacitiesInput;
+    connect?: Prisma.BoxVersionWhereUniqueInput;
+};
+export type BoxVersionUpdateOneRequiredWithoutCapacitiesNestedInput = {
+    create?: Prisma.XOR<Prisma.BoxVersionCreateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedCreateWithoutCapacitiesInput>;
+    connectOrCreate?: Prisma.BoxVersionCreateOrConnectWithoutCapacitiesInput;
+    upsert?: Prisma.BoxVersionUpsertWithoutCapacitiesInput;
+    connect?: Prisma.BoxVersionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.BoxVersionUpdateToOneWithWhereWithoutCapacitiesInput, Prisma.BoxVersionUpdateWithoutCapacitiesInput>, Prisma.BoxVersionUncheckedUpdateWithoutCapacitiesInput>;
+};
+export type BoxVersionCreateNestedOneWithoutReservationsInput = {
+    create?: Prisma.XOR<Prisma.BoxVersionCreateWithoutReservationsInput, Prisma.BoxVersionUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.BoxVersionCreateOrConnectWithoutReservationsInput;
+    connect?: Prisma.BoxVersionWhereUniqueInput;
+};
+export type BoxVersionUpdateOneRequiredWithoutReservationsNestedInput = {
+    create?: Prisma.XOR<Prisma.BoxVersionCreateWithoutReservationsInput, Prisma.BoxVersionUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.BoxVersionCreateOrConnectWithoutReservationsInput;
+    upsert?: Prisma.BoxVersionUpsertWithoutReservationsInput;
+    connect?: Prisma.BoxVersionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.BoxVersionUpdateToOneWithWhereWithoutReservationsInput, Prisma.BoxVersionUpdateWithoutReservationsInput>, Prisma.BoxVersionUncheckedUpdateWithoutReservationsInput>;
+};
 export type BoxVersionCreateWithoutBoxInput = {
     id?: string;
     versionName: string;
@@ -366,6 +404,8 @@ export type BoxVersionCreateWithoutBoxInput = {
     createdAt?: Date | string;
     items?: Prisma.BoxItemCreateNestedManyWithoutBoxVersionInput;
     orders?: Prisma.OrderCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionUncheckedCreateWithoutBoxInput = {
     id?: string;
@@ -375,6 +415,8 @@ export type BoxVersionUncheckedCreateWithoutBoxInput = {
     createdAt?: Date | string;
     items?: Prisma.BoxItemUncheckedCreateNestedManyWithoutBoxVersionInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionCreateOrConnectWithoutBoxInput = {
     where: Prisma.BoxVersionWhereUniqueInput;
@@ -416,6 +458,8 @@ export type BoxVersionCreateWithoutItemsInput = {
     createdAt?: Date | string;
     box: Prisma.BoxCreateNestedOneWithoutVersionsInput;
     orders?: Prisma.OrderCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionUncheckedCreateWithoutItemsInput = {
     id?: string;
@@ -425,6 +469,8 @@ export type BoxVersionUncheckedCreateWithoutItemsInput = {
     endDate?: Date | string | null;
     createdAt?: Date | string;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionCreateOrConnectWithoutItemsInput = {
     where: Prisma.BoxVersionWhereUniqueInput;
@@ -447,6 +493,8 @@ export type BoxVersionUpdateWithoutItemsInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     box?: Prisma.BoxUpdateOneRequiredWithoutVersionsNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionUncheckedUpdateWithoutItemsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -456,6 +504,8 @@ export type BoxVersionUncheckedUpdateWithoutItemsInput = {
     endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionCreateWithoutOrdersInput = {
     id?: string;
@@ -465,6 +515,8 @@ export type BoxVersionCreateWithoutOrdersInput = {
     createdAt?: Date | string;
     box: Prisma.BoxCreateNestedOneWithoutVersionsInput;
     items?: Prisma.BoxItemCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionUncheckedCreateWithoutOrdersInput = {
     id?: string;
@@ -474,6 +526,8 @@ export type BoxVersionUncheckedCreateWithoutOrdersInput = {
     endDate?: Date | string | null;
     createdAt?: Date | string;
     items?: Prisma.BoxItemUncheckedCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutBoxVersionInput;
 };
 export type BoxVersionCreateOrConnectWithoutOrdersInput = {
     where: Prisma.BoxVersionWhereUniqueInput;
@@ -496,6 +550,8 @@ export type BoxVersionUpdateWithoutOrdersInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     box?: Prisma.BoxUpdateOneRequiredWithoutVersionsNestedInput;
     items?: Prisma.BoxItemUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionUncheckedUpdateWithoutOrdersInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -505,6 +561,122 @@ export type BoxVersionUncheckedUpdateWithoutOrdersInput = {
     endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     items?: Prisma.BoxItemUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutBoxVersionNestedInput;
+};
+export type BoxVersionCreateWithoutCapacitiesInput = {
+    id?: string;
+    versionName: string;
+    startDate: Date | string;
+    endDate?: Date | string | null;
+    createdAt?: Date | string;
+    box: Prisma.BoxCreateNestedOneWithoutVersionsInput;
+    items?: Prisma.BoxItemCreateNestedManyWithoutBoxVersionInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutBoxVersionInput;
+};
+export type BoxVersionUncheckedCreateWithoutCapacitiesInput = {
+    id?: string;
+    boxId: string;
+    versionName: string;
+    startDate: Date | string;
+    endDate?: Date | string | null;
+    createdAt?: Date | string;
+    items?: Prisma.BoxItemUncheckedCreateNestedManyWithoutBoxVersionInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBoxVersionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutBoxVersionInput;
+};
+export type BoxVersionCreateOrConnectWithoutCapacitiesInput = {
+    where: Prisma.BoxVersionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.BoxVersionCreateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedCreateWithoutCapacitiesInput>;
+};
+export type BoxVersionUpsertWithoutCapacitiesInput = {
+    update: Prisma.XOR<Prisma.BoxVersionUpdateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedUpdateWithoutCapacitiesInput>;
+    create: Prisma.XOR<Prisma.BoxVersionCreateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedCreateWithoutCapacitiesInput>;
+    where?: Prisma.BoxVersionWhereInput;
+};
+export type BoxVersionUpdateToOneWithWhereWithoutCapacitiesInput = {
+    where?: Prisma.BoxVersionWhereInput;
+    data: Prisma.XOR<Prisma.BoxVersionUpdateWithoutCapacitiesInput, Prisma.BoxVersionUncheckedUpdateWithoutCapacitiesInput>;
+};
+export type BoxVersionUpdateWithoutCapacitiesInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    versionName?: Prisma.StringFieldUpdateOperationsInput | string;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    box?: Prisma.BoxUpdateOneRequiredWithoutVersionsNestedInput;
+    items?: Prisma.BoxItemUpdateManyWithoutBoxVersionNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutBoxVersionNestedInput;
+};
+export type BoxVersionUncheckedUpdateWithoutCapacitiesInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.StringFieldUpdateOperationsInput | string;
+    versionName?: Prisma.StringFieldUpdateOperationsInput | string;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    items?: Prisma.BoxItemUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutBoxVersionNestedInput;
+};
+export type BoxVersionCreateWithoutReservationsInput = {
+    id?: string;
+    versionName: string;
+    startDate: Date | string;
+    endDate?: Date | string | null;
+    createdAt?: Date | string;
+    box: Prisma.BoxCreateNestedOneWithoutVersionsInput;
+    items?: Prisma.BoxItemCreateNestedManyWithoutBoxVersionInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotCreateNestedManyWithoutBoxVersionInput;
+};
+export type BoxVersionUncheckedCreateWithoutReservationsInput = {
+    id?: string;
+    boxId: string;
+    versionName: string;
+    startDate: Date | string;
+    endDate?: Date | string | null;
+    createdAt?: Date | string;
+    items?: Prisma.BoxItemUncheckedCreateNestedManyWithoutBoxVersionInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBoxVersionInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput;
+};
+export type BoxVersionCreateOrConnectWithoutReservationsInput = {
+    where: Prisma.BoxVersionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.BoxVersionCreateWithoutReservationsInput, Prisma.BoxVersionUncheckedCreateWithoutReservationsInput>;
+};
+export type BoxVersionUpsertWithoutReservationsInput = {
+    update: Prisma.XOR<Prisma.BoxVersionUpdateWithoutReservationsInput, Prisma.BoxVersionUncheckedUpdateWithoutReservationsInput>;
+    create: Prisma.XOR<Prisma.BoxVersionCreateWithoutReservationsInput, Prisma.BoxVersionUncheckedCreateWithoutReservationsInput>;
+    where?: Prisma.BoxVersionWhereInput;
+};
+export type BoxVersionUpdateToOneWithWhereWithoutReservationsInput = {
+    where?: Prisma.BoxVersionWhereInput;
+    data: Prisma.XOR<Prisma.BoxVersionUpdateWithoutReservationsInput, Prisma.BoxVersionUncheckedUpdateWithoutReservationsInput>;
+};
+export type BoxVersionUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    versionName?: Prisma.StringFieldUpdateOperationsInput | string;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    box?: Prisma.BoxUpdateOneRequiredWithoutVersionsNestedInput;
+    items?: Prisma.BoxItemUpdateManyWithoutBoxVersionNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput;
+};
+export type BoxVersionUncheckedUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.StringFieldUpdateOperationsInput | string;
+    versionName?: Prisma.StringFieldUpdateOperationsInput | string;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    items?: Prisma.BoxItemUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionCreateManyBoxInput = {
     id?: string;
@@ -521,6 +693,8 @@ export type BoxVersionUpdateWithoutBoxInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     items?: Prisma.BoxItemUpdateManyWithoutBoxVersionNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionUncheckedUpdateWithoutBoxInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -530,6 +704,8 @@ export type BoxVersionUncheckedUpdateWithoutBoxInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     items?: Prisma.BoxItemUncheckedUpdateManyWithoutBoxVersionNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    capacities?: Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutBoxVersionNestedInput;
 };
 export type BoxVersionUncheckedUpdateManyWithoutBoxInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -544,10 +720,14 @@ export type BoxVersionUncheckedUpdateManyWithoutBoxInput = {
 export type BoxVersionCountOutputType = {
     items: number;
     orders: number;
+    capacities: number;
+    reservations: number;
 };
 export type BoxVersionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     items?: boolean | BoxVersionCountOutputTypeCountItemsArgs;
     orders?: boolean | BoxVersionCountOutputTypeCountOrdersArgs;
+    capacities?: boolean | BoxVersionCountOutputTypeCountCapacitiesArgs;
+    reservations?: boolean | BoxVersionCountOutputTypeCountReservationsArgs;
 };
 /**
  * BoxVersionCountOutputType without action
@@ -570,6 +750,18 @@ export type BoxVersionCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Type
 export type BoxVersionCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.OrderWhereInput;
 };
+/**
+ * BoxVersionCountOutputType without action
+ */
+export type BoxVersionCountOutputTypeCountCapacitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.CapacitySnapshotWhereInput;
+};
+/**
+ * BoxVersionCountOutputType without action
+ */
+export type BoxVersionCountOutputTypeCountReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.InventoryReservationWhereInput;
+};
 export type BoxVersionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     boxId?: boolean;
@@ -580,6 +772,8 @@ export type BoxVersionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
     box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
     items?: boolean | Prisma.BoxVersion$itemsArgs<ExtArgs>;
     orders?: boolean | Prisma.BoxVersion$ordersArgs<ExtArgs>;
+    capacities?: boolean | Prisma.BoxVersion$capacitiesArgs<ExtArgs>;
+    reservations?: boolean | Prisma.BoxVersion$reservationsArgs<ExtArgs>;
     _count?: boolean | Prisma.BoxVersionCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["boxVersion"]>;
 export type BoxVersionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -613,6 +807,8 @@ export type BoxVersionInclude<ExtArgs extends runtime.Types.Extensions.InternalA
     box?: boolean | Prisma.BoxDefaultArgs<ExtArgs>;
     items?: boolean | Prisma.BoxVersion$itemsArgs<ExtArgs>;
     orders?: boolean | Prisma.BoxVersion$ordersArgs<ExtArgs>;
+    capacities?: boolean | Prisma.BoxVersion$capacitiesArgs<ExtArgs>;
+    reservations?: boolean | Prisma.BoxVersion$reservationsArgs<ExtArgs>;
     _count?: boolean | Prisma.BoxVersionCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type BoxVersionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -627,6 +823,8 @@ export type $BoxVersionPayload<ExtArgs extends runtime.Types.Extensions.Internal
         box: Prisma.$BoxPayload<ExtArgs>;
         items: Prisma.$BoxItemPayload<ExtArgs>[];
         orders: Prisma.$OrderPayload<ExtArgs>[];
+        capacities: Prisma.$CapacitySnapshotPayload<ExtArgs>[];
+        reservations: Prisma.$InventoryReservationPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
@@ -967,6 +1165,8 @@ export interface Prisma__BoxVersionClient<T, Null = never, ExtArgs extends runti
     box<T extends Prisma.BoxDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxDefaultArgs<ExtArgs>>): Prisma.Prisma__BoxClient<runtime.Types.Result.GetResult<Prisma.$BoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     items<T extends Prisma.BoxVersion$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxVersion$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     orders<T extends Prisma.BoxVersion$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxVersion$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    capacities<T extends Prisma.BoxVersion$capacitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxVersion$capacitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    reservations<T extends Prisma.BoxVersion$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxVersion$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1426,6 +1626,52 @@ export type BoxVersion$ordersArgs<ExtArgs extends runtime.Types.Extensions.Inter
     take?: number;
     skip?: number;
     distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+/**
+ * BoxVersion.capacities
+ */
+export type BoxVersion$capacitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    where?: Prisma.CapacitySnapshotWhereInput;
+    orderBy?: Prisma.CapacitySnapshotOrderByWithRelationInput | Prisma.CapacitySnapshotOrderByWithRelationInput[];
+    cursor?: Prisma.CapacitySnapshotWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.CapacitySnapshotScalarFieldEnum | Prisma.CapacitySnapshotScalarFieldEnum[];
+};
+/**
+ * BoxVersion.reservations
+ */
+export type BoxVersion$reservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryReservation
+     */
+    select?: Prisma.InventoryReservationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the InventoryReservation
+     */
+    omit?: Prisma.InventoryReservationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.InventoryReservationInclude<ExtArgs> | null;
+    where?: Prisma.InventoryReservationWhereInput;
+    orderBy?: Prisma.InventoryReservationOrderByWithRelationInput | Prisma.InventoryReservationOrderByWithRelationInput[];
+    cursor?: Prisma.InventoryReservationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.InventoryReservationScalarFieldEnum | Prisma.InventoryReservationScalarFieldEnum[];
 };
 /**
  * BoxVersion without action

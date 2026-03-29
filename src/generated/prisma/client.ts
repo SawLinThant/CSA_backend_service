@@ -110,6 +110,21 @@ export type Subscription = Prisma.SubscriptionModel
  */
 export type Order = Prisma.OrderModel
 /**
+ * Model SubscriptionOrderCycleEvent
+ * 
+ */
+export type SubscriptionOrderCycleEvent = Prisma.SubscriptionOrderCycleEventModel
+/**
+ * Model CapacitySnapshot
+ * 
+ */
+export type CapacitySnapshot = Prisma.CapacitySnapshotModel
+/**
+ * Model InventoryReservation
+ * 
+ */
+export type InventoryReservation = Prisma.InventoryReservationModel
+/**
  * Model OrderItem
  * 
  */

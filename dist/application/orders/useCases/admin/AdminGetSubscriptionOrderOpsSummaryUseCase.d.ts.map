@@ -1,0 +1,1 @@
+{"version":3,"file":"AdminGetSubscriptionOrderOpsSummaryUseCase.d.ts","sourceRoot":"","sources":["../../../../../src/application/orders/useCases/admin/AdminGetSubscriptionOrderOpsSummaryUseCase.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,qCAAqC,EAAE,MAAM,yBAAyB,CAAC;AAGrF,qBAAa,0CAA0C;IAC/C,OAAO,CAAC,KAAK,EAAE,qCAAqC;;;;;;;;;;;;;CA2D3D"}

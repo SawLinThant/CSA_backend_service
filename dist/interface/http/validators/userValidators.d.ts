@@ -3,11 +3,13 @@ export declare const userValidators: {
         name: import("zod").ZodOptional<import("zod").ZodString>;
         phone: import("zod").ZodOptional<import("zod").ZodString>;
         email: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
+        imageUrl: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
     }, import("zod/v4/core").$strip>;
     updateFarmerProfile: import("zod").ZodObject<{
         name: import("zod").ZodOptional<import("zod").ZodString>;
         phone: import("zod").ZodOptional<import("zod").ZodString>;
         email: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
+        imageUrl: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
         farmName: import("zod").ZodOptional<import("zod").ZodString>;
         farmLocation: import("zod").ZodOptional<import("zod").ZodString>;
         farmDescription: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
@@ -43,6 +45,22 @@ export declare const userValidators: {
         limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
         name: import("zod").ZodOptional<import("zod").ZodString>;
         phone: import("zod").ZodOptional<import("zod").ZodString>;
+    }, import("zod/v4/core").$strip>;
+    createAddress: import("zod").ZodObject<{
+        addressLine: import("zod").ZodString;
+        city: import("zod").ZodString;
+        state: import("zod").ZodString;
+        postalCode: import("zod").ZodString;
+        country: import("zod").ZodString;
+        isDefault: import("zod").ZodOptional<import("zod").ZodBoolean>;
+    }, import("zod/v4/core").$strip>;
+    updateAddress: import("zod").ZodObject<{
+        addressLine: import("zod").ZodOptional<import("zod").ZodString>;
+        city: import("zod").ZodOptional<import("zod").ZodString>;
+        state: import("zod").ZodOptional<import("zod").ZodString>;
+        postalCode: import("zod").ZodOptional<import("zod").ZodString>;
+        country: import("zod").ZodOptional<import("zod").ZodString>;
+        isDefault: import("zod").ZodOptional<import("zod").ZodBoolean>;
     }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=userValidators.d.ts.map

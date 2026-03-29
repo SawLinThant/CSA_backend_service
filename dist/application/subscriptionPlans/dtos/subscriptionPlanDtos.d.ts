@@ -25,6 +25,18 @@ export declare const listSubscriptionPlansQuerySchema: z.ZodObject<{
     limit: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
     boxId: z.ZodOptional<z.ZodString>;
     active: z.ZodOptional<z.ZodCoercedBoolean<unknown>>;
+    deliveryFrequency: z.ZodOptional<z.ZodEnum<{
+        weekly: "weekly";
+        monthly: "monthly";
+    }>>;
+    minPrice: z.ZodOptional<z.ZodCoercedNumber<unknown>>;
+    maxPrice: z.ZodOptional<z.ZodCoercedNumber<unknown>>;
+    sortBy: z.ZodOptional<z.ZodEnum<{
+        newest: "newest";
+        priceAsc: "priceAsc";
+        priceDesc: "priceDesc";
+        nameAsc: "nameAsc";
+    }>>;
 }, z.core.$strip>;
 export type CreateSubscriptionPlanInput = z.infer<typeof createSubscriptionPlanSchema>;
 export type UpdateSubscriptionPlanInput = z.infer<typeof updateSubscriptionPlanSchema>;

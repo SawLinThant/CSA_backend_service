@@ -2,6 +2,7 @@ import type { Request, Response } from 'express';
 import { PrismaFarmerRepository } from '../../../infrastructure/db/repositories/PrismaFarmerRepository';
 import { PrismaProductRepository } from '../../../infrastructure/db/repositories/PrismaProductRepository';
 import { PrismaHarvestRepository } from '../../../infrastructure/db/repositories/PrismaHarvestRepository';
+import { PrismaUserRepository } from '../../../infrastructure/db/repositories/PrismaUserRepository';
 import { FarmerCreateHarvestUseCase } from '../../../application/harvests/useCases/farmer/FarmerCreateHarvestUseCase';
 import { FarmerListMyHarvestsUseCase } from '../../../application/harvests/useCases/farmer/FarmerListMyHarvestsUseCase';
 import { FarmerGetHarvestUseCase } from '../../../application/harvests/useCases/farmer/FarmerGetHarvestUseCase';
@@ -15,6 +16,7 @@ import { harvestValidators } from '../validators/harvestValidators';
 const farmerRepository = new PrismaFarmerRepository();
 const productRepository = new PrismaProductRepository();
 const harvestRepository = new PrismaHarvestRepository();
+const userRepository = new PrismaUserRepository();
 
 const farmerCreateHarvestUseCase = new FarmerCreateHarvestUseCase(
   farmerRepository,
@@ -24,7 +26,12 @@ const farmerCreateHarvestUseCase = new FarmerCreateHarvestUseCase(
 const farmerListMyHarvestsUseCase = new FarmerListMyHarvestsUseCase(farmerRepository, harvestRepository);
 const farmerGetHarvestUseCase = new FarmerGetHarvestUseCase(farmerRepository, harvestRepository);
 const farmerUpdateHarvestUseCase = new FarmerUpdateHarvestUseCase(farmerRepository, harvestRepository);
-const adminListHarvestsUseCase = new AdminListHarvestsUseCase(harvestRepository);
+const adminListHarvestsUseCase = new AdminListHarvestsUseCase(
+  harvestRepository,
+  farmerRepository,
+  productRepository,
+  userRepository,
+);
 const adminGetHarvestUseCase = new AdminGetHarvestUseCase(harvestRepository);
 const adminApproveHarvestUseCase = new AdminApproveHarvestUseCase(harvestRepository);
 const adminRejectHarvestUseCase = new AdminRejectHarvestUseCase(harvestRepository);

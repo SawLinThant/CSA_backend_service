@@ -3,11 +3,13 @@ export declare const updateCustomerProfileSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     phone: z.ZodOptional<z.ZodString>;
     email: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    imageUrl: z.ZodNullable<z.ZodOptional<z.ZodString>>;
 }, z.core.$strip>;
 export declare const updateFarmerProfileSchema: z.ZodObject<{
     name: z.ZodOptional<z.ZodString>;
     phone: z.ZodOptional<z.ZodString>;
     email: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    imageUrl: z.ZodNullable<z.ZodOptional<z.ZodString>>;
     farmName: z.ZodOptional<z.ZodString>;
     farmLocation: z.ZodOptional<z.ZodString>;
     farmDescription: z.ZodNullable<z.ZodOptional<z.ZodString>>;

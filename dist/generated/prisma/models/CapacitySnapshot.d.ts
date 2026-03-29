@@ -1,0 +1,1513 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
+import type * as Prisma from "../internal/prismaNamespace";
+/**
+ * Model CapacitySnapshot
+ *
+ */
+export type CapacitySnapshotModel = runtime.Types.Result.DefaultSelection<Prisma.$CapacitySnapshotPayload>;
+export type AggregateCapacitySnapshot = {
+    _count: CapacitySnapshotCountAggregateOutputType | null;
+    _avg: CapacitySnapshotAvgAggregateOutputType | null;
+    _sum: CapacitySnapshotSumAggregateOutputType | null;
+    _min: CapacitySnapshotMinAggregateOutputType | null;
+    _max: CapacitySnapshotMaxAggregateOutputType | null;
+};
+export type CapacitySnapshotAvgAggregateOutputType = {
+    maxBoxes: number | null;
+    reservedBoxes: number | null;
+    consumedBoxes: number | null;
+};
+export type CapacitySnapshotSumAggregateOutputType = {
+    maxBoxes: number | null;
+    reservedBoxes: number | null;
+    consumedBoxes: number | null;
+};
+export type CapacitySnapshotMinAggregateOutputType = {
+    id: string | null;
+    boxVersionId: string | null;
+    cycleDate: Date | null;
+    maxBoxes: number | null;
+    reservedBoxes: number | null;
+    consumedBoxes: number | null;
+    status: $Enums.CapacityStatus | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type CapacitySnapshotMaxAggregateOutputType = {
+    id: string | null;
+    boxVersionId: string | null;
+    cycleDate: Date | null;
+    maxBoxes: number | null;
+    reservedBoxes: number | null;
+    consumedBoxes: number | null;
+    status: $Enums.CapacityStatus | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+};
+export type CapacitySnapshotCountAggregateOutputType = {
+    id: number;
+    boxVersionId: number;
+    cycleDate: number;
+    maxBoxes: number;
+    reservedBoxes: number;
+    consumedBoxes: number;
+    status: number;
+    createdAt: number;
+    updatedAt: number;
+    _all: number;
+};
+export type CapacitySnapshotAvgAggregateInputType = {
+    maxBoxes?: true;
+    reservedBoxes?: true;
+    consumedBoxes?: true;
+};
+export type CapacitySnapshotSumAggregateInputType = {
+    maxBoxes?: true;
+    reservedBoxes?: true;
+    consumedBoxes?: true;
+};
+export type CapacitySnapshotMinAggregateInputType = {
+    id?: true;
+    boxVersionId?: true;
+    cycleDate?: true;
+    maxBoxes?: true;
+    reservedBoxes?: true;
+    consumedBoxes?: true;
+    status?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type CapacitySnapshotMaxAggregateInputType = {
+    id?: true;
+    boxVersionId?: true;
+    cycleDate?: true;
+    maxBoxes?: true;
+    reservedBoxes?: true;
+    consumedBoxes?: true;
+    status?: true;
+    createdAt?: true;
+    updatedAt?: true;
+};
+export type CapacitySnapshotCountAggregateInputType = {
+    id?: true;
+    boxVersionId?: true;
+    cycleDate?: true;
+    maxBoxes?: true;
+    reservedBoxes?: true;
+    consumedBoxes?: true;
+    status?: true;
+    createdAt?: true;
+    updatedAt?: true;
+    _all?: true;
+};
+export type CapacitySnapshotAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which CapacitySnapshot to aggregate.
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CapacitySnapshots to fetch.
+     */
+    orderBy?: Prisma.CapacitySnapshotOrderByWithRelationInput | Prisma.CapacitySnapshotOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.CapacitySnapshotWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CapacitySnapshots from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CapacitySnapshots.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned CapacitySnapshots
+    **/
+    _count?: true | CapacitySnapshotCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: CapacitySnapshotAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: CapacitySnapshotSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: CapacitySnapshotMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: CapacitySnapshotMaxAggregateInputType;
+};
+export type GetCapacitySnapshotAggregateType<T extends CapacitySnapshotAggregateArgs> = {
+    [P in keyof T & keyof AggregateCapacitySnapshot]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateCapacitySnapshot[P]> : Prisma.GetScalarType<T[P], AggregateCapacitySnapshot[P]>;
+};
+export type CapacitySnapshotGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.CapacitySnapshotWhereInput;
+    orderBy?: Prisma.CapacitySnapshotOrderByWithAggregationInput | Prisma.CapacitySnapshotOrderByWithAggregationInput[];
+    by: Prisma.CapacitySnapshotScalarFieldEnum[] | Prisma.CapacitySnapshotScalarFieldEnum;
+    having?: Prisma.CapacitySnapshotScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: CapacitySnapshotCountAggregateInputType | true;
+    _avg?: CapacitySnapshotAvgAggregateInputType;
+    _sum?: CapacitySnapshotSumAggregateInputType;
+    _min?: CapacitySnapshotMinAggregateInputType;
+    _max?: CapacitySnapshotMaxAggregateInputType;
+};
+export type CapacitySnapshotGroupByOutputType = {
+    id: string;
+    boxVersionId: string;
+    cycleDate: Date;
+    maxBoxes: number;
+    reservedBoxes: number;
+    consumedBoxes: number;
+    status: $Enums.CapacityStatus;
+    createdAt: Date;
+    updatedAt: Date;
+    _count: CapacitySnapshotCountAggregateOutputType | null;
+    _avg: CapacitySnapshotAvgAggregateOutputType | null;
+    _sum: CapacitySnapshotSumAggregateOutputType | null;
+    _min: CapacitySnapshotMinAggregateOutputType | null;
+    _max: CapacitySnapshotMaxAggregateOutputType | null;
+};
+type GetCapacitySnapshotGroupByPayload<T extends CapacitySnapshotGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<CapacitySnapshotGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof CapacitySnapshotGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], CapacitySnapshotGroupByOutputType[P]> : Prisma.GetScalarType<T[P], CapacitySnapshotGroupByOutputType[P]>;
+}>>;
+export type CapacitySnapshotWhereInput = {
+    AND?: Prisma.CapacitySnapshotWhereInput | Prisma.CapacitySnapshotWhereInput[];
+    OR?: Prisma.CapacitySnapshotWhereInput[];
+    NOT?: Prisma.CapacitySnapshotWhereInput | Prisma.CapacitySnapshotWhereInput[];
+    id?: Prisma.StringFilter<"CapacitySnapshot"> | string;
+    boxVersionId?: Prisma.StringFilter<"CapacitySnapshot"> | string;
+    cycleDate?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    maxBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    reservedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    consumedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    status?: Prisma.EnumCapacityStatusFilter<"CapacitySnapshot"> | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    boxVersion?: Prisma.XOR<Prisma.BoxVersionScalarRelationFilter, Prisma.BoxVersionWhereInput>;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
+};
+export type CapacitySnapshotOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    boxVersion?: Prisma.BoxVersionOrderByWithRelationInput;
+    reservations?: Prisma.InventoryReservationOrderByRelationAggregateInput;
+};
+export type CapacitySnapshotWhereUniqueInput = Prisma.AtLeast<{
+    id?: string;
+    boxVersionId_cycleDate?: Prisma.CapacitySnapshotBoxVersionIdCycleDateCompoundUniqueInput;
+    AND?: Prisma.CapacitySnapshotWhereInput | Prisma.CapacitySnapshotWhereInput[];
+    OR?: Prisma.CapacitySnapshotWhereInput[];
+    NOT?: Prisma.CapacitySnapshotWhereInput | Prisma.CapacitySnapshotWhereInput[];
+    boxVersionId?: Prisma.StringFilter<"CapacitySnapshot"> | string;
+    cycleDate?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    maxBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    reservedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    consumedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    status?: Prisma.EnumCapacityStatusFilter<"CapacitySnapshot"> | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    boxVersion?: Prisma.XOR<Prisma.BoxVersionScalarRelationFilter, Prisma.BoxVersionWhereInput>;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
+}, "id" | "boxVersionId_cycleDate">;
+export type CapacitySnapshotOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+    _count?: Prisma.CapacitySnapshotCountOrderByAggregateInput;
+    _avg?: Prisma.CapacitySnapshotAvgOrderByAggregateInput;
+    _max?: Prisma.CapacitySnapshotMaxOrderByAggregateInput;
+    _min?: Prisma.CapacitySnapshotMinOrderByAggregateInput;
+    _sum?: Prisma.CapacitySnapshotSumOrderByAggregateInput;
+};
+export type CapacitySnapshotScalarWhereWithAggregatesInput = {
+    AND?: Prisma.CapacitySnapshotScalarWhereWithAggregatesInput | Prisma.CapacitySnapshotScalarWhereWithAggregatesInput[];
+    OR?: Prisma.CapacitySnapshotScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.CapacitySnapshotScalarWhereWithAggregatesInput | Prisma.CapacitySnapshotScalarWhereWithAggregatesInput[];
+    id?: Prisma.StringWithAggregatesFilter<"CapacitySnapshot"> | string;
+    boxVersionId?: Prisma.StringWithAggregatesFilter<"CapacitySnapshot"> | string;
+    cycleDate?: Prisma.DateTimeWithAggregatesFilter<"CapacitySnapshot"> | Date | string;
+    maxBoxes?: Prisma.IntWithAggregatesFilter<"CapacitySnapshot"> | number;
+    reservedBoxes?: Prisma.IntWithAggregatesFilter<"CapacitySnapshot"> | number;
+    consumedBoxes?: Prisma.IntWithAggregatesFilter<"CapacitySnapshot"> | number;
+    status?: Prisma.EnumCapacityStatusWithAggregatesFilter<"CapacitySnapshot"> | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"CapacitySnapshot"> | Date | string;
+    updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CapacitySnapshot"> | Date | string;
+};
+export type CapacitySnapshotCreateInput = {
+    id?: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    boxVersion: Prisma.BoxVersionCreateNestedOneWithoutCapacitiesInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutCapacitySnapshotInput;
+};
+export type CapacitySnapshotUncheckedCreateInput = {
+    id?: string;
+    boxVersionId: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutCapacitySnapshotInput;
+};
+export type CapacitySnapshotUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    boxVersion?: Prisma.BoxVersionUpdateOneRequiredWithoutCapacitiesNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutCapacitySnapshotNestedInput;
+};
+export type CapacitySnapshotUncheckedUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutCapacitySnapshotNestedInput;
+};
+export type CapacitySnapshotCreateManyInput = {
+    id?: string;
+    boxVersionId: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type CapacitySnapshotUpdateManyMutationInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type CapacitySnapshotUncheckedUpdateManyInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type CapacitySnapshotListRelationFilter = {
+    every?: Prisma.CapacitySnapshotWhereInput;
+    some?: Prisma.CapacitySnapshotWhereInput;
+    none?: Prisma.CapacitySnapshotWhereInput;
+};
+export type CapacitySnapshotOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type CapacitySnapshotBoxVersionIdCycleDateCompoundUniqueInput = {
+    boxVersionId: string;
+    cycleDate: Date | string;
+};
+export type CapacitySnapshotCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type CapacitySnapshotAvgOrderByAggregateInput = {
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+};
+export type CapacitySnapshotMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type CapacitySnapshotMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+    status?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
+};
+export type CapacitySnapshotSumOrderByAggregateInput = {
+    maxBoxes?: Prisma.SortOrder;
+    reservedBoxes?: Prisma.SortOrder;
+    consumedBoxes?: Prisma.SortOrder;
+};
+export type CapacitySnapshotScalarRelationFilter = {
+    is?: Prisma.CapacitySnapshotWhereInput;
+    isNot?: Prisma.CapacitySnapshotWhereInput;
+};
+export type CapacitySnapshotCreateNestedManyWithoutBoxVersionInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput> | Prisma.CapacitySnapshotCreateWithoutBoxVersionInput[] | Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput[];
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput | Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput[];
+    createMany?: Prisma.CapacitySnapshotCreateManyBoxVersionInputEnvelope;
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+};
+export type CapacitySnapshotUncheckedCreateNestedManyWithoutBoxVersionInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput> | Prisma.CapacitySnapshotCreateWithoutBoxVersionInput[] | Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput[];
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput | Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput[];
+    createMany?: Prisma.CapacitySnapshotCreateManyBoxVersionInputEnvelope;
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+};
+export type CapacitySnapshotUpdateManyWithoutBoxVersionNestedInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput> | Prisma.CapacitySnapshotCreateWithoutBoxVersionInput[] | Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput[];
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput | Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput[];
+    upsert?: Prisma.CapacitySnapshotUpsertWithWhereUniqueWithoutBoxVersionInput | Prisma.CapacitySnapshotUpsertWithWhereUniqueWithoutBoxVersionInput[];
+    createMany?: Prisma.CapacitySnapshotCreateManyBoxVersionInputEnvelope;
+    set?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    disconnect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    delete?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    update?: Prisma.CapacitySnapshotUpdateWithWhereUniqueWithoutBoxVersionInput | Prisma.CapacitySnapshotUpdateWithWhereUniqueWithoutBoxVersionInput[];
+    updateMany?: Prisma.CapacitySnapshotUpdateManyWithWhereWithoutBoxVersionInput | Prisma.CapacitySnapshotUpdateManyWithWhereWithoutBoxVersionInput[];
+    deleteMany?: Prisma.CapacitySnapshotScalarWhereInput | Prisma.CapacitySnapshotScalarWhereInput[];
+};
+export type CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionNestedInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput> | Prisma.CapacitySnapshotCreateWithoutBoxVersionInput[] | Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput[];
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput | Prisma.CapacitySnapshotCreateOrConnectWithoutBoxVersionInput[];
+    upsert?: Prisma.CapacitySnapshotUpsertWithWhereUniqueWithoutBoxVersionInput | Prisma.CapacitySnapshotUpsertWithWhereUniqueWithoutBoxVersionInput[];
+    createMany?: Prisma.CapacitySnapshotCreateManyBoxVersionInputEnvelope;
+    set?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    disconnect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    delete?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput | Prisma.CapacitySnapshotWhereUniqueInput[];
+    update?: Prisma.CapacitySnapshotUpdateWithWhereUniqueWithoutBoxVersionInput | Prisma.CapacitySnapshotUpdateWithWhereUniqueWithoutBoxVersionInput[];
+    updateMany?: Prisma.CapacitySnapshotUpdateManyWithWhereWithoutBoxVersionInput | Prisma.CapacitySnapshotUpdateManyWithWhereWithoutBoxVersionInput[];
+    deleteMany?: Prisma.CapacitySnapshotScalarWhereInput | Prisma.CapacitySnapshotScalarWhereInput[];
+};
+export type EnumCapacityStatusFieldUpdateOperationsInput = {
+    set?: $Enums.CapacityStatus;
+};
+export type CapacitySnapshotCreateNestedOneWithoutReservationsInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutReservationsInput;
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput;
+};
+export type CapacitySnapshotUpdateOneRequiredWithoutReservationsNestedInput = {
+    create?: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.CapacitySnapshotCreateOrConnectWithoutReservationsInput;
+    upsert?: Prisma.CapacitySnapshotUpsertWithoutReservationsInput;
+    connect?: Prisma.CapacitySnapshotWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.CapacitySnapshotUpdateToOneWithWhereWithoutReservationsInput, Prisma.CapacitySnapshotUpdateWithoutReservationsInput>, Prisma.CapacitySnapshotUncheckedUpdateWithoutReservationsInput>;
+};
+export type CapacitySnapshotCreateWithoutBoxVersionInput = {
+    id?: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutCapacitySnapshotInput;
+};
+export type CapacitySnapshotUncheckedCreateWithoutBoxVersionInput = {
+    id?: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutCapacitySnapshotInput;
+};
+export type CapacitySnapshotCreateOrConnectWithoutBoxVersionInput = {
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+    create: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput>;
+};
+export type CapacitySnapshotCreateManyBoxVersionInputEnvelope = {
+    data: Prisma.CapacitySnapshotCreateManyBoxVersionInput | Prisma.CapacitySnapshotCreateManyBoxVersionInput[];
+    skipDuplicates?: boolean;
+};
+export type CapacitySnapshotUpsertWithWhereUniqueWithoutBoxVersionInput = {
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+    update: Prisma.XOR<Prisma.CapacitySnapshotUpdateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedUpdateWithoutBoxVersionInput>;
+    create: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedCreateWithoutBoxVersionInput>;
+};
+export type CapacitySnapshotUpdateWithWhereUniqueWithoutBoxVersionInput = {
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateWithoutBoxVersionInput, Prisma.CapacitySnapshotUncheckedUpdateWithoutBoxVersionInput>;
+};
+export type CapacitySnapshotUpdateManyWithWhereWithoutBoxVersionInput = {
+    where: Prisma.CapacitySnapshotScalarWhereInput;
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateManyMutationInput, Prisma.CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionInput>;
+};
+export type CapacitySnapshotScalarWhereInput = {
+    AND?: Prisma.CapacitySnapshotScalarWhereInput | Prisma.CapacitySnapshotScalarWhereInput[];
+    OR?: Prisma.CapacitySnapshotScalarWhereInput[];
+    NOT?: Prisma.CapacitySnapshotScalarWhereInput | Prisma.CapacitySnapshotScalarWhereInput[];
+    id?: Prisma.StringFilter<"CapacitySnapshot"> | string;
+    boxVersionId?: Prisma.StringFilter<"CapacitySnapshot"> | string;
+    cycleDate?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    maxBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    reservedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    consumedBoxes?: Prisma.IntFilter<"CapacitySnapshot"> | number;
+    status?: Prisma.EnumCapacityStatusFilter<"CapacitySnapshot"> | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"CapacitySnapshot"> | Date | string;
+};
+export type CapacitySnapshotCreateWithoutReservationsInput = {
+    id?: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    boxVersion: Prisma.BoxVersionCreateNestedOneWithoutCapacitiesInput;
+};
+export type CapacitySnapshotUncheckedCreateWithoutReservationsInput = {
+    id?: string;
+    boxVersionId: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type CapacitySnapshotCreateOrConnectWithoutReservationsInput = {
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+    create: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedCreateWithoutReservationsInput>;
+};
+export type CapacitySnapshotUpsertWithoutReservationsInput = {
+    update: Prisma.XOR<Prisma.CapacitySnapshotUpdateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedUpdateWithoutReservationsInput>;
+    create: Prisma.XOR<Prisma.CapacitySnapshotCreateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedCreateWithoutReservationsInput>;
+    where?: Prisma.CapacitySnapshotWhereInput;
+};
+export type CapacitySnapshotUpdateToOneWithWhereWithoutReservationsInput = {
+    where?: Prisma.CapacitySnapshotWhereInput;
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateWithoutReservationsInput, Prisma.CapacitySnapshotUncheckedUpdateWithoutReservationsInput>;
+};
+export type CapacitySnapshotUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    boxVersion?: Prisma.BoxVersionUpdateOneRequiredWithoutCapacitiesNestedInput;
+};
+export type CapacitySnapshotUncheckedUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type CapacitySnapshotCreateManyBoxVersionInput = {
+    id?: string;
+    cycleDate: Date | string;
+    maxBoxes: number;
+    reservedBoxes?: number;
+    consumedBoxes?: number;
+    status?: $Enums.CapacityStatus;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+};
+export type CapacitySnapshotUpdateWithoutBoxVersionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutCapacitySnapshotNestedInput;
+};
+export type CapacitySnapshotUncheckedUpdateWithoutBoxVersionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutCapacitySnapshotNestedInput;
+};
+export type CapacitySnapshotUncheckedUpdateManyWithoutBoxVersionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    maxBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    reservedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    consumedBoxes?: Prisma.IntFieldUpdateOperationsInput | number;
+    status?: Prisma.EnumCapacityStatusFieldUpdateOperationsInput | $Enums.CapacityStatus;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+/**
+ * Count Type CapacitySnapshotCountOutputType
+ */
+export type CapacitySnapshotCountOutputType = {
+    reservations: number;
+};
+export type CapacitySnapshotCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    reservations?: boolean | CapacitySnapshotCountOutputTypeCountReservationsArgs;
+};
+/**
+ * CapacitySnapshotCountOutputType without action
+ */
+export type CapacitySnapshotCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshotCountOutputType
+     */
+    select?: Prisma.CapacitySnapshotCountOutputTypeSelect<ExtArgs> | null;
+};
+/**
+ * CapacitySnapshotCountOutputType without action
+ */
+export type CapacitySnapshotCountOutputTypeCountReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.InventoryReservationWhereInput;
+};
+export type CapacitySnapshotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    boxVersionId?: boolean;
+    cycleDate?: boolean;
+    maxBoxes?: boolean;
+    reservedBoxes?: boolean;
+    consumedBoxes?: boolean;
+    status?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+    reservations?: boolean | Prisma.CapacitySnapshot$reservationsArgs<ExtArgs>;
+    _count?: boolean | Prisma.CapacitySnapshotCountOutputTypeDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["capacitySnapshot"]>;
+export type CapacitySnapshotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    boxVersionId?: boolean;
+    cycleDate?: boolean;
+    maxBoxes?: boolean;
+    reservedBoxes?: boolean;
+    consumedBoxes?: boolean;
+    status?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["capacitySnapshot"]>;
+export type CapacitySnapshotSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    boxVersionId?: boolean;
+    cycleDate?: boolean;
+    maxBoxes?: boolean;
+    reservedBoxes?: boolean;
+    consumedBoxes?: boolean;
+    status?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+}, ExtArgs["result"]["capacitySnapshot"]>;
+export type CapacitySnapshotSelectScalar = {
+    id?: boolean;
+    boxVersionId?: boolean;
+    cycleDate?: boolean;
+    maxBoxes?: boolean;
+    reservedBoxes?: boolean;
+    consumedBoxes?: boolean;
+    status?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
+};
+export type CapacitySnapshotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "boxVersionId" | "cycleDate" | "maxBoxes" | "reservedBoxes" | "consumedBoxes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["capacitySnapshot"]>;
+export type CapacitySnapshotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+    reservations?: boolean | Prisma.CapacitySnapshot$reservationsArgs<ExtArgs>;
+    _count?: boolean | Prisma.CapacitySnapshotCountOutputTypeDefaultArgs<ExtArgs>;
+};
+export type CapacitySnapshotIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+};
+export type CapacitySnapshotIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    boxVersion?: boolean | Prisma.BoxVersionDefaultArgs<ExtArgs>;
+};
+export type $CapacitySnapshotPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "CapacitySnapshot";
+    objects: {
+        boxVersion: Prisma.$BoxVersionPayload<ExtArgs>;
+        reservations: Prisma.$InventoryReservationPayload<ExtArgs>[];
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: string;
+        boxVersionId: string;
+        cycleDate: Date;
+        maxBoxes: number;
+        reservedBoxes: number;
+        consumedBoxes: number;
+        status: $Enums.CapacityStatus;
+        createdAt: Date;
+        updatedAt: Date;
+    }, ExtArgs["result"]["capacitySnapshot"]>;
+    composites: {};
+};
+export type CapacitySnapshotGetPayload<S extends boolean | null | undefined | CapacitySnapshotDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload, S>;
+export type CapacitySnapshotCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<CapacitySnapshotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: CapacitySnapshotCountAggregateInputType | true;
+};
+export interface CapacitySnapshotDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['CapacitySnapshot'];
+        meta: {
+            name: 'CapacitySnapshot';
+        };
+    };
+    /**
+     * Find zero or one CapacitySnapshot that matches the filter.
+     * @param {CapacitySnapshotFindUniqueArgs} args - Arguments to find a CapacitySnapshot
+     * @example
+     * // Get one CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CapacitySnapshotFindUniqueArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotFindUniqueArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one CapacitySnapshot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CapacitySnapshotFindUniqueOrThrowArgs} args - Arguments to find a CapacitySnapshot
+     * @example
+     * // Get one CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CapacitySnapshotFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first CapacitySnapshot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotFindFirstArgs} args - Arguments to find a CapacitySnapshot
+     * @example
+     * // Get one CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CapacitySnapshotFindFirstArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotFindFirstArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first CapacitySnapshot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotFindFirstOrThrowArgs} args - Arguments to find a CapacitySnapshot
+     * @example
+     * // Get one CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CapacitySnapshotFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more CapacitySnapshots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CapacitySnapshots
+     * const capacitySnapshots = await prisma.capacitySnapshot.findMany()
+     *
+     * // Get first 10 CapacitySnapshots
+     * const capacitySnapshots = await prisma.capacitySnapshot.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const capacitySnapshotWithIdOnly = await prisma.capacitySnapshot.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends CapacitySnapshotFindManyArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a CapacitySnapshot.
+     * @param {CapacitySnapshotCreateArgs} args - Arguments to create a CapacitySnapshot.
+     * @example
+     * // Create one CapacitySnapshot
+     * const CapacitySnapshot = await prisma.capacitySnapshot.create({
+     *   data: {
+     *     // ... data to create a CapacitySnapshot
+     *   }
+     * })
+     *
+     */
+    create<T extends CapacitySnapshotCreateArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotCreateArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many CapacitySnapshots.
+     * @param {CapacitySnapshotCreateManyArgs} args - Arguments to create many CapacitySnapshots.
+     * @example
+     * // Create many CapacitySnapshots
+     * const capacitySnapshot = await prisma.capacitySnapshot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends CapacitySnapshotCreateManyArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many CapacitySnapshots and returns the data saved in the database.
+     * @param {CapacitySnapshotCreateManyAndReturnArgs} args - Arguments to create many CapacitySnapshots.
+     * @example
+     * // Create many CapacitySnapshots
+     * const capacitySnapshot = await prisma.capacitySnapshot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many CapacitySnapshots and only return the `id`
+     * const capacitySnapshotWithIdOnly = await prisma.capacitySnapshot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends CapacitySnapshotCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a CapacitySnapshot.
+     * @param {CapacitySnapshotDeleteArgs} args - Arguments to delete one CapacitySnapshot.
+     * @example
+     * // Delete one CapacitySnapshot
+     * const CapacitySnapshot = await prisma.capacitySnapshot.delete({
+     *   where: {
+     *     // ... filter to delete one CapacitySnapshot
+     *   }
+     * })
+     *
+     */
+    delete<T extends CapacitySnapshotDeleteArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotDeleteArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one CapacitySnapshot.
+     * @param {CapacitySnapshotUpdateArgs} args - Arguments to update one CapacitySnapshot.
+     * @example
+     * // Update one CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends CapacitySnapshotUpdateArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotUpdateArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more CapacitySnapshots.
+     * @param {CapacitySnapshotDeleteManyArgs} args - Arguments to filter CapacitySnapshots to delete.
+     * @example
+     * // Delete a few CapacitySnapshots
+     * const { count } = await prisma.capacitySnapshot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends CapacitySnapshotDeleteManyArgs>(args?: Prisma.SelectSubset<T, CapacitySnapshotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more CapacitySnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CapacitySnapshots
+     * const capacitySnapshot = await prisma.capacitySnapshot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends CapacitySnapshotUpdateManyArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more CapacitySnapshots and returns the data updated in the database.
+     * @param {CapacitySnapshotUpdateManyAndReturnArgs} args - Arguments to update many CapacitySnapshots.
+     * @example
+     * // Update many CapacitySnapshots
+     * const capacitySnapshot = await prisma.capacitySnapshot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more CapacitySnapshots and only return the `id`
+     * const capacitySnapshotWithIdOnly = await prisma.capacitySnapshot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends CapacitySnapshotUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one CapacitySnapshot.
+     * @param {CapacitySnapshotUpsertArgs} args - Arguments to update or create a CapacitySnapshot.
+     * @example
+     * // Update or create a CapacitySnapshot
+     * const capacitySnapshot = await prisma.capacitySnapshot.upsert({
+     *   create: {
+     *     // ... data to create a CapacitySnapshot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CapacitySnapshot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CapacitySnapshotUpsertArgs>(args: Prisma.SelectSubset<T, CapacitySnapshotUpsertArgs<ExtArgs>>): Prisma.Prisma__CapacitySnapshotClient<runtime.Types.Result.GetResult<Prisma.$CapacitySnapshotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of CapacitySnapshots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotCountArgs} args - Arguments to filter CapacitySnapshots to count.
+     * @example
+     * // Count the number of CapacitySnapshots
+     * const count = await prisma.capacitySnapshot.count({
+     *   where: {
+     *     // ... the filter for the CapacitySnapshots we want to count
+     *   }
+     * })
+    **/
+    count<T extends CapacitySnapshotCountArgs>(args?: Prisma.Subset<T, CapacitySnapshotCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], CapacitySnapshotCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a CapacitySnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CapacitySnapshotAggregateArgs>(args: Prisma.Subset<T, CapacitySnapshotAggregateArgs>): Prisma.PrismaPromise<GetCapacitySnapshotAggregateType<T>>;
+    /**
+     * Group by CapacitySnapshot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CapacitySnapshotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends CapacitySnapshotGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: CapacitySnapshotGroupByArgs['orderBy'];
+    } : {
+        orderBy?: CapacitySnapshotGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, CapacitySnapshotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCapacitySnapshotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the CapacitySnapshot model
+     */
+    readonly fields: CapacitySnapshotFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for CapacitySnapshot.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__CapacitySnapshotClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    boxVersion<T extends Prisma.BoxVersionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxVersionDefaultArgs<ExtArgs>>): Prisma.Prisma__BoxVersionClient<runtime.Types.Result.GetResult<Prisma.$BoxVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    reservations<T extends Prisma.CapacitySnapshot$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CapacitySnapshot$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the CapacitySnapshot model
+ */
+export interface CapacitySnapshotFieldRefs {
+    readonly id: Prisma.FieldRef<"CapacitySnapshot", 'String'>;
+    readonly boxVersionId: Prisma.FieldRef<"CapacitySnapshot", 'String'>;
+    readonly cycleDate: Prisma.FieldRef<"CapacitySnapshot", 'DateTime'>;
+    readonly maxBoxes: Prisma.FieldRef<"CapacitySnapshot", 'Int'>;
+    readonly reservedBoxes: Prisma.FieldRef<"CapacitySnapshot", 'Int'>;
+    readonly consumedBoxes: Prisma.FieldRef<"CapacitySnapshot", 'Int'>;
+    readonly status: Prisma.FieldRef<"CapacitySnapshot", 'CapacityStatus'>;
+    readonly createdAt: Prisma.FieldRef<"CapacitySnapshot", 'DateTime'>;
+    readonly updatedAt: Prisma.FieldRef<"CapacitySnapshot", 'DateTime'>;
+}
+/**
+ * CapacitySnapshot findUnique
+ */
+export type CapacitySnapshotFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter, which CapacitySnapshot to fetch.
+     */
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+};
+/**
+ * CapacitySnapshot findUniqueOrThrow
+ */
+export type CapacitySnapshotFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter, which CapacitySnapshot to fetch.
+     */
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+};
+/**
+ * CapacitySnapshot findFirst
+ */
+export type CapacitySnapshotFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter, which CapacitySnapshot to fetch.
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CapacitySnapshots to fetch.
+     */
+    orderBy?: Prisma.CapacitySnapshotOrderByWithRelationInput | Prisma.CapacitySnapshotOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for CapacitySnapshots.
+     */
+    cursor?: Prisma.CapacitySnapshotWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CapacitySnapshots from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CapacitySnapshots.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of CapacitySnapshots.
+     */
+    distinct?: Prisma.CapacitySnapshotScalarFieldEnum | Prisma.CapacitySnapshotScalarFieldEnum[];
+};
+/**
+ * CapacitySnapshot findFirstOrThrow
+ */
+export type CapacitySnapshotFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter, which CapacitySnapshot to fetch.
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CapacitySnapshots to fetch.
+     */
+    orderBy?: Prisma.CapacitySnapshotOrderByWithRelationInput | Prisma.CapacitySnapshotOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for CapacitySnapshots.
+     */
+    cursor?: Prisma.CapacitySnapshotWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CapacitySnapshots from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CapacitySnapshots.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of CapacitySnapshots.
+     */
+    distinct?: Prisma.CapacitySnapshotScalarFieldEnum | Prisma.CapacitySnapshotScalarFieldEnum[];
+};
+/**
+ * CapacitySnapshot findMany
+ */
+export type CapacitySnapshotFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter, which CapacitySnapshots to fetch.
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of CapacitySnapshots to fetch.
+     */
+    orderBy?: Prisma.CapacitySnapshotOrderByWithRelationInput | Prisma.CapacitySnapshotOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing CapacitySnapshots.
+     */
+    cursor?: Prisma.CapacitySnapshotWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` CapacitySnapshots from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` CapacitySnapshots.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of CapacitySnapshots.
+     */
+    distinct?: Prisma.CapacitySnapshotScalarFieldEnum | Prisma.CapacitySnapshotScalarFieldEnum[];
+};
+/**
+ * CapacitySnapshot create
+ */
+export type CapacitySnapshotCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a CapacitySnapshot.
+     */
+    data: Prisma.XOR<Prisma.CapacitySnapshotCreateInput, Prisma.CapacitySnapshotUncheckedCreateInput>;
+};
+/**
+ * CapacitySnapshot createMany
+ */
+export type CapacitySnapshotCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CapacitySnapshots.
+     */
+    data: Prisma.CapacitySnapshotCreateManyInput | Prisma.CapacitySnapshotCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * CapacitySnapshot createManyAndReturn
+ */
+export type CapacitySnapshotCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * The data used to create many CapacitySnapshots.
+     */
+    data: Prisma.CapacitySnapshotCreateManyInput | Prisma.CapacitySnapshotCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * CapacitySnapshot update
+ */
+export type CapacitySnapshotUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a CapacitySnapshot.
+     */
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateInput, Prisma.CapacitySnapshotUncheckedUpdateInput>;
+    /**
+     * Choose, which CapacitySnapshot to update.
+     */
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+};
+/**
+ * CapacitySnapshot updateMany
+ */
+export type CapacitySnapshotUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CapacitySnapshots.
+     */
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateManyMutationInput, Prisma.CapacitySnapshotUncheckedUpdateManyInput>;
+    /**
+     * Filter which CapacitySnapshots to update
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * Limit how many CapacitySnapshots to update.
+     */
+    limit?: number;
+};
+/**
+ * CapacitySnapshot updateManyAndReturn
+ */
+export type CapacitySnapshotUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * The data used to update CapacitySnapshots.
+     */
+    data: Prisma.XOR<Prisma.CapacitySnapshotUpdateManyMutationInput, Prisma.CapacitySnapshotUncheckedUpdateManyInput>;
+    /**
+     * Filter which CapacitySnapshots to update
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * Limit how many CapacitySnapshots to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * CapacitySnapshot upsert
+ */
+export type CapacitySnapshotUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the CapacitySnapshot to update in case it exists.
+     */
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+    /**
+     * In case the CapacitySnapshot found by the `where` argument doesn't exist, create a new CapacitySnapshot with this data.
+     */
+    create: Prisma.XOR<Prisma.CapacitySnapshotCreateInput, Prisma.CapacitySnapshotUncheckedCreateInput>;
+    /**
+     * In case the CapacitySnapshot was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.CapacitySnapshotUpdateInput, Prisma.CapacitySnapshotUncheckedUpdateInput>;
+};
+/**
+ * CapacitySnapshot delete
+ */
+export type CapacitySnapshotDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+    /**
+     * Filter which CapacitySnapshot to delete.
+     */
+    where: Prisma.CapacitySnapshotWhereUniqueInput;
+};
+/**
+ * CapacitySnapshot deleteMany
+ */
+export type CapacitySnapshotDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which CapacitySnapshots to delete
+     */
+    where?: Prisma.CapacitySnapshotWhereInput;
+    /**
+     * Limit how many CapacitySnapshots to delete.
+     */
+    limit?: number;
+};
+/**
+ * CapacitySnapshot.reservations
+ */
+export type CapacitySnapshot$reservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryReservation
+     */
+    select?: Prisma.InventoryReservationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the InventoryReservation
+     */
+    omit?: Prisma.InventoryReservationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.InventoryReservationInclude<ExtArgs> | null;
+    where?: Prisma.InventoryReservationWhereInput;
+    orderBy?: Prisma.InventoryReservationOrderByWithRelationInput | Prisma.InventoryReservationOrderByWithRelationInput[];
+    cursor?: Prisma.InventoryReservationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.InventoryReservationScalarFieldEnum | Prisma.InventoryReservationScalarFieldEnum[];
+};
+/**
+ * CapacitySnapshot without action
+ */
+export type CapacitySnapshotDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CapacitySnapshot
+     */
+    select?: Prisma.CapacitySnapshotSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the CapacitySnapshot
+     */
+    omit?: Prisma.CapacitySnapshotOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CapacitySnapshotInclude<ExtArgs> | null;
+};
+export {};
+//# sourceMappingURL=CapacitySnapshot.d.ts.map

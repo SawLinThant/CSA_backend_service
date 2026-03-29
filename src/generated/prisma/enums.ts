@@ -81,3 +81,31 @@ export const DeliveryStatus = {
 } as const
 
 export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus]
+
+
+export const CapacityStatus = {
+  open: 'open',
+  locked: 'locked',
+  closed: 'closed'
+} as const
+
+export type CapacityStatus = (typeof CapacityStatus)[keyof typeof CapacityStatus]
+
+
+export const ReservationStatus = {
+  reserved: 'reserved',
+  consumed: 'consumed',
+  released: 'released',
+  expired: 'expired'
+} as const
+
+export type ReservationStatus = (typeof ReservationStatus)[keyof typeof ReservationStatus]
+
+
+export const SubscriptionOrderCycleOutcome = {
+  created: 'created',
+  skipped: 'skipped',
+  failed: 'failed'
+} as const
+
+export type SubscriptionOrderCycleOutcome = (typeof SubscriptionOrderCycleOutcome)[keyof typeof SubscriptionOrderCycleOutcome]

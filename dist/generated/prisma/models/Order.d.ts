@@ -24,6 +24,7 @@ export type OrderMinAggregateOutputType = {
     customerId: string | null;
     subscriptionId: string | null;
     boxVersionId: string | null;
+    cycleDate: Date | null;
     status: $Enums.OrderStatus | null;
     totalPrice: runtime.Decimal | null;
     deliveryDate: Date | null;
@@ -34,6 +35,7 @@ export type OrderMaxAggregateOutputType = {
     customerId: string | null;
     subscriptionId: string | null;
     boxVersionId: string | null;
+    cycleDate: Date | null;
     status: $Enums.OrderStatus | null;
     totalPrice: runtime.Decimal | null;
     deliveryDate: Date | null;
@@ -44,6 +46,7 @@ export type OrderCountAggregateOutputType = {
     customerId: number;
     subscriptionId: number;
     boxVersionId: number;
+    cycleDate: number;
     status: number;
     totalPrice: number;
     deliveryDate: number;
@@ -61,6 +64,7 @@ export type OrderMinAggregateInputType = {
     customerId?: true;
     subscriptionId?: true;
     boxVersionId?: true;
+    cycleDate?: true;
     status?: true;
     totalPrice?: true;
     deliveryDate?: true;
@@ -71,6 +75,7 @@ export type OrderMaxAggregateInputType = {
     customerId?: true;
     subscriptionId?: true;
     boxVersionId?: true;
+    cycleDate?: true;
     status?: true;
     totalPrice?: true;
     deliveryDate?: true;
@@ -81,6 +86,7 @@ export type OrderCountAggregateInputType = {
     customerId?: true;
     subscriptionId?: true;
     boxVersionId?: true;
+    cycleDate?: true;
     status?: true;
     totalPrice?: true;
     deliveryDate?: true;
@@ -168,6 +174,7 @@ export type OrderGroupByOutputType = {
     customerId: string;
     subscriptionId: string | null;
     boxVersionId: string;
+    cycleDate: Date | null;
     status: $Enums.OrderStatus;
     totalPrice: runtime.Decimal;
     deliveryDate: Date | null;
@@ -189,6 +196,7 @@ export type OrderWhereInput = {
     customerId?: Prisma.StringFilter<"Order"> | string;
     subscriptionId?: Prisma.StringNullableFilter<"Order"> | string | null;
     boxVersionId?: Prisma.StringFilter<"Order"> | string;
+    cycleDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
     status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
@@ -205,6 +213,7 @@ export type OrderOrderByWithRelationInput = {
     customerId?: Prisma.SortOrder;
     subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder;
     boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrderInput | Prisma.SortOrder;
     status?: Prisma.SortOrder;
     totalPrice?: Prisma.SortOrder;
     deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -218,12 +227,14 @@ export type OrderOrderByWithRelationInput = {
 };
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
     id?: string;
+    subscriptionId_cycleDate?: Prisma.OrderSubscriptionIdCycleDateCompoundUniqueInput;
     AND?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[];
     OR?: Prisma.OrderWhereInput[];
     NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[];
     customerId?: Prisma.StringFilter<"Order"> | string;
     subscriptionId?: Prisma.StringNullableFilter<"Order"> | string | null;
     boxVersionId?: Prisma.StringFilter<"Order"> | string;
+    cycleDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
     status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
@@ -234,12 +245,13 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
     items?: Prisma.OrderItemListRelationFilter;
     payments?: Prisma.PaymentListRelationFilter;
     delivery?: Prisma.XOR<Prisma.DeliveryNullableScalarRelationFilter, Prisma.DeliveryWhereInput> | null;
-}, "id">;
+}, "id" | "subscriptionId_cycleDate">;
 export type OrderOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder;
     boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrderInput | Prisma.SortOrder;
     status?: Prisma.SortOrder;
     totalPrice?: Prisma.SortOrder;
     deliveryDate?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -258,6 +270,7 @@ export type OrderScalarWhereWithAggregatesInput = {
     customerId?: Prisma.StringWithAggregatesFilter<"Order"> | string;
     subscriptionId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null;
     boxVersionId?: Prisma.StringWithAggregatesFilter<"Order"> | string;
+    cycleDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null;
     status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null;
@@ -265,6 +278,7 @@ export type OrderScalarWhereWithAggregatesInput = {
 };
 export type OrderCreateInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -281,6 +295,7 @@ export type OrderUncheckedCreateInput = {
     customerId: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -291,6 +306,7 @@ export type OrderUncheckedCreateInput = {
 };
 export type OrderUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -307,6 +323,7 @@ export type OrderUncheckedUpdateInput = {
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -320,6 +337,7 @@ export type OrderCreateManyInput = {
     customerId: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -327,6 +345,7 @@ export type OrderCreateManyInput = {
 };
 export type OrderUpdateManyMutationInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -337,6 +356,7 @@ export type OrderUncheckedUpdateManyInput = {
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -350,11 +370,16 @@ export type OrderListRelationFilter = {
 export type OrderOrderByRelationAggregateInput = {
     _count?: Prisma.SortOrder;
 };
+export type OrderSubscriptionIdCycleDateCompoundUniqueInput = {
+    subscriptionId: string;
+    cycleDate: Date | string;
+};
 export type OrderCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     subscriptionId?: Prisma.SortOrder;
     boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     totalPrice?: Prisma.SortOrder;
     deliveryDate?: Prisma.SortOrder;
@@ -368,6 +393,7 @@ export type OrderMaxOrderByAggregateInput = {
     customerId?: Prisma.SortOrder;
     subscriptionId?: Prisma.SortOrder;
     boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     totalPrice?: Prisma.SortOrder;
     deliveryDate?: Prisma.SortOrder;
@@ -378,6 +404,7 @@ export type OrderMinOrderByAggregateInput = {
     customerId?: Prisma.SortOrder;
     subscriptionId?: Prisma.SortOrder;
     boxVersionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     totalPrice?: Prisma.SortOrder;
     deliveryDate?: Prisma.SortOrder;
@@ -545,6 +572,7 @@ export type OrderUpdateOneRequiredWithoutDeliveryNestedInput = {
 };
 export type OrderCreateWithoutCustomerInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -559,6 +587,7 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
     id?: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -596,6 +625,7 @@ export type OrderScalarWhereInput = {
     customerId?: Prisma.StringFilter<"Order"> | string;
     subscriptionId?: Prisma.StringNullableFilter<"Order"> | string | null;
     boxVersionId?: Prisma.StringFilter<"Order"> | string;
+    cycleDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
     status?: Prisma.EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null;
@@ -603,6 +633,7 @@ export type OrderScalarWhereInput = {
 };
 export type OrderCreateWithoutBoxVersionInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -617,6 +648,7 @@ export type OrderUncheckedCreateWithoutBoxVersionInput = {
     id?: string;
     customerId: string;
     subscriptionId?: string | null;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -648,6 +680,7 @@ export type OrderUpdateManyWithWhereWithoutBoxVersionInput = {
 };
 export type OrderCreateWithoutSubscriptionInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -662,6 +695,7 @@ export type OrderUncheckedCreateWithoutSubscriptionInput = {
     id?: string;
     customerId: string;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -693,6 +727,7 @@ export type OrderUpdateManyWithWhereWithoutSubscriptionInput = {
 };
 export type OrderCreateWithoutItemsInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -708,6 +743,7 @@ export type OrderUncheckedCreateWithoutItemsInput = {
     customerId: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -730,6 +766,7 @@ export type OrderUpdateToOneWithWhereWithoutItemsInput = {
 };
 export type OrderUpdateWithoutItemsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -745,6 +782,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -754,6 +792,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
 };
 export type OrderCreateWithoutPaymentsInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -769,6 +808,7 @@ export type OrderUncheckedCreateWithoutPaymentsInput = {
     customerId: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -791,6 +831,7 @@ export type OrderUpdateToOneWithWhereWithoutPaymentsInput = {
 };
 export type OrderUpdateWithoutPaymentsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -806,6 +847,7 @@ export type OrderUncheckedUpdateWithoutPaymentsInput = {
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -815,6 +857,7 @@ export type OrderUncheckedUpdateWithoutPaymentsInput = {
 };
 export type OrderCreateWithoutDeliveryInput = {
     id?: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -830,6 +873,7 @@ export type OrderUncheckedCreateWithoutDeliveryInput = {
     customerId: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -852,6 +896,7 @@ export type OrderUpdateToOneWithWhereWithoutDeliveryInput = {
 };
 export type OrderUpdateWithoutDeliveryInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -867,6 +912,7 @@ export type OrderUncheckedUpdateWithoutDeliveryInput = {
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -878,6 +924,7 @@ export type OrderCreateManyCustomerInput = {
     id?: string;
     subscriptionId?: string | null;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -885,6 +932,7 @@ export type OrderCreateManyCustomerInput = {
 };
 export type OrderUpdateWithoutCustomerInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -899,6 +947,7 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -911,6 +960,7 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -920,6 +970,7 @@ export type OrderCreateManyBoxVersionInput = {
     id?: string;
     customerId: string;
     subscriptionId?: string | null;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -927,6 +978,7 @@ export type OrderCreateManyBoxVersionInput = {
 };
 export type OrderUpdateWithoutBoxVersionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -941,6 +993,7 @@ export type OrderUncheckedUpdateWithoutBoxVersionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -953,6 +1006,7 @@ export type OrderUncheckedUpdateManyWithoutBoxVersionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -962,6 +1016,7 @@ export type OrderCreateManySubscriptionInput = {
     id?: string;
     customerId: string;
     boxVersionId: string;
+    cycleDate?: Date | string | null;
     status?: $Enums.OrderStatus;
     totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Date | string | null;
@@ -969,6 +1024,7 @@ export type OrderCreateManySubscriptionInput = {
 };
 export type OrderUpdateWithoutSubscriptionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -983,6 +1039,7 @@ export type OrderUncheckedUpdateWithoutSubscriptionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -995,6 +1052,7 @@ export type OrderUncheckedUpdateManyWithoutSubscriptionInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     boxVersionId?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus;
     totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
     deliveryDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
@@ -1037,6 +1095,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     customerId?: boolean;
     subscriptionId?: boolean;
     boxVersionId?: boolean;
+    cycleDate?: boolean;
     status?: boolean;
     totalPrice?: boolean;
     deliveryDate?: boolean;
@@ -1054,6 +1113,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
     customerId?: boolean;
     subscriptionId?: boolean;
     boxVersionId?: boolean;
+    cycleDate?: boolean;
     status?: boolean;
     totalPrice?: boolean;
     deliveryDate?: boolean;
@@ -1067,6 +1127,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
     customerId?: boolean;
     subscriptionId?: boolean;
     boxVersionId?: boolean;
+    cycleDate?: boolean;
     status?: boolean;
     totalPrice?: boolean;
     deliveryDate?: boolean;
@@ -1080,12 +1141,13 @@ export type OrderSelectScalar = {
     customerId?: boolean;
     subscriptionId?: boolean;
     boxVersionId?: boolean;
+    cycleDate?: boolean;
     status?: boolean;
     totalPrice?: boolean;
     deliveryDate?: boolean;
     createdAt?: boolean;
 };
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "subscriptionId" | "boxVersionId" | "status" | "totalPrice" | "deliveryDate" | "createdAt", ExtArgs["result"]["order"]>;
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "subscriptionId" | "boxVersionId" | "cycleDate" | "status" | "totalPrice" | "deliveryDate" | "createdAt", ExtArgs["result"]["order"]>;
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     subscription?: boolean | Prisma.Order$subscriptionArgs<ExtArgs>;
@@ -1120,6 +1182,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
         customerId: string;
         subscriptionId: string | null;
         boxVersionId: string;
+        cycleDate: Date | null;
         status: $Enums.OrderStatus;
         totalPrice: runtime.Decimal;
         deliveryDate: Date | null;
@@ -1488,6 +1551,7 @@ export interface OrderFieldRefs {
     readonly customerId: Prisma.FieldRef<"Order", 'String'>;
     readonly subscriptionId: Prisma.FieldRef<"Order", 'String'>;
     readonly boxVersionId: Prisma.FieldRef<"Order", 'String'>;
+    readonly cycleDate: Prisma.FieldRef<"Order", 'DateTime'>;
     readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>;
     readonly totalPrice: Prisma.FieldRef<"Order", 'Decimal'>;
     readonly deliveryDate: Prisma.FieldRef<"Order", 'DateTime'>;

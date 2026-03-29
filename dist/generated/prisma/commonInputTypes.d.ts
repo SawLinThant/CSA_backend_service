@@ -264,6 +264,51 @@ export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
     _min?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>;
     _max?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>;
 };
+export type EnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionOrderCycleOutcome | Prisma.EnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    in?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel> | $Enums.SubscriptionOrderCycleOutcome;
+};
+export type EnumSubscriptionOrderCycleOutcomeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionOrderCycleOutcome | Prisma.EnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    in?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionOrderCycleOutcome;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel>;
+};
+export type EnumCapacityStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CapacityStatus | Prisma.EnumCapacityStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel> | $Enums.CapacityStatus;
+};
+export type EnumCapacityStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CapacityStatus | Prisma.EnumCapacityStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCapacityStatusWithAggregatesFilter<$PrismaModel> | $Enums.CapacityStatus;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel>;
+};
+export type EnumReservationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationStatus | Prisma.EnumReservationStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel> | $Enums.ReservationStatus;
+};
+export type EnumReservationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationStatus | Prisma.EnumReservationStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumReservationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReservationStatus;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel>;
+};
 export type EnumPaymentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentStatus | Prisma.EnumPaymentStatusFieldRefInput<$PrismaModel>;
     in?: $Enums.PaymentStatus[] | Prisma.ListEnumPaymentStatusFieldRefInput<$PrismaModel>;
@@ -568,6 +613,51 @@ export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
     _count?: Prisma.NestedIntFilter<$PrismaModel>;
     _min?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>;
     _max?: Prisma.NestedEnumOrderStatusFilter<$PrismaModel>;
+};
+export type NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionOrderCycleOutcome | Prisma.EnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    in?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel> | $Enums.SubscriptionOrderCycleOutcome;
+};
+export type NestedEnumSubscriptionOrderCycleOutcomeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubscriptionOrderCycleOutcome | Prisma.EnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    in?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.SubscriptionOrderCycleOutcome[] | Prisma.ListEnumSubscriptionOrderCycleOutcomeFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.SubscriptionOrderCycleOutcome;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumSubscriptionOrderCycleOutcomeFilter<$PrismaModel>;
+};
+export type NestedEnumCapacityStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.CapacityStatus | Prisma.EnumCapacityStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel> | $Enums.CapacityStatus;
+};
+export type NestedEnumCapacityStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CapacityStatus | Prisma.EnumCapacityStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CapacityStatus[] | Prisma.ListEnumCapacityStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCapacityStatusWithAggregatesFilter<$PrismaModel> | $Enums.CapacityStatus;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumCapacityStatusFilter<$PrismaModel>;
+};
+export type NestedEnumReservationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationStatus | Prisma.EnumReservationStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel> | $Enums.ReservationStatus;
+};
+export type NestedEnumReservationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationStatus | Prisma.EnumReservationStatusFieldRefInput<$PrismaModel>;
+    in?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.ReservationStatus[] | Prisma.ListEnumReservationStatusFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumReservationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReservationStatus;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumReservationStatusFilter<$PrismaModel>;
 };
 export type NestedEnumPaymentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentStatus | Prisma.EnumPaymentStatusFieldRefInput<$PrismaModel>;

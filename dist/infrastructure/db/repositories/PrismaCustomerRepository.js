@@ -11,6 +11,7 @@ function mapDbUserToUser(user) {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        imageUrl: user.imageUrl,
         passwordHash: user.password,
         role: user.role,
         status: user.status,

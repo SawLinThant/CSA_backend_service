@@ -17,6 +17,7 @@ router.get('/products/:id', (req, res) => productController.publicGetProduct(req
 
 router.get('/boxes', (req, res) => boxController.publicListBoxes(req, res));
 router.get('/boxes/:id', (req, res) => boxController.publicGetBox(req, res));
+router.get('/boxes/:id/detail', (req, res) => boxController.publicGetBoxDetail(req, res));
 router.get('/box-versions', (req, res) => boxController.publicListBoxVersions(req, res));
 router.get('/box-versions/:id/items', (req, res) => boxController.publicListBoxVersionItems(req, res));
 router.get('/box-versions/:id', (req, res) => boxController.publicGetBoxVersion(req, res));

@@ -22,5 +22,9 @@ exports.listSubscriptionPlansQuerySchema = zod_1.z.object({
     limit: zod_1.z.coerce.number().int().min(1).max(100).default(20),
     boxId: zod_1.z.string().min(1).optional(),
     active: zod_1.z.coerce.boolean().optional(),
+    deliveryFrequency: zod_1.z.enum(['weekly', 'monthly']).optional(),
+    minPrice: zod_1.z.coerce.number().positive().optional(),
+    maxPrice: zod_1.z.coerce.number().positive().optional(),
+    sortBy: zod_1.z.enum(['newest', 'priceAsc', 'priceDesc', 'nameAsc']).optional(),
 });
 //# sourceMappingURL=subscriptionPlanDtos.js.map

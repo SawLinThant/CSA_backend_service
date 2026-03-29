@@ -21,6 +21,11 @@ export const listBoxesQuerySchema = z.object({
   isActive: z.coerce.boolean().optional(),
 });
 
+export const publicBoxDetailQuerySchema = z.object({
+  date: z.coerce.date().optional(),
+});
+
 export type CreateBoxInput = z.infer<typeof createBoxSchema>;
 export type UpdateBoxInput = z.infer<typeof updateBoxSchema>;
 export type ListBoxesQuery = z.infer<typeof listBoxesQuerySchema>;
+export type PublicBoxDetailQuery = z.infer<typeof publicBoxDetailQuerySchema>;

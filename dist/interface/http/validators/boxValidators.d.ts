@@ -17,6 +17,9 @@ export declare const boxValidators: {
         name: import("zod").ZodOptional<import("zod").ZodString>;
         isActive: import("zod").ZodOptional<import("zod").ZodCoercedBoolean<unknown>>;
     }, import("zod/v4/core").$strip>;
+    publicBoxDetailQuery: import("zod").ZodObject<{
+        date: import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>;
+    }, import("zod/v4/core").$strip>;
     createBoxVersion: import("zod").ZodObject<{
         boxId: import("zod").ZodString;
         versionName: import("zod").ZodString;
@@ -43,6 +46,40 @@ export declare const boxValidators: {
     updateBoxItem: import("zod").ZodObject<{
         quantity: import("zod").ZodOptional<import("zod").ZodNumber>;
         optional: import("zod").ZodOptional<import("zod").ZodBoolean>;
+    }, import("zod/v4/core").$strip>;
+    recomputeBoxVersionCapacity: import("zod").ZodObject<{
+        cycleDate: import("zod").ZodCoercedDate<unknown>;
+    }, import("zod/v4/core").$strip>;
+    listCapacitySnapshotsQuery: import("zod").ZodObject<{
+        page: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        boxVersionId: import("zod").ZodOptional<import("zod").ZodString>;
+        status: import("zod").ZodOptional<import("zod").ZodEnum<{
+            open: "open";
+            locked: "locked";
+            closed: "closed";
+        }>>;
+        cycleDateFrom: import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>;
+        cycleDateTo: import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>;
+    }, import("zod/v4/core").$strip>;
+    updateCapacitySnapshotStatus: import("zod").ZodObject<{
+        status: import("zod").ZodEnum<{
+            open: "open";
+            locked: "locked";
+            closed: "closed";
+        }>;
+    }, import("zod/v4/core").$strip>;
+    listInventoryReservationsQuery: import("zod").ZodObject<{
+        page: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
+        status: import("zod").ZodOptional<import("zod").ZodEnum<{
+            reserved: "reserved";
+            consumed: "consumed";
+            released: "released";
+            expired: "expired";
+        }>>;
+        cycleDateFrom: import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>;
+        cycleDateTo: import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>;
     }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=boxValidators.d.ts.map

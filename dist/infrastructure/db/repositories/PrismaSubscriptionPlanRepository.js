@@ -30,13 +30,29 @@ class PrismaSubscriptionPlanRepository {
             where.boxId = filters.boxId;
         if (filters?.active !== undefined)
             where.active = filters.active;
+        if (filters?.deliveryFrequency)
+            where.deliveryFrequency = filters.deliveryFrequency;
+        if (filters?.minPrice !== undefined || filters?.maxPrice !== undefined) {
+            where.price = {};
+            if (filters.minPrice !== undefined)
+                where.price.gte = filters.minPrice;
+            if (filters.maxPrice !== undefined)
+                where.price.lte = filters.maxPrice;
+        }
         const hasWhere = Object.keys(where).length > 0;
+        const orderBy = filters?.sortBy === 'priceAsc'
+            ? { price: 'asc' }
+            : filters?.sortBy === 'priceDesc'
+                ? { price: 'desc' }
+                : filters?.sortBy === 'nameAsc'
+                    ? { name: 'asc' }
+                    : { createdAt: 'desc' };
         const [items, total] = await Promise.all([
             prismaClient_1.default.subscriptionPlan.findMany({
                 skip,
                 take,
                 ...(hasWhere && { where }),
-                orderBy: { createdAt: 'desc' },
+                orderBy,
             }),
             hasWhere ? prismaClient_1.default.subscriptionPlan.count({ where }) : prismaClient_1.default.subscriptionPlan.count(),
         ]);

@@ -41,17 +41,36 @@ export class PrismaSubscriptionPlanRepository implements SubscriptionPlanReposit
     take: number,
     filters?: SubscriptionPlanListFilters,
   ): Promise<{ items: SubscriptionPlan[]; total: number }> {
-    const where: { boxId?: string; active?: boolean } = {};
+    const where: {
+      boxId?: string;
+      active?: boolean;
+      deliveryFrequency?: SubscriptionPlan['deliveryFrequency'];
+      price?: { gte?: number; lte?: number };
+    } = {};
     if (filters?.boxId) where.boxId = filters.boxId;
     if (filters?.active !== undefined) where.active = filters.active;
+    if (filters?.deliveryFrequency) where.deliveryFrequency = filters.deliveryFrequency;
+    if (filters?.minPrice !== undefined || filters?.maxPrice !== undefined) {
+      where.price = {};
+      if (filters.minPrice !== undefined) where.price.gte = filters.minPrice;
+      if (filters.maxPrice !== undefined) where.price.lte = filters.maxPrice;
+    }
     const hasWhere = Object.keys(where).length > 0;
+    const orderBy =
+      filters?.sortBy === 'priceAsc'
+        ? { price: 'asc' as const }
+        : filters?.sortBy === 'priceDesc'
+          ? { price: 'desc' as const }
+          : filters?.sortBy === 'nameAsc'
+            ? { name: 'asc' as const }
+            : { createdAt: 'desc' as const };
 
     const [items, total] = await Promise.all([
       prisma.subscriptionPlan.findMany({
         skip,
         take,
         ...(hasWhere && { where }),
-        orderBy: { createdAt: 'desc' },
+        orderBy,
       }),
       hasWhere ? prisma.subscriptionPlan.count({ where }) : prisma.subscriptionPlan.count(),
     ]);

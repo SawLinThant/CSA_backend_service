@@ -11,9 +11,13 @@ function mapRowToSubscription(row: {
   id: string;
   customerId: string;
   planId: string;
+  boxId: string | null;
   status: string;
   startDate: Date;
   nextDeliveryDate: Date;
+  nextOrderDate: Date | null;
+  lastOrderDate: Date | null;
+  pauseReason: string | null;
   pauseUntil: Date | null;
   createdAt: Date;
 }): Subscription {
@@ -21,9 +25,13 @@ function mapRowToSubscription(row: {
     id: row.id,
     customerId: row.customerId,
     planId: row.planId,
+    boxId: row.boxId,
     status: row.status as Subscription['status'],
     startDate: row.startDate,
     nextDeliveryDate: row.nextDeliveryDate,
+    nextOrderDate: row.nextOrderDate,
+    lastOrderDate: row.lastOrderDate,
+    pauseReason: row.pauseReason,
     pauseUntil: row.pauseUntil,
     createdAt: row.createdAt,
   };
@@ -35,9 +43,13 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
       data: {
         customerId: data.customerId,
         planId: data.planId,
+        boxId: data.boxId ?? null,
         status: data.status,
         startDate: data.startDate,
         nextDeliveryDate: data.nextDeliveryDate,
+        nextOrderDate: data.nextOrderDate ?? null,
+        lastOrderDate: data.lastOrderDate ?? null,
+        pauseReason: data.pauseReason ?? null,
         pauseUntil: data.pauseUntil ?? null,
       },
     });
@@ -88,6 +100,9 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
       data: {
         ...(data.status !== undefined && { status: data.status }),
         ...(data.nextDeliveryDate !== undefined && { nextDeliveryDate: data.nextDeliveryDate }),
+        ...(data.nextOrderDate !== undefined && { nextOrderDate: data.nextOrderDate }),
+        ...(data.lastOrderDate !== undefined && { lastOrderDate: data.lastOrderDate }),
+        ...(data.pauseReason !== undefined && { pauseReason: data.pauseReason }),
         ...(data.pauseUntil !== undefined && { pauseUntil: data.pauseUntil }),
       },
     });

@@ -270,6 +270,39 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     /**
+     * `prisma.subscriptionOrderCycleEvent`: Exposes CRUD operations for the **SubscriptionOrderCycleEvent** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more SubscriptionOrderCycleEvents
+      * const subscriptionOrderCycleEvents = await prisma.subscriptionOrderCycleEvent.findMany()
+      * ```
+      */
+    get subscriptionOrderCycleEvent(): Prisma.SubscriptionOrderCycleEventDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.capacitySnapshot`: Exposes CRUD operations for the **CapacitySnapshot** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more CapacitySnapshots
+      * const capacitySnapshots = await prisma.capacitySnapshot.findMany()
+      * ```
+      */
+    get capacitySnapshot(): Prisma.CapacitySnapshotDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.inventoryReservation`: Exposes CRUD operations for the **InventoryReservation** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more InventoryReservations
+      * const inventoryReservations = await prisma.inventoryReservation.findMany()
+      * ```
+      */
+    get inventoryReservation(): Prisma.InventoryReservationDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
      * `prisma.orderItem`: Exposes CRUD operations for the **OrderItem** model.
       * Example usage:
       * ```ts

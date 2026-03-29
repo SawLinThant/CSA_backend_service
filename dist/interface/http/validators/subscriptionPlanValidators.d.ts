@@ -25,6 +25,18 @@ export declare const subscriptionPlanValidators: {
         limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
         boxId: import("zod").ZodOptional<import("zod").ZodString>;
         active: import("zod").ZodOptional<import("zod").ZodCoercedBoolean<unknown>>;
+        deliveryFrequency: import("zod").ZodOptional<import("zod").ZodEnum<{
+            weekly: "weekly";
+            monthly: "monthly";
+        }>>;
+        minPrice: import("zod").ZodOptional<import("zod").ZodCoercedNumber<unknown>>;
+        maxPrice: import("zod").ZodOptional<import("zod").ZodCoercedNumber<unknown>>;
+        sortBy: import("zod").ZodOptional<import("zod").ZodEnum<{
+            newest: "newest";
+            priceAsc: "priceAsc";
+            priceDesc: "priceDesc";
+            nameAsc: "nameAsc";
+        }>>;
     }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=subscriptionPlanValidators.d.ts.map

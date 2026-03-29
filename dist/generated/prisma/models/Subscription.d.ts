@@ -15,9 +15,13 @@ export type SubscriptionMinAggregateOutputType = {
     id: string | null;
     customerId: string | null;
     planId: string | null;
+    boxId: string | null;
     status: $Enums.SubscriptionStatus | null;
     startDate: Date | null;
     nextDeliveryDate: Date | null;
+    nextOrderDate: Date | null;
+    lastOrderDate: Date | null;
+    pauseReason: string | null;
     pauseUntil: Date | null;
     createdAt: Date | null;
 };
@@ -25,9 +29,13 @@ export type SubscriptionMaxAggregateOutputType = {
     id: string | null;
     customerId: string | null;
     planId: string | null;
+    boxId: string | null;
     status: $Enums.SubscriptionStatus | null;
     startDate: Date | null;
     nextDeliveryDate: Date | null;
+    nextOrderDate: Date | null;
+    lastOrderDate: Date | null;
+    pauseReason: string | null;
     pauseUntil: Date | null;
     createdAt: Date | null;
 };
@@ -35,9 +43,13 @@ export type SubscriptionCountAggregateOutputType = {
     id: number;
     customerId: number;
     planId: number;
+    boxId: number;
     status: number;
     startDate: number;
     nextDeliveryDate: number;
+    nextOrderDate: number;
+    lastOrderDate: number;
+    pauseReason: number;
     pauseUntil: number;
     createdAt: number;
     _all: number;
@@ -46,9 +58,13 @@ export type SubscriptionMinAggregateInputType = {
     id?: true;
     customerId?: true;
     planId?: true;
+    boxId?: true;
     status?: true;
     startDate?: true;
     nextDeliveryDate?: true;
+    nextOrderDate?: true;
+    lastOrderDate?: true;
+    pauseReason?: true;
     pauseUntil?: true;
     createdAt?: true;
 };
@@ -56,9 +72,13 @@ export type SubscriptionMaxAggregateInputType = {
     id?: true;
     customerId?: true;
     planId?: true;
+    boxId?: true;
     status?: true;
     startDate?: true;
     nextDeliveryDate?: true;
+    nextOrderDate?: true;
+    lastOrderDate?: true;
+    pauseReason?: true;
     pauseUntil?: true;
     createdAt?: true;
 };
@@ -66,9 +86,13 @@ export type SubscriptionCountAggregateInputType = {
     id?: true;
     customerId?: true;
     planId?: true;
+    boxId?: true;
     status?: true;
     startDate?: true;
     nextDeliveryDate?: true;
+    nextOrderDate?: true;
+    lastOrderDate?: true;
+    pauseReason?: true;
     pauseUntil?: true;
     createdAt?: true;
     _all?: true;
@@ -139,9 +163,13 @@ export type SubscriptionGroupByOutputType = {
     id: string;
     customerId: string;
     planId: string;
+    boxId: string | null;
     status: $Enums.SubscriptionStatus;
     startDate: Date;
     nextDeliveryDate: Date;
+    nextOrderDate: Date | null;
+    lastOrderDate: Date | null;
+    pauseReason: string | null;
     pauseUntil: Date | null;
     createdAt: Date;
     _count: SubscriptionCountAggregateOutputType | null;
@@ -158,27 +186,41 @@ export type SubscriptionWhereInput = {
     id?: Prisma.StringFilter<"Subscription"> | string;
     customerId?: Prisma.StringFilter<"Subscription"> | string;
     planId?: Prisma.StringFilter<"Subscription"> | string;
+    boxId?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
+    nextOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    lastOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    pauseReason?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     pauseUntil?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
     customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>;
     plan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>;
+    box?: Prisma.XOR<Prisma.BoxNullableScalarRelationFilter, Prisma.BoxWhereInput> | null;
     orders?: Prisma.OrderListRelationFilter;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventListRelationFilter;
 };
 export type SubscriptionOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     planId?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrderInput | Prisma.SortOrder;
     status?: Prisma.SortOrder;
     startDate?: Prisma.SortOrder;
     nextDeliveryDate?: Prisma.SortOrder;
+    nextOrderDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    lastOrderDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    pauseReason?: Prisma.SortOrderInput | Prisma.SortOrder;
     pauseUntil?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     customer?: Prisma.CustomerOrderByWithRelationInput;
     plan?: Prisma.SubscriptionPlanOrderByWithRelationInput;
+    box?: Prisma.BoxOrderByWithRelationInput;
     orders?: Prisma.OrderOrderByRelationAggregateInput;
+    reservations?: Prisma.InventoryReservationOrderByRelationAggregateInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventOrderByRelationAggregateInput;
 };
 export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
     id?: string;
@@ -187,22 +229,33 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
     NOT?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[];
     customerId?: Prisma.StringFilter<"Subscription"> | string;
     planId?: Prisma.StringFilter<"Subscription"> | string;
+    boxId?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
+    nextOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    lastOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    pauseReason?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     pauseUntil?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
     customer?: Prisma.XOR<Prisma.CustomerScalarRelationFilter, Prisma.CustomerWhereInput>;
     plan?: Prisma.XOR<Prisma.SubscriptionPlanScalarRelationFilter, Prisma.SubscriptionPlanWhereInput>;
+    box?: Prisma.XOR<Prisma.BoxNullableScalarRelationFilter, Prisma.BoxWhereInput> | null;
     orders?: Prisma.OrderListRelationFilter;
+    reservations?: Prisma.InventoryReservationListRelationFilter;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventListRelationFilter;
 }, "id">;
 export type SubscriptionOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     planId?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrderInput | Prisma.SortOrder;
     status?: Prisma.SortOrder;
     startDate?: Prisma.SortOrder;
     nextDeliveryDate?: Prisma.SortOrder;
+    nextOrderDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    lastOrderDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    pauseReason?: Prisma.SortOrderInput | Prisma.SortOrder;
     pauseUntil?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     _count?: Prisma.SubscriptionCountOrderByAggregateInput;
@@ -216,9 +269,13 @@ export type SubscriptionScalarWhereWithAggregatesInput = {
     id?: Prisma.StringWithAggregatesFilter<"Subscription"> | string;
     customerId?: Prisma.StringWithAggregatesFilter<"Subscription"> | string;
     planId?: Prisma.StringWithAggregatesFilter<"Subscription"> | string;
+    boxId?: Prisma.StringNullableWithAggregatesFilter<"Subscription"> | string | null;
     status?: Prisma.EnumSubscriptionStatusWithAggregatesFilter<"Subscription"> | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string;
     nextDeliveryDate?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string;
+    nextOrderDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null;
+    lastOrderDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null;
+    pauseReason?: Prisma.StringNullableWithAggregatesFilter<"Subscription"> | string | null;
     pauseUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Subscription"> | Date | string;
 };
@@ -227,52 +284,80 @@ export type SubscriptionCreateInput = {
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
     plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
     orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionUncheckedCreateInput = {
     id?: string;
     customerId: string;
     planId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
     plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionCreateManyInput = {
     id?: string;
     customerId: string;
     planId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
 };
@@ -281,6 +366,9 @@ export type SubscriptionUpdateManyMutationInput = {
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -288,9 +376,13 @@ export type SubscriptionUncheckedUpdateManyInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -306,9 +398,13 @@ export type SubscriptionCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     planId?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     startDate?: Prisma.SortOrder;
     nextDeliveryDate?: Prisma.SortOrder;
+    nextOrderDate?: Prisma.SortOrder;
+    lastOrderDate?: Prisma.SortOrder;
+    pauseReason?: Prisma.SortOrder;
     pauseUntil?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
@@ -316,9 +412,13 @@ export type SubscriptionMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     planId?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     startDate?: Prisma.SortOrder;
     nextDeliveryDate?: Prisma.SortOrder;
+    nextOrderDate?: Prisma.SortOrder;
+    lastOrderDate?: Prisma.SortOrder;
+    pauseReason?: Prisma.SortOrder;
     pauseUntil?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
@@ -326,15 +426,23 @@ export type SubscriptionMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     customerId?: Prisma.SortOrder;
     planId?: Prisma.SortOrder;
+    boxId?: Prisma.SortOrder;
     status?: Prisma.SortOrder;
     startDate?: Prisma.SortOrder;
     nextDeliveryDate?: Prisma.SortOrder;
+    nextOrderDate?: Prisma.SortOrder;
+    lastOrderDate?: Prisma.SortOrder;
+    pauseReason?: Prisma.SortOrder;
     pauseUntil?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
 };
 export type SubscriptionNullableScalarRelationFilter = {
     is?: Prisma.SubscriptionWhereInput | null;
     isNot?: Prisma.SubscriptionWhereInput | null;
+};
+export type SubscriptionScalarRelationFilter = {
+    is?: Prisma.SubscriptionWhereInput;
+    isNot?: Prisma.SubscriptionWhereInput;
 };
 export type SubscriptionCreateNestedManyWithoutCustomerInput = {
     create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutCustomerInput, Prisma.SubscriptionUncheckedCreateWithoutCustomerInput> | Prisma.SubscriptionCreateWithoutCustomerInput[] | Prisma.SubscriptionUncheckedCreateWithoutCustomerInput[];
@@ -372,6 +480,44 @@ export type SubscriptionUncheckedUpdateManyWithoutCustomerNestedInput = {
     connect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
     update?: Prisma.SubscriptionUpdateWithWhereUniqueWithoutCustomerInput | Prisma.SubscriptionUpdateWithWhereUniqueWithoutCustomerInput[];
     updateMany?: Prisma.SubscriptionUpdateManyWithWhereWithoutCustomerInput | Prisma.SubscriptionUpdateManyWithWhereWithoutCustomerInput[];
+    deleteMany?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[];
+};
+export type SubscriptionCreateNestedManyWithoutBoxInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionCreateWithoutBoxInput[] | Prisma.SubscriptionUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutBoxInput | Prisma.SubscriptionCreateOrConnectWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionCreateManyBoxInputEnvelope;
+    connect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+};
+export type SubscriptionUncheckedCreateNestedManyWithoutBoxInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionCreateWithoutBoxInput[] | Prisma.SubscriptionUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutBoxInput | Prisma.SubscriptionCreateOrConnectWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionCreateManyBoxInputEnvelope;
+    connect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+};
+export type SubscriptionUpdateManyWithoutBoxNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionCreateWithoutBoxInput[] | Prisma.SubscriptionUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutBoxInput | Prisma.SubscriptionCreateOrConnectWithoutBoxInput[];
+    upsert?: Prisma.SubscriptionUpsertWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionUpsertWithWhereUniqueWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionCreateManyBoxInputEnvelope;
+    set?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    delete?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    connect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    update?: Prisma.SubscriptionUpdateWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionUpdateWithWhereUniqueWithoutBoxInput[];
+    updateMany?: Prisma.SubscriptionUpdateManyWithWhereWithoutBoxInput | Prisma.SubscriptionUpdateManyWithWhereWithoutBoxInput[];
+    deleteMany?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[];
+};
+export type SubscriptionUncheckedUpdateManyWithoutBoxNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput> | Prisma.SubscriptionCreateWithoutBoxInput[] | Prisma.SubscriptionUncheckedCreateWithoutBoxInput[];
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutBoxInput | Prisma.SubscriptionCreateOrConnectWithoutBoxInput[];
+    upsert?: Prisma.SubscriptionUpsertWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionUpsertWithWhereUniqueWithoutBoxInput[];
+    createMany?: Prisma.SubscriptionCreateManyBoxInputEnvelope;
+    set?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    delete?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    connect?: Prisma.SubscriptionWhereUniqueInput | Prisma.SubscriptionWhereUniqueInput[];
+    update?: Prisma.SubscriptionUpdateWithWhereUniqueWithoutBoxInput | Prisma.SubscriptionUpdateWithWhereUniqueWithoutBoxInput[];
+    updateMany?: Prisma.SubscriptionUpdateManyWithWhereWithoutBoxInput | Prisma.SubscriptionUpdateManyWithWhereWithoutBoxInput[];
     deleteMany?: Prisma.SubscriptionScalarWhereInput | Prisma.SubscriptionScalarWhereInput[];
 };
 export type SubscriptionCreateNestedManyWithoutPlanInput = {
@@ -429,25 +575,63 @@ export type SubscriptionUpdateOneWithoutOrdersNestedInput = {
     connect?: Prisma.SubscriptionWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutOrdersInput, Prisma.SubscriptionUpdateWithoutOrdersInput>, Prisma.SubscriptionUncheckedUpdateWithoutOrdersInput>;
 };
+export type SubscriptionCreateNestedOneWithoutCycleEventsInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedCreateWithoutCycleEventsInput>;
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutCycleEventsInput;
+    connect?: Prisma.SubscriptionWhereUniqueInput;
+};
+export type SubscriptionUpdateOneWithoutCycleEventsNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedCreateWithoutCycleEventsInput>;
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutCycleEventsInput;
+    upsert?: Prisma.SubscriptionUpsertWithoutCycleEventsInput;
+    disconnect?: Prisma.SubscriptionWhereInput | boolean;
+    delete?: Prisma.SubscriptionWhereInput | boolean;
+    connect?: Prisma.SubscriptionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutCycleEventsInput, Prisma.SubscriptionUpdateWithoutCycleEventsInput>, Prisma.SubscriptionUncheckedUpdateWithoutCycleEventsInput>;
+};
+export type SubscriptionCreateNestedOneWithoutReservationsInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutReservationsInput, Prisma.SubscriptionUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutReservationsInput;
+    connect?: Prisma.SubscriptionWhereUniqueInput;
+};
+export type SubscriptionUpdateOneRequiredWithoutReservationsNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionCreateWithoutReservationsInput, Prisma.SubscriptionUncheckedCreateWithoutReservationsInput>;
+    connectOrCreate?: Prisma.SubscriptionCreateOrConnectWithoutReservationsInput;
+    upsert?: Prisma.SubscriptionUpsertWithoutReservationsInput;
+    connect?: Prisma.SubscriptionWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionUpdateToOneWithWhereWithoutReservationsInput, Prisma.SubscriptionUpdateWithoutReservationsInput>, Prisma.SubscriptionUncheckedUpdateWithoutReservationsInput>;
+};
 export type SubscriptionCreateWithoutCustomerInput = {
     id?: string;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
     orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionUncheckedCreateWithoutCustomerInput = {
     id?: string;
     planId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionCreateOrConnectWithoutCustomerInput = {
     where: Prisma.SubscriptionWhereUniqueInput;
@@ -477,31 +661,100 @@ export type SubscriptionScalarWhereInput = {
     id?: Prisma.StringFilter<"Subscription"> | string;
     customerId?: Prisma.StringFilter<"Subscription"> | string;
     planId?: Prisma.StringFilter<"Subscription"> | string;
+    boxId?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     status?: Prisma.EnumSubscriptionStatusFilter<"Subscription"> | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
+    nextOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    lastOrderDate?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
+    pauseReason?: Prisma.StringNullableFilter<"Subscription"> | string | null;
     pauseUntil?: Prisma.DateTimeNullableFilter<"Subscription"> | Date | string | null;
     createdAt?: Prisma.DateTimeFilter<"Subscription"> | Date | string;
+};
+export type SubscriptionCreateWithoutBoxInput = {
+    id?: string;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
+    plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionUncheckedCreateWithoutBoxInput = {
+    id?: string;
+    customerId: string;
+    planId: string;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionCreateOrConnectWithoutBoxInput = {
+    where: Prisma.SubscriptionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput>;
+};
+export type SubscriptionCreateManyBoxInputEnvelope = {
+    data: Prisma.SubscriptionCreateManyBoxInput | Prisma.SubscriptionCreateManyBoxInput[];
+    skipDuplicates?: boolean;
+};
+export type SubscriptionUpsertWithWhereUniqueWithoutBoxInput = {
+    where: Prisma.SubscriptionWhereUniqueInput;
+    update: Prisma.XOR<Prisma.SubscriptionUpdateWithoutBoxInput, Prisma.SubscriptionUncheckedUpdateWithoutBoxInput>;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutBoxInput, Prisma.SubscriptionUncheckedCreateWithoutBoxInput>;
+};
+export type SubscriptionUpdateWithWhereUniqueWithoutBoxInput = {
+    where: Prisma.SubscriptionWhereUniqueInput;
+    data: Prisma.XOR<Prisma.SubscriptionUpdateWithoutBoxInput, Prisma.SubscriptionUncheckedUpdateWithoutBoxInput>;
+};
+export type SubscriptionUpdateManyWithWhereWithoutBoxInput = {
+    where: Prisma.SubscriptionScalarWhereInput;
+    data: Prisma.XOR<Prisma.SubscriptionUpdateManyMutationInput, Prisma.SubscriptionUncheckedUpdateManyWithoutBoxInput>;
 };
 export type SubscriptionCreateWithoutPlanInput = {
     id?: string;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
     orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionUncheckedCreateWithoutPlanInput = {
     id?: string;
     customerId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionCreateOrConnectWithoutPlanInput = {
     where: Prisma.SubscriptionWhereUniqueInput;
@@ -529,20 +782,32 @@ export type SubscriptionCreateWithoutOrdersInput = {
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
     customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
     plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionUncheckedCreateWithoutOrdersInput = {
     id?: string;
     customerId: string;
     planId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
 };
 export type SubscriptionCreateOrConnectWithoutOrdersInput = {
     where: Prisma.SubscriptionWhereUniqueInput;
@@ -562,27 +827,197 @@ export type SubscriptionUpdateWithoutOrdersInput = {
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
     plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateWithoutOrdersInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
     planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionCreateWithoutCycleEventsInput = {
+    id?: string;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
+    plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionUncheckedCreateWithoutCycleEventsInput = {
+    id?: string;
+    customerId: string;
+    planId: string;
+    boxId?: string | null;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    reservations?: Prisma.InventoryReservationUncheckedCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionCreateOrConnectWithoutCycleEventsInput = {
+    where: Prisma.SubscriptionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedCreateWithoutCycleEventsInput>;
+};
+export type SubscriptionUpsertWithoutCycleEventsInput = {
+    update: Prisma.XOR<Prisma.SubscriptionUpdateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedUpdateWithoutCycleEventsInput>;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedCreateWithoutCycleEventsInput>;
+    where?: Prisma.SubscriptionWhereInput;
+};
+export type SubscriptionUpdateToOneWithWhereWithoutCycleEventsInput = {
+    where?: Prisma.SubscriptionWhereInput;
+    data: Prisma.XOR<Prisma.SubscriptionUpdateWithoutCycleEventsInput, Prisma.SubscriptionUncheckedUpdateWithoutCycleEventsInput>;
+};
+export type SubscriptionUpdateWithoutCycleEventsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionUncheckedUpdateWithoutCycleEventsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionCreateWithoutReservationsInput = {
+    id?: string;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    customer: Prisma.CustomerCreateNestedOneWithoutSubscriptionsInput;
+    plan: Prisma.SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput;
+    box?: Prisma.BoxCreateNestedOneWithoutSubscriptionsInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionUncheckedCreateWithoutReservationsInput = {
+    id?: string;
+    customerId: string;
+    planId: string;
+    boxId?: string | null;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutSubscriptionInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput;
+};
+export type SubscriptionCreateOrConnectWithoutReservationsInput = {
+    where: Prisma.SubscriptionWhereUniqueInput;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutReservationsInput, Prisma.SubscriptionUncheckedCreateWithoutReservationsInput>;
+};
+export type SubscriptionUpsertWithoutReservationsInput = {
+    update: Prisma.XOR<Prisma.SubscriptionUpdateWithoutReservationsInput, Prisma.SubscriptionUncheckedUpdateWithoutReservationsInput>;
+    create: Prisma.XOR<Prisma.SubscriptionCreateWithoutReservationsInput, Prisma.SubscriptionUncheckedCreateWithoutReservationsInput>;
+    where?: Prisma.SubscriptionWhereInput;
+};
+export type SubscriptionUpdateToOneWithWhereWithoutReservationsInput = {
+    where?: Prisma.SubscriptionWhereInput;
+    data: Prisma.XOR<Prisma.SubscriptionUpdateWithoutReservationsInput, Prisma.SubscriptionUncheckedUpdateWithoutReservationsInput>;
+};
+export type SubscriptionUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionUncheckedUpdateWithoutReservationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionCreateManyCustomerInput = {
     id?: string;
     planId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
 };
@@ -591,36 +1026,114 @@ export type SubscriptionUpdateWithoutCustomerInput = {
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateWithoutCustomerInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateManyWithoutCustomerInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionCreateManyBoxInput = {
+    id?: string;
+    customerId: string;
+    planId: string;
+    status?: $Enums.SubscriptionStatus;
+    startDate: Date | string;
+    nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
+    pauseUntil?: Date | string | null;
+    createdAt?: Date | string;
+};
+export type SubscriptionUpdateWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    plan?: Prisma.SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionUncheckedUpdateWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
+};
+export type SubscriptionUncheckedUpdateManyWithoutBoxInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    planId?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
+    startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type SubscriptionCreateManyPlanInput = {
     id?: string;
     customerId: string;
+    boxId?: string | null;
     status?: $Enums.SubscriptionStatus;
     startDate: Date | string;
     nextDeliveryDate: Date | string;
+    nextOrderDate?: Date | string | null;
+    lastOrderDate?: Date | string | null;
+    pauseReason?: string | null;
     pauseUntil?: Date | string | null;
     createdAt?: Date | string;
 };
@@ -629,27 +1142,43 @@ export type SubscriptionUpdateWithoutPlanInput = {
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     customer?: Prisma.CustomerUpdateOneRequiredWithoutSubscriptionsNestedInput;
+    box?: Prisma.BoxUpdateOneWithoutSubscriptionsNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateWithoutPlanInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    reservations?: Prisma.InventoryReservationUncheckedUpdateManyWithoutSubscriptionNestedInput;
+    cycleEvents?: Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput;
 };
 export type SubscriptionUncheckedUpdateManyWithoutPlanInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     customerId?: Prisma.StringFieldUpdateOperationsInput | string;
+    boxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     status?: Prisma.EnumSubscriptionStatusFieldUpdateOperationsInput | $Enums.SubscriptionStatus;
     startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     nextDeliveryDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    nextOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    lastOrderDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    pauseReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     pauseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -658,9 +1187,13 @@ export type SubscriptionUncheckedUpdateManyWithoutPlanInput = {
  */
 export type SubscriptionCountOutputType = {
     orders: number;
+    reservations: number;
+    cycleEvents: number;
 };
 export type SubscriptionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     orders?: boolean | SubscriptionCountOutputTypeCountOrdersArgs;
+    reservations?: boolean | SubscriptionCountOutputTypeCountReservationsArgs;
+    cycleEvents?: boolean | SubscriptionCountOutputTypeCountCycleEventsArgs;
 };
 /**
  * SubscriptionCountOutputType without action
@@ -677,83 +1210,128 @@ export type SubscriptionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
 export type SubscriptionCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.OrderWhereInput;
 };
+/**
+ * SubscriptionCountOutputType without action
+ */
+export type SubscriptionCountOutputTypeCountReservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.InventoryReservationWhereInput;
+};
+/**
+ * SubscriptionCountOutputType without action
+ */
+export type SubscriptionCountOutputTypeCountCycleEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+};
 export type SubscriptionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     customerId?: boolean;
     planId?: boolean;
+    boxId?: boolean;
     status?: boolean;
     startDate?: boolean;
     nextDeliveryDate?: boolean;
+    nextOrderDate?: boolean;
+    lastOrderDate?: boolean;
+    pauseReason?: boolean;
     pauseUntil?: boolean;
     createdAt?: boolean;
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
     orders?: boolean | Prisma.Subscription$ordersArgs<ExtArgs>;
+    reservations?: boolean | Prisma.Subscription$reservationsArgs<ExtArgs>;
+    cycleEvents?: boolean | Prisma.Subscription$cycleEventsArgs<ExtArgs>;
     _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["subscription"]>;
 export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     customerId?: boolean;
     planId?: boolean;
+    boxId?: boolean;
     status?: boolean;
     startDate?: boolean;
     nextDeliveryDate?: boolean;
+    nextOrderDate?: boolean;
+    lastOrderDate?: boolean;
+    pauseReason?: boolean;
     pauseUntil?: boolean;
     createdAt?: boolean;
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
 }, ExtArgs["result"]["subscription"]>;
 export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     customerId?: boolean;
     planId?: boolean;
+    boxId?: boolean;
     status?: boolean;
     startDate?: boolean;
     nextDeliveryDate?: boolean;
+    nextOrderDate?: boolean;
+    lastOrderDate?: boolean;
+    pauseReason?: boolean;
     pauseUntil?: boolean;
     createdAt?: boolean;
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
 }, ExtArgs["result"]["subscription"]>;
 export type SubscriptionSelectScalar = {
     id?: boolean;
     customerId?: boolean;
     planId?: boolean;
+    boxId?: boolean;
     status?: boolean;
     startDate?: boolean;
     nextDeliveryDate?: boolean;
+    nextOrderDate?: boolean;
+    lastOrderDate?: boolean;
+    pauseReason?: boolean;
     pauseUntil?: boolean;
     createdAt?: boolean;
 };
-export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "planId" | "status" | "startDate" | "nextDeliveryDate" | "pauseUntil" | "createdAt", ExtArgs["result"]["subscription"]>;
+export type SubscriptionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customerId" | "planId" | "boxId" | "status" | "startDate" | "nextDeliveryDate" | "nextOrderDate" | "lastOrderDate" | "pauseReason" | "pauseUntil" | "createdAt", ExtArgs["result"]["subscription"]>;
 export type SubscriptionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
     orders?: boolean | Prisma.Subscription$ordersArgs<ExtArgs>;
+    reservations?: boolean | Prisma.Subscription$reservationsArgs<ExtArgs>;
+    cycleEvents?: boolean | Prisma.Subscription$cycleEventsArgs<ExtArgs>;
     _count?: boolean | Prisma.SubscriptionCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
 };
 export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     customer?: boolean | Prisma.CustomerDefaultArgs<ExtArgs>;
     plan?: boolean | Prisma.SubscriptionPlanDefaultArgs<ExtArgs>;
+    box?: boolean | Prisma.Subscription$boxArgs<ExtArgs>;
 };
 export type $SubscriptionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "Subscription";
     objects: {
         customer: Prisma.$CustomerPayload<ExtArgs>;
         plan: Prisma.$SubscriptionPlanPayload<ExtArgs>;
+        box: Prisma.$BoxPayload<ExtArgs> | null;
         orders: Prisma.$OrderPayload<ExtArgs>[];
+        reservations: Prisma.$InventoryReservationPayload<ExtArgs>[];
+        cycleEvents: Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
         customerId: string;
         planId: string;
+        boxId: string | null;
         status: $Enums.SubscriptionStatus;
         startDate: Date;
         nextDeliveryDate: Date;
+        nextOrderDate: Date | null;
+        lastOrderDate: Date | null;
+        pauseReason: string | null;
         pauseUntil: Date | null;
         createdAt: Date;
     }, ExtArgs["result"]["subscription"]>;
@@ -1087,7 +1665,10 @@ export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends run
     readonly [Symbol.toStringTag]: "PrismaPromise";
     customer<T extends Prisma.CustomerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CustomerDefaultArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     plan<T extends Prisma.SubscriptionPlanDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPlanDefaultArgs<ExtArgs>>): Prisma.Prisma__SubscriptionPlanClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    box<T extends Prisma.Subscription$boxArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$boxArgs<ExtArgs>>): Prisma.Prisma__BoxClient<runtime.Types.Result.GetResult<Prisma.$BoxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     orders<T extends Prisma.Subscription$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    reservations<T extends Prisma.Subscription$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    cycleEvents<T extends Prisma.Subscription$cycleEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subscription$cycleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1116,9 +1697,13 @@ export interface SubscriptionFieldRefs {
     readonly id: Prisma.FieldRef<"Subscription", 'String'>;
     readonly customerId: Prisma.FieldRef<"Subscription", 'String'>;
     readonly planId: Prisma.FieldRef<"Subscription", 'String'>;
+    readonly boxId: Prisma.FieldRef<"Subscription", 'String'>;
     readonly status: Prisma.FieldRef<"Subscription", 'SubscriptionStatus'>;
     readonly startDate: Prisma.FieldRef<"Subscription", 'DateTime'>;
     readonly nextDeliveryDate: Prisma.FieldRef<"Subscription", 'DateTime'>;
+    readonly nextOrderDate: Prisma.FieldRef<"Subscription", 'DateTime'>;
+    readonly lastOrderDate: Prisma.FieldRef<"Subscription", 'DateTime'>;
+    readonly pauseReason: Prisma.FieldRef<"Subscription", 'String'>;
     readonly pauseUntil: Prisma.FieldRef<"Subscription", 'DateTime'>;
     readonly createdAt: Prisma.FieldRef<"Subscription", 'DateTime'>;
 }
@@ -1505,6 +2090,24 @@ export type SubscriptionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
     limit?: number;
 };
 /**
+ * Subscription.box
+ */
+export type Subscription$boxArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Box
+     */
+    select?: Prisma.BoxSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Box
+     */
+    omit?: Prisma.BoxOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.BoxInclude<ExtArgs> | null;
+    where?: Prisma.BoxWhereInput;
+};
+/**
  * Subscription.orders
  */
 export type Subscription$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1526,6 +2129,52 @@ export type Subscription$ordersArgs<ExtArgs extends runtime.Types.Extensions.Int
     take?: number;
     skip?: number;
     distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+/**
+ * Subscription.reservations
+ */
+export type Subscription$reservationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InventoryReservation
+     */
+    select?: Prisma.InventoryReservationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the InventoryReservation
+     */
+    omit?: Prisma.InventoryReservationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.InventoryReservationInclude<ExtArgs> | null;
+    where?: Prisma.InventoryReservationWhereInput;
+    orderBy?: Prisma.InventoryReservationOrderByWithRelationInput | Prisma.InventoryReservationOrderByWithRelationInput[];
+    cursor?: Prisma.InventoryReservationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.InventoryReservationScalarFieldEnum | Prisma.InventoryReservationScalarFieldEnum[];
+};
+/**
+ * Subscription.cycleEvents
+ */
+export type Subscription$cycleEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput | Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput[];
+    cursor?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.SubscriptionOrderCycleEventScalarFieldEnum | Prisma.SubscriptionOrderCycleEventScalarFieldEnum[];
 };
 /**
  * Subscription without action

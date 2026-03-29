@@ -65,6 +65,9 @@ export const ModelName = {
   SubscriptionPlan: 'SubscriptionPlan',
   Subscription: 'Subscription',
   Order: 'Order',
+  SubscriptionOrderCycleEvent: 'SubscriptionOrderCycleEvent',
+  CapacitySnapshot: 'CapacitySnapshot',
+  InventoryReservation: 'InventoryReservation',
   OrderItem: 'OrderItem',
   Payment: 'Payment',
   Delivery: 'Delivery',
@@ -92,6 +95,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
+  imageUrl: 'imageUrl',
   password: 'password',
   role: 'role',
   status: 'status',
@@ -245,9 +249,13 @@ export const SubscriptionScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
   planId: 'planId',
+  boxId: 'boxId',
   status: 'status',
   startDate: 'startDate',
   nextDeliveryDate: 'nextDeliveryDate',
+  nextOrderDate: 'nextOrderDate',
+  lastOrderDate: 'lastOrderDate',
+  pauseReason: 'pauseReason',
   pauseUntil: 'pauseUntil',
   createdAt: 'createdAt'
 } as const
@@ -260,6 +268,7 @@ export const OrderScalarFieldEnum = {
   customerId: 'customerId',
   subscriptionId: 'subscriptionId',
   boxVersionId: 'boxVersionId',
+  cycleDate: 'cycleDate',
   status: 'status',
   totalPrice: 'totalPrice',
   deliveryDate: 'deliveryDate',
@@ -267,6 +276,52 @@ export const OrderScalarFieldEnum = {
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const SubscriptionOrderCycleEventScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  cycleDate: 'cycleDate',
+  referenceDate: 'referenceDate',
+  outcome: 'outcome',
+  reason: 'reason',
+  attempt: 'attempt',
+  createdAt: 'createdAt'
+} as const
+
+export type SubscriptionOrderCycleEventScalarFieldEnum = (typeof SubscriptionOrderCycleEventScalarFieldEnum)[keyof typeof SubscriptionOrderCycleEventScalarFieldEnum]
+
+
+export const CapacitySnapshotScalarFieldEnum = {
+  id: 'id',
+  boxVersionId: 'boxVersionId',
+  cycleDate: 'cycleDate',
+  maxBoxes: 'maxBoxes',
+  reservedBoxes: 'reservedBoxes',
+  consumedBoxes: 'consumedBoxes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CapacitySnapshotScalarFieldEnum = (typeof CapacitySnapshotScalarFieldEnum)[keyof typeof CapacitySnapshotScalarFieldEnum]
+
+
+export const InventoryReservationScalarFieldEnum = {
+  id: 'id',
+  subscriptionId: 'subscriptionId',
+  boxVersionId: 'boxVersionId',
+  capacitySnapshotId: 'capacitySnapshotId',
+  cycleDate: 'cycleDate',
+  quantity: 'quantity',
+  status: 'status',
+  reason: 'reason',
+  idempotencyKey: 'idempotencyKey',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InventoryReservationScalarFieldEnum = (typeof InventoryReservationScalarFieldEnum)[keyof typeof InventoryReservationScalarFieldEnum]
 
 
 export const OrderItemScalarFieldEnum = {

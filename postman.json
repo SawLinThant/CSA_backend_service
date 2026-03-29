@@ -1115,7 +1115,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"email\": \"\"\n}"
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"email\": \"\",\n  \"otp\": \"123456\"\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/auth/customer/register",
@@ -1142,6 +1142,24 @@
                   "raw": "{{baseUrl}}/auth/customer/login",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "customer", "login"]
+                }
+              }
+            },
+            {
+              "name": "Send OTP (beta)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/otp/send",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "otp", "send"]
                 }
               }
             }
@@ -1172,6 +1190,114 @@
                   "raw": "{{baseUrl}}/auth/customer/profile",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "customer", "profile"]
+                }
+              }
+            },
+            {
+              "name": "Update (with image upload)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "", "type": "text" },
+                    { "key": "phone", "value": "", "type": "text" },
+                    { "key": "email", "value": "", "type": "text" },
+                    { "key": "image", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/profile/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "profile", "upload"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Address",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/addresses",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "addresses"]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/addresses/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "addresses", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addressLine\": \"No. 12, Main Street\",\n  \"city\": \"Yangon\",\n  \"state\": \"Yangon\",\n  \"postalCode\": \"11181\",\n  \"country\": \"Myanmar\",\n  \"isDefault\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/addresses",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "addresses"]
+                }
+              }
+            },
+            {
+              "name": "Update",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" },
+                  { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addressLine\": \"No. 99, Updated Street\",\n  \"city\": \"Mandalay\",\n  \"isDefault\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/addresses/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "addresses", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "DELETE",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/addresses/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "addresses", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
                 }
               }
             }
@@ -1259,6 +1385,41 @@
               }
             }
           ]
+        },
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "List",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/orders?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "orders"],
+                  "query": [
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" },
+                    { "key": "status", "value": "pending", "disabled": true }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/customer/orders/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "customer", "orders", ":id"],
+                  "variable": [{ "key": "id", "value": "" }]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -1280,7 +1441,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\",\n  \"email\": \"\"\n}"
+                  "raw": "{\n  \"name\": \"\",\n  \"phone\": \"\",\n  \"password\": \"\",\n  \"farmName\": \"\",\n  \"farmLocation\": \"\",\n  \"farmDescription\": \"\",\n  \"email\": \"\",\n  \"otp\": \"123456\"\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/auth/farmer/register",
@@ -1309,12 +1470,47 @@
                   "path": ["auth", "farmer", "login"]
                 }
               }
+            },
+            {
+              "name": "Send OTP (beta)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  { "key": "Content-Type", "value": "application/json" }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/otp/send",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "otp", "send"]
+                }
+              }
             }
           ]
         },
         {
           "name": "Profile",
           "item": [
+            {
+              "name": "Get",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/profile",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "profile"]
+                }
+              }
+            },
             {
               "name": "Update",
               "request": {
@@ -1337,6 +1533,35 @@
                   "raw": "{{baseUrl}}/auth/farmer/profile",
                   "host": ["{{baseUrl}}"],
                   "path": ["auth", "farmer", "profile"]
+                }
+              }
+            },
+            {
+              "name": "Update (with image upload)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    { "key": "name", "value": "", "type": "text" },
+                    { "key": "phone", "value": "", "type": "text" },
+                    { "key": "email", "value": "", "type": "text" },
+                    { "key": "farmName", "value": "", "type": "text" },
+                    { "key": "farmLocation", "value": "", "type": "text" },
+                    { "key": "farmDescription", "value": "", "type": "text" },
+                    { "key": "image", "type": "file", "src": [] }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/farmer/profile/upload",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["auth", "farmer", "profile", "upload"]
                 }
               }
             }

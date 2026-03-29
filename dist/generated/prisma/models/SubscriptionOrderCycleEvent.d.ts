@@ -1,0 +1,1342 @@
+import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
+import type * as Prisma from "../internal/prismaNamespace";
+/**
+ * Model SubscriptionOrderCycleEvent
+ *
+ */
+export type SubscriptionOrderCycleEventModel = runtime.Types.Result.DefaultSelection<Prisma.$SubscriptionOrderCycleEventPayload>;
+export type AggregateSubscriptionOrderCycleEvent = {
+    _count: SubscriptionOrderCycleEventCountAggregateOutputType | null;
+    _avg: SubscriptionOrderCycleEventAvgAggregateOutputType | null;
+    _sum: SubscriptionOrderCycleEventSumAggregateOutputType | null;
+    _min: SubscriptionOrderCycleEventMinAggregateOutputType | null;
+    _max: SubscriptionOrderCycleEventMaxAggregateOutputType | null;
+};
+export type SubscriptionOrderCycleEventAvgAggregateOutputType = {
+    attempt: number | null;
+};
+export type SubscriptionOrderCycleEventSumAggregateOutputType = {
+    attempt: number | null;
+};
+export type SubscriptionOrderCycleEventMinAggregateOutputType = {
+    id: string | null;
+    subscriptionId: string | null;
+    cycleDate: Date | null;
+    referenceDate: Date | null;
+    outcome: $Enums.SubscriptionOrderCycleOutcome | null;
+    reason: string | null;
+    attempt: number | null;
+    createdAt: Date | null;
+};
+export type SubscriptionOrderCycleEventMaxAggregateOutputType = {
+    id: string | null;
+    subscriptionId: string | null;
+    cycleDate: Date | null;
+    referenceDate: Date | null;
+    outcome: $Enums.SubscriptionOrderCycleOutcome | null;
+    reason: string | null;
+    attempt: number | null;
+    createdAt: Date | null;
+};
+export type SubscriptionOrderCycleEventCountAggregateOutputType = {
+    id: number;
+    subscriptionId: number;
+    cycleDate: number;
+    referenceDate: number;
+    outcome: number;
+    reason: number;
+    attempt: number;
+    createdAt: number;
+    _all: number;
+};
+export type SubscriptionOrderCycleEventAvgAggregateInputType = {
+    attempt?: true;
+};
+export type SubscriptionOrderCycleEventSumAggregateInputType = {
+    attempt?: true;
+};
+export type SubscriptionOrderCycleEventMinAggregateInputType = {
+    id?: true;
+    subscriptionId?: true;
+    cycleDate?: true;
+    referenceDate?: true;
+    outcome?: true;
+    reason?: true;
+    attempt?: true;
+    createdAt?: true;
+};
+export type SubscriptionOrderCycleEventMaxAggregateInputType = {
+    id?: true;
+    subscriptionId?: true;
+    cycleDate?: true;
+    referenceDate?: true;
+    outcome?: true;
+    reason?: true;
+    attempt?: true;
+    createdAt?: true;
+};
+export type SubscriptionOrderCycleEventCountAggregateInputType = {
+    id?: true;
+    subscriptionId?: true;
+    cycleDate?: true;
+    referenceDate?: true;
+    outcome?: true;
+    reason?: true;
+    attempt?: true;
+    createdAt?: true;
+    _all?: true;
+};
+export type SubscriptionOrderCycleEventAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubscriptionOrderCycleEvent to aggregate.
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of SubscriptionOrderCycleEvents to fetch.
+     */
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput | Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` SubscriptionOrderCycleEvents from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` SubscriptionOrderCycleEvents.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned SubscriptionOrderCycleEvents
+    **/
+    _count?: true | SubscriptionOrderCycleEventCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+    **/
+    _avg?: SubscriptionOrderCycleEventAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+    **/
+    _sum?: SubscriptionOrderCycleEventSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubscriptionOrderCycleEventMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubscriptionOrderCycleEventMaxAggregateInputType;
+};
+export type GetSubscriptionOrderCycleEventAggregateType<T extends SubscriptionOrderCycleEventAggregateArgs> = {
+    [P in keyof T & keyof AggregateSubscriptionOrderCycleEvent]: P extends '_count' | 'count' ? T[P] extends true ? number : Prisma.GetScalarType<T[P], AggregateSubscriptionOrderCycleEvent[P]> : Prisma.GetScalarType<T[P], AggregateSubscriptionOrderCycleEvent[P]>;
+};
+export type SubscriptionOrderCycleEventGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithAggregationInput | Prisma.SubscriptionOrderCycleEventOrderByWithAggregationInput[];
+    by: Prisma.SubscriptionOrderCycleEventScalarFieldEnum[] | Prisma.SubscriptionOrderCycleEventScalarFieldEnum;
+    having?: Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: SubscriptionOrderCycleEventCountAggregateInputType | true;
+    _avg?: SubscriptionOrderCycleEventAvgAggregateInputType;
+    _sum?: SubscriptionOrderCycleEventSumAggregateInputType;
+    _min?: SubscriptionOrderCycleEventMinAggregateInputType;
+    _max?: SubscriptionOrderCycleEventMaxAggregateInputType;
+};
+export type SubscriptionOrderCycleEventGroupByOutputType = {
+    id: string;
+    subscriptionId: string | null;
+    cycleDate: Date | null;
+    referenceDate: Date;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason: string | null;
+    attempt: number;
+    createdAt: Date;
+    _count: SubscriptionOrderCycleEventCountAggregateOutputType | null;
+    _avg: SubscriptionOrderCycleEventAvgAggregateOutputType | null;
+    _sum: SubscriptionOrderCycleEventSumAggregateOutputType | null;
+    _min: SubscriptionOrderCycleEventMinAggregateOutputType | null;
+    _max: SubscriptionOrderCycleEventMaxAggregateOutputType | null;
+};
+type GetSubscriptionOrderCycleEventGroupByPayload<T extends SubscriptionOrderCycleEventGroupByArgs> = Prisma.PrismaPromise<Array<Prisma.PickEnumerable<SubscriptionOrderCycleEventGroupByOutputType, T['by']> & {
+    [P in ((keyof T) & (keyof SubscriptionOrderCycleEventGroupByOutputType))]: P extends '_count' ? T[P] extends boolean ? number : Prisma.GetScalarType<T[P], SubscriptionOrderCycleEventGroupByOutputType[P]> : Prisma.GetScalarType<T[P], SubscriptionOrderCycleEventGroupByOutputType[P]>;
+}>>;
+export type SubscriptionOrderCycleEventWhereInput = {
+    AND?: Prisma.SubscriptionOrderCycleEventWhereInput | Prisma.SubscriptionOrderCycleEventWhereInput[];
+    OR?: Prisma.SubscriptionOrderCycleEventWhereInput[];
+    NOT?: Prisma.SubscriptionOrderCycleEventWhereInput | Prisma.SubscriptionOrderCycleEventWhereInput[];
+    id?: Prisma.StringFilter<"SubscriptionOrderCycleEvent"> | string;
+    subscriptionId?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    cycleDate?: Prisma.DateTimeNullableFilter<"SubscriptionOrderCycleEvent"> | Date | string | null;
+    referenceDate?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFilter<"SubscriptionOrderCycleEvent"> | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    attempt?: Prisma.IntFilter<"SubscriptionOrderCycleEvent"> | number;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null;
+};
+export type SubscriptionOrderCycleEventOrderByWithRelationInput = {
+    id?: Prisma.SortOrder;
+    subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    referenceDate?: Prisma.SortOrder;
+    outcome?: Prisma.SortOrder;
+    reason?: Prisma.SortOrderInput | Prisma.SortOrder;
+    attempt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    subscription?: Prisma.SubscriptionOrderByWithRelationInput;
+};
+export type SubscriptionOrderCycleEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string;
+    AND?: Prisma.SubscriptionOrderCycleEventWhereInput | Prisma.SubscriptionOrderCycleEventWhereInput[];
+    OR?: Prisma.SubscriptionOrderCycleEventWhereInput[];
+    NOT?: Prisma.SubscriptionOrderCycleEventWhereInput | Prisma.SubscriptionOrderCycleEventWhereInput[];
+    subscriptionId?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    cycleDate?: Prisma.DateTimeNullableFilter<"SubscriptionOrderCycleEvent"> | Date | string | null;
+    referenceDate?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFilter<"SubscriptionOrderCycleEvent"> | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    attempt?: Prisma.IntFilter<"SubscriptionOrderCycleEvent"> | number;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null;
+}, "id">;
+export type SubscriptionOrderCycleEventOrderByWithAggregationInput = {
+    id?: Prisma.SortOrder;
+    subscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrderInput | Prisma.SortOrder;
+    referenceDate?: Prisma.SortOrder;
+    outcome?: Prisma.SortOrder;
+    reason?: Prisma.SortOrderInput | Prisma.SortOrder;
+    attempt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+    _count?: Prisma.SubscriptionOrderCycleEventCountOrderByAggregateInput;
+    _avg?: Prisma.SubscriptionOrderCycleEventAvgOrderByAggregateInput;
+    _max?: Prisma.SubscriptionOrderCycleEventMaxOrderByAggregateInput;
+    _min?: Prisma.SubscriptionOrderCycleEventMinOrderByAggregateInput;
+    _sum?: Prisma.SubscriptionOrderCycleEventSumOrderByAggregateInput;
+};
+export type SubscriptionOrderCycleEventScalarWhereWithAggregatesInput = {
+    AND?: Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput | Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput[];
+    OR?: Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput[];
+    NOT?: Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput | Prisma.SubscriptionOrderCycleEventScalarWhereWithAggregatesInput[];
+    id?: Prisma.StringWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | string;
+    subscriptionId?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    cycleDate?: Prisma.DateTimeNullableWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | Date | string | null;
+    referenceDate?: Prisma.DateTimeWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    attempt?: Prisma.IntWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | number;
+    createdAt?: Prisma.DateTimeWithAggregatesFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+};
+export type SubscriptionOrderCycleEventCreateInput = {
+    id?: string;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+    subscription?: Prisma.SubscriptionCreateNestedOneWithoutCycleEventsInput;
+};
+export type SubscriptionOrderCycleEventUncheckedCreateInput = {
+    id?: string;
+    subscriptionId?: string | null;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+};
+export type SubscriptionOrderCycleEventUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    subscription?: Prisma.SubscriptionUpdateOneWithoutCycleEventsNestedInput;
+};
+export type SubscriptionOrderCycleEventUncheckedUpdateInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventCreateManyInput = {
+    id?: string;
+    subscriptionId?: string | null;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+};
+export type SubscriptionOrderCycleEventUpdateManyMutationInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventUncheckedUpdateManyInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventListRelationFilter = {
+    every?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    some?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    none?: Prisma.SubscriptionOrderCycleEventWhereInput;
+};
+export type SubscriptionOrderCycleEventOrderByRelationAggregateInput = {
+    _count?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventCountOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    subscriptionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    referenceDate?: Prisma.SortOrder;
+    outcome?: Prisma.SortOrder;
+    reason?: Prisma.SortOrder;
+    attempt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventAvgOrderByAggregateInput = {
+    attempt?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventMaxOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    subscriptionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    referenceDate?: Prisma.SortOrder;
+    outcome?: Prisma.SortOrder;
+    reason?: Prisma.SortOrder;
+    attempt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventMinOrderByAggregateInput = {
+    id?: Prisma.SortOrder;
+    subscriptionId?: Prisma.SortOrder;
+    cycleDate?: Prisma.SortOrder;
+    referenceDate?: Prisma.SortOrder;
+    outcome?: Prisma.SortOrder;
+    reason?: Prisma.SortOrder;
+    attempt?: Prisma.SortOrder;
+    createdAt?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventSumOrderByAggregateInput = {
+    attempt?: Prisma.SortOrder;
+};
+export type SubscriptionOrderCycleEventCreateNestedManyWithoutSubscriptionInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput> | Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput[] | Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput[];
+    connectOrCreate?: Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput[];
+    createMany?: Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInputEnvelope;
+    connect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+};
+export type SubscriptionOrderCycleEventUncheckedCreateNestedManyWithoutSubscriptionInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput> | Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput[] | Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput[];
+    connectOrCreate?: Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput[];
+    createMany?: Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInputEnvelope;
+    connect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+};
+export type SubscriptionOrderCycleEventUpdateManyWithoutSubscriptionNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput> | Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput[] | Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput[];
+    connectOrCreate?: Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput[];
+    upsert?: Prisma.SubscriptionOrderCycleEventUpsertWithWhereUniqueWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpsertWithWhereUniqueWithoutSubscriptionInput[];
+    createMany?: Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInputEnvelope;
+    set?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    delete?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    connect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    update?: Prisma.SubscriptionOrderCycleEventUpdateWithWhereUniqueWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpdateWithWhereUniqueWithoutSubscriptionInput[];
+    updateMany?: Prisma.SubscriptionOrderCycleEventUpdateManyWithWhereWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpdateManyWithWhereWithoutSubscriptionInput[];
+    deleteMany?: Prisma.SubscriptionOrderCycleEventScalarWhereInput | Prisma.SubscriptionOrderCycleEventScalarWhereInput[];
+};
+export type SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionNestedInput = {
+    create?: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput> | Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput[] | Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput[];
+    connectOrCreate?: Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput[];
+    upsert?: Prisma.SubscriptionOrderCycleEventUpsertWithWhereUniqueWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpsertWithWhereUniqueWithoutSubscriptionInput[];
+    createMany?: Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInputEnvelope;
+    set?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    disconnect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    delete?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    connect?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput | Prisma.SubscriptionOrderCycleEventWhereUniqueInput[];
+    update?: Prisma.SubscriptionOrderCycleEventUpdateWithWhereUniqueWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpdateWithWhereUniqueWithoutSubscriptionInput[];
+    updateMany?: Prisma.SubscriptionOrderCycleEventUpdateManyWithWhereWithoutSubscriptionInput | Prisma.SubscriptionOrderCycleEventUpdateManyWithWhereWithoutSubscriptionInput[];
+    deleteMany?: Prisma.SubscriptionOrderCycleEventScalarWhereInput | Prisma.SubscriptionOrderCycleEventScalarWhereInput[];
+};
+export type EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput = {
+    set?: $Enums.SubscriptionOrderCycleOutcome;
+};
+export type SubscriptionOrderCycleEventCreateWithoutSubscriptionInput = {
+    id?: string;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+};
+export type SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput = {
+    id?: string;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+};
+export type SubscriptionOrderCycleEventCreateOrConnectWithoutSubscriptionInput = {
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    create: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput>;
+};
+export type SubscriptionOrderCycleEventCreateManySubscriptionInputEnvelope = {
+    data: Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInput | Prisma.SubscriptionOrderCycleEventCreateManySubscriptionInput[];
+    skipDuplicates?: boolean;
+};
+export type SubscriptionOrderCycleEventUpsertWithWhereUniqueWithoutSubscriptionInput = {
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    update: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateWithoutSubscriptionInput>;
+    create: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateWithoutSubscriptionInput>;
+};
+export type SubscriptionOrderCycleEventUpdateWithWhereUniqueWithoutSubscriptionInput = {
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateWithoutSubscriptionInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateWithoutSubscriptionInput>;
+};
+export type SubscriptionOrderCycleEventUpdateManyWithWhereWithoutSubscriptionInput = {
+    where: Prisma.SubscriptionOrderCycleEventScalarWhereInput;
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateManyMutationInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionInput>;
+};
+export type SubscriptionOrderCycleEventScalarWhereInput = {
+    AND?: Prisma.SubscriptionOrderCycleEventScalarWhereInput | Prisma.SubscriptionOrderCycleEventScalarWhereInput[];
+    OR?: Prisma.SubscriptionOrderCycleEventScalarWhereInput[];
+    NOT?: Prisma.SubscriptionOrderCycleEventScalarWhereInput | Prisma.SubscriptionOrderCycleEventScalarWhereInput[];
+    id?: Prisma.StringFilter<"SubscriptionOrderCycleEvent"> | string;
+    subscriptionId?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    cycleDate?: Prisma.DateTimeNullableFilter<"SubscriptionOrderCycleEvent"> | Date | string | null;
+    referenceDate?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFilter<"SubscriptionOrderCycleEvent"> | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.StringNullableFilter<"SubscriptionOrderCycleEvent"> | string | null;
+    attempt?: Prisma.IntFilter<"SubscriptionOrderCycleEvent"> | number;
+    createdAt?: Prisma.DateTimeFilter<"SubscriptionOrderCycleEvent"> | Date | string;
+};
+export type SubscriptionOrderCycleEventCreateManySubscriptionInput = {
+    id?: string;
+    cycleDate?: Date | string | null;
+    referenceDate: Date | string;
+    outcome: $Enums.SubscriptionOrderCycleOutcome;
+    reason?: string | null;
+    attempt?: number;
+    createdAt?: Date | string;
+};
+export type SubscriptionOrderCycleEventUpdateWithoutSubscriptionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventUncheckedUpdateWithoutSubscriptionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventUncheckedUpdateManyWithoutSubscriptionInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    cycleDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    referenceDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    outcome?: Prisma.EnumSubscriptionOrderCycleOutcomeFieldUpdateOperationsInput | $Enums.SubscriptionOrderCycleOutcome;
+    reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    attempt?: Prisma.IntFieldUpdateOperationsInput | number;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+export type SubscriptionOrderCycleEventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    subscriptionId?: boolean;
+    cycleDate?: boolean;
+    referenceDate?: boolean;
+    outcome?: boolean;
+    reason?: boolean;
+    attempt?: boolean;
+    createdAt?: boolean;
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+}, ExtArgs["result"]["subscriptionOrderCycleEvent"]>;
+export type SubscriptionOrderCycleEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    subscriptionId?: boolean;
+    cycleDate?: boolean;
+    referenceDate?: boolean;
+    outcome?: boolean;
+    reason?: boolean;
+    attempt?: boolean;
+    createdAt?: boolean;
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+}, ExtArgs["result"]["subscriptionOrderCycleEvent"]>;
+export type SubscriptionOrderCycleEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    id?: boolean;
+    subscriptionId?: boolean;
+    cycleDate?: boolean;
+    referenceDate?: boolean;
+    outcome?: boolean;
+    reason?: boolean;
+    attempt?: boolean;
+    createdAt?: boolean;
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+}, ExtArgs["result"]["subscriptionOrderCycleEvent"]>;
+export type SubscriptionOrderCycleEventSelectScalar = {
+    id?: boolean;
+    subscriptionId?: boolean;
+    cycleDate?: boolean;
+    referenceDate?: boolean;
+    outcome?: boolean;
+    reason?: boolean;
+    attempt?: boolean;
+    createdAt?: boolean;
+};
+export type SubscriptionOrderCycleEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subscriptionId" | "cycleDate" | "referenceDate" | "outcome" | "reason" | "attempt" | "createdAt", ExtArgs["result"]["subscriptionOrderCycleEvent"]>;
+export type SubscriptionOrderCycleEventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+};
+export type SubscriptionOrderCycleEventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+};
+export type SubscriptionOrderCycleEventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    subscription?: boolean | Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>;
+};
+export type $SubscriptionOrderCycleEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    name: "SubscriptionOrderCycleEvent";
+    objects: {
+        subscription: Prisma.$SubscriptionPayload<ExtArgs> | null;
+    };
+    scalars: runtime.Types.Extensions.GetPayloadResult<{
+        id: string;
+        subscriptionId: string | null;
+        cycleDate: Date | null;
+        referenceDate: Date;
+        outcome: $Enums.SubscriptionOrderCycleOutcome;
+        reason: string | null;
+        attempt: number;
+        createdAt: Date;
+    }, ExtArgs["result"]["subscriptionOrderCycleEvent"]>;
+    composites: {};
+};
+export type SubscriptionOrderCycleEventGetPayload<S extends boolean | null | undefined | SubscriptionOrderCycleEventDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload, S>;
+export type SubscriptionOrderCycleEventCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = Omit<SubscriptionOrderCycleEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+    select?: SubscriptionOrderCycleEventCountAggregateInputType | true;
+};
+export interface SubscriptionOrderCycleEventDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: {
+        types: Prisma.TypeMap<ExtArgs>['model']['SubscriptionOrderCycleEvent'];
+        meta: {
+            name: 'SubscriptionOrderCycleEvent';
+        };
+    };
+    /**
+     * Find zero or one SubscriptionOrderCycleEvent that matches the filter.
+     * @param {SubscriptionOrderCycleEventFindUniqueArgs} args - Arguments to find a SubscriptionOrderCycleEvent
+     * @example
+     * // Get one SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubscriptionOrderCycleEventFindUniqueArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventFindUniqueArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find one SubscriptionOrderCycleEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubscriptionOrderCycleEventFindUniqueOrThrowArgs} args - Arguments to find a SubscriptionOrderCycleEvent
+     * @example
+     * // Get one SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubscriptionOrderCycleEventFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first SubscriptionOrderCycleEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventFindFirstArgs} args - Arguments to find a SubscriptionOrderCycleEvent
+     * @example
+     * // Get one SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubscriptionOrderCycleEventFindFirstArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventFindFirstArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find the first SubscriptionOrderCycleEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventFindFirstOrThrowArgs} args - Arguments to find a SubscriptionOrderCycleEvent
+     * @example
+     * // Get one SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubscriptionOrderCycleEventFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Find zero or more SubscriptionOrderCycleEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvents = await prisma.subscriptionOrderCycleEvent.findMany()
+     *
+     * // Get first 10 SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvents = await prisma.subscriptionOrderCycleEvent.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const subscriptionOrderCycleEventWithIdOnly = await prisma.subscriptionOrderCycleEvent.findMany({ select: { id: true } })
+     *
+     */
+    findMany<T extends SubscriptionOrderCycleEventFindManyArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>;
+    /**
+     * Create a SubscriptionOrderCycleEvent.
+     * @param {SubscriptionOrderCycleEventCreateArgs} args - Arguments to create a SubscriptionOrderCycleEvent.
+     * @example
+     * // Create one SubscriptionOrderCycleEvent
+     * const SubscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.create({
+     *   data: {
+     *     // ... data to create a SubscriptionOrderCycleEvent
+     *   }
+     * })
+     *
+     */
+    create<T extends SubscriptionOrderCycleEventCreateArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventCreateArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Create many SubscriptionOrderCycleEvents.
+     * @param {SubscriptionOrderCycleEventCreateManyArgs} args - Arguments to create many SubscriptionOrderCycleEvents.
+     * @example
+     * // Create many SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     */
+    createMany<T extends SubscriptionOrderCycleEventCreateManyArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Create many SubscriptionOrderCycleEvents and returns the data saved in the database.
+     * @param {SubscriptionOrderCycleEventCreateManyAndReturnArgs} args - Arguments to create many SubscriptionOrderCycleEvents.
+     * @example
+     * // Create many SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Create many SubscriptionOrderCycleEvents and only return the `id`
+     * const subscriptionOrderCycleEventWithIdOnly = await prisma.subscriptionOrderCycleEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    createManyAndReturn<T extends SubscriptionOrderCycleEventCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Delete a SubscriptionOrderCycleEvent.
+     * @param {SubscriptionOrderCycleEventDeleteArgs} args - Arguments to delete one SubscriptionOrderCycleEvent.
+     * @example
+     * // Delete one SubscriptionOrderCycleEvent
+     * const SubscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.delete({
+     *   where: {
+     *     // ... filter to delete one SubscriptionOrderCycleEvent
+     *   }
+     * })
+     *
+     */
+    delete<T extends SubscriptionOrderCycleEventDeleteArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventDeleteArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Update one SubscriptionOrderCycleEvent.
+     * @param {SubscriptionOrderCycleEventUpdateArgs} args - Arguments to update one SubscriptionOrderCycleEvent.
+     * @example
+     * // Update one SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    update<T extends SubscriptionOrderCycleEventUpdateArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventUpdateArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Delete zero or more SubscriptionOrderCycleEvents.
+     * @param {SubscriptionOrderCycleEventDeleteManyArgs} args - Arguments to filter SubscriptionOrderCycleEvents to delete.
+     * @example
+     * // Delete a few SubscriptionOrderCycleEvents
+     * const { count } = await prisma.subscriptionOrderCycleEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     */
+    deleteMany<T extends SubscriptionOrderCycleEventDeleteManyArgs>(args?: Prisma.SelectSubset<T, SubscriptionOrderCycleEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more SubscriptionOrderCycleEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     */
+    updateMany<T extends SubscriptionOrderCycleEventUpdateManyArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>;
+    /**
+     * Update zero or more SubscriptionOrderCycleEvents and returns the data updated in the database.
+     * @param {SubscriptionOrderCycleEventUpdateManyAndReturnArgs} args - Arguments to update many SubscriptionOrderCycleEvents.
+     * @example
+     * // Update many SubscriptionOrderCycleEvents
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *
+     * // Update zero or more SubscriptionOrderCycleEvents and only return the `id`
+     * const subscriptionOrderCycleEventWithIdOnly = await prisma.subscriptionOrderCycleEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     *
+     */
+    updateManyAndReturn<T extends SubscriptionOrderCycleEventUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>;
+    /**
+     * Create or update one SubscriptionOrderCycleEvent.
+     * @param {SubscriptionOrderCycleEventUpsertArgs} args - Arguments to update or create a SubscriptionOrderCycleEvent.
+     * @example
+     * // Update or create a SubscriptionOrderCycleEvent
+     * const subscriptionOrderCycleEvent = await prisma.subscriptionOrderCycleEvent.upsert({
+     *   create: {
+     *     // ... data to create a SubscriptionOrderCycleEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SubscriptionOrderCycleEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubscriptionOrderCycleEventUpsertArgs>(args: Prisma.SelectSubset<T, SubscriptionOrderCycleEventUpsertArgs<ExtArgs>>): Prisma.Prisma__SubscriptionOrderCycleEventClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionOrderCycleEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Count the number of SubscriptionOrderCycleEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventCountArgs} args - Arguments to filter SubscriptionOrderCycleEvents to count.
+     * @example
+     * // Count the number of SubscriptionOrderCycleEvents
+     * const count = await prisma.subscriptionOrderCycleEvent.count({
+     *   where: {
+     *     // ... the filter for the SubscriptionOrderCycleEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubscriptionOrderCycleEventCountArgs>(args?: Prisma.Subset<T, SubscriptionOrderCycleEventCountArgs>): Prisma.PrismaPromise<T extends runtime.Types.Utils.Record<'select', any> ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], SubscriptionOrderCycleEventCountAggregateOutputType> : number>;
+    /**
+     * Allows you to perform aggregations operations on a SubscriptionOrderCycleEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubscriptionOrderCycleEventAggregateArgs>(args: Prisma.Subset<T, SubscriptionOrderCycleEventAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionOrderCycleEventAggregateType<T>>;
+    /**
+     * Group by SubscriptionOrderCycleEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubscriptionOrderCycleEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+    **/
+    groupBy<T extends SubscriptionOrderCycleEventGroupByArgs, HasSelectOrTake extends Prisma.Or<Prisma.Extends<'skip', Prisma.Keys<T>>, Prisma.Extends<'take', Prisma.Keys<T>>>, OrderByArg extends Prisma.True extends HasSelectOrTake ? {
+        orderBy: SubscriptionOrderCycleEventGroupByArgs['orderBy'];
+    } : {
+        orderBy?: SubscriptionOrderCycleEventGroupByArgs['orderBy'];
+    }, OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>, ByFields extends Prisma.MaybeTupleToUnion<T['by']>, ByValid extends Prisma.Has<ByFields, OrderFields>, HavingFields extends Prisma.GetHavingFields<T['having']>, HavingValid extends Prisma.Has<ByFields, HavingFields>, ByEmpty extends T['by'] extends never[] ? Prisma.True : Prisma.False, InputErrors extends ByEmpty extends Prisma.True ? `Error: "by" must not be empty.` : HavingValid extends Prisma.False ? {
+        [P in HavingFields]: P extends ByFields ? never : P extends string ? `Error: Field "${P}" used in "having" needs to be provided in "by".` : [
+            Error,
+            'Field ',
+            P,
+            ` in "having" needs to be provided in "by"`
+        ];
+    }[HavingFields] : 'take' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "take", you also need to provide "orderBy"' : 'skip' extends Prisma.Keys<T> ? 'orderBy' extends Prisma.Keys<T> ? ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields] : 'Error: If you provide "skip", you also need to provide "orderBy"' : ByValid extends Prisma.True ? {} : {
+        [P in OrderFields]: P extends ByFields ? never : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+    }[OrderFields]>(args: Prisma.SubsetIntersection<T, SubscriptionOrderCycleEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionOrderCycleEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>;
+    /**
+     * Fields of the SubscriptionOrderCycleEvent model
+     */
+    readonly fields: SubscriptionOrderCycleEventFieldRefs;
+}
+/**
+ * The delegate class that acts as a "Promise-like" for SubscriptionOrderCycleEvent.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export interface Prisma__SubscriptionOrderCycleEventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    subscription<T extends Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
+}
+/**
+ * Fields of the SubscriptionOrderCycleEvent model
+ */
+export interface SubscriptionOrderCycleEventFieldRefs {
+    readonly id: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'String'>;
+    readonly subscriptionId: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'String'>;
+    readonly cycleDate: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'DateTime'>;
+    readonly referenceDate: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'DateTime'>;
+    readonly outcome: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'SubscriptionOrderCycleOutcome'>;
+    readonly reason: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'String'>;
+    readonly attempt: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'Int'>;
+    readonly createdAt: Prisma.FieldRef<"SubscriptionOrderCycleEvent", 'DateTime'>;
+}
+/**
+ * SubscriptionOrderCycleEvent findUnique
+ */
+export type SubscriptionOrderCycleEventFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter, which SubscriptionOrderCycleEvent to fetch.
+     */
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+};
+/**
+ * SubscriptionOrderCycleEvent findUniqueOrThrow
+ */
+export type SubscriptionOrderCycleEventFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter, which SubscriptionOrderCycleEvent to fetch.
+     */
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+};
+/**
+ * SubscriptionOrderCycleEvent findFirst
+ */
+export type SubscriptionOrderCycleEventFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter, which SubscriptionOrderCycleEvent to fetch.
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of SubscriptionOrderCycleEvents to fetch.
+     */
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput | Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for SubscriptionOrderCycleEvents.
+     */
+    cursor?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` SubscriptionOrderCycleEvents from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` SubscriptionOrderCycleEvents.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of SubscriptionOrderCycleEvents.
+     */
+    distinct?: Prisma.SubscriptionOrderCycleEventScalarFieldEnum | Prisma.SubscriptionOrderCycleEventScalarFieldEnum[];
+};
+/**
+ * SubscriptionOrderCycleEvent findFirstOrThrow
+ */
+export type SubscriptionOrderCycleEventFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter, which SubscriptionOrderCycleEvent to fetch.
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of SubscriptionOrderCycleEvents to fetch.
+     */
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput | Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for SubscriptionOrderCycleEvents.
+     */
+    cursor?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` SubscriptionOrderCycleEvents from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` SubscriptionOrderCycleEvents.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of SubscriptionOrderCycleEvents.
+     */
+    distinct?: Prisma.SubscriptionOrderCycleEventScalarFieldEnum | Prisma.SubscriptionOrderCycleEventScalarFieldEnum[];
+};
+/**
+ * SubscriptionOrderCycleEvent findMany
+ */
+export type SubscriptionOrderCycleEventFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter, which SubscriptionOrderCycleEvents to fetch.
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of SubscriptionOrderCycleEvents to fetch.
+     */
+    orderBy?: Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput | Prisma.SubscriptionOrderCycleEventOrderByWithRelationInput[];
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing SubscriptionOrderCycleEvents.
+     */
+    cursor?: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` SubscriptionOrderCycleEvents from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` SubscriptionOrderCycleEvents.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of SubscriptionOrderCycleEvents.
+     */
+    distinct?: Prisma.SubscriptionOrderCycleEventScalarFieldEnum | Prisma.SubscriptionOrderCycleEventScalarFieldEnum[];
+};
+/**
+ * SubscriptionOrderCycleEvent create
+ */
+export type SubscriptionOrderCycleEventCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * The data needed to create a SubscriptionOrderCycleEvent.
+     */
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateInput>;
+};
+/**
+ * SubscriptionOrderCycleEvent createMany
+ */
+export type SubscriptionOrderCycleEventCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SubscriptionOrderCycleEvents.
+     */
+    data: Prisma.SubscriptionOrderCycleEventCreateManyInput | Prisma.SubscriptionOrderCycleEventCreateManyInput[];
+    skipDuplicates?: boolean;
+};
+/**
+ * SubscriptionOrderCycleEvent createManyAndReturn
+ */
+export type SubscriptionOrderCycleEventCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelectCreateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * The data used to create many SubscriptionOrderCycleEvents.
+     */
+    data: Prisma.SubscriptionOrderCycleEventCreateManyInput | Prisma.SubscriptionOrderCycleEventCreateManyInput[];
+    skipDuplicates?: boolean;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventIncludeCreateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * SubscriptionOrderCycleEvent update
+ */
+export type SubscriptionOrderCycleEventUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * The data needed to update a SubscriptionOrderCycleEvent.
+     */
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateInput>;
+    /**
+     * Choose, which SubscriptionOrderCycleEvent to update.
+     */
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+};
+/**
+ * SubscriptionOrderCycleEvent updateMany
+ */
+export type SubscriptionOrderCycleEventUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SubscriptionOrderCycleEvents.
+     */
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateManyMutationInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyInput>;
+    /**
+     * Filter which SubscriptionOrderCycleEvents to update
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * Limit how many SubscriptionOrderCycleEvents to update.
+     */
+    limit?: number;
+};
+/**
+ * SubscriptionOrderCycleEvent updateManyAndReturn
+ */
+export type SubscriptionOrderCycleEventUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelectUpdateManyAndReturn<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * The data used to update SubscriptionOrderCycleEvents.
+     */
+    data: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateManyMutationInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateManyInput>;
+    /**
+     * Filter which SubscriptionOrderCycleEvents to update
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * Limit how many SubscriptionOrderCycleEvents to update.
+     */
+    limit?: number;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventIncludeUpdateManyAndReturn<ExtArgs> | null;
+};
+/**
+ * SubscriptionOrderCycleEvent upsert
+ */
+export type SubscriptionOrderCycleEventUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * The filter to search for the SubscriptionOrderCycleEvent to update in case it exists.
+     */
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+    /**
+     * In case the SubscriptionOrderCycleEvent found by the `where` argument doesn't exist, create a new SubscriptionOrderCycleEvent with this data.
+     */
+    create: Prisma.XOR<Prisma.SubscriptionOrderCycleEventCreateInput, Prisma.SubscriptionOrderCycleEventUncheckedCreateInput>;
+    /**
+     * In case the SubscriptionOrderCycleEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: Prisma.XOR<Prisma.SubscriptionOrderCycleEventUpdateInput, Prisma.SubscriptionOrderCycleEventUncheckedUpdateInput>;
+};
+/**
+ * SubscriptionOrderCycleEvent delete
+ */
+export type SubscriptionOrderCycleEventDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+    /**
+     * Filter which SubscriptionOrderCycleEvent to delete.
+     */
+    where: Prisma.SubscriptionOrderCycleEventWhereUniqueInput;
+};
+/**
+ * SubscriptionOrderCycleEvent deleteMany
+ */
+export type SubscriptionOrderCycleEventDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubscriptionOrderCycleEvents to delete
+     */
+    where?: Prisma.SubscriptionOrderCycleEventWhereInput;
+    /**
+     * Limit how many SubscriptionOrderCycleEvents to delete.
+     */
+    limit?: number;
+};
+/**
+ * SubscriptionOrderCycleEvent.subscription
+ */
+export type SubscriptionOrderCycleEvent$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subscription
+     */
+    select?: Prisma.SubscriptionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Subscription
+     */
+    omit?: Prisma.SubscriptionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionInclude<ExtArgs> | null;
+    where?: Prisma.SubscriptionWhereInput;
+};
+/**
+ * SubscriptionOrderCycleEvent without action
+ */
+export type SubscriptionOrderCycleEventDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubscriptionOrderCycleEvent
+     */
+    select?: Prisma.SubscriptionOrderCycleEventSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the SubscriptionOrderCycleEvent
+     */
+    omit?: Prisma.SubscriptionOrderCycleEventOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.SubscriptionOrderCycleEventInclude<ExtArgs> | null;
+};
+export {};
+//# sourceMappingURL=SubscriptionOrderCycleEvent.d.ts.map
