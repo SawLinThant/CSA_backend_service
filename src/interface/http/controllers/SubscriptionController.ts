@@ -13,6 +13,30 @@ const customerRepository = new PrismaCustomerRepository();
 const subscriptionPlanRepository = new PrismaSubscriptionPlanRepository();
 const subscriptionRepository = new PrismaSubscriptionRepository();
 
+function serializeSubscription(s: {
+  id: string;
+  customerId: string;
+  planId: string;
+  status: string;
+  startDate: Date;
+  nextDeliveryDate: Date;
+  nextOrderDate: Date | null;
+  pauseUntil: Date | null;
+  createdAt: Date;
+}) {
+  return {
+    id: s.id,
+    customerId: s.customerId,
+    planId: s.planId,
+    status: s.status,
+    startDate: s.startDate.toISOString(),
+    nextDeliveryDate: s.nextDeliveryDate.toISOString(),
+    nextOrderDate: s.nextOrderDate ? s.nextOrderDate.toISOString() : null,
+    pauseUntil: s.pauseUntil ? s.pauseUntil.toISOString() : null,
+    createdAt: s.createdAt.toISOString(),
+  };
+}
+
 const customerCreateSubscriptionUseCase = new CustomerCreateSubscriptionUseCase(
   customerRepository,
   subscriptionPlanRepository,
@@ -41,7 +65,10 @@ export class SubscriptionController {
     }
     try {
       const result = await customerListMySubscriptionsUseCase.execute(req.user.id, parseResult.data);
-      return res.status(200).json(result);
+      return res.status(200).json({
+        ...result,
+        items: result.items.map(serializeSubscription),
+      });
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed';
       if (message.includes('not found')) return res.status(404).json({ error: message });
@@ -55,7 +82,7 @@ export class SubscriptionController {
     if (!id) return res.status(400).json({ error: 'Subscription id required' });
     try {
       const result = await customerGetSubscriptionUseCase.execute(req.user.id, id);
-      return res.status(200).json(result);
+      return res.status(200).json(serializeSubscription(result));
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Not found';
       return res.status(404).json({ error: message });

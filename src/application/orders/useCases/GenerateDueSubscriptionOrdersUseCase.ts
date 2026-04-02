@@ -4,6 +4,16 @@ import { CycleDateCalculator } from '../../../domain/orders/services/CycleDateCa
 import { SubscriptionOrderEligibilityService } from '../../../domain/orders/services/SubscriptionOrderEligibilityService';
 import { OrderFromSubscriptionFactory } from '../../../domain/orders/services/OrderFromSubscriptionFactory';
 
+function addDays(date: Date, days: number): Date {
+  const d = new Date(date.getTime());
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function estimateDeliveryDays(deliveryFrequency: 'weekly' | 'monthly'): number {
+  return deliveryFrequency === 'weekly' ? 2 : 3;
+}
+
 export interface GenerateDueSubscriptionOrdersResult {
   referenceDate: Date;
   scanned: number;
@@ -243,8 +253,12 @@ export class GenerateDueSubscriptionOrdersUseCase {
         })),
       });
 
+      const deliveryDate = addDays(cycleDate, estimateDeliveryDays(subscription.plan.deliveryFrequency));
       const order = await tx.order.create({
-        data: built.order,
+        data: {
+          ...built.order,
+          deliveryDate,
+        },
       });
       if (built.orderItems.length > 0) {
         await tx.orderItem.createMany({
@@ -257,6 +271,16 @@ export class GenerateDueSubscriptionOrdersUseCase {
           })),
         });
       }
+
+      await tx.delivery.create({
+        data: {
+          orderId: order.id,
+          deliveryStatus: 'scheduled',
+          deliveryDriver: null,
+          trackingCode: null,
+          deliveredAt: null,
+        },
+      });
 
       await tx.inventoryReservation.update({
         where: { id: reservation.id },

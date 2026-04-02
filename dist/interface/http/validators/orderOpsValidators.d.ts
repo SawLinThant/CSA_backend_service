@@ -8,9 +8,9 @@ export declare const orderOpsValidators: {
         page: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
         limit: import("zod").ZodDefault<import("zod").ZodCoercedNumber<unknown>>;
         outcome: import("zod").ZodOptional<import("zod").ZodEnum<{
+            failed: "failed";
             created: "created";
             skipped: "skipped";
-            failed: "failed";
         }>>;
         reason: import("zod").ZodOptional<import("zod").ZodString>;
         subscriptionId: import("zod").ZodOptional<import("zod").ZodString>;

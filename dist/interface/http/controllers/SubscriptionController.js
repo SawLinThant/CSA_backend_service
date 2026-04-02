@@ -13,6 +13,19 @@ const subscriptionValidators_1 = require("../validators/subscriptionValidators")
 const customerRepository = new PrismaCustomerRepository_1.PrismaCustomerRepository();
 const subscriptionPlanRepository = new PrismaSubscriptionPlanRepository_1.PrismaSubscriptionPlanRepository();
 const subscriptionRepository = new PrismaSubscriptionRepository_1.PrismaSubscriptionRepository();
+function serializeSubscription(s) {
+    return {
+        id: s.id,
+        customerId: s.customerId,
+        planId: s.planId,
+        status: s.status,
+        startDate: s.startDate.toISOString(),
+        nextDeliveryDate: s.nextDeliveryDate.toISOString(),
+        nextOrderDate: s.nextOrderDate ? s.nextOrderDate.toISOString() : null,
+        pauseUntil: s.pauseUntil ? s.pauseUntil.toISOString() : null,
+        createdAt: s.createdAt.toISOString(),
+    };
+}
 const customerCreateSubscriptionUseCase = new CustomerCreateSubscriptionUseCase_1.CustomerCreateSubscriptionUseCase(customerRepository, subscriptionPlanRepository, subscriptionRepository);
 const customerListMySubscriptionsUseCase = new CustomerListMySubscriptionsUseCase_1.CustomerListMySubscriptionsUseCase(customerRepository, subscriptionRepository);
 const customerGetSubscriptionUseCase = new CustomerGetSubscriptionUseCase_1.CustomerGetSubscriptionUseCase(customerRepository, subscriptionRepository);
@@ -28,7 +41,10 @@ class SubscriptionController {
         }
         try {
             const result = await customerListMySubscriptionsUseCase.execute(req.user.id, parseResult.data);
-            return res.status(200).json(result);
+            return res.status(200).json({
+                ...result,
+                items: result.items.map(serializeSubscription),
+            });
         }
         catch (error) {
             const message = error instanceof Error ? error.message : 'Failed';
@@ -45,7 +61,7 @@ class SubscriptionController {
             return res.status(400).json({ error: 'Subscription id required' });
         try {
             const result = await customerGetSubscriptionUseCase.execute(req.user.id, id);
-            return res.status(200).json(result);
+            return res.status(200).json(serializeSubscription(result));
         }
         catch (error) {
             const message = error instanceof Error ? error.message : 'Not found';

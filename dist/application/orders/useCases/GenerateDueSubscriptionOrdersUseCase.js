@@ -9,6 +9,14 @@ const logger_1 = require("../../../core/logging/logger");
 const CycleDateCalculator_1 = require("../../../domain/orders/services/CycleDateCalculator");
 const SubscriptionOrderEligibilityService_1 = require("../../../domain/orders/services/SubscriptionOrderEligibilityService");
 const OrderFromSubscriptionFactory_1 = require("../../../domain/orders/services/OrderFromSubscriptionFactory");
+function addDays(date, days) {
+    const d = new Date(date.getTime());
+    d.setDate(d.getDate() + days);
+    return d;
+}
+function estimateDeliveryDays(deliveryFrequency) {
+    return deliveryFrequency === 'weekly' ? 2 : 3;
+}
 class GenerateDueSubscriptionOrdersUseCase {
     constructor(cycleDateCalculator = new CycleDateCalculator_1.CycleDateCalculator(), eligibilityService = new SubscriptionOrderEligibilityService_1.SubscriptionOrderEligibilityService(), orderFactory = new OrderFromSubscriptionFactory_1.OrderFromSubscriptionFactory()) {
         this.cycleDateCalculator = cycleDateCalculator;
@@ -226,8 +234,12 @@ class GenerateDueSubscriptionOrdersUseCase {
                     unitPrice: Number(item.product.basePrice),
                 })),
             });
+            const deliveryDate = addDays(cycleDate, estimateDeliveryDays(subscription.plan.deliveryFrequency));
             const order = await tx.order.create({
-                data: built.order,
+                data: {
+                    ...built.order,
+                    deliveryDate,
+                },
             });
             if (built.orderItems.length > 0) {
                 await tx.orderItem.createMany({
@@ -240,6 +252,15 @@ class GenerateDueSubscriptionOrdersUseCase {
                     })),
                 });
             }
+            await tx.delivery.create({
+                data: {
+                    orderId: order.id,
+                    deliveryStatus: 'scheduled',
+                    deliveryDriver: null,
+                    trackingCode: null,
+                    deliveredAt: null,
+                },
+            });
             await tx.inventoryReservation.update({
                 where: { id: reservation.id },
                 data: { status: 'consumed' },

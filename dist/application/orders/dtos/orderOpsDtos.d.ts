@@ -8,9 +8,9 @@ export declare const adminListSubscriptionOrderCycleEventsQuerySchema: z.ZodObje
     page: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
     limit: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
     outcome: z.ZodOptional<z.ZodEnum<{
+        failed: "failed";
         created: "created";
         skipped: "skipped";
-        failed: "failed";
     }>>;
     reason: z.ZodOptional<z.ZodString>;
     subscriptionId: z.ZodOptional<z.ZodString>;

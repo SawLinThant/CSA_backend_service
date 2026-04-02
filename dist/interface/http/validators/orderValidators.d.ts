@@ -22,5 +22,25 @@ export declare const orderValidators: {
             desc: "desc";
         }>>;
     }, import("zod/v4/core").$strip>;
+    adminUpdateOrderStatus: import("zod").ZodObject<{
+        status: import("zod").ZodEnum<{
+            pending: "pending";
+            packed: "packed";
+            shipped: "shipped";
+            delivered: "delivered";
+            cancelled: "cancelled";
+        }>;
+    }, import("zod/v4/core").$strip>;
+    adminUpsertDelivery: import("zod").ZodObject<{
+        deliveryStatus: import("zod").ZodEnum<{
+            delivered: "delivered";
+            scheduled: "scheduled";
+            out_for_delivery: "out_for_delivery";
+            failed: "failed";
+        }>;
+        deliveryDriver: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
+        trackingCode: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodString>>;
+        deliveredAt: import("zod").ZodNullable<import("zod").ZodOptional<import("zod").ZodCoercedDate<unknown>>>;
+    }, import("zod/v4/core").$strip>;
 };
 //# sourceMappingURL=orderValidators.d.ts.map

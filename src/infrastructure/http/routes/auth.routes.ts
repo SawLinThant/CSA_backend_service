@@ -9,6 +9,7 @@ import { SubscriptionController } from '../../../interface/http/controllers/Subs
 import { AnalyticsController } from '../../../interface/http/controllers/AnalyticsController';
 import { OrderOpsController } from '../../../interface/http/controllers/OrderOpsController';
 import { OrderController } from '../../../interface/http/controllers/OrderController';
+import { AdminOrderController } from '../../../interface/http/controllers/AdminOrderController';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { requireRole } from '../middleware/requireRole';
 import { productImagesUpload, singleImageUpload } from '../middleware/uploadMiddleware';
@@ -24,6 +25,7 @@ const subscriptionController = new SubscriptionController();
 const analyticsController = new AnalyticsController();
 const orderOpsController = new OrderOpsController();
 const orderController = new OrderController();
+const adminOrderController = new AdminOrderController();
 
 router.post('/admin/login', (req, res) => controller.loginAdmin(req, res));
 router.post('/customer/register', (req, res) => controller.customerRegister(req, res));
@@ -284,6 +286,18 @@ router.get('/admin/subscription-order-ops/summary', authMiddleware, requireRole(
 );
 router.get('/admin/subscription-order-ops/events', authMiddleware, requireRole('admin'), (req, res) =>
   orderOpsController.adminListSubscriptionOrderCycleEvents(req, res),
+);
+router.get('/admin/orders', authMiddleware, requireRole('admin'), (req, res) =>
+  adminOrderController.adminListOrders(req, res),
+);
+router.get('/admin/orders/:id', authMiddleware, requireRole('admin'), (req, res) =>
+  adminOrderController.adminGetOrder(req, res),
+);
+router.patch('/admin/orders/:id/status', authMiddleware, requireRole('admin'), (req, res) =>
+  adminOrderController.adminUpdateOrderStatus(req, res),
+);
+router.patch('/admin/orders/:id/delivery', authMiddleware, requireRole('admin'), (req, res) =>
+  adminOrderController.adminUpsertDelivery(req, res),
 );
 
 export default router;
