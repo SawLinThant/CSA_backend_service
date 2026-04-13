@@ -11,7 +11,7 @@ export declare class AuthController {
     loginCustomer(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     loginFarmer(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     refreshToken(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
-    logout(_req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
+    logout(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     updateCustomerProfile(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     getCustomerProfile(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     updateCustomerProfileWithUpload(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;

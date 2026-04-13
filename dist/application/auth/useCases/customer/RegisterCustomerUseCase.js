@@ -42,7 +42,7 @@ class RegisterCustomerUseCase {
             return { user, customer };
         });
         const accessToken = (0, jwt_1.signAccessToken)({ sub: result.user.id, role: 'customer' });
-        const refreshToken = (0, jwt_1.signRefreshToken)({ sub: result.user.id, role: 'customer', type: 'refresh' });
+        const { refreshToken } = (0, jwt_1.issueRefreshToken)({ sub: result.user.id, role: 'customer' });
         return {
             accessToken,
             refreshToken,

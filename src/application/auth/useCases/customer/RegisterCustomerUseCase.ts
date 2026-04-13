@@ -1,7 +1,7 @@
 import type { UserRepository } from '../../../../domain/users/UserRepository';
 import type { RegisterCustomerInput } from '../../dtos/authDtos';
 import { passwordHasher } from '../../../../core/security/passwordHasher';
-import { signAccessToken, signRefreshToken } from '../../../../core/security/jwt';
+import { issueRefreshToken, signAccessToken } from '../../../../core/security/jwt';
 import prisma from '../../../../infrastructure/db/prismaClient';
 
 export class RegisterCustomerUseCase {
@@ -44,7 +44,7 @@ export class RegisterCustomerUseCase {
     });
 
     const accessToken = signAccessToken({ sub: result.user.id, role: 'customer' });
-    const refreshToken = signRefreshToken({ sub: result.user.id, role: 'customer', type: 'refresh' });
+    const { refreshToken } = issueRefreshToken({ sub: result.user.id, role: 'customer' });
 
     return {
       accessToken,

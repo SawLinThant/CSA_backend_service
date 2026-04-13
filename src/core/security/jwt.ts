@@ -1,6 +1,8 @@
 import jwt, { type Secret } from 'jsonwebtoken';
+import { randomUUID } from 'crypto';
 import { env } from '../../config/env';
 import type { UserRole } from '../../domain/users/User';
+import { trackIssuedRefreshToken } from './refreshTokenSession';
 
 export interface JwtPayload {
   sub: string;
@@ -22,6 +24,8 @@ export interface RefreshTokenPayload {
   sub: string;
   role: UserRole;
   type: 'refresh';
+  tokenId: string;
+  familyId: string;
 }
 
 export function signRefreshToken(payload: RefreshTokenPayload): string {
@@ -33,6 +37,24 @@ export function signRefreshToken(payload: RefreshTokenPayload): string {
       expiresIn: env.REFRESH_TOKEN_EXPIRES_IN,
     },
   );
+}
+
+export function issueRefreshToken(payload: { sub: string; role: UserRole; familyId?: string }) {
+  const tokenId = randomUUID();
+  const familyId = payload.familyId ?? tokenId;
+  const refreshPayload: RefreshTokenPayload = {
+    sub: payload.sub,
+    role: payload.role,
+    type: 'refresh',
+    tokenId,
+    familyId,
+  };
+  const refreshToken = signRefreshToken(refreshPayload);
+  trackIssuedRefreshToken(refreshPayload);
+  return {
+    refreshToken,
+    payload: refreshPayload,
+  };
 }
 
 export function verifyRefreshToken(token: string): RefreshTokenPayload {
