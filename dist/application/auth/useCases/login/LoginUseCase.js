@@ -23,7 +23,7 @@ class LoginUseCase {
             throw new Error('Invalid credentials');
         }
         const accessToken = (0, jwt_1.signAccessToken)({ sub: user.id, role: user.role });
-        const refreshToken = (0, jwt_1.signRefreshToken)({ sub: user.id, role: user.role, type: 'refresh' });
+        const { refreshToken } = (0, jwt_1.issueRefreshToken)({ sub: user.id, role: user.role });
         return {
             accessToken,
             refreshToken,

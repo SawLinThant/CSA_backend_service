@@ -1,7 +1,7 @@
 import type { UserRepository } from '../../../../domain/users/UserRepository';
 import type { RegisterFarmerInput } from '../../dtos/authDtos';
 import { passwordHasher } from '../../../../core/security/passwordHasher';
-import { signAccessToken, signRefreshToken } from '../../../../core/security/jwt';
+import { issueRefreshToken, signAccessToken } from '../../../../core/security/jwt';
 import prisma from '../../../../infrastructure/db/prismaClient';
 
 export class RegisterFarmerUseCase {
@@ -48,7 +48,7 @@ export class RegisterFarmerUseCase {
     });
 
     const accessToken = signAccessToken({ sub: result.user.id, role: 'farmer' });
-    const refreshToken = signRefreshToken({ sub: result.user.id, role: 'farmer', type: 'refresh' });
+    const { refreshToken } = issueRefreshToken({ sub: result.user.id, role: 'farmer' });
 
     return {
       accessToken,

@@ -46,7 +46,7 @@ class RegisterFarmerUseCase {
             return { user, farmer };
         });
         const accessToken = (0, jwt_1.signAccessToken)({ sub: result.user.id, role: 'farmer' });
-        const refreshToken = (0, jwt_1.signRefreshToken)({ sub: result.user.id, role: 'farmer', type: 'refresh' });
+        const { refreshToken } = (0, jwt_1.issueRefreshToken)({ sub: result.user.id, role: 'farmer' });
         return {
             accessToken,
             refreshToken,

@@ -10,7 +10,31 @@ class AdminGetOrderUseCase {
         const order = await prismaClient_1.default.order.findUnique({
             where: { id: orderId },
             include: {
-                customer: { select: { id: true, user: { select: { id: true, email: true, name: true, phone: true } } } },
+                customer: {
+                    select: {
+                        id: true,
+                        user: {
+                            select: {
+                                id: true,
+                                email: true,
+                                name: true,
+                                phone: true,
+                                addresses: {
+                                    select: {
+                                        id: true,
+                                        addressLine: true,
+                                        city: true,
+                                        state: true,
+                                        postalCode: true,
+                                        country: true,
+                                        isDefault: true,
+                                    },
+                                    orderBy: [{ isDefault: 'desc' }, { id: 'asc' }],
+                                },
+                            },
+                        },
+                    },
+                },
                 boxVersion: {
                     select: {
                         id: true,
@@ -61,6 +85,15 @@ class AdminGetOrderUseCase {
                     email: order.customer.user.email,
                     name: order.customer.user.name,
                     phone: order.customer.user.phone,
+                    addresses: order.customer.user.addresses.map((a) => ({
+                        id: a.id,
+                        addressLine: a.addressLine,
+                        city: a.city,
+                        state: a.state,
+                        postalCode: a.postalCode,
+                        country: a.country,
+                        isDefault: a.isDefault,
+                    })),
                 },
             },
             box: {

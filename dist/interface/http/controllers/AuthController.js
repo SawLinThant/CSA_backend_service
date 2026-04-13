@@ -30,6 +30,8 @@ const authValidators_1 = require("../validators/authValidators");
 const userValidators_1 = require("../validators/userValidators");
 const S3StorageService_1 = require("../../../infrastructure/storage/S3StorageService");
 const storageFactory_1 = require("../../../infrastructure/storage/storageFactory");
+const refreshTokenSession_1 = require("../../../core/security/refreshTokenSession");
+const jwt_1 = require("../../../core/security/jwt");
 const userRepository = new PrismaUserRepository_1.PrismaUserRepository();
 const customerRepository = new PrismaCustomerRepository_1.PrismaCustomerRepository();
 const farmerRepository = new PrismaFarmerRepository_1.PrismaFarmerRepository();
@@ -37,7 +39,7 @@ const addressRepository = new PrismaAddressRepository_1.PrismaAddressRepository(
 const registerCustomerUseCase = new RegisterCustomerUseCase_1.RegisterCustomerUseCase(userRepository);
 const registerFarmerUseCase = new RegisterFarmerUseCase_1.RegisterFarmerUseCase(userRepository);
 const loginUseCase = new LoginUseCase_1.LoginUseCase(userRepository);
-const refreshTokenUseCase = new RefreshTokenUseCase_1.RefreshTokenUseCase();
+const refreshTokenUseCase = new RefreshTokenUseCase_1.RefreshTokenUseCase(userRepository);
 const updateCustomerProfileUseCase = new UpdateCustomerProfileUseCase_1.UpdateCustomerProfileUseCase(userRepository);
 const getCustomerProfileUseCase = new GetCustomerProfileUseCase_1.GetCustomerProfileUseCase(userRepository);
 const updateFarmerProfileUseCase = new UpdateFarmerProfileUseCase_1.UpdateFarmerProfileUseCase(userRepository, farmerRepository);
@@ -165,9 +167,20 @@ class AuthController {
             return res.status(401).json({ error: error instanceof Error ? error.message : 'Refresh failed' });
         }
     }
-    async logout(_req, res) {
-        // Tokens are stateless JWTs; logout is handled client-side by discarding tokens.
-        // This endpoint exists so clients have a consistent API to call.
+    async logout(req, res) {
+        const refreshToken = typeof req.body?.refreshToken === 'string' ? req.body.refreshToken : null;
+        if (refreshToken) {
+            try {
+                const payload = (0, jwt_1.verifyRefreshToken)(refreshToken);
+                if (payload.type === 'refresh') {
+                    (0, refreshTokenSession_1.revokeRefreshTokenFamily)(payload.familyId);
+                    (0, refreshTokenSession_1.clearRefreshTokenSessionsForUser)(payload.sub);
+                }
+            }
+            catch {
+                // Best effort logout: ignore invalid token and still return success.
+            }
+        }
         return res.status(200).json({ message: 'Logged out' });
     }
     async updateCustomerProfile(req, res) {

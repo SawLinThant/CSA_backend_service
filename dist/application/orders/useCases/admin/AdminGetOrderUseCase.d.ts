@@ -13,6 +13,15 @@ export declare class AdminGetOrderUseCase {
                 email: string | null;
                 name: string;
                 phone: string;
+                addresses: {
+                    id: string;
+                    addressLine: string;
+                    city: string;
+                    state: string;
+                    postalCode: string;
+                    country: string;
+                    isDefault: boolean;
+                }[];
             };
         };
         box: {

@@ -28,6 +28,8 @@ import { authValidators } from '../validators/authValidators';
 import { userValidators } from '../validators/userValidators';
 import { getImageExtension } from '../../../infrastructure/storage/S3StorageService';
 import { getStorageService } from '../../../infrastructure/storage/storageFactory';
+import { clearRefreshTokenSessionsForUser, revokeRefreshTokenFamily } from '../../../core/security/refreshTokenSession';
+import { verifyRefreshToken } from '../../../core/security/jwt';
 
 const userRepository = new PrismaUserRepository();
 const customerRepository = new PrismaCustomerRepository();
@@ -37,7 +39,7 @@ const addressRepository = new PrismaAddressRepository();
 const registerCustomerUseCase = new RegisterCustomerUseCase(userRepository);
 const registerFarmerUseCase = new RegisterFarmerUseCase(userRepository);
 const loginUseCase = new LoginUseCase(userRepository);
-const refreshTokenUseCase = new RefreshTokenUseCase();
+const refreshTokenUseCase = new RefreshTokenUseCase(userRepository);
 const updateCustomerProfileUseCase = new UpdateCustomerProfileUseCase(userRepository);
 const getCustomerProfileUseCase = new GetCustomerProfileUseCase(userRepository);
 const updateFarmerProfileUseCase = new UpdateFarmerProfileUseCase(userRepository, farmerRepository);
@@ -173,9 +175,19 @@ export class AuthController {
     }
   }
 
-  async logout(_req: Request, res: Response) {
-    // Tokens are stateless JWTs; logout is handled client-side by discarding tokens.
-    // This endpoint exists so clients have a consistent API to call.
+  async logout(req: Request, res: Response) {
+    const refreshToken = typeof req.body?.refreshToken === 'string' ? req.body.refreshToken : null;
+    if (refreshToken) {
+      try {
+        const payload = verifyRefreshToken(refreshToken);
+        if (payload.type === 'refresh') {
+          revokeRefreshTokenFamily(payload.familyId);
+          clearRefreshTokenSessionsForUser(payload.sub);
+        }
+      } catch {
+        // Best effort logout: ignore invalid token and still return success.
+      }
+    }
     return res.status(200).json({ message: 'Logged out' });
   }
 
