@@ -16,6 +16,8 @@ const envSchema = z.object({
   SUPABASE_URL: z.string().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
   SUPABASE_STORAGE_BUCKET: z.string().optional(),
+  /** Comma-separated browser origins allowed for credentialed CORS (e.g. dashboard, website). */
+  CORS_ORIGINS: z.string().default('http://localhost:5173,http://localhost:3000'),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -28,5 +30,11 @@ export function isS3Configured(): boolean {
 
 export function isSupabaseConfigured(): boolean {
   return !!(env.SUPABASE_URL && env.SUPABASE_SERVICE_ROLE_KEY && env.SUPABASE_STORAGE_BUCKET);
+}
+
+export function getCorsOrigins(): string[] {
+  return env.CORS_ORIGINS.split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 }
 
