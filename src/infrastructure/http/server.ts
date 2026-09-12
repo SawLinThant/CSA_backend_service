@@ -1,25 +1,15 @@
 import express from 'express';
 import helmet from 'helmet';
-import cors from 'cors';
-import { getCorsOrigins } from '../../config/env';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import { registerRoutes } from './routes/index';
 
 const app = express();
-const allowedOrigins = getCorsOrigins();
 
-app.use(helmet());
+// CORS is handled at the reverse-proxy / server layer.
+// Disable Helmet CORP so it does not block cross-origin API reads.
 app.use(
-  cors({
-    origin(origin, callback) {
-      // Allow non-browser clients (curl, health checks) with no Origin header.
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
-      callback(new Error(`Origin ${origin} not allowed by CORS`));
-    },
-    credentials: true,
+  helmet({
+    crossOriginResourcePolicy: false,
   }),
 );
 app.use(express.json());
@@ -29,4 +19,3 @@ registerRoutes(app);
 app.use(errorMiddleware);
 
 export default app;
-
